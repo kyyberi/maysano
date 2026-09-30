@@ -336,79 +336,112 @@ ol { margin-top: 0; }
 .hero-model {
   position: relative;
   display: grid;
-  justify-items: center;
-  padding: 6px 0;
+  width: min(100%, 390px);
+  margin-inline: auto;
 }
 
-.hero-model-label {
-  margin: 0 0 12px;
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 0.64rem;
+.hero-model-layer {
+  border: 1px solid rgba(171, 196, 156, 0.62);
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.hero-model-heading {
+  display: grid;
+  gap: 5px;
+  padding: 17px 20px;
+  background: var(--green);
+  color: white;
+  text-align: center;
+}
+
+.hero-model-heading span,
+.hero-model-controls span,
+.hero-model-platforms small {
+  font-size: 0.58rem;
   font-weight: 800;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.11em;
   text-transform: uppercase;
 }
 
-.hero-model-label--end { margin: 12px 0 0; }
-
-.hero-model-chain {
-  position: relative;
-  display: grid;
-  width: min(100%, 330px);
-  justify-items: center;
-  gap: 18px;
+.hero-model-heading strong {
+  font-size: 1.14rem;
+  letter-spacing: 0.14em;
 }
 
-.hero-model-chain::before {
+.hero-model-objects {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  padding: 18px 18px 10px;
+}
+
+.hero-model-node {
+  padding: 13px 9px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: var(--navy-deep);
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.72rem;
+  font-weight: 680;
+  text-align: center;
+}
+
+.hero-model-node:last-child { grid-column: 1 / -1; }
+
+.hero-model-controls {
+  display: grid;
+  gap: 6px;
+  margin: 0 18px 18px;
+  padding: 14px 16px;
+  border-left: 3px solid var(--green-muted);
+  background: rgba(171, 196, 156, 0.1);
+}
+
+.hero-model-controls span { color: var(--green-muted); }
+.hero-model-controls strong { color: white; font-size: 0.78rem; }
+
+.hero-model-foundation {
+  position: relative;
+  margin-top: 38px;
+}
+
+.hero-model-foundation::before {
   position: absolute;
-  z-index: 0;
-  top: 20px;
-  bottom: 20px;
+  bottom: 100%;
   left: 50%;
   width: 1px;
-  background: rgba(255, 255, 255, 0.33);
+  height: 28px;
+  background: rgba(255, 255, 255, 0.34);
   content: "";
 }
 
-.hero-model-node,
-.hero-model-core {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  padding: 13px 18px;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  border-radius: 4px;
+.hero-model-connector {
+  display: block;
+  margin-bottom: 11px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.hero-model-platforms {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.hero-model-platforms > div {
+  display: grid;
+  gap: 6px;
+  padding: 13px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   background: var(--navy-deep);
   text-align: center;
 }
 
-.hero-model-node {
-  width: 76%;
-  color: rgba(255, 255, 255, 0.82);
-  font-size: 0.79rem;
-  font-weight: 680;
-}
-
-.hero-model-core {
-  display: grid;
-  gap: 5px;
-  padding: 21px;
-  border-color: var(--green-muted);
-  background: var(--green);
-  color: white;
-}
-
-.hero-model-core span {
-  font-size: 0.59rem;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.hero-model-core strong {
-  font-size: 1.15rem;
-  letter-spacing: 0.12em;
-}
+.hero-model-platforms small { color: rgba(255, 255, 255, 0.45); }
+.hero-model-platforms strong { color: rgba(255, 255, 255, 0.82); font-size: 0.7rem; }
 
 /* Problem */
 
@@ -1341,7 +1374,7 @@ ol { margin-top: 0; }
   .hero { min-height: auto; padding: 78px 0; }
   .hero-grid { grid-template-columns: 1fr; gap: 70px; }
   .hero-copy { max-width: 720px; }
-  .hero-model-chain { width: min(100%, 430px); }
+  .hero-model { width: min(100%, 430px); }
   .problem-visual { grid-template-columns: 1fr; }
   .problem-gap { grid-template-columns: 1fr auto auto auto 1fr; border: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .problem-gap-line { width: 100%; height: 1px; }
@@ -1380,7 +1413,7 @@ ol { margin-top: 0; }
   .hero-trust { margin-top: 34px; text-align: center; }
   .hero-trust span { display: none; }
   .hero-trust { display: grid; gap: 4px; }
-  .hero-model-node { width: 88%; }
+  .hero-model { width: min(100%, 390px); }
   .problem-side { padding: 28px 22px; }
   .problem-side ul { grid-template-columns: 1fr; }
   .problem-gap { grid-template-columns: 1fr; }

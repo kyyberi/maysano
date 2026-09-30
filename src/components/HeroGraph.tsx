@@ -1,19 +1,34 @@
-const strategyNodes = ['Objectives', 'Use Cases']
-const deliveryNodes = ['Data Products', 'Governance & Lifecycle', 'Delivery']
+const portfolioObjects = ['Business Objectives', 'Business Use Cases', 'Data Products']
+
+const foundationPlatforms = ['Metadata Management', 'Data Management']
 
 export function HeroGraph() {
   return (
-    <div className="hero-model" aria-label="Business strategy connects through Maysano to data products, governance, lifecycle and delivery">
-      <p className="hero-model-label">Business strategy</p>
-      <div className="hero-model-chain">
-        {strategyNodes.map((node) => <div className="hero-model-node" key={node}>{node}</div>)}
-        <div className="hero-model-core">
-          <span>The connected layer</span>
+    <div className="hero-model" aria-label="Maysano manages business objectives, business use cases and data products with built-in governance and lifecycle management above existing metadata and data management platforms">
+      <div className="hero-model-layer">
+        <div className="hero-model-heading">
+          <span>Business &amp; product layer</span>
           <strong>MAYSANO</strong>
         </div>
-        {deliveryNodes.map((node) => <div className="hero-model-node" key={node}>{node}</div>)}
+        <div className="hero-model-objects">
+          {portfolioObjects.map((item) => <div className="hero-model-node" key={item}>{item}</div>)}
+        </div>
+        <div className="hero-model-controls">
+          <span>Built in across the portfolio</span>
+          <strong>Governance &amp; Lifecycle Management</strong>
+        </div>
       </div>
-      <p className="hero-model-label hero-model-label--end">Delivery</p>
+      <div className="hero-model-foundation">
+        <span className="hero-model-connector">Runs above and connects to</span>
+        <div className="hero-model-platforms">
+          {foundationPlatforms.map((item) => (
+            <div key={item}>
+              <small>Existing platform</small>
+              <strong>{item}</strong>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   )
 }
