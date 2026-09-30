@@ -6,8 +6,8 @@ const footerNav = [
   ['How It Works', '#how-it-works'],
   ['AI Agents', '#agents'],
   ['Open Standards', '#standards'],
-  ['Resources', '#evidence'],
-  ['About', '#enterprise'],
+  ['Proof & References', '#evidence'],
+  ['Enterprise', '#enterprise'],
 ]
 
 export function Footer() {

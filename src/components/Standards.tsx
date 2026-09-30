@@ -1,3 +1,4 @@
+import { Reveal } from './Reveal'
 import { SectionIntro } from './SectionIntro'
 
 const standards = [
@@ -24,14 +25,14 @@ export function Standards() {
             </ul>
             <a className="text-link" href="https://opendataproducts.org" target="_blank" rel="noreferrer">Explore Open Standards <span aria-hidden="true">↗</span></a>
           </div>
-          <div className="standards-visual" aria-label="Open Data Product Specification ecosystem standards">
-            <div className="standards-core">Open Data Product<br />Specification<br />ecosystem</div>
-            <div className="standards-list">
+          <Reveal className="standard-board">
+            <p>Open Data Product Specification ecosystem</p>
+            <ul aria-label="Open Data Product Specification ecosystem standards">
               {standards.map(([code, label]) => (
-                <div className="standard-row" key={code}><strong>{code}</strong><span>{label}</span><i /></div>
+                <li key={code} className="rise"><strong>{code}</strong><span>{label}</span></li>
               ))}
-            </div>
-          </div>
+            </ul>
+          </Reveal>
         </div>
       </div>
     </section>

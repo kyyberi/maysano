@@ -1,3 +1,4 @@
+import { Reveal } from './Reveal'
 import { SectionIntro } from './SectionIntro'
 
 const businessItems = ['Objectives', 'Use Cases', 'Priorities']
@@ -12,28 +13,28 @@ export function ProblemBridge() {
           title="Your business and your data speak different languages."
           copy="Business teams define outcomes. Data teams manage products, platforms and pipelines. Governance adds policies and controls, while AI teams need enough context to understand what any of it means. The connections are often weak, manual or missing."
         />
-        <div className="problem-visual" aria-label="The missing connection between business strategy and the data estate">
-          <div className="problem-side">
-            <span>Business strategy</span>
-            <h3>Intent and value</h3>
-            <ul>{businessItems.map((item) => <li key={item}>{item}</li>)}</ul>
+        <Reveal className="bridge">
+          <div className="bridge-stage" aria-label="The missing connection between business strategy and the data estate">
+            <article className="bridge-panel bridge-panel--tilt-left rise">
+              <p>Business strategy</p>
+              <h3>Intent and value</h3>
+              <ul>{businessItems.map((item) => <li key={item}>{item}</li>)}</ul>
+            </article>
+            <div className="bridge-medallion rise">
+              <strong>Missing connection</strong>
+              <small>Manual mapping · fragmented context</small>
+            </div>
+            <article className="bridge-panel bridge-panel--tilt-right rise">
+              <p>Data estate</p>
+              <h3>Assets and operations</h3>
+              <ul>{dataItems.map((item) => <li key={item}>{item}</li>)}</ul>
+            </article>
           </div>
-          <div className="problem-gap">
-            <span className="problem-gap-line" />
-            <strong>Missing connection</strong>
-            <small>Manual mapping · fragmented context</small>
-            <span className="problem-gap-line" />
+          <div className="bridge-join rise">
+            <span>Maysano</span>
+            <p>Connects the language of business intent to the language of enterprise data.</p>
           </div>
-          <div className="problem-side">
-            <span>Data estate</span>
-            <h3>Assets and operations</h3>
-            <ul>{dataItems.map((item) => <li key={item}>{item}</li>)}</ul>
-          </div>
-        </div>
-        <div className="problem-resolution">
-          <span>MAYSANO</span>
-          <p>Connects the language of business intent to the language of enterprise data.</p>
-        </div>
+        </Reveal>
       </div>
     </section>
   )

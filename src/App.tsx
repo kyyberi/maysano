@@ -8,6 +8,7 @@ import { Footer } from './components/Footer'
 import { GovernanceFlow } from './components/GovernanceFlow'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
+import { OutcomeStrip } from './components/OutcomeStrip'
 import { ProblemBridge } from './components/ProblemBridge'
 import { ProductLifecycle } from './components/ProductLifecycle'
 import { Standards } from './components/Standards'
@@ -20,6 +21,7 @@ export default function App() {
       <Header />
       <main id="main-content">
         <Hero />
+        <OutcomeStrip />
         <ProblemBridge />
         <StrategyGraph />
         <ConcreteExample />

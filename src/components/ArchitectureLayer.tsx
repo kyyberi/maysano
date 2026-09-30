@@ -1,3 +1,4 @@
+import { Reveal } from './Reveal'
 import { SectionIntro } from './SectionIntro'
 
 const layers = [
@@ -25,15 +26,19 @@ export function ArchitectureLayer() {
           title="The missing layer between strategy and data management."
           copy="Your existing data platforms describe, store and operate data. Maysano connects those assets to why the business needs them and how they create value."
         />
-        <div className="layer-diagram">
-          {layers.map((layer, index) => (
-            <div key={layer.label} className={`layer-band ${layer.emphasis ? 'layer-band--emphasis' : ''}`}>
-              <span>0{index + 1}</span>
-              <h3>{layer.label}</h3>
-              <div>{layer.items.map((item) => <strong key={item}>{item}</strong>)}</div>
-            </div>
-          ))}
-        </div>
+        <Reveal>
+          <div className="stack">
+            {layers.map((layer, index) => (
+              <article key={layer.label} className={`stack-layer rise ${layer.emphasis ? 'stack-layer--focus' : ''}`}>
+                <span>0{index + 1}</span>
+                <div>
+                  <h3>{layer.label}</h3>
+                  <div className="pill-row">{layer.items.map((item) => <em key={item}>{item}</em>)}</div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </Reveal>
         <p className="architecture-note"><strong>Complementary by design.</strong> Maysano does not replace catalogs, metadata platforms or data platforms. It gives them business context.</p>
       </div>
     </section>

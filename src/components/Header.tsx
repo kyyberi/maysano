@@ -6,9 +6,13 @@ const navItems = [
   ['Product', '#product'],
   ['How It Works', '#how-it-works'],
   ['AI Agents', '#agents'],
+]
+
+// Shown only in the mobile menu; on desktop these stay reachable from the footer.
+const secondaryNavItems = [
   ['Open Standards', '#standards'],
-  ['Resources', '#evidence'],
-  ['About', '#enterprise'],
+  ['Proof & References', '#evidence'],
+  ['Enterprise', '#enterprise'],
 ]
 
 export function Header() {
@@ -16,8 +20,13 @@ export function Header() {
 
   useEffect(() => {
     const close = () => setOpen(false)
+    const closeOnEscape = (event: KeyboardEvent) => { if (event.key === 'Escape') close() }
     window.addEventListener('resize', close)
-    return () => window.removeEventListener('resize', close)
+    window.addEventListener('keydown', closeOnEscape)
+    return () => {
+      window.removeEventListener('resize', close)
+      window.removeEventListener('keydown', closeOnEscape)
+    }
   }, [])
 
   return (
@@ -39,7 +48,13 @@ export function Header() {
           {navItems.map(([label, href]) => (
             <a key={href} href={href} onClick={() => setOpen(false)}>{label}</a>
           ))}
-          <a className="button button--small" href={siteConfig.bookingUrl}>Book a Demo</a>
+          <div className="nav-secondary">
+            <span>More</span>
+            {secondaryNavItems.map(([label, href]) => (
+              <a key={href} href={href} onClick={() => setOpen(false)}>{label}</a>
+            ))}
+          </div>
+          <a className="button button--small" href={siteConfig.bookingUrl} onClick={() => setOpen(false)}>Book a Demo</a>
         </nav>
       </div>
     </header>

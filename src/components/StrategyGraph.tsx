@@ -1,3 +1,4 @@
+import { Reveal } from './Reveal'
 import { SectionIntro } from './SectionIntro'
 
 const model = [
@@ -18,15 +19,17 @@ export function StrategyGraph() {
           title="One connected model from objective to delivery."
           copy="Maysano creates a knowledge graph of the business objects surrounding data products. A product no longer exists as an isolated technical asset: you can see why it exists, who depends on it, who owns it, how it is governed and where it sits in delivery."
         />
-        <ol className="model-flow">
-          {model.map(([number, title, copy]) => (
-            <li key={title}>
-              <span>{number}</span>
-              <strong>{title}</strong>
-              <small>{copy}</small>
-            </li>
-          ))}
-        </ol>
+        <Reveal>
+          <ol className="journey">
+            {model.map(([number, title, copy]) => (
+              <li key={title} className="rise">
+                <span>{number}</span>
+                <strong>{title}</strong>
+                <small>{copy}</small>
+              </li>
+            ))}
+          </ol>
+        </Reveal>
       </div>
     </section>
   )

@@ -1,3 +1,4 @@
+import { Reveal } from './Reveal'
 import { SectionIntro } from './SectionIntro'
 
 const graphContext = ['Objectives', 'Use Cases', 'Data Products', 'Governance', 'Lifecycle', 'Delivery']
@@ -17,22 +18,23 @@ export function AgentGraph() {
           title="AI agents that understand your portfolio."
           copy="Agents operate on the connected graph containing business objectives, use cases, data products, governance and lifecycle context—not on an isolated prompt."
         />
-        <div className="agent-layout">
-          <div className="agent-context" aria-label="Connected portfolio context available to AI agents">
+        <Reveal className="agent-stage">
+          <div className="agent-hub rise" aria-label="Connected portfolio context available to AI agents">
             <span>Shared operating context</span>
             <strong>Enterprise knowledge graph</strong>
-            <div>{graphContext.map((item) => <small key={item}>{item}</small>)}</div>
+            <ul>{graphContext.map((item) => <li key={item}>{item}</li>)}</ul>
             <p>Portfolio agents use this context to explain gaps, dependencies, governance needs and change impact.</p>
           </div>
-          <dl className="agent-properties">
+          <ul className="agent-traits">
             {properties.map(([term, description], index) => (
-              <div key={term}>
-                <dt><span>0{index + 1}</span>{term}</dt>
-                <dd>{description}</dd>
-              </div>
+              <li key={term} className="rise">
+                <span>0{index + 1}</span>
+                <strong>{term}</strong>
+                <p>{description}</p>
+              </li>
             ))}
-          </dl>
-        </div>
+          </ul>
+        </Reveal>
         <div className="recipe-note">
           <span>OPEN RECIPE LAYER</span>
           <p>The recipe approach builds on open standards in the LF AI & Data Open Data Product Specification ecosystem, keeping agent behavior portable and reviewable.</p>
