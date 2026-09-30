@@ -20,6 +20,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -27,6 +29,14 @@ jobs:
           cache: npm
       - name: Install dependencies
         run: npm ci
+      - name: Set CSS cache version
+        shell: bash
+        run: |
+          css_version="$(git log -1 --format=%h -- '*.css')"
+          if [[ -z "$css_version" ]]; then
+            css_version="initial"
+          fi
+          echo "CSS_ASSET_VERSION=$css_version" >> "$GITHUB_ENV"
       - name: Build
         run: npm run build
       - name: Configure Pages
