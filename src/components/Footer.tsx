@@ -2,19 +2,19 @@ import { siteConfig } from '../config/site'
 import { Brand } from './Brand'
 
 const footerNav = [
-  ['Platform', '#platform'],
-  ['Data Products', '#data-products'],
+  ['Product', '#product'],
+  ['How It Works', '#how-it-works'],
   ['AI Agents', '#agents'],
-  ['Governance', '#governance'],
   ['Open Standards', '#standards'],
-  ['Contact', siteConfig.bookingUrl],
+  ['Resources', '#evidence'],
+  ['About', '#enterprise'],
 ]
 
 export function Footer() {
   return (
     <footer className="site-footer">
       <div className="container footer-grid">
-        <div><Brand /><p>The business and product layer for the enterprise data ecosystem.</p></div>
+        <div><Brand /><p>The connected business layer between strategy and the enterprise data estate.</p></div>
         <nav className="footer-nav" aria-label="Footer navigation">
           {footerNav.map(([label, href]) => <a href={href} key={label}>{label}</a>)}
         </nav>
@@ -24,7 +24,7 @@ export function Footer() {
           <a href="mailto:privacy@maysano.com">Privacy</a>
         </div>
       </div>
-      <div className="container footer-bottom"><span>© {new Date().getFullYear()} {siteConfig.companyName}</span><span>Connect business directly to data.</span></div>
+      <div className="container footer-bottom"><span>© {new Date().getFullYear()} {siteConfig.companyName}</span><span>Connect data directly to business.</span></div>
     </footer>
   )
 }

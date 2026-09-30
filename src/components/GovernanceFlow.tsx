@@ -1,6 +1,6 @@
 import { SectionIntro } from './SectionIntro'
 
-const phases = ['Design', 'Build', 'Review', 'Operate', 'Change']
+const phases = ['Create', 'Develop', 'Review', 'Operate', 'Improve']
 
 export function GovernanceFlow() {
   return (
@@ -9,8 +9,8 @@ export function GovernanceFlow() {
         <SectionIntro eyebrow="MINIMUM LOVABLE GOVERNANCE" title="Governance built into the work" />
         <div className="governance-grid">
           <div className="governance-summary">
-            <p className="section-copy">Traditional governance often arrives as a separate gate after the work has already happened. Maysano embeds the required ownership, controls, evidence and policies into the product lifecycle itself.</p>
-          <p className="governance-close">Teams see what applies while they work.</p>
+            <p className="section-copy">Minimum Lovable Governance means applying the ownership, evidence, policies and controls a product needs while teams create, develop, review and operate it—not as a separate gate after the work has already happened.</p>
+            <p className="governance-close">Teams see what applies while they work.</p>
           </div>
           <div className="governance-visual" aria-label="Governance applied continuously across design, build, review, operate and change">
             <div className="phase-row">
@@ -22,7 +22,7 @@ export function GovernanceFlow() {
               ))}
             </div>
             <div className="governance-rail">
-              <div className="rail-label"><span /> Continuous governance</div>
+              <div className="rail-label"><span /> Minimum Lovable Governance</div>
               <div className="rail-items">
                 <span>Ownership</span><span>Controls</span><span>Evidence</span><span>Policies</span>
               </div>

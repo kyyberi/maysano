@@ -1,47 +1,48 @@
 import { SectionIntro } from './SectionIntro'
 
-const stages = ['Idea', 'Design', 'Review', 'Active', 'Change', 'New Version', 'Deprecated']
-const products = [
-  { name: 'Customer 360 Product', owner: 'Customer Data Office', version: 'v3.2', stage: 3, tone: 'sage' },
-  { name: 'Credit Risk Signals', owner: 'Risk Data Office', version: 'v2.4', stage: 2, tone: 'peach' },
-  { name: 'Liquidity Position', owner: 'Treasury Data', version: 'v1.8', stage: 4, tone: 'olive' },
-  { name: 'Corporate Customer Profile', owner: 'Corporate Banking', version: 'v1.0', stage: 1, tone: 'neutral' },
+const questions = [
+  ['What supports this objective?', 'Portfolio graph connects objectives, use cases and the products they require.'],
+  ['Where are the gaps or blockers?', 'Lifecycle, ownership, governance and delivery context show what needs attention.'],
+  ['What should we do next?', 'Portfolio Assistant turns connected context into explainable, reviewable actions.'],
 ]
-
-const capabilities = ['Full lifecycle', 'Product ownership', 'Versions & history', 'Use cases & KPIs', 'Dependencies', 'Governance', 'Decision history']
 
 export function ProductLifecycle() {
   return (
-    <section className="section product-section" id="data-products">
+    <section className="section product-section" id="product">
       <div className="container">
-        <div className="split-heading">
-          <SectionIntro eyebrow="DATA PRODUCT MANAGEMENT" title="Manage data as products, not catalog entries" copy="Give every data product a purpose, owner, lifecycle, version history and connected place in the enterprise portfolio." />
-          <div className="capability-list">
-            {capabilities.map((capability) => <span key={capability}>{capability}</span>)}
+        <SectionIntro
+          eyebrow="THE PRODUCT"
+          title="From portfolio understanding to action."
+          copy="Maysano brings portfolio relationships, lifecycle management, governance, delivery monitoring and assistant-led analysis into one working environment."
+        />
+        <div className="product-story">
+          <div className="product-questions">
+            {questions.map(([question, answer], index) => (
+              <article key={question}>
+                <span>0{index + 1}</span>
+                <h3>{question}</h3>
+                <p>{answer}</p>
+              </article>
+            ))}
           </div>
+          <figure className="product-screenshot">
+            <img
+              src={`${import.meta.env.BASE_URL}product-catalog.png`}
+              alt="Maysano product catalog showing a production data product and its business context"
+              loading="lazy"
+              width="1780"
+              height="734"
+            />
+            <figcaption><span>Product view</span> A governed data product catalog connected to business use cases.</figcaption>
+          </figure>
         </div>
-        <div className="lifecycle-board">
-          <div className="lifecycle-track" aria-label="Data product lifecycle stages">
-            {stages.map((stage, index) => (
-              <div className={`lifecycle-stage ${index === 3 ? 'is-current' : ''}`} key={stage}>
-                <span>{String(index + 1).padStart(2, '0')}</span>
-                <strong>{stage}</strong>
-              </div>
-            ))}
-          </div>
-          <div className="product-register">
-            <div className="register-head"><span>Data product</span><span>Ownership</span><span>Version</span><span>Lifecycle</span></div>
-            {products.map((product) => (
-              <div className="product-row" key={product.name}>
-                <div className="product-name"><i className={`product-swatch product-swatch--${product.tone}`} /><strong>{product.name}</strong></div>
-                <span>{product.owner}</span>
-                <strong>{product.version}</strong>
-                <div className="mini-track" aria-label={`${product.name} lifecycle position`}>
-                  {stages.map((stage, index) => <i key={stage} className={index <= product.stage ? 'is-filled' : ''} />)}
-                </div>
-              </div>
-            ))}
-          </div>
+        <div className="product-capabilities" aria-label="Selected Maysano product capabilities">
+          <span>Portfolio graph</span>
+          <span>Data product lifecycle</span>
+          <span>Talk-to-Portfolio</span>
+          <span>Governance</span>
+          <span>Delivery monitoring</span>
+          <span>Jira integration</span>
         </div>
       </div>
     </section>

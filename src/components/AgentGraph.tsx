@@ -1,43 +1,41 @@
 import { SectionIntro } from './SectionIntro'
 
-const agents = [
-  ['Portfolio Agent', 'Portfolio health'],
-  ['Governance Agent', 'Applicable controls'],
-  ['Product Agent', 'Product quality'],
-  ['Impact Agent', 'Change effects'],
+const graphContext = ['Objectives', 'Use Cases', 'Data Products', 'Governance', 'Lifecycle', 'Delivery']
+const properties = [
+  ['Explainable', 'Actions and reasoning remain visible.'],
+  ['Auditable', 'Activity and decisions leave a reviewable record.'],
+  ['Controllable', 'Human oversight and kill controls stay available.'],
+  ['Externally configured', 'Standardized recipes keep behavior outside application code.'],
 ]
-
-const graphContext = ['Objectives', 'Use Cases', 'Data Products', 'Dependencies', 'Governance', 'Ownership', 'Versions', 'Decisions']
 
 export function AgentGraph() {
   return (
     <section className="section agents-section" id="agents">
       <div className="container">
-        <SectionIntro eyebrow="CONTEXT-AWARE OPERATIONS" title="AI agents that understand your business context" copy="Maysano agents operate on the connected company portfolio—not isolated prompts. Every agent works with the same governed context and leaves a visible record." />
-        <div className="agent-visual">
-          <div className="agent-row">
-            {agents.map(([name, purpose], index) => (
-              <div className="agent-unit" key={name}>
-                <div className="agent-topline"><span>A{index + 1}</span><i /></div>
-                <strong>{name}</strong>
-                <small>{purpose}</small>
+        <SectionIntro
+          eyebrow="PORTFOLIO-AWARE AI"
+          title="AI agents that understand your portfolio."
+          copy="Agents operate on the connected graph containing business objectives, use cases, data products, governance and lifecycle context—not on an isolated prompt."
+        />
+        <div className="agent-layout">
+          <div className="agent-context" aria-label="Connected portfolio context available to AI agents">
+            <span>Shared operating context</span>
+            <strong>Enterprise knowledge graph</strong>
+            <div>{graphContext.map((item) => <small key={item}>{item}</small>)}</div>
+            <p>Portfolio agents use this context to explain gaps, dependencies, governance needs and change impact.</p>
+          </div>
+          <dl className="agent-properties">
+            {properties.map(([term, description], index) => (
+              <div key={term}>
+                <dt><span>0{index + 1}</span>{term}</dt>
+                <dd>{description}</dd>
               </div>
             ))}
-          </div>
-          <div className="agent-connectors" aria-hidden="true"><span /><span /><span /><span /></div>
-          <div className="shared-graph">
-            <div className="shared-graph-heading">
-              <span>SHARED OPERATING CONTEXT</span>
-              <strong>Enterprise Knowledge Graph</strong>
-            </div>
-            <div className="shared-graph-nodes">
-              {graphContext.map((item) => <span key={item}>{item}</span>)}
-            </div>
-          </div>
-          <div className="recipe-band">
-            <span>EXTERNAL CONTROL LAYER</span>
-            <p>Agent behavior is configured outside the model through standardized recipes aligned with the Linux Foundation Open Data Product Specification ecosystem.</p>
-          </div>
+          </dl>
+        </div>
+        <div className="recipe-note">
+          <span>OPEN RECIPE LAYER</span>
+          <p>The recipe approach builds on open standards in the LF AI & Data Open Data Product Specification ecosystem, keeping agent behavior portable and reviewable.</p>
         </div>
       </div>
     </section>

@@ -3,11 +3,12 @@ import { siteConfig } from '../config/site'
 import { Brand } from './Brand'
 
 const navItems = [
-  ['Platform', '#platform'],
-  ['Data Products', '#data-products'],
-  ['Governance', '#governance'],
+  ['Product', '#product'],
+  ['How It Works', '#how-it-works'],
   ['AI Agents', '#agents'],
-  ['Standards', '#standards'],
+  ['Open Standards', '#standards'],
+  ['Resources', '#evidence'],
+  ['About', '#enterprise'],
 ]
 
 export function Header() {
