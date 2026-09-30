@@ -1,3 +1,4 @@
+import { Reveal } from './Reveal'
 import { SectionIntro } from './SectionIntro'
 
 const products = ['Customer Profile', 'Credit History', 'Transaction Behaviour']
@@ -13,28 +14,45 @@ export function ConcreteExample() {
           title="See the connection."
           copy="One banking objective becomes a governed portfolio of products, responsibilities and delivery work."
         />
-        <div className="example-flow" aria-label="SME loan approval example from business objective through delivery">
-          <div className="example-step example-step--primary">
-            <span>Business objective</span>
-            <strong>Reduce SME loan approval time</strong>
-          </div>
-          <div className="example-step">
-            <span>Use case</span>
-            <strong>Automated SME credit assessment</strong>
-          </div>
-          <div className="example-step">
-            <span>Required data products</span>
-            <div className="example-items">{products.map((item) => <strong key={item}>{item}</strong>)}</div>
-          </div>
-          <div className="example-step">
-            <span>Governance</span>
-            <div className="example-items example-items--compact">{governance.map((item) => <strong key={item}>{item}</strong>)}</div>
-          </div>
-          <div className="example-step">
-            <span>Delivery</span>
-            <div className="delivery-track">{delivery.map((item, index) => <strong key={item}><i>{index + 1}</i>{item}</strong>)}</div>
-          </div>
-        </div>
+        <Reveal>
+          <ol className="story" aria-label="SME loan approval example from business objective through delivery">
+            <li className="story-step story-step--lead rise">
+              <span className="story-dot" />
+              <div className="story-card">
+                <span>Business objective</span>
+                <strong>Reduce SME loan approval time</strong>
+              </div>
+            </li>
+            <li className="story-step rise">
+              <span className="story-dot" />
+              <div className="story-card">
+                <span>Use case</span>
+                <strong>Automated SME credit assessment</strong>
+              </div>
+            </li>
+            <li className="story-step rise">
+              <span className="story-dot" />
+              <div className="story-card">
+                <span>Required data products</span>
+                <div className="pill-row">{products.map((item) => <em key={item}>{item}</em>)}</div>
+              </div>
+            </li>
+            <li className="story-step rise">
+              <span className="story-dot" />
+              <div className="story-card">
+                <span>Governance</span>
+                <div className="pill-row">{governance.map((item) => <em key={item}>{item}</em>)}</div>
+              </div>
+            </li>
+            <li className="story-step rise">
+              <span className="story-dot" />
+              <div className="story-card">
+                <span>Delivery</span>
+                <div className="progress-row">{delivery.map((item, index) => <em key={item}><i>{index + 1}</i>{item}</em>)}</div>
+              </div>
+            </li>
+          </ol>
+        </Reveal>
       </div>
     </section>
   )

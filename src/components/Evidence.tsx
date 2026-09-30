@@ -1,30 +1,36 @@
+import { siteConfig } from '../config/site'
 import { SectionIntro } from './SectionIntro'
+
+const referenceTopics = [
+  'Customer references, once approved for sharing',
+  'Deployment and architecture review',
+  'Security, access control and auditability',
+]
 
 export function Evidence() {
   return (
     <section className="section evidence-section" id="evidence">
       <div className="container">
         <SectionIntro
-          eyebrow="EVIDENCE"
-          title="Built from real data product experience."
-          copy="The public site should earn trust with verifiable delivery evidence—not borrowed logos or invented performance numbers."
+          eyebrow="PROOF & REFERENCES"
+          title="Open foundation. References in the demo."
+          copy="The data product foundation behind Maysano is open and public, so you can review it before you speak to us. Customer references are shared in the demo."
         />
         <div className="evidence-grid">
           <article className="evidence-supported">
-            <span>SUPPORTED IN THIS REPOSITORY</span>
-            <h3>Open data product foundation</h3>
-            <p>The product narrative and operating model are built around the Open Data Product Specification ecosystem and machine-readable product context.</p>
+            <span>PUBLIC FOUNDATION</span>
+            <h3>Open Data Product Specification ecosystem</h3>
+            <p>Product definitions, contracts, relationships and agent recipes build on the LF AI & Data open standards, so your portfolio context stays portable and machine-readable.</p>
             <a className="text-link" href="#standards">See the open foundation <span aria-hidden="true">↓</span></a>
           </article>
-          <article className="evidence-placeholder">
-            <span>VERIFIED EVIDENCE REQUIRED</span>
-            <h3>Customer outcomes and implementation references</h3>
-            <p>No approved customer names, case-study metrics or measured workflow improvements are present in this repository. Publish them here only after the source and permission are verified.</p>
+          <article className="evidence-references">
+            <span>IN THE DEMO</span>
+            <h3>References and enterprise review, in conversation</h3>
+            <p>We share customer references directly, once they are approved for your evaluation, and walk through the enterprise questions your team will ask.</p>
             <ul>
-              <li>Enterprise implementation reference</li>
-              <li>Measured workflow improvement</li>
-              <li>Approved customer or government-scale case study</li>
+              {referenceTopics.map((topic) => <li key={topic}>{topic}</li>)}
             </ul>
+            <a className="button" href={siteConfig.bookingUrl}>Ask for references in a demo</a>
           </article>
         </div>
       </div>
