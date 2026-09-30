@@ -1108,9 +1108,10 @@ code, pre {
   display: grid;
   grid-template-columns: 190px 1fr;
   gap: 28px;
+  margin-top: 18px;
   padding: 22px 28px;
   border: 1px solid hsl(var(--border));
-  border-top: 0;
+  border-radius: calc(var(--radius) + 1px);
   background: hsl(var(--accent));
 }
 
@@ -1952,6 +1953,21 @@ html.js .reveal:not(.is-in) .rise { opacity: 0; transform: translateY(18px); }
 
 .stack-layer h3 { margin: 0 0 12px; font-size: 1.15rem; }
 
+.stack-groups {
+  display: grid;
+  gap: 18px;
+}
+
+.stack-group > small {
+  display: block;
+  margin-bottom: 8px;
+  color: hsl(var(--muted-foreground));
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
 .stack-layer--focus {
   position: relative;
   z-index: 1;
@@ -1967,6 +1983,8 @@ html.js .reveal:not(.is-in) .rise { opacity: 0; transform: translateY(18px); }
 
 .stack-layer--focus > span,
 .stack-layer--focus h3 { color: hsl(var(--lime)); }
+
+.stack-layer--focus .stack-group > small { color: hsl(var(--lime) / 0.78); }
 
 .stack-layer--focus .pill-row em {
   border: 1px solid hsl(var(--navy-foreground) / 0.16);

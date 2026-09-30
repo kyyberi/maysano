@@ -3,17 +3,27 @@ import { SectionIntro } from './SectionIntro'
 
 const layers = [
   {
-    label: 'Business strategy',
-    items: ['Objectives', 'Priorities', 'Use Cases', 'Business Outcomes'],
-  },
-  {
     label: 'Maysano',
-    items: ['Knowledge Graph', 'Data Product Portfolio', 'Lifecycle', 'Governance', 'AI Agents'],
+    groups: [
+      {
+        label: 'Business context',
+        items: ['Business Objectives', 'Priorities', 'Business Use Cases', 'Business Outcomes'],
+      },
+      {
+        label: 'Portfolio operating model',
+        items: ['Knowledge Graph', 'Data Product Portfolio', 'Lifecycle', 'Governance', 'AI Agents'],
+      },
+    ],
     emphasis: true,
   },
   {
     label: 'Data & metadata systems',
-    items: ['Data Catalogs', 'Metadata Platforms', 'Data Platforms', 'Warehouses', 'Lakehouses', 'Operational Systems'],
+    groups: [
+      {
+        label: 'Existing foundation',
+        items: ['Data Catalogs', 'Metadata Platforms', 'Data Platforms', 'Warehouses', 'Lakehouses', 'Operational Systems'],
+      },
+    ],
   },
 ]
 
@@ -23,8 +33,8 @@ export function ArchitectureLayer() {
       <div className="container">
         <SectionIntro
           eyebrow="DIFFERENTIATION"
-          title="The missing layer between strategy and data management."
-          copy="Your existing data platforms describe, store and operate data. Maysano connects those assets to why the business needs them and how they create value."
+          title="The business layer above data and metadata management."
+          copy="Maysano captures business objectives and use cases, connects them to the data product portfolio, and manages governance and lifecycle in the same operating model."
         />
         <Reveal>
           <div className="stack">
@@ -33,13 +43,20 @@ export function ArchitectureLayer() {
                 <span>0{index + 1}</span>
                 <div>
                   <h3>{layer.label}</h3>
-                  <div className="pill-row">{layer.items.map((item) => <em key={item}>{item}</em>)}</div>
+                  <div className="stack-groups">
+                    {layer.groups.map((group) => (
+                      <div className="stack-group" key={group.label}>
+                        <small>{group.label}</small>
+                        <div className="pill-row">{group.items.map((item) => <em key={item}>{item}</em>)}</div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </article>
             ))}
           </div>
         </Reveal>
-        <p className="architecture-note"><strong>Complementary by design.</strong> Maysano does not replace catalogs, metadata platforms or data platforms. It gives them business context.</p>
+        <p className="architecture-note"><strong>Complementary by design.</strong> Maysano owns the connected business and product context. Catalogs, metadata platforms and data platforms remain the underlying systems.</p>
       </div>
     </section>
   )
