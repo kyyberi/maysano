@@ -1183,7 +1183,15 @@ ol { margin-top: 0; }
   gap: 90px;
 }
 
-.enterprise-grid .section-intro { margin-bottom: 0; }
+.enterprise-grid .section-intro {
+  min-width: 0;
+  margin-bottom: 0;
+}
+
+.enterprise-grid .section-intro h2 {
+  max-width: 560px;
+  white-space: normal;
+}
 
 .enterprise-list { border-top: 1px solid var(--line-strong); }
 
