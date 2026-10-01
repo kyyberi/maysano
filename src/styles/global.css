@@ -1431,7 +1431,6 @@ code, pre {
   gap: 8px;
   padding: 22px 24px;
   border: 1px solid hsl(var(--navy-foreground) / 0.16);
-  border-top: 3px solid hsl(var(--lime));
   border-radius: calc(var(--radius) + 1px);
   background: hsl(var(--navy-foreground) / 0.04);
 }

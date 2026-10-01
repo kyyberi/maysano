@@ -3,7 +3,7 @@ import { siteConfig } from '../config/site'
 const demoPoints = [
   ['Strategy connected to data', 'Objectives, use cases and data products linked in one knowledge graph.'],
   ['Governance in the work', 'Ownership, evidence, policies and controls across create, develop, review and operate.'],
-  ['Agents that explain', 'Portfolio-aware agents explaining gaps, dependencies, governance needs and change impact.'],
+  ['AI Agent operations', 'Portfolio-aware agents explaining gaps, dependencies, governance needs and change impact.'],
 ]
 
 export function FinalCTA() {
