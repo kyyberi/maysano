@@ -2526,3 +2526,27 @@ html.js .reveal:not(.is-in) .rise { opacity: 0; transform: translateY(18px); }
   .standard-board li:hover { transform: none; }
   html.js .reveal:not(.is-in) .rise { opacity: 1; transform: none; }
 }
+
+/* Mobile hero diagram */
+.hero-mobile-visual { display: none; }
+
+@media (max-width: 900px) {
+  .hero { background-image: none; }
+  .hero-model { display: none; }
+  .hero-mobile-visual {
+    display: block;
+    width: 100%;
+    max-width: 440px;
+    margin: 36px auto 40px;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    border-radius: 12px;
+  }
+  .hero-mobile-visual img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 80% center;
+  }
+}
