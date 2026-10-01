@@ -412,16 +412,6 @@ code, pre {
   color: hsl(var(--lime));
 }
 
-.hero-demo-note {
-  max-width: 720px;
-  margin: 20px 0 0;
-  color: hsl(var(--navy-foreground) / 0.72);
-  font-size: 0.85rem;
-  line-height: 1.55;
-}
-
-.hero-demo-note strong { color: hsl(var(--navy-foreground)); }
-
 /* Outcome strip */
 
 .outcome-strip {
@@ -1709,7 +1699,6 @@ code, pre {
   .cta-actions { align-items: stretch; flex-direction: column; gap: 14px; }
   .hero-actions .text-link,
   .cta-actions .text-link { align-self: center; }
-  .hero-demo-note { text-align: center; }
   .hero-model { width: min(100%, 390px); }
   .faq-item summary { gap: 18px; padding: 20px 0; }
   .faq-answer { padding: 0 0 22px; }

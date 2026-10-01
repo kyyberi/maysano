@@ -14,7 +14,6 @@ export function Hero() {
               <a className="button button--hero" href={siteConfig.bookingUrl}>Book a 30-Minute Demo</a>
               <a className="text-link text-link--hero" href="#how-it-works">See How It Works <span aria-hidden="true">↓</span></a>
             </div>
-            <p className="hero-demo-note"><strong>In the demo:</strong> portfolio connection, governance in the work, and explainable agents.</p>
           </div>
           <HeroGraph />
         </div>
