@@ -815,6 +815,54 @@ code, pre {
   font-style: normal;
 }
 
+/* Product demos */
+
+.demos-section { background: hsl(var(--background)); }
+
+.demo-placeholder-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.demo-placeholder {
+  display: flex;
+  aspect-ratio: 16 / 9;
+  justify-content: space-between;
+  flex-direction: column;
+  padding: 24px;
+  border: 1px solid hsl(var(--navy-foreground) / 0.14);
+  border-radius: calc(var(--radius) + 1px);
+  background: hsl(var(--navy));
+  color: hsl(var(--navy-foreground));
+}
+
+.demo-placeholder > span {
+  color: hsl(var(--lime));
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.demo-placeholder strong {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 1.05rem;
+}
+
+.demo-placeholder small {
+  color: hsl(var(--navy-foreground) / 0.62);
+  font-size: 0.76rem;
+}
+
+.demo-scope-note {
+  max-width: 760px;
+  margin: 26px 0 0;
+  color: hsl(var(--muted-foreground));
+  font-size: 0.8rem;
+  line-height: 1.6;
+}
+
 /* Architecture */
 
 .architecture { background: hsl(var(--accent)); }
@@ -1664,6 +1712,8 @@ code, pre {
   .problem-gap { grid-template-columns: 1fr auto auto auto 1fr; border: 0; border-top: 1px solid hsl(var(--border)); border-bottom: 1px solid hsl(var(--border)); }
   .problem-gap-line { width: 100%; height: 1px; }
   .problem-resolution { grid-template-columns: 150px 1fr; }
+  .demo-placeholder-grid { grid-template-columns: 1fr; }
+  .demo-placeholder { aspect-ratio: 16 / 7; }
   .layer-band { grid-template-columns: 42px 190px 1fr; }
   .agent-layout { grid-template-columns: 1fr; }
   .product-story { grid-template-columns: 1fr; }
@@ -1731,6 +1781,7 @@ code, pre {
   .example-step { grid-template-columns: 1fr; gap: 12px; padding: 23px 20px; }
   .example-items,
   .delivery-track { align-items: stretch; flex-direction: column; }
+  .demo-placeholder { aspect-ratio: 16 / 9; padding: 22px; }
   .layer-band { grid-template-columns: 32px 1fr; gap: 14px; padding: 22px 18px; }
   .layer-band > div { grid-column: 2; }
   .governance-visual { padding: 26px 16px; }

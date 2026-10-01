@@ -12,6 +12,7 @@ import { Hero } from './components/Hero'
 import { OutcomeStrip } from './components/OutcomeStrip'
 import { ProblemBridge } from './components/ProblemBridge'
 import { ProductLifecycle } from './components/ProductLifecycle'
+import { ProductDemos } from './components/ProductDemos'
 import { Standards } from './components/Standards'
 import { StrategyGraph } from './components/StrategyGraph'
 
@@ -26,6 +27,7 @@ export default function App() {
         <ProblemBridge />
         <StrategyGraph />
         <ConcreteExample />
+        <ProductDemos />
         <ArchitectureLayer />
         <GovernanceFlow />
         <AgentGraph />
