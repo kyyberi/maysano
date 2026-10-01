@@ -12,7 +12,7 @@ export function ProductLifecycle() {
       <div className="container">
         <SectionIntro
           eyebrow="THE PRODUCT"
-          title="From portfolio understanding to action."
+          title="From portfolio understanding to action"
           copy="Maysano brings portfolio relationships, lifecycle management, governance, delivery monitoring and assistant-led analysis into one working environment."
         />
         <div className="product-story">

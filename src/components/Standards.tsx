@@ -13,7 +13,7 @@ export function Standards() {
   return (
     <section className="section standards-section" id="standards">
       <div className="container">
-        <SectionIntro eyebrow="OPEN FOUNDATION" title="Built on an open data product foundation." />
+        <SectionIntro eyebrow="OPEN FOUNDATION" title="Built on an open data product foundation" />
         <div className="standards-grid">
           <div className="standards-copy">
             <p className="section-copy">Maysano works with the LF AI & Data Open Data Product Specification ecosystem so product definitions, contracts, relationships and agent recipes can remain portable and machine-readable.</p>

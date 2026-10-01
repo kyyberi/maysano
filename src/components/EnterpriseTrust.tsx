@@ -14,7 +14,7 @@ export function EnterpriseTrust() {
       <div className="container enterprise-grid">
         <SectionIntro
           eyebrow="ENTERPRISE TRUST"
-          title="Designed for enterprise environments."
+          title="Designed for enterprise environments"
           copy="A Maysano evaluation includes the architecture, controls and ownership boundaries around the product—not only a feature tour."
         />
         <div className="enterprise-list">

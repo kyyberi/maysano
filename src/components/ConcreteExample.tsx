@@ -11,7 +11,7 @@ export function ConcreteExample() {
       <div className="container">
         <SectionIntro
           eyebrow="A CONCRETE EXAMPLE"
-          title="See the connection."
+          title="See the connection"
           copy="One banking objective becomes a governed portfolio of products, responsibilities and delivery work."
         />
         <Reveal>

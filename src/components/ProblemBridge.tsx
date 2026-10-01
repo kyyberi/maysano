@@ -10,7 +10,7 @@ export function ProblemBridge() {
       <div className="container">
         <SectionIntro
           eyebrow="THE PROBLEM"
-          title="Your business and your data speak different languages."
+          title="Your business and your data speak different languages"
           copy="Business teams define outcomes. Data teams manage products, platforms and pipelines. Governance adds policies and controls, while AI teams need enough context to understand what any of it means. The connections are often weak, manual or missing."
         />
         <Reveal className="bridge">

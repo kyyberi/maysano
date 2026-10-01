@@ -16,7 +16,7 @@ export function StrategyGraph() {
       <div className="container">
         <SectionIntro
           eyebrow="THE CONNECTED MODEL"
-          title="One connected model from objective to delivery."
+          title="One connected model from objective to delivery"
           copy="Maysano creates a knowledge graph of the business objects surrounding data products. A product no longer exists as an isolated technical asset: you can see why it exists, who depends on it, who owns it, how it is governed and where it sits in delivery."
         />
         <Reveal>

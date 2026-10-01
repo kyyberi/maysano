@@ -11,7 +11,7 @@ export function FinalCTA() {
     <section className="section final-cta">
       <div className="container final-cta-inner">
         <p className="eyebrow">BOOK A 30-MINUTE DEMO</p>
-        <h2>Connect your data portfolio to the business.</h2>
+        <h2>Connect your data portfolio to the business</h2>
         <p>In 30 minutes, see how Maysano connects objectives, use cases, data products, governance and delivery in one operating model.</p>
         <ol className="cta-demo-list" aria-label="What you will see in the demo">
           {demoPoints.map(([title, copy], index) => (

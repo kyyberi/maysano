@@ -33,7 +33,7 @@ export function ArchitectureLayer() {
       <div className="container">
         <SectionIntro
           eyebrow="DIFFERENTIATION"
-          title="The business layer above data and metadata management."
+          title="The business layer above data and metadata management"
           copy="Maysano captures business objectives and use cases, connects them to the data product portfolio, and manages governance and lifecycle in the same operating model."
         />
         <Reveal>

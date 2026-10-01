@@ -15,7 +15,7 @@ export function AgentGraph() {
       <div className="container">
         <SectionIntro
           eyebrow="PORTFOLIO-AWARE AI"
-          title="AI agents operate in your portfolio."
+          title="AI agents operate in your portfolio"
           copy="Agents operate on the connected graph containing business objectives, use cases, data products, governance and lifecycle context—not on an isolated prompt."
         />
         <Reveal className="agent-stage">

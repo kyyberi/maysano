@@ -13,7 +13,7 @@ export function Evidence() {
       <div className="container">
         <SectionIntro
           eyebrow="PROOF & REFERENCES"
-          title="Open foundation. References in the demo."
+          title="Open foundation. References in the demo"
           copy="The data product foundation behind Maysano is open and public, so you can review it before you speak to us. Customer references are shared in the demo."
         />
         <div className="evidence-grid">

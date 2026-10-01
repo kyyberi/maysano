@@ -33,7 +33,7 @@ export function FAQ() {
       <div className="container faq-grid">
         <SectionIntro
           eyebrow="FREQUENTLY ASKED QUESTIONS"
-          title="Questions enterprise teams ask first."
+          title="Questions enterprise teams ask first"
           copy="Clear answers about where Maysano fits, what it connects and how it operates in an enterprise environment."
         />
         <div className="faq-list">
