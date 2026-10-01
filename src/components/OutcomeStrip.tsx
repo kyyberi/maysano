@@ -1,7 +1,7 @@
 const outcomes = [
   ['#how-it-works', 'Connect strategy to data products', 'See which objectives and use cases each data product supports, in one knowledge graph.'],
   ['#governance', 'Governance inside the work', 'Ownership, evidence, policies and controls applied while teams create, develop, review and operate.'],
-  ['#agents', 'Agents that can explain the portfolio', 'AI agents work from objectives, use cases, products, governance and lifecycle context, not an isolated prompt.'],
+  ['#agents', 'AI Agents operations', 'AI agents work from objectives, use cases, products, governance and lifecycle context, not an isolated prompt.'],
 ]
 
 export function OutcomeStrip() {
