@@ -3,6 +3,7 @@ import { ArchitectureLayer } from './components/ArchitectureLayer'
 import { ConcreteExample } from './components/ConcreteExample'
 import { EnterpriseTrust } from './components/EnterpriseTrust'
 import { Evidence } from './components/Evidence'
+import { FAQ } from './components/FAQ'
 import { FinalCTA } from './components/FinalCTA'
 import { Footer } from './components/Footer'
 import { GovernanceFlow } from './components/GovernanceFlow'
@@ -32,6 +33,7 @@ export default function App() {
         <Evidence />
         <Standards />
         <EnterpriseTrust />
+        <FAQ />
         <FinalCTA />
       </main>
       <Footer />
