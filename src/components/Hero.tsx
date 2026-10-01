@@ -1,6 +1,6 @@
 import { siteConfig } from '../config/site'
 import { HeroGraph } from './HeroGraph'
-import heroDiagram from '../assets/hero-portfolio-flow.jpg'
+import heroDiagram from '../assets/hero-portfolio-flow.webp'
 
 export function Hero() {
   return (

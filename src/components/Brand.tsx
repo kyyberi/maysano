@@ -11,12 +11,12 @@ export function Brand({ className = '', compact = false }: BrandProps) {
       {compact ? (
         <>
           <span className="brand-mark" aria-hidden="true">
-            <img src={`${import.meta.env.BASE_URL}logo.png`} alt="" />
+            <img src={`${import.meta.env.BASE_URL}logo.webp`} alt="" />
           </span>
           <span className="brand-word">MAYSĀNO</span>
         </>
       ) : (
-        <img src={`${import.meta.env.BASE_URL}logo.png`} alt={siteConfig.companyName} />
+        <img src={`${import.meta.env.BASE_URL}logo.webp`} alt={siteConfig.companyName} />
       )}
     </a>
   )

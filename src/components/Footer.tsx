@@ -23,6 +23,13 @@ export function Footer() {
           {siteConfig.githubUrl && <a href={siteConfig.githubUrl} target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>}
           <a href="mailto:privacy@maysano.com">Privacy</a>
         </div>
+        <address className="footer-company">
+          <strong>Company Details</strong>
+          <span>Data Maestro Academy FZE LLC</span>
+          <span>Business-ID: 262443655888</span>
+          <span>Amber Gem Tower, 26th Floor, Ajman</span>
+          <span>United Arab Emirates</span>
+        </address>
       </div>
       <div className="container footer-bottom"><span>© {new Date().getFullYear()} {siteConfig.companyName}</span><span>Connect data directly to business.</span></div>
     </footer>

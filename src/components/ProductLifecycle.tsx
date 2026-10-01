@@ -27,7 +27,7 @@ export function ProductLifecycle() {
           </div>
           <figure className="product-screenshot">
             <img
-              src={`${import.meta.env.BASE_URL}product-catalog.png`}
+              src={`${import.meta.env.BASE_URL}product-catalog.webp`}
               alt="Maysano product catalog showing a production data product and its business context"
               loading="lazy"
               width="1780"
