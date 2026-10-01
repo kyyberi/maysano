@@ -1572,7 +1572,7 @@ code, pre {
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.05fr 0.72fr 0.38fr 0.9fr;
+  grid-template-columns: 1.05fr 0.72fr 0.9fr;
   gap: 52px;
 }
 
@@ -1593,21 +1593,13 @@ code, pre {
   gap: 18px 30px;
 }
 
-.footer-nav a,
-.footer-links a {
+.footer-nav a {
   color: hsl(var(--foreground));
   font-size: 0.79rem;
   font-weight: 700;
 }
 
-.footer-nav a:hover,
-.footer-links a:hover { color: hsl(var(--primary)); }
-
-.footer-links {
-  display: grid;
-  align-content: start;
-  gap: 18px;
-}
+.footer-nav a:hover { color: hsl(var(--primary)); }
 
 .footer-company {
   display: grid;

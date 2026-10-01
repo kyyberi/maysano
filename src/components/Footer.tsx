@@ -18,11 +18,6 @@ export function Footer() {
         <nav className="footer-nav" aria-label="Footer navigation">
           {footerNav.map(([label, href]) => <a href={href} key={label}>{label}</a>)}
         </nav>
-        <div className="footer-links">
-          {siteConfig.linkedInUrl && <a href={siteConfig.linkedInUrl} target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>}
-          {siteConfig.githubUrl && <a href={siteConfig.githubUrl} target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>}
-          <a href="mailto:privacy@maysano.com">Privacy</a>
-        </div>
         <address className="footer-company">
           <strong>Company Details</strong>
           <span>Data Maestro Academy FZE LLC</span>
