@@ -880,11 +880,11 @@ code, pre {
 
 .architecture-note {
   max-width: 800px;
-  margin: 34px auto 0;
+  margin: 34px 0 0;
   color: hsl(var(--muted-foreground));
   font-size: 0.92rem;
   line-height: 1.6;
-  text-align: center;
+  text-align: left;
 }
 
 .architecture-note strong { color: hsl(var(--heading)); }
@@ -2000,7 +2000,7 @@ html.js .reveal:not(.is-in) .rise { opacity: 0; transform: translateY(18px); }
 .stack {
   display: grid;
   max-width: 980px;
-  margin: 0 auto;
+  margin: 0;
   gap: 16px;
 }
 
@@ -2047,7 +2047,6 @@ html.js .reveal:not(.is-in) .rise { opacity: 0; transform: translateY(18px); }
     radial-gradient(90% 140% at 100% 0%, hsl(var(--lime) / 0.18), transparent 46%),
     hsl(var(--navy));
   color: hsl(var(--navy-foreground));
-  transform: scale(1.035);
   box-shadow: var(--shadow-lg), 0 0 0 1px hsl(var(--lime) / 0.35);
   animation: glow-pulse 4.5s ease-in-out infinite;
 }
@@ -2141,7 +2140,7 @@ html.js .reveal:not(.is-in) .rise { opacity: 0; transform: translateY(18px); }
 
 .gov-phases::before {
   position: absolute;
-  top: 34px;
+  top: 20px;
   right: 8%;
   left: 8%;
   height: 2px;
@@ -2222,10 +2221,10 @@ html.js .reveal:not(.is-in) .rise { opacity: 0; transform: translateY(18px); }
 }
 
 .gov-note {
-  margin: 14px 0 0;
+  margin: 12px 18px 0;
   color: hsl(var(--navy-foreground) / 0.62);
   font-size: 0.78rem;
-  text-align: center;
+  text-align: left;
 }
 
 .agent-stage {
