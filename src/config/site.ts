@@ -1,6 +1,6 @@
 export const siteConfig = {
   companyName: 'Maysano',
-  bookingUrl: 'mailto:hello@maysano.com?subject=Maysano%20demo',
+  bookingUrl: 'https://cal.com/maysanoplatform/30min',
   platformUrl: '#product',
   githubUrl: '',
   linkedInUrl: '',
