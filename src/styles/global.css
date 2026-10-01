@@ -345,11 +345,14 @@ code, pre {
   display: flex;
   align-items: center;
   padding: 80px 0 72px;
-  background:
-    linear-gradient(hsl(var(--lime) / 0.07) 1px, transparent 1px),
-    linear-gradient(90deg, hsl(var(--lime) / 0.07) 1px, transparent 1px),
-    hsl(var(--navy));
-  background-size: 52px 52px;
+  background-color: hsl(var(--navy));
+  background-image:
+    linear-gradient(90deg, hsl(var(--navy) / 0.94) 0%, hsl(var(--navy) / 0.84) 44%, hsl(var(--navy) / 0.34) 72%, hsl(var(--navy) / 0.08) 100%),
+    linear-gradient(180deg, hsl(var(--navy) / 0.02), hsl(var(--navy) / 0.12)),
+    url('../assets/hero-portfolio-flow.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   color: hsl(var(--navy-foreground));
   overflow: hidden;
 }
@@ -474,6 +477,7 @@ code, pre {
   display: grid;
   width: min(100%, 390px);
   margin-inline: auto;
+  visibility: hidden;
 }
 
 .hero-model-layer {
@@ -1583,7 +1587,15 @@ code, pre {
   }
   .nav-secondary a { padding: 11px 6px; color: hsl(var(--muted-foreground)); font-size: 0.84rem; font-weight: 700; }
   .nav-secondary a:hover { color: hsl(var(--primary)); }
-  .hero { padding: 78px 0; }
+  .hero {
+    padding: 78px 0;
+    background-image:
+      linear-gradient(90deg, hsl(var(--navy) / 0.98), hsl(var(--navy) / 0.58)),
+      linear-gradient(180deg, hsl(var(--navy) / 0.48), hsl(var(--navy) / 0.16)),
+      url('../assets/hero-portfolio-flow.jpg');
+    background-position: center, center, 70% bottom;
+    background-size: cover, cover, auto 48%;
+  }
   .outcome-list { grid-template-columns: 1fr; margin: 0; }
   .outcome-list li + li { border-top: 1px solid hsl(var(--navy-foreground) / 0.12); border-left: 0; }
   .outcome-list a { padding: 24px 0; }
@@ -1620,7 +1632,7 @@ code, pre {
   .brand--compact { gap: 9px; }
   .brand-word { font-size: 0.93rem; }
   .primary-nav { top: 74px; }
-  .hero { padding: 58px 0 70px; background-size: 40px 40px; }
+  .hero { padding: 58px 0 70px; }
   .hero-grid { gap: 58px; }
   .hero-copy h1 { font-size: clamp(2.65rem, 13vw, 4rem); line-height: 0.94; }
   .hero-lead { font-size: 1rem; }
