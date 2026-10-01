@@ -16,7 +16,7 @@ export function AgentGraph() {
         <SectionIntro
           eyebrow="PORTFOLIO-AWARE AI"
           title="AI agents operate in your portfolio"
-          copy="Agents operate on the connected graph containing business objectives, use cases, data products, governance and lifecycle context—not on an isolated prompt."
+          copy="Agents operate on the connected graph containing business objectives, use cases, data products, governance and lifecycle context—not on an isolated prompt. Built-in monitoring and a kill switch keep agent operations observable and under human control."
         />
         <Reveal className="agent-stage">
           <div className="agent-hub rise" aria-label="Connected portfolio context available to AI agents">
