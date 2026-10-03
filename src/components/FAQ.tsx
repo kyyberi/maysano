@@ -1,6 +1,6 @@
 import { SectionIntro } from './SectionIntro'
 
-const questions = [
+export const questions = [
   [
     'What does Maysano connect?',
     'Maysano connects business objectives and use cases to data products in a shared knowledge graph. Governance, lifecycle and delivery context stay attached to the same portfolio.',
@@ -25,7 +25,7 @@ const questions = [
     'What happens in a 30-minute demo?',
     'We walk through strategy-to-product connections, governance and lifecycle inside the work, portfolio gaps and dependencies, AI Agent operations and the enterprise questions relevant to your environment.',
   ],
-]
+] as const
 
 export function FAQ() {
   return (

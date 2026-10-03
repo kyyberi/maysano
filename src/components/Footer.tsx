@@ -12,6 +12,7 @@ const footerExplore = [
   ['Governance', '#governance'],
   ['Open Standards', '#standards'],
   ['Proof & References', '#evidence'],
+  ['Who Built Maysano', '#creator'],
   ['Enterprise', '#enterprise'],
   ['FAQ', '#faq'],
 ]

@@ -1,6 +1,7 @@
 import { AgentGraph } from './components/AgentGraph'
 import { ArchitectureLayer } from './components/ArchitectureLayer'
 import { ConcreteExample } from './components/ConcreteExample'
+import { CreatorProfile } from './components/CreatorProfile'
 import { EnterpriseTrust } from './components/EnterpriseTrust'
 import { Evidence } from './components/Evidence'
 import { FAQ } from './components/FAQ'
@@ -15,10 +16,12 @@ import { ProductLifecycle } from './components/ProductLifecycle'
 import { ProductDemos } from './components/ProductDemos'
 import { Standards } from './components/Standards'
 import { StrategyGraph } from './components/StrategyGraph'
+import { StructuredData } from './components/StructuredData'
 
 export default function App() {
   return (
     <>
+      <StructuredData />
       <a className="skip-link" href="#main-content">Skip to content</a>
       <Header />
       <main id="main-content">
@@ -33,6 +36,7 @@ export default function App() {
         <AgentGraph />
         <ProductLifecycle />
         <Evidence />
+        <CreatorProfile />
         <Standards />
         <EnterpriseTrust />
         <FAQ />

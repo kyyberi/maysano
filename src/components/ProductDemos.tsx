@@ -1,7 +1,5 @@
 import { SectionIntro } from './SectionIntro'
 
-const upcomingDemoSlots = ['02', '03']
-
 const firstDemo = {
   title: 'From Business Discussion to Data Product Candidate',
   youtubeUrl: 'https://youtu.be/Z0wZkZbZv0I',
@@ -61,21 +59,6 @@ export function ProductDemos() {
             </a>
           </div>
         </article>
-
-        <div className="demo-upcoming">
-          <p className="demo-upcoming-label">Next recordings</p>
-          <div className="demo-placeholder-grid" aria-label="Upcoming Maysano product demonstrations">
-            {upcomingDemoSlots.map((slot) => (
-              <article className="demo-placeholder" key={slot}>
-                <span>DEMO SLOT {slot}</span>
-                <div>
-                  <strong>Recording in preparation</strong>
-                  <small>Title and scope to be confirmed</small>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   )
