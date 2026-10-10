@@ -57,6 +57,7 @@ export function ArchitectureLayer() {
           </div>
         </Reveal>
         <p className="architecture-note"><strong>Complementary by design.</strong> Maysano owns the connected business and product context. Catalogs, metadata platforms and data platforms remain the underlying systems.</p>
+        <a className="text-link" href="maysano.pdf" download>Download the Maysano overview <span aria-hidden="true">↓</span></a>
       </div>
     </section>
   )
