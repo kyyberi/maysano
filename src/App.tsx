@@ -2,6 +2,7 @@ import { AgentGraph } from './components/AgentGraph'
 import { ArchitectureLayer } from './components/ArchitectureLayer'
 import { ConcreteExample } from './components/ConcreteExample'
 import { CreatorProfile } from './components/CreatorProfile'
+import { DeploymentModels } from './components/DeploymentModels'
 import { EnterpriseTrust } from './components/EnterpriseTrust'
 import { Evidence } from './components/Evidence'
 import { FAQ } from './components/FAQ'
@@ -32,6 +33,7 @@ export default function App() {
         <ConcreteExample />
         <ProductDemos />
         <ArchitectureLayer />
+        <DeploymentModels />
         <GovernanceFlow />
         <AgentGraph />
         <ProductLifecycle />

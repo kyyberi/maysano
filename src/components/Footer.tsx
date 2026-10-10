@@ -9,6 +9,7 @@ const footerNav = [
 
 const footerExplore = [
   ['Product Demos', '#demos'],
+  ['Deployment Models', '#deployment'],
   ['Governance', '#governance'],
   ['Open Standards', '#standards'],
   ['Proof & References', '#evidence'],

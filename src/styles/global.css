@@ -984,6 +984,123 @@ code, pre {
 
 .architecture-note strong { color: hsl(var(--heading)); }
 
+/* Deployment models */
+
+.deployment-section { background: hsl(var(--secondary)); }
+
+.deployment-diagram { max-width: 1120px; }
+
+.deployment-operating-layer {
+  padding: 30px 34px 0;
+  border: 1px solid hsl(var(--navy));
+  background: hsl(var(--navy));
+  color: hsl(var(--navy-foreground));
+}
+
+.deployment-operating-layer__heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid hsl(var(--navy-foreground) / 0.2);
+}
+
+.deployment-operating-layer__heading span {
+  color: hsl(var(--lime));
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.deployment-operating-layer__heading strong { font-size: 0.92rem; font-weight: 600; }
+
+.deployment-capabilities {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.deployment-capabilities li {
+  min-height: 104px;
+  padding: 22px 16px 20px;
+  border-right: 1px solid hsl(var(--navy-foreground) / 0.16);
+}
+
+.deployment-capabilities li:first-child { padding-left: 0; }
+.deployment-capabilities li:last-child { padding-right: 0; border-right: 0; }
+.deployment-capabilities span { display: block; margin-bottom: 10px; color: hsl(var(--lime)); font-size: 0.62rem; font-weight: 700; }
+.deployment-capabilities strong { display: block; color: hsl(var(--navy-foreground)); font-size: 0.86rem; line-height: 1.25; }
+
+.deployment-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.deployment-option {
+  display: flex;
+  flex-direction: column;
+  min-height: 356px;
+  padding: 32px 34px 28px;
+  border: 1px solid hsl(var(--border));
+  background: hsl(var(--card));
+}
+
+.deployment-option > p {
+  margin-bottom: 8px;
+  color: hsl(var(--primary));
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.deployment-option h3 { margin-bottom: 22px; font-size: clamp(1.4rem, 2vw, 1.8rem); line-height: 1.1; }
+
+.deployment-components {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-bottom: 25px;
+  border-top: 1px solid hsl(var(--border));
+  border-bottom: 1px solid hsl(var(--border));
+}
+
+.deployment-components span {
+  display: flex;
+  align-items: center;
+  min-height: 62px;
+  padding: 10px 12px;
+  border-right: 1px solid hsl(var(--border));
+  color: hsl(var(--heading));
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.32;
+}
+
+.deployment-components span:first-child { padding-left: 0; }
+.deployment-components span:last-child { padding-right: 0; border-right: 0; }
+
+.deployment-benefits { display: grid; gap: 9px; margin: 0 0 25px; padding: 0; list-style: none; }
+.deployment-benefits li { display: grid; grid-template-columns: 9px 1fr; gap: 10px; color: hsl(var(--muted-foreground)); font-size: 0.83rem; line-height: 1.45; }
+.deployment-benefits li::before { width: 6px; height: 6px; margin-top: 0.4rem; border-radius: 50%; background: hsl(var(--primary)); content: ''; }
+
+.deployment-option small {
+  display: block;
+  margin-top: auto;
+  padding-top: 18px;
+  border-top: 1px solid hsl(var(--border));
+  color: hsl(var(--foreground));
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.deployment-choice { margin: 24px 0 0; color: hsl(var(--muted-foreground)); font-size: 0.84rem; text-align: center; }
+
 /* Governance */
 
 .governance-section {
@@ -1912,6 +2029,14 @@ code, pre {
   .governance-summary { max-width: 760px; }
   .standards-grid { gap: 48px; }
   .enterprise-grid { gap: 58px; }
+  .deployment-capabilities { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .deployment-capabilities li { padding: 18px 16px; border-bottom: 1px solid hsl(var(--navy-foreground) / 0.16); }
+  .deployment-capabilities li:nth-child(3n) { border-right: 0; }
+  .deployment-capabilities li:nth-child(n + 4) { border-bottom: 0; }
+  .deployment-capabilities li:first-child { padding-left: 0; }
+  .deployment-capabilities li:nth-child(4) { padding-left: 0; }
+  .deployment-capabilities li:nth-child(3) { padding-right: 0; }
+  .deployment-capabilities li:last-child { padding-right: 0; }
   .footer-main { grid-template-columns: 1.25fr repeat(2, 0.7fr) 1fr; }
   .footer-contact { grid-column: 2 / -1; padding-top: 34px; padding-left: 0; border-top: 1px solid hsl(var(--navy-foreground) / 0.18); border-left: 0; }
   .footer-context { grid-template-columns: 1fr; gap: 24px; }
@@ -1984,6 +2109,8 @@ code, pre {
   .standards-grid,
   .enterprise-grid,
   .faq-grid { grid-template-columns: 1fr; }
+  .deployment-options { grid-template-columns: 1fr; }
+  .deployment-option { min-height: 0; }
   .enterprise-grid .section-intro { margin-bottom: 10px; }
   .faq-grid { gap: 18px; }
   .faq-grid .section-intro { margin-bottom: 20px; }
@@ -2009,6 +2136,19 @@ code, pre {
   .hero-actions .text-link,
   .cta-actions .text-link { align-self: center; }
   .hero-model { width: min(100%, 390px); }
+  .deployment-operating-layer { padding: 24px 20px 0; }
+  .deployment-operating-layer__heading { align-items: flex-start; flex-direction: column; gap: 8px; padding-bottom: 16px; }
+  .deployment-capabilities { grid-template-columns: 1fr; }
+  .deployment-capabilities li,
+  .deployment-capabilities li:nth-child(n) { display: grid; grid-template-columns: 38px 1fr; align-items: center; min-height: 0; padding: 15px 0; border-right: 0; border-bottom: 1px solid hsl(var(--navy-foreground) / 0.16); }
+  .deployment-capabilities li:last-child { border-bottom: 0; }
+  .deployment-capabilities span { margin: 0; }
+  .deployment-option { padding: 27px 22px 24px; }
+  .deployment-components { grid-template-columns: 1fr; }
+  .deployment-components span,
+  .deployment-components span:first-child,
+  .deployment-components span:last-child { min-height: 0; padding: 12px 0; border-right: 0; border-bottom: 1px solid hsl(var(--border)); }
+  .deployment-components span:last-child { border-bottom: 0; }
   .faq-item summary { gap: 18px; padding: 20px 0; }
   .faq-answer { padding: 0 0 22px; }
   .problem-side { padding: 28px 22px; }

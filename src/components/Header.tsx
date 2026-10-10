@@ -10,6 +10,7 @@ const navItems = [
 
 // Shown only in the mobile menu; on desktop these stay reachable from the footer.
 const secondaryNavItems = [
+  ['Deployment Models', '#deployment'],
   ['Open Standards', '#standards'],
   ['Proof & References', '#evidence'],
   ['Enterprise', '#enterprise'],
