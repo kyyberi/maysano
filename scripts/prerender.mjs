@@ -55,6 +55,42 @@ const pages = [
     ogType: 'article',
     assetPrefix: '../../',
   },
+  {
+    pathname: '/insights/traditional-governance-to-minimum-lovable-governance/',
+    outputPath: `${outputDirectory}insights/traditional-governance-to-minimum-lovable-governance/index.html`,
+    title: 'From Traditional Governance to Minimum Lovable Governance | Maysano',
+    description: 'Why enterprise data product governance should become part of everyday work instead of a separate process that slows it down.',
+    canonical: 'https://maysano.com/insights/traditional-governance-to-minimum-lovable-governance/',
+    ogType: 'article',
+    assetPrefix: '../../',
+  },
+  {
+    pathname: '/insights/knowledge-graph-vs-ontology/',
+    outputPath: `${outputDirectory}insights/knowledge-graph-vs-ontology/index.html`,
+    title: 'Knowledge Graph vs. Ontology | Maysano',
+    description: 'Why organizations need both connected business knowledge and shared meaning, and why building a large enterprise ontology is not always the right starting point.',
+    canonical: 'https://maysano.com/insights/knowledge-graph-vs-ontology/',
+    ogType: 'article',
+    assetPrefix: '../../',
+  },
+  {
+    pathname: '/insights/traditional-ai-agents-vs-governed-ai-agents/',
+    outputPath: `${outputDirectory}insights/traditional-ai-agents-vs-governed-ai-agents/index.html`,
+    title: 'Traditional AI Agents vs. Governed AI Agents | Maysano',
+    description: 'An AI agent that produces an answer is different from an AI agent that operates within business responsibilities, governance requirements, and accountable enterprise workflows.',
+    canonical: 'https://maysano.com/insights/traditional-ai-agents-vs-governed-ai-agents/',
+    ogType: 'article',
+    assetPrefix: '../../',
+  },
+  {
+    pathname: '/insights/manual-vs-ai-assisted-governed-data-product-delivery/',
+    outputPath: `${outputDirectory}insights/manual-vs-ai-assisted-governed-data-product-delivery/index.html`,
+    title: 'Manual vs. AI-Assisted, Governed Data Product Delivery | Maysano',
+    description: 'Why enterprise data product delivery needs a better way to turn business discussions, requirements, and existing information into structured, governed product work.',
+    canonical: 'https://maysano.com/insights/manual-vs-ai-assisted-governed-data-product-delivery/',
+    ogType: 'article',
+    assetPrefix: '../../',
+  },
 ]
 
 function escapeHtml(value) {

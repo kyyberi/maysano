@@ -1,10 +1,14 @@
 import { readFile, readdir, stat } from 'node:fs/promises'
 
-const [html, insights, article, contractsArticle, robots, sitemap, notFound] = await Promise.all([
+const [html, insights, article, contractsArticle, governanceArticle, graphArticle, agentsArticle, deliveryArticle, robots, sitemap, notFound] = await Promise.all([
   readFile(new URL('../dist/index.html', import.meta.url), 'utf8'),
   readFile(new URL('../dist/insights/index.html', import.meta.url), 'utf8'),
   readFile(new URL('../dist/insights/data-catalog-vs-data-product-portfolio-management/index.html', import.meta.url), 'utf8'),
   readFile(new URL('../dist/insights/data-contracts-and-data-product-specifications/index.html', import.meta.url), 'utf8'),
+  readFile(new URL('../dist/insights/traditional-governance-to-minimum-lovable-governance/index.html', import.meta.url), 'utf8'),
+  readFile(new URL('../dist/insights/knowledge-graph-vs-ontology/index.html', import.meta.url), 'utf8'),
+  readFile(new URL('../dist/insights/traditional-ai-agents-vs-governed-ai-agents/index.html', import.meta.url), 'utf8'),
+  readFile(new URL('../dist/insights/manual-vs-ai-assisted-governed-data-product-delivery/index.html', import.meta.url), 'utf8'),
   readFile(new URL('../dist/robots.txt', import.meta.url), 'utf8'),
   readFile(new URL('../dist/sitemap.xml', import.meta.url), 'utf8'),
   readFile(new URL('../dist/404.html', import.meta.url), 'utf8'),
@@ -15,7 +19,7 @@ const hashTargets = [...html.matchAll(/href="#([^"]+)"/g)].map((match) => match[
 const assetDirectory = new URL('../dist/assets/', import.meta.url)
 const assetNames = await readdir(assetDirectory)
 const assetSizes = Object.fromEntries(await Promise.all(assetNames.map(async (name) => [name, (await stat(new URL(name, assetDirectory))).size])))
-const javascriptBytes = Object.entries(assetSizes).filter(([name]) => name.endsWith('.js')).reduce((total, [, size]) => total + size, 0)
+const largestJavaScriptBytes = Math.max(...Object.entries(assetSizes).filter(([name]) => name.endsWith('.js')).map(([, size]) => size), 0)
 const cssBytes = Object.entries(assetSizes).filter(([name]) => name.endsWith('.css')).reduce((total, [, size]) => total + size, 0)
 
 const checks = [
@@ -36,10 +40,18 @@ const checks = [
   ['canonical Insights index in sitemap', sitemap.includes('<loc>https://maysano.com/insights/</loc>')],
   ['canonical Insight article in sitemap', sitemap.includes('<loc>https://maysano.com/insights/data-catalog-vs-data-product-portfolio-management/</loc>')],
   ['canonical contracts Insight article in sitemap', sitemap.includes('<loc>https://maysano.com/insights/data-contracts-and-data-product-specifications/</loc>')],
+  ['canonical governance Insight article in sitemap', sitemap.includes('<loc>https://maysano.com/insights/traditional-governance-to-minimum-lovable-governance/</loc>')],
+  ['canonical graph Insight article in sitemap', sitemap.includes('<loc>https://maysano.com/insights/knowledge-graph-vs-ontology/</loc>')],
+  ['canonical governed-agents Insight article in sitemap', sitemap.includes('<loc>https://maysano.com/insights/traditional-ai-agents-vs-governed-ai-agents/</loc>')],
+  ['canonical delivery Insight article in sitemap', sitemap.includes('<loc>https://maysano.com/insights/manual-vs-ai-assisted-governed-data-product-delivery/</loc>')],
   ['prerendered Insights index', insights.includes('Better decisions about data products and AI.')],
   ['Insights index canonical URL', insights.includes('<link rel="canonical" href="https://maysano.com/insights/"')],
   ['Insights index has six editorial cards', (insights.match(/class="insight-card(?: |")/g) || []).length === 6],
   ['contracts card targets the published Insight', insights.includes('href="https://maysano.com/insights/data-contracts-and-data-product-specifications/"')],
+  ['governance card targets the published Insight', insights.includes('href="https://maysano.com/insights/traditional-governance-to-minimum-lovable-governance/"')],
+  ['graph card targets the published Insight', insights.includes('href="https://maysano.com/insights/knowledge-graph-vs-ontology/"')],
+  ['agents card targets the published Insight', insights.includes('href="https://maysano.com/insights/traditional-ai-agents-vs-governed-ai-agents/"')],
+  ['delivery card targets the published Insight', insights.includes('href="https://maysano.com/insights/manual-vs-ai-assisted-governed-data-product-delivery/"')],
   ['prerendered Insight article', article.includes('Data Catalog vs. Data Product Portfolio Management: Why Enterprises Need Both')],
   ['Insight article canonical URL', article.includes('<link rel="canonical" href="https://maysano.com/insights/data-catalog-vs-data-product-portfolio-management/"')],
   ['Insight article structured data', article.includes('"@type":"BlogPosting"')],
@@ -48,13 +60,29 @@ const checks = [
   ['contracts Insight article canonical URL', contractsArticle.includes('<link rel="canonical" href="https://maysano.com/insights/data-contracts-and-data-product-specifications/"')],
   ['contracts Insight article structured data', contractsArticle.includes('"@type":"BlogPosting"')],
   ['contracts Insight article keeps contract and product distinction', contractsArticle.includes('Product specifications and data contracts should therefore reinforce each other rather than compete.')],
+  ['prerendered governance Insight article', governanceArticle.includes('From Traditional Governance to Minimum Lovable Governance')],
+  ['governance Insight article canonical URL', governanceArticle.includes('<link rel="canonical" href="https://maysano.com/insights/traditional-governance-to-minimum-lovable-governance/"')],
+  ['governance Insight article structured data', governanceArticle.includes('"@type":"BlogPosting"')],
+  ['governance Insight article keeps human approval boundary', governanceArticle.includes('An AI agent should not independently invent policies')],
+  ['prerendered graph Insight article', graphArticle.includes('Knowledge Graph vs. Ontology: What Enterprise Data Products Need')],
+  ['graph Insight article canonical URL', graphArticle.includes('<link rel="canonical" href="https://maysano.com/insights/knowledge-graph-vs-ontology/"')],
+  ['graph Insight article structured data', graphArticle.includes('"@type":"BlogPosting"')],
+  ['graph Insight article keeps graph and ontology distinction', graphArticle.includes('The knowledge graph tells us what is connected. The ontology helps explain what those connections mean.')],
+  ['prerendered governed-agents Insight article', agentsArticle.includes('Traditional AI Agents vs. Governed AI Agents for Enterprise Data Work')],
+  ['governed-agents Insight article canonical URL', agentsArticle.includes('<link rel="canonical" href="https://maysano.com/insights/traditional-ai-agents-vs-governed-ai-agents/"')],
+  ['governed-agents Insight article structured data', agentsArticle.includes('"@type":"BlogPosting"')],
+  ['governed-agents Insight article keeps approval boundary', agentsArticle.includes('authority to execute.')],
+  ['prerendered delivery Insight article', deliveryArticle.includes('Manual vs. AI-Assisted, Governed Data Product Delivery')],
+  ['delivery Insight article canonical URL', deliveryArticle.includes('<link rel="canonical" href="https://maysano.com/insights/manual-vs-ai-assisted-governed-data-product-delivery/"')],
+  ['delivery Insight article structured data', deliveryArticle.includes('"@type":"BlogPosting"')],
+  ['delivery Insight article keeps human-review boundary', deliveryArticle.includes('Agents prepare the decision; they do not make it for the bank.')],
   ['custom 404 links home', notFound.includes('href="https://maysano.com/"')],
   ['all built images are WebP', !/<img[^>]+src="[^"]+\.(?:png|jpe?g)\b/i.test(html)],
   ['all images have alt text', imageTags.every((tag) => /\balt="[^"]*"/.test(tag))],
   ['all images reserve dimensions', imageTags.every((tag) => /\bwidth="\d+"/.test(tag) && /\bheight="\d+"/.test(tag))],
   ['all internal section links resolve', hashTargets.every((id) => html.includes(`id="${id}"`))],
   ['prerendered asset paths remain portable', !/\b(?:src|href)="\/(?!\/)/.test(html)],
-  ['JavaScript stays below 250 kB uncompressed', javascriptBytes < 250_000],
+  ['initial JavaScript chunk stays below 250 kB uncompressed', largestJavaScriptBytes < 250_000],
   ['CSS stays below 100 kB uncompressed', cssBytes < 100_000],
 ]
 

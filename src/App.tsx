@@ -1,3 +1,4 @@
+import { lazy, Suspense, type ComponentType } from 'react'
 import { AgentGraph } from './components/AgentGraph'
 import { ArchitectureLayer } from './components/ArchitectureLayer'
 import { ConcreteExample } from './components/ConcreteExample'
@@ -18,18 +19,24 @@ import { ProductDemos } from './components/ProductDemos'
 import { Standards } from './components/Standards'
 import { StrategyGraph } from './components/StrategyGraph'
 import { StructuredData } from './components/StructuredData'
-import { DataContractsInsightArticle, InsightArticle, InsightsIndex } from './components/Insights'
+
+type InsightRouteProps = {
+  pathname: string
+}
+
+const InsightRoutes = lazy(() => import('./components/InsightRoutes').then((module) => ({ default: module.InsightRoutes })))
 
 type AppProps = {
   pathname?: string
 }
 
-export default function App({ pathname = '/' }: AppProps) {
+export function AppContent({ pathname = '/', InsightRenderer }: AppProps & { InsightRenderer?: ComponentType<InsightRouteProps> }) {
   const path = pathname.replace(/\/+$/, '') || '/'
 
-  if (path === '/insights') return <InsightsIndex />
-  if (path === '/insights/data-catalog-vs-data-product-portfolio-management') return <InsightArticle />
-  if (path === '/insights/data-contracts-and-data-product-specifications') return <DataContractsInsightArticle />
+  if (path.startsWith('/insights')) {
+    if (InsightRenderer) return <InsightRenderer pathname={path} />
+    return <Suspense fallback={null}><InsightRoutes pathname={path} /></Suspense>
+  }
 
   return (
     <>
@@ -58,4 +65,8 @@ export default function App({ pathname = '/' }: AppProps) {
       <Footer />
     </>
   )
+}
+
+export default function App({ pathname = '/' }: AppProps) {
+  return <AppContent pathname={pathname} />
 }

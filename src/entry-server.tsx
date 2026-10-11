@@ -1,6 +1,7 @@
 import { renderToString } from 'react-dom/server'
-import App from './App'
+import { AppContent } from './App'
+import { InsightRoutes } from './components/InsightRoutes'
 
 export function render(pathname = '/') {
-  return renderToString(<App pathname={pathname} />)
+  return renderToString(<AppContent pathname={pathname} InsightRenderer={InsightRoutes} />)
 }

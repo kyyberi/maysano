@@ -6,6 +6,7 @@ const navItems = [
   ['Product', `${siteConfig.siteUrl}#product`],
   ['How It Works', `${siteConfig.siteUrl}#how-it-works`],
   ['AI Agents', `${siteConfig.siteUrl}#agents`],
+  ['Insights', `${siteConfig.siteUrl}insights/`],
 ]
 
 // Shown only in the mobile menu; on desktop these stay reachable from the footer.
