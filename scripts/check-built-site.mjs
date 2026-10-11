@@ -21,6 +21,28 @@ const assetNames = await readdir(assetDirectory)
 const assetSizes = Object.fromEntries(await Promise.all(assetNames.map(async (name) => [name, (await stat(new URL(name, assetDirectory))).size])))
 const largestJavaScriptBytes = Math.max(...Object.entries(assetSizes).filter(([name]) => name.endsWith('.js')).map(([, size]) => size), 0)
 const cssBytes = Object.entries(assetSizes).filter(([name]) => name.endsWith('.css')).reduce((total, [, size]) => total + size, 0)
+const insightSocialImages = [
+  ['catalog Insight', article, 'insight-data-catalog-portfolio.png', 'Maysano Insight: Data Catalog vs. Data Product Portfolio Management: Why Enterprises Need Both'],
+  ['contracts Insight', contractsArticle, 'insight-data-contracts-specifications.png', 'Maysano Insight: Data Contracts and Data Product Specifications: Different Jobs, One Product'],
+  ['governance Insight', governanceArticle, 'insight-minimum-lovable-governance.png', 'Maysano Insight: From Traditional Governance to Minimum Lovable Governance'],
+  ['graph Insight', graphArticle, 'insight-knowledge-graph-ontology.png', 'Maysano Insight: Knowledge Graph vs. Ontology: What Enterprise Data Products Need'],
+  ['governed-agents Insight', agentsArticle, 'insight-governed-ai-agents.png', 'Maysano Insight: Traditional AI Agents vs. Governed AI Agents for Enterprise Data Work'],
+  ['delivery Insight', deliveryArticle, 'insight-ai-assisted-delivery.png', 'Maysano Insight: Manual vs. AI-Assisted, Governed Data Product Delivery'],
+]
+const insightSocialImageSizes = await Promise.all(insightSocialImages.map(async ([, , file]) => {
+  const image = await readFile(new URL(`../dist/og/${file}`, import.meta.url))
+  return image.length >= 24 && image.toString('ascii', 1, 4) === 'PNG' && image.readUInt32BE(16) === 1200 && image.readUInt32BE(20) === 630
+}))
+const hasInsightSocialMetadata = (document, file, alt) => {
+  const imageUrl = `https://maysano.com/og/${file}`
+  return document.includes(`<meta property="og:image" content="${imageUrl}" />`)
+    && document.includes('<meta property="og:image:width" content="1200" />')
+    && document.includes('<meta property="og:image:height" content="630" />')
+    && document.includes(`<meta property="og:image:alt" content="${alt}" />`)
+    && document.includes('<meta name="twitter:card" content="summary_large_image" />')
+    && document.includes(`<meta name="twitter:image" content="${imageUrl}" />`)
+    && document.includes(`<meta name="twitter:image:alt" content="${alt}" />`)
+}
 
 const checks = [
   ['prerendered H1', (html.match(/<h1[\s>]/g) || []).length === 1],
@@ -76,6 +98,8 @@ const checks = [
   ['delivery Insight article canonical URL', deliveryArticle.includes('<link rel="canonical" href="https://maysano.com/insights/manual-vs-ai-assisted-governed-data-product-delivery/"')],
   ['delivery Insight article structured data', deliveryArticle.includes('"@type":"BlogPosting"')],
   ['delivery Insight article keeps human-review boundary', deliveryArticle.includes('Agents prepare the decision; they do not make it for the bank.')],
+  ...insightSocialImages.map(([label, document, file, alt]) => [`${label} has its branded social metadata`, hasInsightSocialMetadata(document, file, alt)]),
+  ['Insight social images are 1200 by 630 PNGs', insightSocialImageSizes.every(Boolean)],
   ['custom 404 links home', notFound.includes('href="https://maysano.com/"')],
   ['all built images are WebP', !/<img[^>]+src="[^"]+\.(?:png|jpe?g)\b/i.test(html)],
   ['all images have alt text', imageTags.every((tag) => /\balt="[^"]*"/.test(tag))],

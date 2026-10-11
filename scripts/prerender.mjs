@@ -44,6 +44,8 @@ const pages = [
     description: 'A practical guide to connecting data assets with business objectives, investment decisions, governance, and AI operations.',
     canonical: 'https://maysano.com/insights/data-catalog-vs-data-product-portfolio-management/',
     ogType: 'article',
+    ogImage: 'https://maysano.com/og/insight-data-catalog-portfolio.png',
+    ogImageAlt: 'Maysano Insight: Data Catalog vs. Data Product Portfolio Management: Why Enterprises Need Both',
     assetPrefix: '../../',
   },
   {
@@ -53,6 +55,8 @@ const pages = [
     description: 'Why defining how data is delivered is different from defining the complete product, and why enterprise AI needs both.',
     canonical: 'https://maysano.com/insights/data-contracts-and-data-product-specifications/',
     ogType: 'article',
+    ogImage: 'https://maysano.com/og/insight-data-contracts-specifications.png',
+    ogImageAlt: 'Maysano Insight: Data Contracts and Data Product Specifications: Different Jobs, One Product',
     assetPrefix: '../../',
   },
   {
@@ -62,6 +66,8 @@ const pages = [
     description: 'Why enterprise data product governance should become part of everyday work instead of a separate process that slows it down.',
     canonical: 'https://maysano.com/insights/traditional-governance-to-minimum-lovable-governance/',
     ogType: 'article',
+    ogImage: 'https://maysano.com/og/insight-minimum-lovable-governance.png',
+    ogImageAlt: 'Maysano Insight: From Traditional Governance to Minimum Lovable Governance',
     assetPrefix: '../../',
   },
   {
@@ -71,6 +77,8 @@ const pages = [
     description: 'Why organizations need both connected business knowledge and shared meaning, and why building a large enterprise ontology is not always the right starting point.',
     canonical: 'https://maysano.com/insights/knowledge-graph-vs-ontology/',
     ogType: 'article',
+    ogImage: 'https://maysano.com/og/insight-knowledge-graph-ontology.png',
+    ogImageAlt: 'Maysano Insight: Knowledge Graph vs. Ontology: What Enterprise Data Products Need',
     assetPrefix: '../../',
   },
   {
@@ -80,6 +88,8 @@ const pages = [
     description: 'An AI agent that produces an answer is different from an AI agent that operates within business responsibilities, governance requirements, and accountable enterprise workflows.',
     canonical: 'https://maysano.com/insights/traditional-ai-agents-vs-governed-ai-agents/',
     ogType: 'article',
+    ogImage: 'https://maysano.com/og/insight-governed-ai-agents.png',
+    ogImageAlt: 'Maysano Insight: Traditional AI Agents vs. Governed AI Agents for Enterprise Data Work',
     assetPrefix: '../../',
   },
   {
@@ -89,6 +99,8 @@ const pages = [
     description: 'Why enterprise data product delivery needs a better way to turn business discussions, requirements, and existing information into structured, governed product work.',
     canonical: 'https://maysano.com/insights/manual-vs-ai-assisted-governed-data-product-delivery/',
     ogType: 'article',
+    ogImage: 'https://maysano.com/og/insight-ai-assisted-delivery.png',
+    ogImageAlt: 'Maysano Insight: Manual vs. AI-Assisted, Governed Data Product Delivery',
     assetPrefix: '../../',
   },
 ]
@@ -101,8 +113,10 @@ function withMetadata(html, page) {
   const title = escapeHtml(page.title)
   const description = escapeHtml(page.description)
   const canonical = escapeHtml(page.canonical)
+  const ogImage = page.ogImage ? escapeHtml(page.ogImage) : null
+  const ogImageAlt = page.ogImageAlt ? escapeHtml(page.ogImageAlt) : null
 
-  return html
+  const metadata = html
     .replace(/<title>.*?<\/title>/, `<title>${title}</title>`)
     .replace(/<meta name="description" content="[^"]*" \/>/, `<meta name="description" content="${description}" />`)
     .replace(/<link rel="canonical" href="[^"]*" \/>/, `<link rel="canonical" href="${canonical}" />`)
@@ -112,6 +126,17 @@ function withMetadata(html, page) {
     .replace(/<meta property="og:url" content="[^"]*" \/>/, `<meta property="og:url" content="${canonical}" />`)
     .replace(/<meta name="twitter:title" content="[^"]*" \/>/, `<meta name="twitter:title" content="${title}" />`)
     .replace(/<meta name="twitter:description" content="[^"]*" \/>/, `<meta name="twitter:description" content="${description}" />`)
+
+  if (!ogImage || !ogImageAlt) return metadata
+
+  return metadata
+    .replace(/<meta property="og:image" content="[^"]*" \/>/, `<meta property="og:image" content="${ogImage}" />`)
+    .replace(/<meta property="og:image:width" content="[^"]*" \/>/, '<meta property="og:image:width" content="1200" />')
+    .replace(/<meta property="og:image:height" content="[^"]*" \/>/, '<meta property="og:image:height" content="630" />')
+    .replace(/<meta property="og:image:alt" content="[^"]*" \/>/, `<meta property="og:image:alt" content="${ogImageAlt}" />`)
+    .replace(/<meta name="twitter:card" content="[^"]*" \/>/, '<meta name="twitter:card" content="summary_large_image" />')
+    .replace(/<meta name="twitter:image" content="[^"]*" \/>/, `<meta name="twitter:image" content="${ogImage}" />`)
+    .replace(/<meta name="twitter:image:alt" content="[^"]*" \/>/, `<meta name="twitter:image:alt" content="${ogImageAlt}" />`)
 }
 
 function withRelativeAssets(html, assetPrefix) {

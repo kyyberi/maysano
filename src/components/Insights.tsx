@@ -15,6 +15,12 @@ const agentsArticlePath = 'insights/traditional-ai-agents-vs-governed-ai-agents/
 const agentsArticleUrl = `${siteConfig.siteUrl}${agentsArticlePath}`
 const deliveryArticlePath = 'insights/manual-vs-ai-assisted-governed-data-product-delivery/'
 const deliveryArticleUrl = `${siteConfig.siteUrl}${deliveryArticlePath}`
+const catalogSocialImage = `${siteConfig.siteUrl}og/insight-data-catalog-portfolio.png`
+const contractsSocialImage = `${siteConfig.siteUrl}og/insight-data-contracts-specifications.png`
+const governanceSocialImage = `${siteConfig.siteUrl}og/insight-minimum-lovable-governance.png`
+const graphSocialImage = `${siteConfig.siteUrl}og/insight-knowledge-graph-ontology.png`
+const agentsSocialImage = `${siteConfig.siteUrl}og/insight-governed-ai-agents.png`
+const deliverySocialImage = `${siteConfig.siteUrl}og/insight-ai-assisted-delivery.png`
 
 type InsightKind = 'catalog' | 'contracts' | 'governance' | 'delivery' | 'graph' | 'agents'
 
@@ -179,13 +185,14 @@ function InsightCardView({ card }: { card: InsightCard }) {
     : <article className="insight-card insight-card--pending">{content}</article>
 }
 
-function InsightStructuredData({ headline, description, url }: { headline: string, description: string, url: string }) {
+function InsightStructuredData({ headline, description, url, image }: { headline: string, description: string, url: string, image: string }) {
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
     '@id': `${url}#article`,
     headline,
     description,
+    image,
     mainEntityOfPage: url,
     author: {
       '@type': 'Person',
@@ -261,6 +268,7 @@ export function InsightArticle() {
         headline="Data Catalog vs. Data Product Portfolio Management: Why Enterprises Need Both"
         description="A practical guide to connecting data assets with business objectives, investment decisions, governance, and AI operations."
         url={articleUrl}
+        image={catalogSocialImage}
       />
       <article className="insight-article">
         <InsightArticleHeader
@@ -378,6 +386,7 @@ export function DataContractsInsightArticle() {
         headline="Data Contracts and Data Product Specifications: Different Jobs, One Product"
         description="Why defining how data is delivered is different from defining the complete product, and why enterprise AI needs both."
         url={contractsArticleUrl}
+        image={contractsSocialImage}
       />
       <article className="insight-article">
         <InsightArticleHeader
@@ -516,6 +525,7 @@ export function MinimumLovableGovernanceInsightArticle() {
         headline="From Traditional Governance to Minimum Lovable Governance"
         description="Why enterprise data product governance should become part of everyday work instead of a separate process that slows it down."
         url={governanceArticleUrl}
+        image={governanceSocialImage}
       />
       <article className="insight-article">
         <InsightArticleHeader
@@ -624,6 +634,7 @@ export function KnowledgeGraphInsightArticle() {
         headline="Knowledge Graph vs. Ontology: What Enterprise Data Products Need"
         description="Why organizations need both connected business knowledge and shared meaning, and why building a large enterprise ontology is not always the right starting point."
         url={graphArticleUrl}
+        image={graphSocialImage}
       />
       <article className="insight-article">
         <InsightArticleHeader
@@ -737,6 +748,7 @@ export function GovernedAgentsInsightArticle() {
         headline="Traditional AI Agents vs. Governed AI Agents for Enterprise Data Work"
         description="An AI agent that produces an answer is different from an AI agent that operates within business responsibilities, governance requirements, and accountable enterprise workflows."
         url={agentsArticleUrl}
+        image={agentsSocialImage}
       />
       <article className="insight-article">
         <InsightArticleHeader
@@ -849,6 +861,7 @@ export function GovernedDeliveryInsightArticle() {
         headline="Manual vs. AI-Assisted, Governed Data Product Delivery"
         description="Why enterprise data product delivery needs a better way to turn business discussions, requirements, and existing information into structured, governed product work."
         url={deliveryArticleUrl}
+        image={deliverySocialImage}
       />
       <article className="insight-article">
         <InsightArticleHeader

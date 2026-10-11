@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build && vite build --ssr src/entry-server.tsx --outDir dist-ssr && node scripts/prerender.mjs",
     "check": "node scripts/check-built-site.mjs",
+    "generate:og": "python3 scripts/generate-og-images.py",
     "preview": "vite preview",
     "lint": "tsc -b --pretty false"
   },
