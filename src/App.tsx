@@ -18,8 +18,19 @@ import { ProductDemos } from './components/ProductDemos'
 import { Standards } from './components/Standards'
 import { StrategyGraph } from './components/StrategyGraph'
 import { StructuredData } from './components/StructuredData'
+import { DataContractsInsightArticle, InsightArticle, InsightsIndex } from './components/Insights'
 
-export default function App() {
+type AppProps = {
+  pathname?: string
+}
+
+export default function App({ pathname = '/' }: AppProps) {
+  const path = pathname.replace(/\/+$/, '') || '/'
+
+  if (path === '/insights') return <InsightsIndex />
+  if (path === '/insights/data-catalog-vs-data-product-portfolio-management') return <InsightArticle />
+  if (path === '/insights/data-contracts-and-data-product-specifications') return <DataContractsInsightArticle />
+
   return (
     <>
       <StructuredData />

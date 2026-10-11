@@ -3,17 +3,17 @@ import { siteConfig } from '../config/site'
 import { Brand } from './Brand'
 
 const navItems = [
-  ['Product', '#product'],
-  ['How It Works', '#how-it-works'],
-  ['AI Agents', '#agents'],
+  ['Product', `${siteConfig.siteUrl}#product`],
+  ['How It Works', `${siteConfig.siteUrl}#how-it-works`],
+  ['AI Agents', `${siteConfig.siteUrl}#agents`],
 ]
 
 // Shown only in the mobile menu; on desktop these stay reachable from the footer.
 const secondaryNavItems = [
-  ['Deployment Models', '#deployment'],
-  ['Open Standards', '#standards'],
-  ['Proof & References', '#evidence'],
-  ['Enterprise', '#enterprise'],
+  ['Deployment Models', `${siteConfig.siteUrl}#deployment`],
+  ['Open Standards', `${siteConfig.siteUrl}#standards`],
+  ['Proof & References', `${siteConfig.siteUrl}#evidence`],
+  ['Enterprise', `${siteConfig.siteUrl}#enterprise`],
 ]
 
 export function Header() {

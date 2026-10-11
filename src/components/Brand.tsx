@@ -7,7 +7,7 @@ type BrandProps = {
 
 export function Brand({ className = '', compact = false }: BrandProps) {
   return (
-    <a className={`brand ${compact ? 'brand--compact' : ''} ${className}`} href="#top" aria-label="Maysano home">
+    <a className={`brand ${compact ? 'brand--compact' : ''} ${className}`} href={siteConfig.siteUrl} aria-label="Maysano home">
       {compact ? (
         <>
           <span className="brand-mark" aria-hidden="true">

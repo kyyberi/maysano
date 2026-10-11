@@ -7,7 +7,7 @@ document.documentElement.classList.add('js')
 
 const app = (
   <React.StrictMode>
-    <App />
+    <App pathname={window.location.pathname} />
   </React.StrictMode>
 )
 

@@ -2,20 +2,21 @@ import { siteConfig } from '../config/site'
 import { Brand } from './Brand'
 
 const footerNav = [
-  ['Product', '#product'],
-  ['How It Works', '#how-it-works'],
-  ['AI Agents', '#agents'],
+  ['Product', `${siteConfig.siteUrl}#product`],
+  ['How It Works', `${siteConfig.siteUrl}#how-it-works`],
+  ['AI Agents', `${siteConfig.siteUrl}#agents`],
 ]
 
 const footerExplore = [
-  ['Product Demos', '#demos'],
-  ['Deployment Models', '#deployment'],
-  ['Governance', '#governance'],
-  ['Open Standards', '#standards'],
-  ['Proof & References', '#evidence'],
-  ['Who Built Maysano', '#creator'],
-  ['Enterprise', '#enterprise'],
-  ['FAQ', '#faq'],
+  ['Insights', `${siteConfig.siteUrl}insights/`],
+  ['Product Demos', `${siteConfig.siteUrl}#demos`],
+  ['Deployment Models', `${siteConfig.siteUrl}#deployment`],
+  ['Governance', `${siteConfig.siteUrl}#governance`],
+  ['Open Standards', `${siteConfig.siteUrl}#standards`],
+  ['Proof & References', `${siteConfig.siteUrl}#evidence`],
+  ['Who Built Maysano', `${siteConfig.siteUrl}#creator`],
+  ['Enterprise', `${siteConfig.siteUrl}#enterprise`],
+  ['FAQ', `${siteConfig.siteUrl}#faq`],
 ]
 
 const connectedContext = [

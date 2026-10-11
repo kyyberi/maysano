@@ -1,7 +1,10 @@
 import { readFile, readdir, stat } from 'node:fs/promises'
 
-const [html, robots, sitemap, notFound] = await Promise.all([
+const [html, insights, article, contractsArticle, robots, sitemap, notFound] = await Promise.all([
   readFile(new URL('../dist/index.html', import.meta.url), 'utf8'),
+  readFile(new URL('../dist/insights/index.html', import.meta.url), 'utf8'),
+  readFile(new URL('../dist/insights/data-catalog-vs-data-product-portfolio-management/index.html', import.meta.url), 'utf8'),
+  readFile(new URL('../dist/insights/data-contracts-and-data-product-specifications/index.html', import.meta.url), 'utf8'),
   readFile(new URL('../dist/robots.txt', import.meta.url), 'utf8'),
   readFile(new URL('../dist/sitemap.xml', import.meta.url), 'utf8'),
   readFile(new URL('../dist/404.html', import.meta.url), 'utf8'),
@@ -30,6 +33,21 @@ const checks = [
   ['Googlebot allowed', /User-agent:\s*\*[\s\S]*Allow:\s*\//.test(robots)],
   ['sitemap declared in robots', robots.includes('Sitemap: https://maysano.com/sitemap.xml')],
   ['canonical homepage in sitemap', sitemap.includes('<loc>https://maysano.com/</loc>')],
+  ['canonical Insights index in sitemap', sitemap.includes('<loc>https://maysano.com/insights/</loc>')],
+  ['canonical Insight article in sitemap', sitemap.includes('<loc>https://maysano.com/insights/data-catalog-vs-data-product-portfolio-management/</loc>')],
+  ['canonical contracts Insight article in sitemap', sitemap.includes('<loc>https://maysano.com/insights/data-contracts-and-data-product-specifications/</loc>')],
+  ['prerendered Insights index', insights.includes('Better decisions about data products and AI.')],
+  ['Insights index canonical URL', insights.includes('<link rel="canonical" href="https://maysano.com/insights/"')],
+  ['Insights index has six editorial cards', (insights.match(/class="insight-card(?: |")/g) || []).length === 6],
+  ['contracts card targets the published Insight', insights.includes('href="https://maysano.com/insights/data-contracts-and-data-product-specifications/"')],
+  ['prerendered Insight article', article.includes('Data Catalog vs. Data Product Portfolio Management: Why Enterprises Need Both')],
+  ['Insight article canonical URL', article.includes('<link rel="canonical" href="https://maysano.com/insights/data-catalog-vs-data-product-portfolio-management/"')],
+  ['Insight article structured data', article.includes('"@type":"BlogPosting"')],
+  ['Insight article keeps product boundary', article.includes('What Maysano does not replace')],
+  ['prerendered contracts Insight article', contractsArticle.includes('Data Contracts and Data Product Specifications: Different Jobs, One Product')],
+  ['contracts Insight article canonical URL', contractsArticle.includes('<link rel="canonical" href="https://maysano.com/insights/data-contracts-and-data-product-specifications/"')],
+  ['contracts Insight article structured data', contractsArticle.includes('"@type":"BlogPosting"')],
+  ['contracts Insight article keeps contract and product distinction', contractsArticle.includes('Product specifications and data contracts should therefore reinforce each other rather than compete.')],
   ['custom 404 links home', notFound.includes('href="https://maysano.com/"')],
   ['all built images are WebP', !/<img[^>]+src="[^"]+\.(?:png|jpe?g)\b/i.test(html)],
   ['all images have alt text', imageTags.every((tag) => /\balt="[^"]*"/.test(tag))],
