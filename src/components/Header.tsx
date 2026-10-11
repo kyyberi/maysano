@@ -5,6 +5,7 @@ import { Brand } from './Brand'
 const navItems = [
   ['Product', `${siteConfig.siteUrl}#product`],
   ['How It Works', `${siteConfig.siteUrl}#how-it-works`],
+  ['Architecture', `${siteConfig.siteUrl}architecture/`],
   ['AI Agents', `${siteConfig.siteUrl}#agents`],
   ['Insights', `${siteConfig.siteUrl}insights/`],
 ]

@@ -1,6 +1,7 @@
 import { lazy, Suspense, type ComponentType } from 'react'
 import { AgentGraph } from './components/AgentGraph'
 import { ArchitectureLayer } from './components/ArchitectureLayer'
+import { ArchitecturePage } from './components/ArchitecturePage'
 import { ConcreteExample } from './components/ConcreteExample'
 import { CreatorProfile } from './components/CreatorProfile'
 import { DeploymentModels } from './components/DeploymentModels'
@@ -37,6 +38,8 @@ export function AppContent({ pathname = '/', InsightRenderer }: AppProps & { Ins
     if (InsightRenderer) return <InsightRenderer pathname={path} />
     return <Suspense fallback={null}><InsightRoutes pathname={path} /></Suspense>
   }
+
+  if (path === '/architecture') return <ArchitecturePage />
 
   return (
     <>

@@ -1301,6 +1301,203 @@ code, pre {
 
 .architecture-note strong { color: hsl(var(--heading)); }
 
+/* Reference architecture */
+
+.architecture-page__hero {
+  padding: 66px 0 62px;
+  background: hsl(var(--navy));
+  color: hsl(var(--navy-foreground));
+}
+
+.architecture-page__hero-inner { max-width: 960px; }
+.architecture-page__hero .eyebrow { color: hsl(var(--lime)); }
+.architecture-page__hero h1 {
+  max-width: 780px;
+  margin-bottom: 20px;
+  color: hsl(var(--navy-foreground));
+  font-size: clamp(2.6rem, 4vw, 3.8rem);
+  letter-spacing: -0.065em;
+  line-height: 0.96;
+}
+.architecture-page__hero p { max-width: 860px; margin-bottom: 16px; color: hsl(var(--navy-foreground) / 0.76); font-size: 1.04rem; line-height: 1.68; }
+.architecture-page__hero .architecture-page__subtitle { max-width: 800px; color: hsl(var(--navy-foreground)); font-size: clamp(1.22rem, 2.4vw, 1.7rem); line-height: 1.35; }
+.architecture-page__principle { margin-top: 30px; color: hsl(var(--lime)) !important; font-weight: 700; }
+
+.architecture-page__section { background: hsl(var(--background)); }
+.architecture-page__section-head { max-width: 920px; margin-bottom: 46px; }
+.architecture-page__section-head h2,
+.architecture-page__boundaries h2,
+.architecture-page__cta h2 { font-size: clamp(2rem, 3.3vw, 3.25rem); letter-spacing: -0.055em; line-height: 1.02; }
+.architecture-page__section-head > p:not(.eyebrow) { max-width: 780px; margin: 0; color: hsl(var(--muted-foreground)); font-size: 1.02rem; line-height: 1.65; }
+.architecture-page__section-head--split { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.7fr); gap: 54px; align-items: end; max-width: none; }
+
+.architecture-diagram-scroll { overflow-x: auto; padding-bottom: 8px; }
+.architecture-diagram-scroll:focus-visible { outline-offset: 6px; }
+.logical-architecture-diagram { display: block; width: 1120px; max-width: none; min-height: 690px; }
+.architecture-svg__connection path { fill: none; stroke: hsl(var(--primary)); stroke-width: 1.5; }
+.architecture-svg__label { fill: hsl(var(--muted-foreground)); font: 600 11px var(--font-sans); letter-spacing: 0.04em; }
+.architecture-svg__group rect { stroke-width: 1.2; }
+.architecture-svg__group text { fill: hsl(var(--heading)); font: 500 15px var(--font-sans); }
+.architecture-svg__group .architecture-svg__eyebrow { fill: hsl(var(--primary)); font: 700 11px var(--font-sans); letter-spacing: 0.13em; }
+.architecture-svg__group .architecture-svg__title { fill: hsl(var(--heading)); font: 700 20px var(--font-sans); }
+.architecture-svg__group--business rect,
+.architecture-svg__group--ecosystem rect { fill: hsl(var(--secondary)); stroke: hsl(var(--border)); }
+.architecture-svg__group--standards rect { fill: hsl(var(--accent)); stroke: hsl(var(--primary)); }
+.architecture-svg__group--core rect { fill: hsl(var(--navy)); stroke: hsl(var(--navy)); }
+.architecture-svg__group--core text { fill: hsl(var(--navy-foreground)); }
+.architecture-svg__group--core .architecture-svg__eyebrow { fill: hsl(var(--lime)); }
+.architecture-svg__group--core .architecture-svg__title { fill: hsl(var(--navy-foreground)); }
+.architecture-svg__group--agents rect { fill: hsl(var(--card)); stroke: hsl(var(--primary)); }
+.architecture-svg__group--models rect { fill: hsl(var(--card)); stroke: hsl(var(--border)); }
+.architecture-page__caption,
+.architecture-page__note { max-width: 920px; margin: 24px 0 0; color: hsl(var(--muted-foreground)); font-size: 0.89rem; line-height: 1.6; }
+.architecture-page__related-links { display: flex; flex-wrap: wrap; gap: 10px 20px; margin-top: 22px; }
+.architecture-page__related-links a { padding-bottom: 3px; border-bottom: 1px solid hsl(var(--primary)); color: hsl(var(--primary)); font-size: 0.82rem; font-weight: 700; }
+
+.architecture-page__planes { background: hsl(var(--secondary)); }
+.architecture-planes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid hsl(var(--border)); border-left: 1px solid hsl(var(--border)); }
+.architecture-planes article { min-height: 260px; padding: 30px; border-right: 1px solid hsl(var(--border)); border-bottom: 1px solid hsl(var(--border)); background: hsl(var(--background)); }
+.architecture-planes article > span { color: hsl(var(--primary)); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; }
+.architecture-planes h3 { margin-top: 42px; font-size: 1.32rem; letter-spacing: -0.03em; }
+.architecture-planes p { margin: 0; color: hsl(var(--muted-foreground)); font-size: 0.93rem; line-height: 1.6; }
+.architecture-planes__focus { background: hsl(var(--navy)) !important; }
+.architecture-planes__focus > span { color: hsl(var(--lime)) !important; }
+.architecture-planes__focus h3 { color: hsl(var(--navy-foreground)); }
+.architecture-planes__focus p { color: hsl(var(--navy-foreground) / 0.72); }
+
+.architecture-ownership-grid { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.55fr); align-items: start; gap: 34px; }
+.architecture-ownership-table-wrap { overflow-x: auto; border: 1px solid hsl(var(--border)); background: hsl(var(--card)); }
+.architecture-ownership-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; text-align: left; }
+.architecture-ownership-table th,
+.architecture-ownership-table td { padding: 16px 18px; border-bottom: 1px solid hsl(var(--border)); vertical-align: top; line-height: 1.45; }
+.architecture-ownership-table thead th { background: hsl(var(--secondary)); color: hsl(var(--heading)); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.architecture-ownership-table tbody th { width: 52%; color: hsl(var(--heading)); font-weight: 700; }
+.architecture-ownership-table tbody tr:last-child th,
+.architecture-ownership-table tbody tr:last-child td { border-bottom: 0; }
+.architecture-information-types { padding: 28px; border-top: 3px solid hsl(var(--primary)); background: hsl(var(--secondary)); }
+.architecture-information-types .eyebrow { margin-bottom: 25px; }
+.architecture-information-types ol { display: grid; gap: 20px; padding: 0; list-style: none; counter-reset: graph-types; }
+.architecture-information-types li { counter-increment: graph-types; display: grid; gap: 5px; padding-left: 38px; position: relative; }
+.architecture-information-types li::before { content: "0" counter(graph-types); position: absolute; left: 0; top: 0; color: hsl(var(--primary)); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; }
+.architecture-information-types strong { color: hsl(var(--heading)); font-size: 0.94rem; }
+.architecture-information-types span { color: hsl(var(--muted-foreground)); font-size: 0.84rem; line-height: 1.5; }
+
+.architecture-page__standards { background: hsl(var(--accent)); }
+.architecture-standards-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border-top: 1px solid hsl(var(--border)); border-left: 1px solid hsl(var(--border)); }
+.architecture-standards-grid article { display: grid; align-content: start; gap: 18px; min-height: 188px; padding: 25px 22px; border-right: 1px solid hsl(var(--border)); border-bottom: 1px solid hsl(var(--border)); background: hsl(var(--background)); }
+.architecture-standards-grid strong { color: hsl(var(--primary)); font-size: 1.25rem; letter-spacing: -0.04em; }
+.architecture-standards-grid span { color: hsl(var(--muted-foreground)); font-size: 0.84rem; line-height: 1.52; }
+
+.architecture-page__agents { background: hsl(var(--navy)); }
+.architecture-page__agents .eyebrow { color: hsl(var(--lime)); }
+.architecture-page__agents h2 { color: hsl(var(--navy-foreground)); }
+.architecture-page__agents .architecture-page__section-head > p:not(.eyebrow) { color: hsl(var(--navy-foreground) / 0.72); }
+.agent-workflow-diagram { display: block; width: 1160px; max-width: none; min-height: 275px; }
+.agent-workflow-svg__step rect { fill: hsl(var(--navy) / 0.25); stroke: hsl(var(--navy-foreground) / 0.34); stroke-width: 1.2; }
+.agent-workflow-svg__step--proposal rect { fill: hsl(var(--navy-foreground) / 0.08); stroke: hsl(var(--lime)); }
+.agent-workflow-svg__step--review rect { fill: hsl(var(--lime)); stroke: hsl(var(--lime)); }
+.agent-workflow-svg__number { fill: hsl(var(--lime)); font: 700 11px var(--font-sans); letter-spacing: 0.13em; }
+.agent-workflow-svg__label { fill: hsl(var(--navy-foreground)); font: 600 13px var(--font-sans); }
+.agent-workflow-svg__step--review .agent-workflow-svg__number,
+.agent-workflow-svg__step--review .agent-workflow-svg__label { fill: hsl(var(--navy)); }
+.agent-workflow-svg__arrow { fill: none; stroke: hsl(var(--navy-foreground) / 0.48); stroke-width: 1.5; marker-end: url(#agent-arrow); }
+.agent-workflow-svg__note { fill: hsl(var(--navy-foreground) / 0.7); font: 500 13px var(--font-sans); }
+.architecture-page__agent-notes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; margin-top: 22px; }
+.architecture-page__agent-notes p { margin: 0; padding-top: 18px; border-top: 1px solid hsl(var(--navy-foreground) / 0.22); color: hsl(var(--navy-foreground) / 0.72); font-size: 0.9rem; line-height: 1.58; }
+.architecture-page__agent-notes strong { color: hsl(var(--navy-foreground)); }
+
+.architecture-deployments { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.architecture-deployments article { padding: 32px; border: 1px solid hsl(var(--border)); background: hsl(var(--card)); }
+.architecture-deployments article > .eyebrow { margin-bottom: 15px; }
+.architecture-deployments h3 { font-size: 1.5rem; letter-spacing: -0.04em; }
+.architecture-deployments > article > p:last-child { margin: 24px 0 0; color: hsl(var(--muted-foreground)); font-size: 0.92rem; line-height: 1.6; }
+.architecture-deployment-flow { display: grid; gap: 0; margin: 25px 0 0; padding: 0; list-style: none; counter-reset: deployment; border-top: 1px solid hsl(var(--border)); }
+.architecture-deployment-flow li { counter-increment: deployment; position: relative; padding: 14px 0 14px 40px; border-bottom: 1px solid hsl(var(--border)); color: hsl(var(--heading)); font-size: 0.88rem; font-weight: 700; line-height: 1.4; }
+.architecture-deployment-flow li::before { content: "0" counter(deployment); position: absolute; left: 0; color: hsl(var(--primary)); font-size: 0.68rem; letter-spacing: 0.1em; }
+
+.deployment-models-diagram { border: 1px solid hsl(var(--navy)); background: hsl(var(--navy)); color: hsl(var(--navy-foreground)); }
+.deployment-models-diagram__shared { display: grid; justify-items: center; gap: 10px; padding: 30px 28px; text-align: center; }
+.deployment-models-diagram__shared p { margin: 0; color: hsl(var(--lime)); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+.deployment-models-diagram__shared strong { font-size: clamp(1.35rem, 2.5vw, 2rem); font-weight: 600; letter-spacing: -0.04em; }
+.deployment-models-diagram__shared span { color: hsl(var(--navy-foreground) / 0.7); font-size: 0.95rem; }
+.deployment-models-diagram__models { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; padding: 0 16px 16px; }
+.deployment-models-diagram__model { padding: 28px; border: 1px solid hsl(var(--navy-foreground) / 0.28); background: hsl(var(--navy) / 0.45); }
+.deployment-models-diagram__model--all-in-one { border-color: hsl(var(--lime)); }
+.deployment-models-diagram__model > .eyebrow { margin-bottom: 35px; color: hsl(var(--lime)); }
+.deployment-models-diagram__model h3 { margin-bottom: 24px; color: hsl(var(--navy-foreground)); font-size: 1.7rem; letter-spacing: -0.04em; }
+.deployment-models-diagram__model table { width: 100%; border-collapse: collapse; text-align: left; }
+.deployment-models-diagram__model th,
+.deployment-models-diagram__model td { padding: 11px 0; border-bottom: 1px solid hsl(var(--navy-foreground) / 0.15); vertical-align: top; font-size: 0.86rem; line-height: 1.45; }
+.deployment-models-diagram__model thead th { padding-top: 0; color: hsl(var(--navy-foreground) / 0.58); font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; }
+.deployment-models-diagram__model tbody th { width: 34%; padding-right: 18px; color: hsl(var(--navy-foreground)); font-weight: 700; }
+.deployment-models-diagram__model td { color: hsl(var(--navy-foreground) / 0.73); }
+.deployment-models-diagram__model tbody tr:last-child th,
+.deployment-models-diagram__model tbody tr:last-child td { border-bottom: 0; }
+.architecture-page__deployment-notes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; margin-top: 24px; }
+.architecture-page__deployment-notes p { margin: 0; padding-top: 16px; border-top: 2px solid hsl(var(--primary)); color: hsl(var(--muted-foreground)); font-size: 0.9rem; line-height: 1.62; }
+.architecture-page__deployment-notes strong { color: hsl(var(--heading)); }
+
+.architecture-page__example { background: hsl(var(--secondary)); }
+.architecture-operating-workflow { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0; padding: 0; list-style: none; border-top: 1px solid hsl(var(--border)); border-left: 1px solid hsl(var(--border)); counter-reset: operating-workflow; }
+.architecture-operating-workflow li { counter-increment: operating-workflow; min-height: 230px; padding: 27px; border-right: 1px solid hsl(var(--border)); border-bottom: 1px solid hsl(var(--border)); background: hsl(var(--background)); }
+.architecture-operating-workflow span { color: hsl(var(--primary)); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; }
+.architecture-operating-workflow strong { display: block; margin-top: 38px; color: hsl(var(--heading)); font-size: 1.08rem; }
+.architecture-operating-workflow p { margin: 10px 0 0; color: hsl(var(--muted-foreground)); font-size: 0.86rem; line-height: 1.55; }
+
+.architecture-page__boundaries { background: hsl(var(--background)); }
+.architecture-page__boundaries-grid { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(280px, 0.72fr); gap: 80px; }
+.architecture-page__boundaries-grid > div:last-child { padding-top: 12px; border-top: 2px solid hsl(var(--primary)); }
+.architecture-page__boundaries-grid p { color: hsl(var(--muted-foreground)); font-size: 1rem; line-height: 1.7; }
+.architecture-page__cta { padding: 96px 0; background: hsl(var(--navy)); color: hsl(var(--navy-foreground)); text-align: center; }
+.architecture-page__cta > .container { max-width: 860px; }
+.architecture-page__cta .eyebrow { color: hsl(var(--lime)); }
+.architecture-page__cta h2 { color: hsl(var(--navy-foreground)); }
+.architecture-page__cta p { max-width: 700px; margin: 0 auto; color: hsl(var(--navy-foreground) / 0.72); font-size: 1.04rem; line-height: 1.65; }
+.architecture-page__cta > .container > div { display: flex; align-items: center; justify-content: center; gap: 22px; margin-top: 32px; }
+.architecture-page__cta .button { background: hsl(var(--lime)); color: hsl(var(--navy)); }
+.architecture-page__cta .text-link { border-color: hsl(var(--lime)); color: hsl(var(--lime)); }
+
+@media (max-width: 900px) {
+  .architecture-page__section-head--split,
+  .architecture-ownership-grid,
+  .architecture-page__boundaries-grid { grid-template-columns: 1fr; gap: 30px; }
+  .architecture-planes { grid-template-columns: 1fr; }
+  .architecture-planes article { min-height: 0; }
+  .architecture-planes h3 { margin-top: 22px; }
+  .architecture-standards-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .architecture-deployments { grid-template-columns: 1fr; }
+  .deployment-models-diagram__models { grid-template-columns: 1fr; }
+  .architecture-operating-workflow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .architecture-operating-workflow li { min-height: 210px; }
+}
+
+@media (max-width: 680px) {
+  .architecture-page__hero { padding: 52px 0 50px; }
+  .architecture-page__hero h1 { font-size: clamp(2.35rem, 9.5vw, 3.25rem); }
+  .architecture-page__hero p { font-size: 0.98rem; }
+  .architecture-page__section-head h2,
+  .architecture-page__boundaries h2,
+  .architecture-page__cta h2 { font-size: clamp(2.2rem, 10vw, 3.15rem); }
+  .logical-architecture-diagram { width: 1000px; min-height: 615px; }
+  .agent-workflow-diagram { width: 1160px; }
+  .architecture-standards-grid { grid-template-columns: 1fr; }
+  .architecture-standards-grid article { min-height: 0; grid-template-columns: 132px 1fr; align-items: baseline; gap: 20px; }
+  .architecture-page__agent-notes { grid-template-columns: 1fr; gap: 18px; }
+  .architecture-page__deployment-notes { grid-template-columns: 1fr; gap: 18px; }
+  .deployment-models-diagram__shared { justify-items: start; text-align: left; }
+  .deployment-models-diagram__models { padding: 0 10px 10px; }
+  .deployment-models-diagram__model { padding: 24px 18px; }
+  .deployment-models-diagram__model > .eyebrow { margin-bottom: 20px; }
+  .deployment-models-diagram__model h3 { font-size: 1.42rem; }
+  .architecture-operating-workflow { grid-template-columns: 1fr; }
+  .architecture-operating-workflow li { min-height: 0; }
+  .architecture-operating-workflow strong { margin-top: 22px; }
+  .architecture-ownership-table { min-width: 620px; }
+  .architecture-page__cta { padding: 76px 0; text-align: left; }
+  .architecture-page__cta p { margin-inline: 0; }
+  .architecture-page__cta > .container > div { align-items: flex-start; flex-direction: column; }
+}
+
 /* Deployment models */
 
 .deployment-section { background: hsl(var(--secondary)); }

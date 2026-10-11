@@ -4,6 +4,7 @@ import { Brand } from './Brand'
 const footerNav = [
   ['Product', `${siteConfig.siteUrl}#product`],
   ['How It Works', `${siteConfig.siteUrl}#how-it-works`],
+  ['Architecture', `${siteConfig.siteUrl}architecture/`],
   ['AI Agents', `${siteConfig.siteUrl}#agents`],
 ]
 

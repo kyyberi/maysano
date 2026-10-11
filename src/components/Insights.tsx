@@ -15,6 +15,7 @@ const agentsArticlePath = 'insights/traditional-ai-agents-vs-governed-ai-agents/
 const agentsArticleUrl = `${siteConfig.siteUrl}${agentsArticlePath}`
 const deliveryArticlePath = 'insights/manual-vs-ai-assisted-governed-data-product-delivery/'
 const deliveryArticleUrl = `${siteConfig.siteUrl}${deliveryArticlePath}`
+const architectureUrl = `${siteConfig.siteUrl}architecture/`
 const catalogSocialImage = `${siteConfig.siteUrl}og/insight-data-catalog-portfolio.png`
 const contractsSocialImage = `${siteConfig.siteUrl}og/insight-data-contracts-specifications.png`
 const governanceSocialImage = `${siteConfig.siteUrl}og/insight-minimum-lovable-governance.png`
@@ -372,6 +373,7 @@ export function InsightArticle() {
             <p className="eyebrow">Next in the series</p>
             <p><a href={contractsArticleUrl}>Data Contracts and Data Product Specifications: Different Jobs, One Product</a></p>
             <p><a href={governanceArticleUrl}>From Traditional Governance to Minimum Lovable Governance</a></p>
+            <p><a href={architectureUrl}>Explore Maysano Reference Architecture</a></p>
           </InsightArticleSideContent>
         </div>
       </article>
@@ -511,6 +513,7 @@ export function DataContractsInsightArticle() {
             <p className="eyebrow">Related insight</p>
             <p><a href={articleUrl}>Data Catalog vs. Data Product Portfolio Management: Why Enterprises Need Both</a></p>
             <p><a href={governanceArticleUrl}>From Traditional Governance to Minimum Lovable Governance</a></p>
+            <p><a href={architectureUrl}>Explore Maysano Reference Architecture</a></p>
           </InsightArticleSideContent>
         </div>
       </article>
@@ -734,6 +737,7 @@ export function KnowledgeGraphInsightArticle() {
             <p className="eyebrow">Related insight</p>
             <p><a href={articleUrl}>Data Catalog vs. Data Product Portfolio Management: Why Enterprises Need Both</a></p>
             <p><a href={agentsArticleUrl}>Traditional AI Agents vs. Governed AI Agents for Enterprise Data Work</a></p>
+            <p><a href={architectureUrl}>Explore Maysano Reference Architecture</a></p>
           </InsightArticleSideContent>
         </div>
       </article>
@@ -847,6 +851,7 @@ export function GovernedAgentsInsightArticle() {
             <p className="eyebrow">Related insight</p>
             <p><a href={graphArticleUrl}>Knowledge Graph vs. Ontology: What Enterprise Data Products Need</a></p>
             <p><a href={deliveryArticleUrl}>Manual vs. AI-Assisted, Governed Data Product Delivery</a></p>
+            <p><a href={architectureUrl}>Explore Maysano Reference Architecture</a></p>
           </InsightArticleSideContent>
         </div>
       </article>

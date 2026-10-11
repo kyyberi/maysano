@@ -38,6 +38,15 @@ const pages = [
     assetPrefix: '../',
   },
   {
+    pathname: '/architecture/',
+    outputPath: `${outputDirectory}architecture/index.html`,
+    title: 'Maysano Reference Architecture | Data Products, Knowledge Graph & Governed AI',
+    description: 'Explore how Maysano connects business objectives, data product portfolios, knowledge graphs, governance, and AI agents with existing enterprise systems.',
+    canonical: 'https://maysano.com/architecture/',
+    ogType: 'website',
+    assetPrefix: '../',
+  },
+  {
     pathname: '/insights/data-catalog-vs-data-product-portfolio-management/',
     outputPath: `${outputDirectory}insights/data-catalog-vs-data-product-portfolio-management/index.html`,
     title: 'Data Catalog vs. Data Product Portfolio Management | Maysano',
