@@ -53,6 +53,38 @@ function ArchitectureStructuredData() {
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
 }
 
+function ArchitectureHeroDiagram() {
+  const context = ['Business objectives', 'Data products', 'Governance context']
+  const execution = ['AI agent workflows', 'Controlled delivery', 'Accountable review']
+  const rowYs = [58, 102, 146]
+
+  return (
+    <div className="architecture-hero-diagram" aria-hidden="true">
+      <svg viewBox="0 0 600 250" role="presentation">
+        <text x="16" y="18" className="architecture-hero-diagram__label">BUSINESS AND DATA CONTEXT</text>
+        <text x="420" y="18" className="architecture-hero-diagram__label">GOVERNED EXECUTION</text>
+        {context.map((item, index) => <g key={item}>
+          <rect x="0" y={rowYs[index]} width="156" height="28" rx="6" className="architecture-hero-diagram__card" />
+          <text x="16" y={rowYs[index] + 18} className="architecture-hero-diagram__text">{item}</text>
+          <path d={`M156 ${rowYs[index] + 14} C186 ${rowYs[index] + 14} 195 107 228 112`} className="architecture-hero-diagram__line" />
+        </g>)}
+        {execution.map((item, index) => <g key={item}>
+          <path d={`M372 112 C402 112 404 ${rowYs[index] + 14} 426 ${rowYs[index] + 14}`} className="architecture-hero-diagram__line architecture-hero-diagram__line--lime" />
+          <rect x="426" y={rowYs[index]} width="174" height="28" rx="6" className="architecture-hero-diagram__card architecture-hero-diagram__card--outcome" />
+          <text x="442" y={rowYs[index] + 18} className="architecture-hero-diagram__text">{item}</text>
+        </g>)}
+        <circle cx="300" cy="112" r="72" className="architecture-hero-diagram__core" />
+        <path d="M300 73 l13 8 v16 l-13 8 -13-8 V81 Z" className="architecture-hero-diagram__mark" />
+        <text x="300" y="129" textAnchor="middle" className="architecture-hero-diagram__core-text">MAYSANO</text>
+        <text x="300" y="144" textAnchor="middle" className="architecture-hero-diagram__core-text">OPERATING LAYER</text>
+        <path d="M300 184 V208" className="architecture-hero-diagram__line architecture-hero-diagram__line--lime" />
+        <rect x="146" y="208" width="308" height="28" rx="6" className="architecture-hero-diagram__footer" />
+        <text x="300" y="226" textAnchor="middle" className="architecture-hero-diagram__footer-text">OPEN STANDARDS · INTEGRATIONS · GOVERNANCE</text>
+      </svg>
+    </div>
+  )
+}
+
 function LogicalArchitectureDiagram() {
   return (
     <div className="architecture-diagram-scroll" tabIndex={0} aria-label="Scrollable logical reference architecture diagram">
@@ -161,11 +193,20 @@ export function ArchitecturePage() {
       <main id="main-content" className="architecture-page">
         <header className="architecture-page__hero">
           <div className="container architecture-page__hero-inner">
-            <p className="eyebrow">MAYSANO · REFERENCE ARCHITECTURE</p>
-            <h1>Maysano Reference Architecture</h1>
-            <p className="architecture-page__subtitle">The business and data product operating layer for governed, AI-agent-first enterprises.</p>
-            <p>Maysano connects business objectives, use cases, data products, governance, lifecycle, and delivery in a shared knowledge graph. AI agents operate with this connected context, while existing enterprise platforms retain responsibility for data storage, processing, metadata management, security, and execution.</p>
-            <p className="architecture-page__principle">Connect existing systems. Preserve their responsibilities. Make business context operational.</p>
+            <a className="architecture-page__back" href={siteConfig.siteUrl}>Maysano</a>
+            <div className="architecture-page__hero-grid">
+              <div className="architecture-page__hero-copy">
+                <p className="eyebrow">MAYSANO · REFERENCE ARCHITECTURE</p>
+                <h1>Maysano Reference Architecture</h1>
+                <p className="architecture-page__subtitle">The business and data product operating layer for governed, AI-agent-first enterprises.</p>
+                <div className="architecture-page__meta" aria-label="Architecture themes">
+                  <span>Business context</span>
+                  <span>Knowledge graph</span>
+                  <span>Governed AI</span>
+                </div>
+              </div>
+              <ArchitectureHeroDiagram />
+            </div>
           </div>
         </header>
 

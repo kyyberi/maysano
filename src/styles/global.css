@@ -1304,24 +1304,77 @@ code, pre {
 /* Reference architecture */
 
 .architecture-page__hero {
-  padding: 66px 0 62px;
+  position: relative;
+  overflow: hidden;
+  padding: 34px 0 66px;
   background: hsl(var(--navy));
   color: hsl(var(--navy-foreground));
 }
 
-.architecture-page__hero-inner { max-width: 960px; }
+.architecture-page__hero-inner { max-width: none; }
+.architecture-page__back {
+  display: inline-block;
+  margin-bottom: 54px;
+  color: hsl(var(--navy-foreground) / 0.72);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.architecture-page__back::before { content: '← '; }
+
+.architecture-page__hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(410px, 0.85fr);
+  gap: clamp(42px, 6vw, 88px);
+  align-items: center;
+}
+
+.architecture-page__hero-copy { min-width: 0; }
 .architecture-page__hero .eyebrow { color: hsl(var(--lime)); }
 .architecture-page__hero h1 {
-  max-width: 780px;
-  margin-bottom: 20px;
+  max-width: 670px;
+  margin: 22px 0;
   color: hsl(var(--navy-foreground));
-  font-size: clamp(2.6rem, 4vw, 3.8rem);
-  letter-spacing: -0.065em;
-  line-height: 0.96;
+  font-size: clamp(2.55rem, 4.6vw, 4.65rem);
+  letter-spacing: -0.045em;
+  line-height: 1.04;
 }
-.architecture-page__hero p { max-width: 860px; margin-bottom: 16px; color: hsl(var(--navy-foreground) / 0.76); font-size: 1.04rem; line-height: 1.68; }
-.architecture-page__hero .architecture-page__subtitle { max-width: 800px; color: hsl(var(--navy-foreground)); font-size: clamp(1.22rem, 2.4vw, 1.7rem); line-height: 1.35; }
-.architecture-page__principle { margin-top: 30px; color: hsl(var(--lime)) !important; font-weight: 700; }
+.architecture-page__hero .architecture-page__subtitle {
+  max-width: 650px;
+  margin: 0;
+  color: hsl(var(--navy-foreground) / 0.78);
+  font-size: clamp(1.08rem, 1.6vw, 1.3rem);
+  line-height: 1.55;
+}
+
+.architecture-page__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 0;
+  margin-top: 30px;
+  color: hsl(var(--lime));
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.architecture-page__meta span { padding: 0 18px; border-left: 1px solid hsl(var(--lime) / 0.7); }
+.architecture-page__meta span:first-child { padding-left: 0; border-left: 0; color: hsl(var(--navy-foreground) / 0.66); }
+
+.architecture-hero-diagram { min-width: 0; color: hsl(var(--lime)); }
+.architecture-hero-diagram svg { display: block; width: 100%; height: auto; overflow: visible; }
+.architecture-hero-diagram__label { fill: hsl(var(--navy-foreground) / 0.64); font-size: 10px; font-weight: 700; letter-spacing: 1.7px; }
+.architecture-hero-diagram__card { fill: hsl(var(--navy-foreground) / 0.025); stroke: hsl(var(--navy-foreground) / 0.32); }
+.architecture-hero-diagram__card--outcome { stroke: hsl(var(--lime) / 0.6); }
+.architecture-hero-diagram__text { fill: hsl(var(--navy-foreground) / 0.84); font-size: 10px; font-weight: 600; }
+.architecture-hero-diagram__line { fill: none; stroke: hsl(var(--navy-foreground) / 0.38); stroke-width: 1.15; }
+.architecture-hero-diagram__line--lime { stroke: hsl(var(--lime) / 0.72); }
+.architecture-hero-diagram__core { fill: hsl(var(--navy) / 0.36); stroke: hsl(var(--lime)); stroke-width: 1.5; }
+.architecture-hero-diagram__mark { fill: none; stroke: hsl(var(--lime)); stroke-width: 1.5; }
+.architecture-hero-diagram__core-text { fill: hsl(var(--navy-foreground)); font-size: 10px; font-weight: 700; letter-spacing: 1.6px; }
+.architecture-hero-diagram__footer { fill: hsl(var(--navy-foreground) / 0.025); stroke: hsl(var(--navy-foreground) / 0.35); stroke-dasharray: 3 3; }
+.architecture-hero-diagram__footer-text { fill: hsl(var(--navy-foreground) / 0.72); font-size: 8.5px; font-weight: 700; letter-spacing: 1.45px; }
 
 .architecture-page__section { background: hsl(var(--background)); }
 .architecture-page__section-head { max-width: 920px; margin-bottom: 46px; }
@@ -1458,6 +1511,9 @@ code, pre {
 .architecture-page__cta .text-link { border-color: hsl(var(--lime)); color: hsl(var(--lime)); }
 
 @media (max-width: 900px) {
+  .architecture-page__hero-grid { grid-template-columns: 1fr; gap: 38px; }
+  .architecture-page__hero-copy { max-width: 680px; }
+  .architecture-hero-diagram { width: min(100%, 580px); }
   .architecture-page__section-head--split,
   .architecture-ownership-grid,
   .architecture-page__boundaries-grid { grid-template-columns: 1fr; gap: 30px; }
@@ -1472,9 +1528,10 @@ code, pre {
 }
 
 @media (max-width: 680px) {
-  .architecture-page__hero { padding: 52px 0 50px; }
+  .architecture-page__hero { padding: 30px 0 56px; }
+  .architecture-page__back { margin-bottom: 40px; }
   .architecture-page__hero h1 { font-size: clamp(2.35rem, 9.5vw, 3.25rem); }
-  .architecture-page__hero p { font-size: 0.98rem; }
+  .architecture-page__hero .architecture-page__subtitle { font-size: 0.98rem; }
   .architecture-page__section-head h2,
   .architecture-page__boundaries h2,
   .architecture-page__cta h2 { font-size: clamp(2.2rem, 10vw, 3.15rem); }
