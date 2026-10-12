@@ -1,6 +1,6 @@
 import { readFile, readdir, stat } from 'node:fs/promises'
 
-const [html, insights, architecture, article, contractsArticle, governanceArticle, graphArticle, agentsArticle, deliveryArticle, robots, sitemap, notFound] = await Promise.all([
+const [html, insights, architecture, article, contractsArticle, governanceArticle, graphArticle, agentsArticle, deliveryArticle, controlPlaneArticle, robots, sitemap, notFound] = await Promise.all([
   readFile(new URL('../dist/index.html', import.meta.url), 'utf8'),
   readFile(new URL('../dist/insights/index.html', import.meta.url), 'utf8'),
   readFile(new URL('../dist/architecture/index.html', import.meta.url), 'utf8'),
@@ -10,6 +10,7 @@ const [html, insights, architecture, article, contractsArticle, governanceArticl
   readFile(new URL('../dist/insights/knowledge-graph-vs-ontology/index.html', import.meta.url), 'utf8'),
   readFile(new URL('../dist/insights/traditional-ai-agents-vs-governed-ai-agents/index.html', import.meta.url), 'utf8'),
   readFile(new URL('../dist/insights/manual-vs-ai-assisted-governed-data-product-delivery/index.html', import.meta.url), 'utf8'),
+  readFile(new URL('../dist/insights/ai-control-plane-vs-data-product-operating-layer/index.html', import.meta.url), 'utf8'),
   readFile(new URL('../dist/robots.txt', import.meta.url), 'utf8'),
   readFile(new URL('../dist/sitemap.xml', import.meta.url), 'utf8'),
   readFile(new URL('../dist/404.html', import.meta.url), 'utf8'),
@@ -29,6 +30,7 @@ const insightSocialImages = [
   ['graph Insight', graphArticle, 'insight-knowledge-graph-ontology.png', 'Maysano Insight: Knowledge Graph vs. Ontology: What Enterprise Data Products Need'],
   ['governed-agents Insight', agentsArticle, 'insight-governed-ai-agents.png', 'Maysano Insight: Traditional AI Agents vs. Governed AI Agents for Enterprise Data Work'],
   ['delivery Insight', deliveryArticle, 'insight-ai-assisted-delivery.png', 'Maysano Insight: Manual vs. AI-Assisted, Governed Data Product Delivery'],
+  ['control-plane Insight', controlPlaneArticle, 'insight-ai-control-plane-vs-operating-layer.png', 'Maysano Insight: AI Control Plane vs. Data Product Operating Layer: Why Enterprises Need Both'],
 ]
 const insightSocialImageSizes = await Promise.all(insightSocialImages.map(async ([, , file]) => {
   const image = await readFile(new URL(`../dist/og/${file}`, import.meta.url))
@@ -68,6 +70,7 @@ const checks = [
   ['canonical graph Insight article in sitemap', sitemap.includes('<loc>https://maysano.com/insights/knowledge-graph-vs-ontology/</loc>')],
   ['canonical governed-agents Insight article in sitemap', sitemap.includes('<loc>https://maysano.com/insights/traditional-ai-agents-vs-governed-ai-agents/</loc>')],
   ['canonical delivery Insight article in sitemap', sitemap.includes('<loc>https://maysano.com/insights/manual-vs-ai-assisted-governed-data-product-delivery/</loc>')],
+  ['canonical control-plane Insight article in sitemap', sitemap.includes('<loc>https://maysano.com/insights/ai-control-plane-vs-data-product-operating-layer/</loc>')],
   ['prerendered Insights index', insights.includes('Better decisions about data products and AI.')],
   ['Insights index canonical URL', insights.includes('<link rel="canonical" href="https://maysano.com/insights/"')],
   ['prerendered Architecture page', architecture.includes('<h1>Maysano Reference Architecture</h1>')],
@@ -75,12 +78,13 @@ const checks = [
   ['Architecture page structured data', architecture.includes('"@type":"WebPage"') && architecture.includes('"@id":"https://maysano.com/architecture/#webpage"')],
   ['Architecture page preserves the Maysano system boundary', architecture.includes('Maysano does not require enterprise data to be physically moved into its platform.')],
   ['Architecture page includes governed AI controls', architecture.includes('An LLM prompt does not enforce security.')],
-  ['Insights index has six editorial cards', (insights.match(/class="insight-card(?: |")/g) || []).length === 6],
+  ['Insights index has seven editorial cards', (insights.match(/class="insight-card(?: |")/g) || []).length === 7],
   ['contracts card targets the published Insight', insights.includes('href="https://maysano.com/insights/data-contracts-and-data-product-specifications/"')],
   ['governance card targets the published Insight', insights.includes('href="https://maysano.com/insights/traditional-governance-to-minimum-lovable-governance/"')],
   ['graph card targets the published Insight', insights.includes('href="https://maysano.com/insights/knowledge-graph-vs-ontology/"')],
   ['agents card targets the published Insight', insights.includes('href="https://maysano.com/insights/traditional-ai-agents-vs-governed-ai-agents/"')],
   ['delivery card targets the published Insight', insights.includes('href="https://maysano.com/insights/manual-vs-ai-assisted-governed-data-product-delivery/"')],
+  ['control-plane card targets the published Insight', insights.includes('href="https://maysano.com/insights/ai-control-plane-vs-data-product-operating-layer/"')],
   ['prerendered Insight article', article.includes('Data Catalog vs. Data Product Portfolio Management: Why Enterprises Need Both')],
   ['Insight article canonical URL', article.includes('<link rel="canonical" href="https://maysano.com/insights/data-catalog-vs-data-product-portfolio-management/"')],
   ['Insight article structured data', article.includes('"@type":"BlogPosting"')],
@@ -109,6 +113,11 @@ const checks = [
   ['delivery Insight article canonical URL', deliveryArticle.includes('<link rel="canonical" href="https://maysano.com/insights/manual-vs-ai-assisted-governed-data-product-delivery/"')],
   ['delivery Insight article structured data', deliveryArticle.includes('"@type":"BlogPosting"')],
   ['delivery Insight article keeps human-review boundary', deliveryArticle.includes('Agents prepare the decision; they do not make it for the bank.')],
+  ['prerendered control-plane Insight article', controlPlaneArticle.includes('AI Control Plane vs. Data Product Operating Layer: Why Enterprises Need Both')],
+  ['control-plane Insight article canonical URL', controlPlaneArticle.includes('<link rel="canonical" href="https://maysano.com/insights/ai-control-plane-vs-data-product-operating-layer/"')],
+  ['control-plane Insight article structured data', controlPlaneArticle.includes('"@type":"BlogPosting"')],
+  ['control-plane Insight keeps technical-control boundary', controlPlaneArticle.includes('Maysano is not a substitute for an enterprise identity provider')],
+  ['control-plane Insight links to Architecture', controlPlaneArticle.includes('href="https://maysano.com/architecture/"')],
   ...insightSocialImages.map(([label, document, file, alt]) => [`${label} has its branded social metadata`, hasInsightSocialMetadata(document, file, alt)]),
   ['Insight social images are 1200 by 630 PNGs', insightSocialImageSizes.every(Boolean)],
   ['custom 404 links home', notFound.includes('href="https://maysano.com/"')],

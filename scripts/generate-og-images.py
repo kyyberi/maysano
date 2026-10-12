@@ -17,6 +17,7 @@ IMAGES = [
     ("insight-knowledge-graph-ontology.png", "insight-graph-background.png", ["Knowledge Graph vs.", "Ontology: What Enterprise", "Data Products Need"]),
     ("insight-governed-ai-agents.png", "insight-agents-background.png", ["Traditional AI Agents", "vs. Governed AI Agents", "for Enterprise Data Work"]),
     ("insight-ai-assisted-delivery.png", "insight-delivery-background.png", ["Manual vs. AI-Assisted,", "Governed Data", "Product Delivery"]),
+    ("insight-ai-control-plane-vs-operating-layer.png", "insight-control-plane-background.png", ["AI Control Plane vs.", "Data Product", "Operating Layer"]),
 ]
 
 

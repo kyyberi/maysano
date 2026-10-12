@@ -112,6 +112,17 @@ const pages = [
     ogImageAlt: 'Maysano Insight: Manual vs. AI-Assisted, Governed Data Product Delivery',
     assetPrefix: '../../',
   },
+  {
+    pathname: '/insights/ai-control-plane-vs-data-product-operating-layer/',
+    outputPath: `${outputDirectory}insights/ai-control-plane-vs-data-product-operating-layer/index.html`,
+    title: 'AI Control Plane vs. Data Product Operating Layer | Maysano',
+    description: 'AI control planes govern how agents execute. A data product operating layer connects execution to objectives, ownership, portfolio decisions, and outcomes.',
+    canonical: 'https://maysano.com/insights/ai-control-plane-vs-data-product-operating-layer/',
+    ogType: 'article',
+    ogImage: 'https://maysano.com/og/insight-ai-control-plane-vs-operating-layer.png',
+    ogImageAlt: 'Maysano Insight: AI Control Plane vs. Data Product Operating Layer: Why Enterprises Need Both',
+    assetPrefix: '../../',
+  },
 ]
 
 function escapeHtml(value) {

@@ -1,5 +1,6 @@
 import {
   DataContractsInsightArticle,
+  ControlPlaneInsightArticle,
   GovernedDeliveryInsightArticle,
   GovernedAgentsInsightArticle,
   InsightArticle,
@@ -16,6 +17,7 @@ export function InsightRoutes({ pathname }: { pathname: string }) {
   if (pathname === '/insights/knowledge-graph-vs-ontology') return <KnowledgeGraphInsightArticle />
   if (pathname === '/insights/traditional-ai-agents-vs-governed-ai-agents') return <GovernedAgentsInsightArticle />
   if (pathname === '/insights/manual-vs-ai-assisted-governed-data-product-delivery') return <GovernedDeliveryInsightArticle />
+  if (pathname === '/insights/ai-control-plane-vs-data-product-operating-layer') return <ControlPlaneInsightArticle />
 
   return null
 }

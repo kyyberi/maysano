@@ -15,6 +15,8 @@ const agentsArticlePath = 'insights/traditional-ai-agents-vs-governed-ai-agents/
 const agentsArticleUrl = `${siteConfig.siteUrl}${agentsArticlePath}`
 const deliveryArticlePath = 'insights/manual-vs-ai-assisted-governed-data-product-delivery/'
 const deliveryArticleUrl = `${siteConfig.siteUrl}${deliveryArticlePath}`
+const controlPlaneArticlePath = 'insights/ai-control-plane-vs-data-product-operating-layer/'
+const controlPlaneArticleUrl = `${siteConfig.siteUrl}${controlPlaneArticlePath}`
 const architectureUrl = `${siteConfig.siteUrl}architecture/`
 const catalogSocialImage = `${siteConfig.siteUrl}og/insight-data-catalog-portfolio.png`
 const contractsSocialImage = `${siteConfig.siteUrl}og/insight-data-contracts-specifications.png`
@@ -22,8 +24,9 @@ const governanceSocialImage = `${siteConfig.siteUrl}og/insight-minimum-lovable-g
 const graphSocialImage = `${siteConfig.siteUrl}og/insight-knowledge-graph-ontology.png`
 const agentsSocialImage = `${siteConfig.siteUrl}og/insight-governed-ai-agents.png`
 const deliverySocialImage = `${siteConfig.siteUrl}og/insight-ai-assisted-delivery.png`
+const controlPlaneSocialImage = `${siteConfig.siteUrl}og/insight-ai-control-plane-vs-operating-layer.png`
 
-type InsightKind = 'catalog' | 'contracts' | 'governance' | 'delivery' | 'graph' | 'agents'
+type InsightKind = 'catalog' | 'contracts' | 'governance' | 'delivery' | 'graph' | 'agents' | 'control-plane'
 
 type InsightCard = {
   category: string
@@ -92,6 +95,13 @@ const insightGroups: Array<{ number: string, title: string, cards: InsightCard[]
         kind: 'agents',
         href: agentsArticleUrl,
       },
+      {
+        category: 'AI architecture',
+        title: 'AI Control Plane vs. Operating Layer',
+        summary: 'Technical control determines what agents may do. Business context determines why.',
+        kind: 'control-plane',
+        href: controlPlaneArticleUrl,
+      },
     ],
   },
 ]
@@ -105,6 +115,7 @@ function InsightIllustration({ kind }: { kind: InsightKind }) {
   if (kind === 'governance') return <svg viewBox="0 0 260 136" aria-hidden="true"><path d="M42 68 H218" {...muted} /><circle cx="58" cy="68" r="19" {...stroke} /><circle cx="108" cy="68" r="19" {...stroke} /><circle cx="158" cy="68" r="19" {...stroke} /><circle cx="208" cy="68" r="19" {...stroke} /><path d="M51 68 l5 5 10 -12 M101 68 l5 5 10 -12 M151 68 l5 5 10 -12 M201 68 l5 5 10 -12" {...stroke} /></svg>
   if (kind === 'delivery') return <svg viewBox="0 0 260 136" aria-hidden="true"><rect x="26" y="38" width="64" height="60" rx="4" {...muted} /><path d="M43 57 H75 M43 72 H69" {...muted} /><path d="M90 68 H122" {...stroke} /><circle cx="144" cy="68" r="24" {...stroke} /><path d="M134 68 l7 7 14 -16" {...stroke} /><path d="M168 68 H198" {...stroke} /><rect x="198" y="38" width="64" height="60" rx="4" {...muted} /><path d="M215 57 H247 M215 72 H241" {...muted} /></svg>
   if (kind === 'graph') return <svg viewBox="0 0 260 136" aria-hidden="true"><path d="M57 68 L105 34 L151 68 L105 102 Z M151 68 L201 38 M151 68 L201 98" {...muted} /><circle cx="57" cy="68" r="9" {...stroke} /><circle cx="105" cy="34" r="9" {...stroke} /><circle cx="105" cy="102" r="9" {...stroke} /><circle cx="151" cy="68" r="15" fill="currentColor" /><circle cx="201" cy="38" r="9" {...stroke} /><circle cx="201" cy="98" r="9" {...stroke} /></svg>
+  if (kind === 'control-plane') return <svg viewBox="0 0 260 136" aria-hidden="true"><rect x="18" y="37" width="68" height="62" rx="5" {...muted} /><path d="M34 55 H70 M34 68 H70 M34 81 H61" {...muted} /><path d="M86 68 H119" {...stroke} /><circle cx="137" cy="68" r="20" {...stroke} /><path d="M128 68 l6 6 12 -14" {...stroke} /><path d="M157 68 H187" {...stroke} /><circle cx="210" cy="42" r="11" {...stroke} /><circle cx="210" cy="94" r="11" {...stroke} /><path d="M198 49 L181 61 M198 87 L181 75" {...stroke} /></svg>
   return <svg viewBox="0 0 260 136" aria-hidden="true"><path d="M130 68 L63 36 M130 68 L63 100 M130 68 L197 36 M130 68 L197 100" {...muted} /><circle cx="63" cy="36" r="10" {...muted} /><circle cx="63" cy="100" r="10" {...muted} /><circle cx="197" cy="36" r="10" {...muted} /><circle cx="197" cy="100" r="10" {...muted} /><circle cx="130" cy="68" r="35" {...stroke} /><rect x="114" y="53" width="32" height="28" rx="5" {...stroke} /><circle cx="124" cy="64" r="2.5" fill="currentColor" /><circle cx="136" cy="64" r="2.5" fill="currentColor" /><path d="M122 74 H138" {...stroke} /></svg>
 }
 
@@ -115,6 +126,7 @@ const heroDiagramLabels: Record<InsightKind, { left: string, right: string, inpu
   delivery: { left: 'Business input', right: 'Reviewed work', inputs: ['Workshop notes', 'Use cases', 'Known products', 'Open questions'], outcomes: ['Candidates', 'Decisions', 'Delivery'], core: ['Product', 'work'] },
   graph: { left: 'Connected objects', right: 'Shared meaning', inputs: ['Objectives', 'Use cases', 'Products', 'Dependencies'], outcomes: ['Definitions', 'Rules', 'Interpretation'], core: ['Operating', 'graph'] },
   agents: { left: 'Agent context', right: 'Accountable action', inputs: ['Objectives', 'Policies', 'Evidence', 'Permissions'], outcomes: ['Recommendations', 'Review', 'Controls'], core: ['Governed', 'agents'] },
+  'control-plane': { left: 'AI control plane', right: 'Operating context', inputs: ['Agent identity', 'Tool access', 'Runtime policies', 'Execution logs'], outcomes: ['Objectives', 'Portfolio context', 'Human review'], core: ['Agent', 'work'] },
 }
 
 function InsightHeroDiagram({ kind }: { kind: InsightKind }) {
@@ -974,6 +986,139 @@ export function GovernedDeliveryInsightArticle() {
             <p className="eyebrow">Related insight</p>
             <p><a href={governanceArticleUrl}>From Traditional Governance to Minimum Lovable Governance</a></p>
             <p><a href={agentsArticleUrl}>Traditional AI Agents vs. Governed AI Agents for Enterprise Data Work</a></p>
+          </InsightArticleSideContent>
+        </div>
+      </article>
+    </InsightShell>
+  )
+}
+
+export function ControlPlaneInsightArticle() {
+  return (
+    <InsightShell>
+      <InsightStructuredData
+        headline="AI Control Plane vs. Data Product Operating Layer: Why Enterprises Need Both"
+        description="AI control planes govern how agents execute. A data product operating layer connects execution to objectives, ownership, portfolio decisions, and outcomes."
+        url={controlPlaneArticleUrl}
+        image={controlPlaneSocialImage}
+      />
+      <article className="insight-article">
+        <InsightArticleHeader
+          kind="control-plane"
+          kicker="Maysano Insights · Architecture & AI · Article 07"
+          title="AI Control Plane vs. Data Product Operating Layer: Why Enterprises Need Both"
+          dek="Technical controls determine which actions an AI agent is permitted to take. The operating layer connects those actions to business objectives, product ownership, investment decisions, and outcomes."
+          readTime="10–12 minute"
+          topics={['AI architecture', 'Business context']}
+        />
+
+        <div className="container insight-article__layout">
+          <div className="insight-article__content">
+            <h2>We already have an AI control plane. Why would we need an operating layer?</h2>
+            <p>Data and AI platforms increasingly hide infrastructure details from the people who use them. A business user asks a question, an agent finds a suitable tool, and a service handles the technical execution. The user no longer needs to know which warehouse, model endpoint, or storage engine performed each step.</p>
+            <p>Less visible infrastructure does not mean less responsibility. Someone must still determine whether the agent has permission to access information, whether its tools are approved, how activity is recorded, and whether usage stays inside accepted limits. This explains the growing attention paid to technical control planes.</p>
+            <p>But technical control leaves a second problem unresolved. Which business objective is the agent working toward? Which existing data products support that objective? Who owns them? Has the organization already funded similar work? What counts as a successful outcome? Who decides whether a proposed product moves into delivery?</p>
+            <p>An agent might be authorized, compliant, and technically accurate while producing work that adds little business value. It might recommend building a data product another division already operates, use an available dataset that no longer fits the approved use case, or optimize an operational measure the business has stopped prioritising.</p>
+            <p>An AI control plane and a data product operating layer address different responsibilities. Most enterprise architectures need both, whether they come from separate products or from a well-integrated suite.</p>
+
+            <h2>What an AI control plane does well</h2>
+            <p>The phrase <em>AI control plane</em> does not describe one universally agreed product category. Here, it means the technical capabilities that mediate, coordinate, and constrain AI execution across models, agents, tools, and data systems.</p>
+            <p>Depending on the organization&apos;s technology choices, those capabilities include identity and access management, authorised tool use, runtime policy enforcement, model selection and routing, cost and usage controls, logging, monitoring, intervention, and audit evidence. Some platforms also integrate workflow approvals and data governance policies.</p>
+            <p>Consider a bank with an AI agent that evaluates customer-retention signals. The technical controls should verify the agent&apos;s identity, restrict its access to approved data interfaces, prevent prohibited actions, and record relevant activity. If the agent tries to retrieve restricted customer information, the data and access systems must enforce the denial. A prompt telling the agent to behave responsibly is not an adequate replacement.</p>
+            <p>The control plane therefore addresses essential execution questions: is the requested operation authorised, which service should run it, what policies apply, what evidence will show what happened, and how can the organization stop or investigate an operation that does not behave as intended?</p>
+            <p>Those questions are foundational. They do not independently identify the right business problem to solve or the products worth maintaining.</p>
+
+            <h2>What a data product operating layer adds</h2>
+            <p>A data product operating layer starts from demand rather than infrastructure. It connects business objectives and use cases with the data products intended to serve them. It also connects those products to owners, consumers, dependencies, contractual expectations, governance requirements, lifecycle states, delivery commitments, and evidence of decisions.</p>
+            <p>This is a portfolio responsibility. A single data product might contribute to several use cases. One use case might depend on multiple products. A change to an upstream product might affect another team&apos;s delivery plan or the evidence used in a strategic decision. An effective operating layer makes those relationships explicit and keeps them current.</p>
+            <p>For an AI agent, this context changes the work it can support. Instead of receiving only a user request, a schema, and tool permissions, the agent has an approved objective to examine, a connected portfolio to consult, and information about which decisions remain open. It can identify potential duplication, flag a missing owner, compare candidate products with existing ones, or prepare a dependency assessment for human review.</p>
+            <p>The operating layer does not grant data access merely because a business objective exists. Technical systems still enforce authorization. It also does not make a generated proposal automatically correct. Product managers, business sponsors, and governance specialists retain responsibility for validation and approval.</p>
+            <p>Its distinct contribution is decision context: <strong>why the work exists, how it connects to the portfolio, and what should be evaluated before the organization acts.</strong></p>
+
+            <h2>AI control plane vs. data product operating layer</h2>
+            <div className="insight-comparison">
+              <table>
+                <thead><tr><th scope="col">Dimension</th><th scope="col">AI control plane</th><th scope="col">Data product operating layer</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Main question</th><td>Is this operation allowed and properly controlled?</td><td>Why does this work matter, and which products support it?</td></tr>
+                  <tr><th scope="row">Starting point</th><td>Identities, tools, models, policies, execution</td><td>Business objectives, use cases, data products, portfolio decisions</td></tr>
+                  <tr><th scope="row">Primary responsibility</th><td>Runtime coordination and enforcement</td><td>Business and product coordination</td></tr>
+                  <tr><th scope="row">Agent context</th><td>Permitted data, tools, limits, and execution state</td><td>Product purpose, ownership, dependencies, lifecycle, approved priorities</td></tr>
+                  <tr><th scope="row">Evidence</th><td>Access decisions, execution logs, costs, technical outcomes</td><td>Product decisions, dependencies, investment rationale, expected value</td></tr>
+                  <tr><th scope="row">Human role</th><td>Define permissions, review exceptions, intervene in operations</td><td>Approve priorities, validate candidates, manage products and ownership</td></tr>
+                  <tr><th scope="row">Failure if missing</th><td>Unsafe or unobservable execution</td><td>Technically valid work that lacks business direction or duplicates investment</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>The categories overlap in some products. That is not a contradiction. The comparison distinguishes responsibilities; it does not require every company to buy a separate platform for each row.</p>
+
+            <h2>A banking example: an authorised agent proposes the wrong product</h2>
+            <p>A bank wants to improve customer retention by recognising declining engagement early. It already operates a customer profile API, transaction datasets, engagement information, and an AI environment with approved models and runtime controls.</p>
+            <p>A product manager asks an agent to identify the data products needed for a new retention use case. The agent accesses an approved catalog, uses permitted APIs, and produces a reasonable-looking recommendation: create a <em>Customer Engagement Signals</em> product to consolidate relevant interactions.</p>
+            <p>From the technical control plane&apos;s point of view, the execution succeeds. The agent used approved interfaces, stayed within its permissions, and produced an auditable result.</p>
+            <p>But another division already operates a Customer Engagement Signals product. Its latest version supports a different programme, and a planned change affects the fields available to the retention team. The bank has also approved a specific retention objective with defined measures and a business owner. None of those facts follows automatically from the agent&apos;s access permissions.</p>
+            <p>Without connected portfolio context, the bank risks funding a duplicate product while overlooking the dependency that matters to the existing one.</p>
+            <p>With a data product operating layer, the agent starts from the approved retention objective and connected use case. It searches the portfolio, finds the existing product, inspects its owner and lifecycle state, checks known dependencies, and identifies the gap between the current product and the proposed retention use case.</p>
+            <p>Instead of recommending a duplicate, it prepares alternatives: reuse the product as it stands, propose an extension, or define a separate product if business and governance requirements justify one. It records assumptions, missing evidence, affected owners, and the review decisions needed.</p>
+            <p>The output becomes a structured recommendation, not an autonomous investment decision. Business stakeholders decide whether the change deserves funding. Product managers coordinate dependencies. Security and governance systems keep enforcing applicable policies. The control plane protects execution while the operating layer helps the organization decide which execution is worthwhile.</p>
+
+            <h2>Three questions that should never be confused</h2>
+            <h3>1. Is the action permitted?</h3>
+            <p>Identity, access controls, policy enforcement, and runtime safeguards determine whether an agent is authorised to perform an operation. An approved business use case is not permission to read restricted information or alter a production system. Authorization belongs in the systems responsible for enforcement.</p>
+            <h3>2. Is the result supported by evidence?</h3>
+            <p>The output needs sufficient source context, validation, quality information, and review. A technically compliant action can still use outdated information or lead to an incorrect conclusion. Evidence of successful execution is different from evidence that the recommendation is sound.</p>
+            <h3>3. Does the result advance a meaningful business objective?</h3>
+            <p>This requires knowledge of objectives, use cases, portfolio priorities, product availability, dependencies, ownership, and expected outcomes. An accurate, authorised result can still be irrelevant or economically wasteful if the agent addresses the wrong problem.</p>
+            <p>These are related questions, but they have different evidence and accountability requirements. Enterprise AI operations become easier to manage when the architecture preserves those distinctions.</p>
+
+            <h2>Why AI agents need machine-readable business context</h2>
+            <p>People often maintain business context informally. A product manager remembers that one dataset is being retired, that a customer profile has a restricted use, and that two departments depend on the same product. Meeting notes, specifications, spreadsheets, approval records, and project boards carry fragments of the same story.</p>
+            <p>An AI agent accessing a warehouse or data catalog does not automatically receive those relationships. It might know that a dataset exists without knowing whether it should be used for the current objective. It might read an old product description without finding the newer lifecycle decision.</p>
+            <p>A connected knowledge graph offers a way to represent business objectives, use cases, products, owners, contractual expectations, governance requirements, versions, and dependencies as related objects. It helps people and agents assess a proposal against the organization&apos;s current operating context.</p>
+            <p>The quality of this context matters. A graph full of obsolete ownership records or guessed dependencies does not make an agent reliable. Facts, assumptions, proposals, and approved decisions need to remain distinguishable. Human review and systems of record still have roles to play.</p>
+
+            <h2>Open standards keep product meaning separate from the execution platform</h2>
+            <p>Enterprise AI increasingly works across several technologies. A company might keep data in its existing warehouse, use a separate metadata catalog, choose its own model providers, and manage execution through approved orchestration and identity systems. The platforms may change during the life of the data product, while its business purpose and ownership continue.</p>
+            <p>This makes portable definitions important. The <a href="https://opendataproducts.org/" target="_blank" rel="noreferrer">Open Data Product Specification</a> supports machine-readable descriptions of data products. A product definition can describe identity, purpose, ownership, access interfaces, and contractual context without becoming inseparable from one vendor&apos;s infrastructure.</p>
+            <p>ODPS is not an authorization engine. A machine-readable definition does not replace an identity provider or automatically enforce access. Those responsibilities remain in runtime and platform controls. The value of an open standard is that product descriptions can be reused across systems rather than recreated as vendor-specific metadata.</p>
+
+            <h2>Where Maysano fits</h2>
+            <p>Maysano is the business-aware data product portfolio and operating layer. It connects business objectives, use cases, products, owners, governance, lifecycle, dependencies, and delivery context through a shared knowledge graph. It supports AI-assisted work using connected context rather than isolated prompts and documents.</p>
+            <p>In practical terms, Maysano helps teams move from business needs to candidate data products, compare those candidates with an existing portfolio, examine relationships and gaps, prepare machine-readable definitions, and manage review and delivery context. It builds on open specification standards and complements the enterprise&apos;s existing data and AI investments.</p>
+            <h3>What Maysano does not replace</h3>
+            <p>Maysano is not a substitute for an enterprise identity provider, policy engine, model gateway, warehouse, lakehouse, metadata catalog, or security control. These systems continue to store, process, secure, and serve data, and to enforce actual permissions. Maysano provides the business and product context around their use.</p>
+            <p>This distinction also avoids dependence on one AI model or infrastructure provider. The business objective, product definition, owner, and approval history should not disappear when an organization changes its models or execution stack. A durable operating model preserves those relationships independently of the chosen runtime.</p>
+
+            <h2>How to decide what your organization needs first</h2>
+            <p>If agents are accessing enterprise resources without adequate permission checks, audit records, or reliable controls on tool execution, address the technical control problem first. A portfolio layer cannot compensate for missing authorization.</p>
+            <p>If execution is already governed but teams still cannot explain which products support an objective, how investments overlap, why a product exists, or what happens when an upstream dependency changes, examine the product operating model. The problem may be missing information, missing relationships, or missing workflows, rather than another data platform.</p>
+            <p>A practical starting point is one important business objective. Identify its use cases, find the data products they require, map owners and dependencies, and record outstanding decisions. Then examine which tasks agents should support and which operations need technical restrictions or human approval. This exposes both kinds of responsibility without committing to an unnecessary platform replacement.</p>
+
+            <h2>The platform becomes less visible. Business intent must become more explicit.</h2>
+            <p>As infrastructure becomes easier to consume, the distinction between permission and purpose grows more important. Enterprise AI needs reliable technical control over what an agent does. It also needs shared business context to determine why that work exists, how it relates to data products, who remains accountable, and whether the result advances a worthwhile objective.</p>
+            <p>An AI control plane governs execution. A data product operating layer connects execution to business value. Both matter, and their responsibilities should remain clear.</p>
+
+            <aside className="insight-product-context" aria-label="About Maysano">
+              <p className="eyebrow">Maysano context</p>
+              <p>Maysano connects business objectives, use cases, data products, governance, lifecycle, dependencies, and delivery into one portfolio operating context. It works alongside existing catalogs, data platforms, and technical AI controls, with open standards providing a foundation for portable product definitions.</p>
+              <a className="button" href={siteConfig.bookingUrl}>Book a 30-minute live demo</a>
+            </aside>
+
+            <section className="insight-article__references" aria-labelledby="control-plane-reading-title">
+              <h2 id="control-plane-reading-title">Further reading</h2>
+              <p><a href="https://medium.com/@chameleon13/the-data-platform-is-becoming-invisible-the-control-plane-is-not-cf0cfd1ce930" target="_blank" rel="noreferrer">The Data Platform Is Becoming Invisible. The Control Plane Is Not.</a> This Insight is an independent analysis inspired by that article, not a republication or endorsement by its author.</p>
+              <p><a href="https://opendataproducts.org/" target="_blank" rel="noreferrer">Open Data Product Specification</a></p>
+              <p><a href="https://www.nist.gov/itl/ai-risk-management-framework" target="_blank" rel="noreferrer">NIST AI Risk Management Framework</a></p>
+              <p><a href={architectureUrl}>Maysano Reference Architecture</a></p>
+            </section>
+          </div>
+
+          <InsightArticleSideContent quote="A control plane governs execution. An operating layer connects execution to business value.">
+            <p className="eyebrow">Related insight</p>
+            <p><a href={agentsArticleUrl}>Traditional AI Agents vs. Governed AI Agents for Enterprise Data Work</a></p>
+            <p><a href={articleUrl}>Data Catalog vs. Data Product Portfolio Management: Why Enterprises Need Both</a></p>
+            <p><a href={graphArticleUrl}>Knowledge Graph vs. Ontology: What Enterprise Data Products Need</a></p>
+            <p><a href={architectureUrl}>Explore Maysano Reference Architecture</a></p>
           </InsightArticleSideContent>
         </div>
       </article>
