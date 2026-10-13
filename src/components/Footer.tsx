@@ -50,7 +50,7 @@ export function Footer() {
 
         <address className="footer-column footer-company">
           <strong>Company details</strong>
-          <span>Data Maestro Academy FZE LLC</span>
+          <span>Maysano is a product of Data Maestro Academy FZE LLC</span>
           <span>Business-ID: 262443655888</span>
           <span>Amber Gem Tower, 26th Floor</span>
           <span>Ajman, United Arab Emirates</span>

@@ -1692,13 +1692,37 @@ code, pre {
 
 .deployment-option small {
   display: block;
-  margin-top: auto;
+  margin: auto 0 0;
   padding-top: 18px;
-  border-top: 1px solid hsl(var(--border));
   color: hsl(var(--foreground));
   font-size: 0.78rem;
   font-weight: 600;
   line-height: 1.45;
+}
+
+.deployment-price {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 12px 0 0;
+  padding-top: 14px;
+  border-top: 1px solid hsl(var(--border));
+}
+
+.deployment-price span {
+  color: hsl(var(--muted-foreground));
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.deployment-price strong {
+  color: hsl(var(--heading));
+  font-size: 0.9rem;
+  line-height: 1.2;
+  text-align: right;
 }
 
 .deployment-choice { margin: 24px 0 0; color: hsl(var(--muted-foreground)); font-size: 0.84rem; text-align: center; }

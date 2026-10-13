@@ -20,6 +20,7 @@ const deploymentModels = [
       'Supports local knowledge and coding workflows',
     ],
     close: 'One package: software, model serving and hardware.',
+    price: 'Starting from 29 500 USD',
   },
   {
     audience: 'For larger or regulated environments',
@@ -31,6 +32,7 @@ const deploymentModels = [
       'Connect to the existing enterprise stack',
     ],
     close: 'Private deployment with a customer-controlled AI layer.',
+    price: 'On request',
   },
 ]
 
@@ -71,6 +73,10 @@ export function DeploymentModels() {
                   {model.benefits.map((benefit) => <li key={benefit}>{benefit}</li>)}
                 </ul>
                 <small>{model.close}</small>
+                <p className="deployment-price">
+                  <span>Indicative pricing</span>
+                  <strong>{model.price}</strong>
+                </p>
               </article>
             ))}
           </div>
