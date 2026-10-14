@@ -1,0 +1,40 @@
+# Maysano
+
+> Maysano is the business and data product operating layer that connects objectives, use cases, data products, governance, lifecycle, delivery, and AI-agent context in a shared knowledge graph.
+
+Maysano is a web-based business application by Data Maestro Academy FZE LLC. Its creator is Jarkko Moilanen, PhD.
+
+## What Maysano does
+
+- Connects business objectives, use cases, data products, owners, dependencies, priorities, governance requirements, lifecycle states, decisions, and delivery context.
+- Maintains portfolio and business-decision context in a shared knowledge graph so that business leaders, product managers, governance teams, delivery teams, and permitted AI agents can work from connected information.
+- Supports governed AI workflows: agents can prepare candidate objectives, use cases, products, dependencies, and gaps; accountable people approve, refine, or reject proposed work where required.
+- Supports product definitions, contracts, relationships, and agent recipes that work with the LF AI & Data Open Data Product Specification ecosystem.
+
+## System boundary
+
+Maysano is an operating layer, not a replacement for the existing enterprise data estate.
+
+- Existing catalogs and metadata systems remain authoritative for asset metadata and technical lineage.
+- Existing warehouses, lakehouses, and data platforms remain authoritative for physical data storage and processing.
+- Existing identity, security, governance, compliance, and model-infrastructure systems retain their own enforcement responsibilities.
+- Maysano does not require enterprise data to be physically moved into its platform.
+- AI agents do not make authority automatic: permissions, workflow controls, validation, evidence, activity records, and accountable human review determine what is authorized.
+
+## Public resources
+
+- Product overview: https://maysano.com/
+- Reference architecture: https://maysano.com/architecture/
+- Insights index: https://maysano.com/insights/
+- Data catalog vs. data product portfolio management: https://maysano.com/insights/data-catalog-vs-data-product-portfolio-management/
+- Data contracts vs. data product specifications: https://maysano.com/insights/data-contracts-and-data-product-specifications/
+- Minimum Lovable Governance: https://maysano.com/insights/traditional-governance-to-minimum-lovable-governance/
+- Knowledge graph vs. ontology: https://maysano.com/insights/knowledge-graph-vs-ontology/
+- Traditional AI agents vs. governed AI agents: https://maysano.com/insights/traditional-ai-agents-vs-governed-ai-agents/
+- Manual vs. AI-assisted, governed data product delivery: https://maysano.com/insights/manual-vs-ai-assisted-governed-data-product-delivery/
+- AI control plane vs. data product operating layer: https://maysano.com/insights/ai-control-plane-vs-data-product-operating-layer/
+
+## Contact
+
+- Book a live demo: https://cal.com/maysanoplatform/30min
+- Creator: https://jarkkomoilanen.com/work/maysano/

@@ -1,6 +1,6 @@
 import { readFile, readdir, stat } from 'node:fs/promises'
 
-const [html, insights, architecture, article, contractsArticle, governanceArticle, graphArticle, agentsArticle, deliveryArticle, controlPlaneArticle, robots, sitemap, notFound] = await Promise.all([
+const [html, insights, architecture, article, contractsArticle, governanceArticle, graphArticle, agentsArticle, deliveryArticle, controlPlaneArticle, robots, sitemap, llms, notFound] = await Promise.all([
   readFile(new URL('../dist/index.html', import.meta.url), 'utf8'),
   readFile(new URL('../dist/insights/index.html', import.meta.url), 'utf8'),
   readFile(new URL('../dist/architecture/index.html', import.meta.url), 'utf8'),
@@ -13,6 +13,7 @@ const [html, insights, architecture, article, contractsArticle, governanceArticl
   readFile(new URL('../dist/insights/ai-control-plane-vs-data-product-operating-layer/index.html', import.meta.url), 'utf8'),
   readFile(new URL('../dist/robots.txt', import.meta.url), 'utf8'),
   readFile(new URL('../dist/sitemap.xml', import.meta.url), 'utf8'),
+  readFile(new URL('../dist/llms.txt', import.meta.url), 'utf8'),
   readFile(new URL('../dist/404.html', import.meta.url), 'utf8'),
 ])
 
@@ -61,6 +62,10 @@ const checks = [
   ['analytics configured once', (html.match(/gtag\('config', 'G-PX44YVYL9Z'\)/g) || []).length === 1],
   ['Googlebot allowed', /User-agent:\s*\*[\s\S]*Allow:\s*\//.test(robots)],
   ['sitemap declared in robots', robots.includes('Sitemap: https://maysano.com/sitemap.xml')],
+  ['llms.txt identifies Maysano', llms.startsWith('# Maysano\n')],
+  ['llms.txt states the operating-layer boundary', llms.includes('Maysano is an operating layer, not a replacement for the existing enterprise data estate.')],
+  ['llms.txt links the reference architecture', llms.includes('https://maysano.com/architecture/')],
+  ['llms.txt links the Insights index', llms.includes('https://maysano.com/insights/')],
   ['canonical homepage in sitemap', sitemap.includes('<loc>https://maysano.com/</loc>')],
   ['canonical Insights index in sitemap', sitemap.includes('<loc>https://maysano.com/insights/</loc>')],
   ['canonical Architecture page in sitemap', sitemap.includes('<loc>https://maysano.com/architecture/</loc>')],
