@@ -10,6 +10,7 @@ const footerNav = [
 
 const footerExplore = [
   ['Insights', `${siteConfig.siteUrl}insights/`],
+  ['Kentaro', `${siteConfig.siteUrl}kentaro/`],
   ['Product Demos', `${siteConfig.siteUrl}#demos`],
   ['Deployment Models', `${siteConfig.siteUrl}#deployment`],
   ['Governance', `${siteConfig.siteUrl}#governance`],

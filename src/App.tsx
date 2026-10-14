@@ -13,6 +13,7 @@ import { Footer } from './components/Footer'
 import { GovernanceFlow } from './components/GovernanceFlow'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
+import { KentaroPage } from './components/Kentaro'
 import { OutcomeStrip } from './components/OutcomeStrip'
 import { ProblemBridge } from './components/ProblemBridge'
 import { ProductLifecycle } from './components/ProductLifecycle'
@@ -38,6 +39,8 @@ export function AppContent({ pathname = '/', InsightRenderer }: AppProps & { Ins
     if (InsightRenderer) return <InsightRenderer pathname={path} />
     return <Suspense fallback={null}><InsightRoutes pathname={path} /></Suspense>
   }
+
+  if (path === '/kentaro' || path.startsWith('/kentaro/episodes/')) return <KentaroPage pathname={path} />
 
   if (path === '/architecture') return <ArchitecturePage />
 

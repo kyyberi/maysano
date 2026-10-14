@@ -1,9 +1,11 @@
 import { readFile, readdir, stat } from 'node:fs/promises'
 
-const [html, insights, architecture, article, contractsArticle, governanceArticle, graphArticle, agentsArticle, deliveryArticle, controlPlaneArticle, robots, sitemap, llms, notFound] = await Promise.all([
+const [html, insights, architecture, kentaro, kentaroEpisode, article, contractsArticle, governanceArticle, graphArticle, agentsArticle, deliveryArticle, controlPlaneArticle, robots, sitemap, llms, notFound] = await Promise.all([
   readFile(new URL('../dist/index.html', import.meta.url), 'utf8'),
   readFile(new URL('../dist/insights/index.html', import.meta.url), 'utf8'),
   readFile(new URL('../dist/architecture/index.html', import.meta.url), 'utf8'),
+  readFile(new URL('../dist/kentaro/index.html', import.meta.url), 'utf8'),
+  readFile(new URL('../dist/kentaro/episodes/first-day-missing-context/index.html', import.meta.url), 'utf8'),
   readFile(new URL('../dist/insights/data-catalog-vs-data-product-portfolio-management/index.html', import.meta.url), 'utf8'),
   readFile(new URL('../dist/insights/data-contracts-and-data-product-specifications/index.html', import.meta.url), 'utf8'),
   readFile(new URL('../dist/insights/traditional-governance-to-minimum-lovable-governance/index.html', import.meta.url), 'utf8'),
@@ -69,6 +71,8 @@ const checks = [
   ['canonical homepage in sitemap', sitemap.includes('<loc>https://maysano.com/</loc>')],
   ['canonical Insights index in sitemap', sitemap.includes('<loc>https://maysano.com/insights/</loc>')],
   ['canonical Architecture page in sitemap', sitemap.includes('<loc>https://maysano.com/architecture/</loc>')],
+  ['canonical Kentaro page in sitemap', sitemap.includes('<loc>https://maysano.com/kentaro/</loc>')],
+  ['Kentaro episode pages in sitemap', ['first-day-missing-context', 'processing-time-zero', 'we-need-more-agents', 'it-works-on-my-machine'].every((slug) => sitemap.includes(`<loc>https://maysano.com/kentaro/episodes/${slug}/</loc>`))],
   ['canonical Insight article in sitemap', sitemap.includes('<loc>https://maysano.com/insights/data-catalog-vs-data-product-portfolio-management/</loc>')],
   ['canonical contracts Insight article in sitemap', sitemap.includes('<loc>https://maysano.com/insights/data-contracts-and-data-product-specifications/</loc>')],
   ['canonical governance Insight article in sitemap', sitemap.includes('<loc>https://maysano.com/insights/traditional-governance-to-minimum-lovable-governance/</loc>')],
@@ -83,6 +87,16 @@ const checks = [
   ['Architecture page structured data', architecture.includes('"@type":"WebPage"') && architecture.includes('"@id":"https://maysano.com/architecture/#webpage"')],
   ['Architecture page preserves the Maysano system boundary', architecture.includes('Maysano does not require enterprise data to be physically moved into its platform.')],
   ['Architecture page includes governed AI controls', architecture.includes('An LLM prompt does not enforce security.')],
+  ['prerendered Kentaro archive', kentaro.includes('An AI agent. <span>A very human workplace.</span>') && kentaro.includes('The episodes')],
+  ['Kentaro archive canonical URL', kentaro.includes('<link rel="canonical" href="https://maysano.com/kentaro/"')],
+  ['Kentaro archive leaves unconfigured video visibly unavailable', kentaro.includes('Latest episode video pending.') && kentaro.includes('Thumbnail pending')],
+  ['Kentaro archive shows six episode slots in a three-column-ready grid', (kentaro.match(/class="kentaro-episode-card(?: |")/g) || []).length === 6 && (kentaro.match(/Coming soon/g) || []).length >= 2],
+  ['Kentaro archive exposes the configured video through an on-card lazy player', kentaro.includes('Play episode') && kentaro.includes('https://i.ytimg.com/vi/WNAQyOpfjkU/hqdefault.jpg') && !kentaro.includes('youtube-nocookie.com/embed/')],
+  ['Kentaro follow CTA links the configured YouTube playlist', kentaro.includes('https://www.youtube.com/playlist?list=PLCfcf0t6CobQ') && kentaro.includes('Watch on YouTube')],
+  ['prerendered Kentaro episode page', kentaroEpisode.includes('First day. Missing context.') && kentaroEpisode.includes('Play episode')],
+  ['Kentaro episode canonical URL', kentaroEpisode.includes('<link rel="canonical" href="https://maysano.com/kentaro/episodes/first-day-missing-context/"')],
+  ['Kentaro episode uses configured 4 by 5 video aspect ratio', kentaroEpisode.includes('aspect-ratio:4 / 5')],
+  ['Kentaro episode defers the configured YouTube embed until play', kentaroEpisode.includes('Play episode') && !kentaroEpisode.includes('youtube-nocookie.com/embed/')],
   ['Insights index has seven editorial cards', (insights.match(/class="insight-card(?: |")/g) || []).length === 7],
   ['contracts card targets the published Insight', insights.includes('href="https://maysano.com/insights/data-contracts-and-data-product-specifications/"')],
   ['governance card targets the published Insight', insights.includes('href="https://maysano.com/insights/traditional-governance-to-minimum-lovable-governance/"')],

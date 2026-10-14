@@ -3,11 +3,12 @@ import { siteConfig } from '../config/site'
 import { Brand } from './Brand'
 
 const navItems = [
-  ['Product', `${siteConfig.siteUrl}#product`],
-  ['How It Works', `${siteConfig.siteUrl}#how-it-works`],
-  ['Architecture', `${siteConfig.siteUrl}architecture/`],
-  ['AI Agents', `${siteConfig.siteUrl}#agents`],
-  ['Insights', `${siteConfig.siteUrl}insights/`],
+  ['Product', `${siteConfig.siteUrl}#product`, 'product'],
+  ['How It Works', `${siteConfig.siteUrl}#how-it-works`, 'how-it-works'],
+  ['Architecture', `${siteConfig.siteUrl}architecture/`, 'architecture'],
+  ['AI Agents', `${siteConfig.siteUrl}#agents`, 'agents'],
+  ['Insights', `${siteConfig.siteUrl}insights/`, 'insights'],
+  ['Kentaro', `${siteConfig.siteUrl}kentaro/`, 'kentaro'],
 ]
 
 // Shown only in the mobile menu; on desktop these stay reachable from the footer.
@@ -18,7 +19,7 @@ const secondaryNavItems = [
   ['Enterprise', `${siteConfig.siteUrl}#enterprise`],
 ]
 
-export function Header() {
+export function Header({ activePath }: { activePath?: string }) {
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
@@ -48,8 +49,8 @@ export function Header() {
           <span />
         </button>
         <nav id="primary-navigation" className={`primary-nav ${open ? 'is-open' : ''}`} aria-label="Primary navigation">
-          {navItems.map(([label, href]) => (
-            <a key={href} href={href} onClick={() => setOpen(false)}>{label}</a>
+          {navItems.map(([label, href, key]) => (
+            <a key={href} className={activePath === key ? 'is-active' : ''} href={href} aria-current={activePath === key ? 'page' : undefined} onClick={() => setOpen(false)}>{label}</a>
           ))}
           <div className="nav-secondary">
             <span>More</span>
