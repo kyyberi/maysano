@@ -87,7 +87,7 @@ const checks = [
   ['Architecture page structured data', architecture.includes('"@type":"WebPage"') && architecture.includes('"@id":"https://maysano.com/architecture/#webpage"')],
   ['Architecture page preserves the Maysano system boundary', architecture.includes('Maysano does not require enterprise data to be physically moved into its platform.')],
   ['Architecture page includes governed AI controls', architecture.includes('An LLM prompt does not enforce security.')],
-  ['prerendered Kentaro archive', kentaro.includes('An AI agent. <span>A very human workplace.</span>') && kentaro.includes('The episodes')],
+  ['prerendered Kentaro archive', kentaro.includes('The Office.</span><span class="kentaro-hero__title-line kentaro-hero__title-line--sage">An agentic experience.</span>') && kentaro.includes('Kentaro has a job, colleagues and increasingly specific questions.') && kentaro.includes('One-minute stories about working with humans.') && kentaro.includes('The episodes')],
   ['Kentaro archive canonical URL', kentaro.includes('<link rel="canonical" href="https://maysano.com/kentaro/"')],
   ['Kentaro archive leaves unconfigured video visibly unavailable', kentaro.includes('Latest episode video pending.') && kentaro.includes('Thumbnail pending')],
   ['Kentaro archive shows six episode slots in a three-column-ready grid', (kentaro.match(/class="kentaro-episode-card(?: |")/g) || []).length === 6 && (kentaro.match(/Coming soon/g) || []).length >= 2],

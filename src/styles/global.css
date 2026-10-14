@@ -3640,7 +3640,9 @@ html.js .reveal:not(.is-in) .rise { opacity: 0; transform: translateY(18px); }
   line-height: 0.95;
 }
 
-.kentaro-hero h1 span { color: hsl(var(--lime)); }
+.kentaro-hero h1 .kentaro-hero__title-line { display: block; }
+.kentaro-hero h1 .kentaro-hero__title-line--light { color: #F4F6EE; }
+.kentaro-hero h1 .kentaro-hero__title-line--sage { color: #C2D897; }
 
 .kentaro-hero__lead {
   max-width: 580px;

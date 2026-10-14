@@ -247,8 +247,11 @@ function KentaroHome() {
           <div className="container kentaro-hero__grid">
             <div className="kentaro-hero__copy">
               <p className="eyebrow">KENTARO AT WORK</p>
-              <h1>An AI agent. <span>A very human workplace.</span></h1>
-              <p className="kentaro-hero__lead">Meet Kentaro. Product manager, reasonable question asker, and reluctant expert in office ambiguity.</p>
+              <h1>
+                <span className="kentaro-hero__title-line kentaro-hero__title-line--light">The Office.</span>
+                <span className="kentaro-hero__title-line kentaro-hero__title-line--sage">An agentic experience.</span>
+              </h1>
+              <p className="kentaro-hero__lead">Kentaro has a job, colleagues and increasingly specific questions.</p>
               <p className="kentaro-hero__supporting">One-minute stories about working with humans.</p>
               <div className="kentaro-hero__actions">
                 {latestEpisode?.youtubeVideoId ? <a className="button button--light" href={episodeHref(latestEpisode)}>Watch latest episode</a> : <button className="button button--light" type="button" disabled title="The latest episode video has not been configured">Watch latest episode</button>}
