@@ -91,7 +91,7 @@ const checks = [
   ['Kentaro archive canonical URL', kentaro.includes('<link rel="canonical" href="https://maysano.com/kentaro/"')],
   ['Kentaro archive leaves unconfigured video visibly unavailable', kentaro.includes('Latest episode video pending.') && kentaro.includes('Thumbnail pending')],
   ['Kentaro archive shows six episode slots in a three-column-ready grid', (kentaro.match(/class="kentaro-episode-card(?: |")/g) || []).length === 6 && (kentaro.match(/Coming soon/g) || []).length >= 2],
-  ['Kentaro archive exposes the configured video through an on-card lazy player', kentaro.includes('Play episode') && kentaro.includes('https://i.ytimg.com/vi/WNAQyOpfjkU/hqdefault.jpg') && !kentaro.includes('youtube-nocookie.com/embed/')],
+  ['Kentaro archive exposes configured videos through on-card lazy players', kentaro.includes('Play episode') && ['WNAQyOpfjkU', 'LuufuQPJgEM'].every((videoId) => kentaro.includes(`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`)) && !kentaro.includes('youtube-nocookie.com/embed/')],
   ['Kentaro follow CTA links the configured YouTube playlist', kentaro.includes('https://www.youtube.com/playlist?list=PLCfcf0t6CobQ') && kentaro.includes('Watch on YouTube')],
   ['prerendered Kentaro episode page', kentaroEpisode.includes('First day. Missing context.') && kentaroEpisode.includes('Play episode')],
   ['Kentaro episode canonical URL', kentaroEpisode.includes('<link rel="canonical" href="https://maysano.com/kentaro/episodes/first-day-missing-context/"')],
