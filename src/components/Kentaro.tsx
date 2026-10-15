@@ -271,7 +271,7 @@ function KentaroHome() {
               <h2 id="kentaro-purpose-title">The work starts before the prompt.</h2>
             </div>
             <div className="kentaro-purpose__copy">
-              <p>AI agents are entering ordinary work. They meet unclear requirements, competing priorities, old documents and words that mean different things to different people.</p>
+              <p>Kentaro is an agent in trouble. AI agents are entering ordinary work, where they meet unclear requirements, competing priorities, old documents and words that mean different things to different people.</p>
               <p>The result is often blamed on the agent.</p>
               <p>Kentaro shows the other side. He takes workplace language seriously. When BO says everything is Priority One, Kentaro starts everything. When BO asks for speed, Kentaro optimises the number. When BO says “use your judgment,” Kentaro asks which judgment is approved.</p>
               <p>The stories raise these tensions to the surface through office comedy. Each episode ends with one practical principle for working with agents.</p>
@@ -290,16 +290,16 @@ function KentaroHome() {
           <div className="container kentaro-harness__grid">
             <div className="kentaro-harness__heading">
               <p className="eyebrow">THE KENTARO HARNESS</p>
-              <h2 id="kentaro-harness-title">The stories show the friction. The Harness helps avoid it.</h2>
-              <p>Open-source, MIT-licensed and made for work that needs shared context.</p>
+              <h2 id="kentaro-harness-title">The stories show Kentaro in trouble. The Harness changes the collaboration.</h2>
+              <p>Open-source, MIT-licensed and made for people and agents to work from shared context.</p>
             </div>
             <div className="kentaro-harness__copy">
               <p>Kentaro is the open-source Agentic Maysano Harness for working with Maysano through Codex, Claude Code and OpenCode.</p>
-              <p>The episodes show what happens when an agent has to guess. The Harness helps people and agents start from the same understanding: business context, structured artefacts, working rules, approved tools and human approval boundaries.</p>
+              <p>The episodes show what happens when Kentaro has to infer human intent alone. The Harness helps lift that friction by giving people and the agent the same business context, structured artefacts, working rules, approved tools and human approval boundaries.</p>
               <ul className="kentaro-harness__principles">
-                <li><strong>Less missing context</strong><span>Objectives, use cases, data products and evidence travel with the agent.</span></li>
-                <li><strong>Less ambiguous action</strong><span>Working rules, approved tools and human approval remain explicit.</span></li>
-                <li><strong>Less friction over time</strong><span>Maysano Platform keeps the shared context, workflow state, approvals, evidence and audit trail.</span></li>
+                <li><strong>Start from the same context</strong><span>Objectives, use cases, data products and evidence travel with the agent.</span></li>
+                <li><strong>Make decisions explicit</strong><span>Working rules, approved tools and human approval remain clear to people and the agent.</span></li>
+                <li><strong>Keep collaboration reviewable</strong><span>Maysano Platform keeps the shared context, workflow state, approvals, evidence and audit trail.</span></li>
               </ul>
               <a className="button button--light" href={kentaroHarnessUrl} target="_blank" rel="noreferrer" aria-label="Explore the Kentaro Harness on GitHub">Explore the Kentaro Harness on GitHub <span aria-hidden="true">↗</span></a>
             </div>
