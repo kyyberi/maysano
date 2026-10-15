@@ -33,10 +33,6 @@ export type KentaroEpisode = {
   relatedLink?: KentaroRelatedLink
 }
 
-export const kentaroSeries = {
-  youtubePlaylistUrl: 'https://www.youtube.com/playlist?list=PLCfcf0t6CobQ',
-} as const
-
 // This is the single content collection for the Kentaro series. Add real media
 // metadata here as each episode is ready; the UI intentionally treats null as unavailable.
 export const kentaroEpisodes: KentaroEpisode[] = [
@@ -49,9 +45,9 @@ export const kentaroEpisodes: KentaroEpisode[] = [
     status: 'published',
     publicationDate: null,
     duration: null,
-    thumbnail: 'https://i.ytimg.com/vi/WNAQyOpfjkU/hqdefault.jpg',
-    thumbnailAlt: 'Preview image for Kentaro episode 1, First day. Missing context.',
-    youtubeVideoId: 'WNAQyOpfjkU',
+    thumbnail: null,
+    thumbnailAlt: null,
+    youtubeVideoId: null,
     videoAspectRatio: '4 / 5',
     topics: ['business-context', 'office-life'],
     transcript: null,
@@ -66,9 +62,9 @@ export const kentaroEpisodes: KentaroEpisode[] = [
     status: 'published',
     publicationDate: null,
     duration: null,
-    thumbnail: 'https://i.ytimg.com/vi/LuufuQPJgEM/hqdefault.jpg',
-    thumbnailAlt: 'Preview image for Kentaro episode 2, Processing time: zero.',
-    youtubeVideoId: 'LuufuQPJgEM',
+    thumbnail: null,
+    thumbnailAlt: null,
+    youtubeVideoId: null,
     videoAspectRatio: '4 / 5',
     topics: ['business-context', 'governance'],
     transcript: null,

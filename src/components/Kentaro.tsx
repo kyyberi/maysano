@@ -5,7 +5,6 @@ import { siteConfig } from '../config/site'
 import {
   getKentaroEpisode,
   kentaroEpisodes,
-  kentaroSeries,
   kentaroTopicLabel,
   kentaroTopics,
   publishedKentaroEpisodes,
@@ -264,6 +263,27 @@ function KentaroHome() {
             </figure>
           </div>
         </section>
+        <section className="kentaro-purpose section" aria-labelledby="kentaro-purpose-title">
+          <div className="container kentaro-purpose__grid">
+            <div className="kentaro-purpose__heading">
+              <p className="eyebrow">WHY KENTARO EXISTS</p>
+              <h2 id="kentaro-purpose-title">The work starts before the prompt.</h2>
+            </div>
+            <div className="kentaro-purpose__copy">
+              <p>AI agents are entering ordinary work. They meet unclear requirements, competing priorities, old documents and words that mean different things to different people.</p>
+              <p>The result is often blamed on the agent.</p>
+              <p>Kentaro shows the other side. He takes workplace language seriously. When BO says everything is Priority One, Kentaro starts everything. When BO asks for speed, Kentaro optimises the number. When BO says “use your judgment,” Kentaro asks which judgment is approved.</p>
+              <p>The stories raise these tensions to the surface through office comedy. Each episode ends with one practical principle for working with agents.</p>
+              <ul className="kentaro-purpose__principles">
+                <li>Agents need business context, not missing history.</li>
+                <li>Agents need a definition of success, not a KPI.</li>
+                <li>Agents need trade-offs, not priority labels.</li>
+              </ul>
+              <p>Kentaro exists because better agent work starts before the prompt. It starts when people make the objective, decision, rules, data and evidence clear enough to act on.</p>
+              <p className="kentaro-purpose__credit">A series by Maysano.</p>
+            </div>
+          </div>
+        </section>
         <EpisodeLibrary />
         <section className="kentaro-character section" aria-labelledby="kentaro-character-title">
           <div className="container kentaro-character__grid">
@@ -284,7 +304,6 @@ function KentaroHome() {
             <p className="eyebrow">KEEP UP WITH KENTARO</p>
             <h2 id="kentaro-follow-title">Follow Kentaro’s next assignment.</h2>
             <p>New episodes. Same reasonable questions.</p>
-            <a className="button button--light" href={kentaroSeries.youtubePlaylistUrl} target="_blank" rel="noreferrer" aria-label="Watch the Kentaro playlist on YouTube">Watch on YouTube <span aria-hidden="true">↗</span></a>
             <small>A series by Maysano.</small>
           </div>
         </section>
