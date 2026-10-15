@@ -279,7 +279,7 @@ function KentaroHome() {
                 <li>Agents need business context, not missing history.</li>
                 <li>Agents need a definition of success, not a KPI.</li>
                 <li>Agents need trade-offs, not priority labels.</li>
-                <li>Agents need a <a href={kentaroHarnessUrl} target="_blank" rel="noreferrer">context harness <span aria-hidden="true">↗</span></a>. That is what we offer as open source.</li>
+                <li><span>Agents need a <a href="#kentaro-harness">context harness</a>. That is what we offer as open source.</span></li>
               </ul>
               <p>Kentaro exists because better agent work starts before the prompt. It starts when people make the objective, decision, rules, data and evidence clear enough to act on.</p>
               <p className="kentaro-purpose__credit">A series by Maysano.</p>
@@ -287,7 +287,7 @@ function KentaroHome() {
           </div>
         </section>
         <EpisodeLibrary />
-        <section className="kentaro-harness section" aria-labelledby="kentaro-harness-title">
+        <section id="kentaro-harness" className="kentaro-harness section" aria-labelledby="kentaro-harness-title">
           <div className="container kentaro-harness__grid">
             <div className="kentaro-harness__heading">
               <p className="eyebrow">THE KENTARO HARNESS</p>
