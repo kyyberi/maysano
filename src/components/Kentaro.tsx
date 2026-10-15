@@ -291,7 +291,7 @@ function KentaroHome() {
           <div className="container kentaro-harness__grid">
             <div className="kentaro-harness__heading">
               <p className="eyebrow">THE KENTARO HARNESS</p>
-              <h2 id="kentaro-harness-title">The stories show Kentaro in trouble.<br />The Harness changes the collaboration.</h2>
+              <h2 id="kentaro-harness-title">The stories show Kentaro in trouble.<br /><span className="kentaro-harness__title-highlight" style={{ color: 'hsl(var(--lime))' }}>The Harness changes the collaboration.</span></h2>
               <p>Open-source, MIT-licensed and made for people and agents to work from shared context.</p>
             </div>
             <div className="kentaro-harness__copy">

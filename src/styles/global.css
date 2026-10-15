@@ -3946,7 +3946,6 @@ html.js .reveal:not(.is-in) .rise { opacity: 0; transform: translateY(18px); }
 }
 
 .kentaro-harness h2 { margin-top: 0; color: hsl(var(--navy-foreground)); }
-
 .kentaro-harness__copy > p {
   margin: 0 0 18px;
   color: hsl(var(--navy-foreground) / 0.84);
