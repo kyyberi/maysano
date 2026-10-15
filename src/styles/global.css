@@ -3629,6 +3629,7 @@ html.js .reveal:not(.is-in) .rise { opacity: 0; transform: translateY(18px); }
 .kentaro-hero__copy { max-width: 620px; }
 .kentaro-hero .eyebrow,
 .kentaro-follow .eyebrow,
+.kentaro-harness .eyebrow,
 .kentaro-episode-page__hero .eyebrow { color: hsl(var(--lime)); }
 
 .kentaro-hero h1,
@@ -3933,6 +3934,57 @@ html.js .reveal:not(.is-in) .rise { opacity: 0; transform: translateY(18px); }
 .kentaro-pagination span { color: hsl(var(--muted-foreground)); font-size: 0.8rem; font-weight: 700; }
 .kentaro-pagination button:disabled { cursor: not-allowed; opacity: 0.45; }
 
+.kentaro-harness {
+  background: hsl(var(--navy));
+  color: hsl(var(--navy-foreground));
+}
+
+.kentaro-harness__grid {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.72fr) minmax(0, 1.15fr);
+  gap: clamp(48px, 10vw, 168px);
+}
+
+.kentaro-harness h2 { margin-top: 0; color: hsl(var(--navy-foreground)); }
+
+.kentaro-harness__copy > p {
+  margin: 0 0 18px;
+  color: hsl(var(--navy-foreground) / 0.84);
+  font: 1.03rem/1.7 var(--font-sans);
+}
+
+.kentaro-harness__copy > p:first-child {
+  color: hsl(var(--navy-foreground));
+  font: 600 clamp(1.18rem, 1.65vw, 1.42rem)/1.42 var(--font-sans);
+  letter-spacing: -0.025em;
+}
+
+.kentaro-harness__principles {
+  display: grid;
+  margin: 34px 0;
+  padding: 0;
+  border-top: 1px solid hsl(var(--navy-foreground) / 0.2);
+  list-style: none;
+}
+
+.kentaro-harness__principles li {
+  display: grid;
+  grid-template-columns: minmax(150px, 0.5fr) minmax(0, 1fr);
+  gap: 24px;
+  padding: 18px 0;
+  border-bottom: 1px solid hsl(var(--navy-foreground) / 0.2);
+}
+
+.kentaro-harness__principles strong {
+  color: hsl(var(--lime));
+  font-size: 0.84rem;
+}
+
+.kentaro-harness__principles span {
+  color: hsl(var(--navy-foreground) / 0.8);
+  font-size: 0.94rem;
+}
+
 .kentaro-character { background: hsl(var(--secondary)); }
 
 .kentaro-character__grid {
@@ -3952,7 +4004,8 @@ html.js .reveal:not(.is-in) .rise { opacity: 0; transform: translateY(18px); }
 .kentaro-character__copy { max-width: 610px; }
 .kentaro-character__copy h2,
 .kentaro-follow h2,
-.kentaro-related h2 { margin-bottom: 24px; font-size: clamp(2.3rem, 4vw, 4rem); letter-spacing: -0.06em; line-height: 0.98; }
+.kentaro-related h2,
+.kentaro-harness h2 { margin-bottom: 24px; font-size: clamp(2.3rem, 4vw, 4rem); letter-spacing: -0.06em; line-height: 0.98; }
 .kentaro-character__copy > p:not(.eyebrow) { color: hsl(var(--muted-foreground)); font-size: 1rem; line-height: 1.72; }
 
 .kentaro-character blockquote {
@@ -4031,11 +4084,13 @@ html.js .reveal:not(.is-in) .rise { opacity: 0; transform: translateY(18px); }
 @media (max-width: 900px) {
   .kentaro-hero__grid,
   .kentaro-character__grid,
-  .kentaro-purpose__grid { grid-template-columns: 1fr; }
+  .kentaro-purpose__grid,
+  .kentaro-harness__grid { grid-template-columns: 1fr; }
   .kentaro-hero__copy { max-width: 680px; }
   .kentaro-hero__image { justify-self: start; width: min(100%, 680px); }
   .kentaro-purpose__grid { gap: 28px; }
   .kentaro-purpose__heading { max-width: 580px; }
+  .kentaro-harness__grid { gap: 28px; }
   .kentaro-library__heading { align-items: start; flex-direction: column; gap: 0; }
   .kentaro-search { margin-bottom: 0; }
   .kentaro-library__controls { align-items: start; flex-direction: column; }
@@ -4055,11 +4110,14 @@ html.js .reveal:not(.is-in) .rise { opacity: 0; transform: translateY(18px); }
   .kentaro-purpose__heading h2 { font-size: clamp(2.25rem, 10vw, 3.1rem); }
   .kentaro-purpose__copy > p { font-size: 0.98rem; }
   .kentaro-purpose__principles { margin: 28px 0; padding: 22px 0; font-size: 1.06rem; }
+  .kentaro-harness { padding: 78px 0; }
+  .kentaro-harness__principles li { grid-template-columns: 1fr; gap: 6px; }
   .kentaro-episode-grid { grid-template-columns: 1fr; }
   .kentaro-thumbnail-pending { min-height: 195px; }
   .kentaro-character__copy h2,
   .kentaro-follow h2,
-  .kentaro-related h2 { font-size: clamp(2.25rem, 10vw, 3.1rem); }
+  .kentaro-related h2,
+  .kentaro-harness h2 { font-size: clamp(2.25rem, 10vw, 3.1rem); }
   .kentaro-follow { padding: 74px 0; }
   .kentaro-episode-page__hero { padding: 30px 0 58px; }
   .kentaro-back { margin-bottom: 42px; }

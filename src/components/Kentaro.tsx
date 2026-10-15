@@ -16,6 +16,7 @@ import { Header } from './Header'
 
 const pageSize = 9
 const kentaroBaseUrl = `${siteConfig.siteUrl}kentaro/`
+const kentaroHarnessUrl = 'https://github.com/Maysano/Kentaro'
 const episodeHref = (episode: KentaroEpisode) => `${kentaroBaseUrl}episodes/${episode.slug}/`
 const episodeNumber = (episode: KentaroEpisode) => `Episode ${String(episode.episodeNumber).padStart(2, '0')}`
 
@@ -285,6 +286,25 @@ function KentaroHome() {
           </div>
         </section>
         <EpisodeLibrary />
+        <section className="kentaro-harness section" aria-labelledby="kentaro-harness-title">
+          <div className="container kentaro-harness__grid">
+            <div className="kentaro-harness__heading">
+              <p className="eyebrow">THE KENTARO HARNESS</p>
+              <h2 id="kentaro-harness-title">The stories show the friction. The Harness helps avoid it.</h2>
+              <p>Open-source, MIT-licensed and made for work that needs shared context.</p>
+            </div>
+            <div className="kentaro-harness__copy">
+              <p>Kentaro is the open-source Agentic Maysano Harness for working with Maysano through Codex, Claude Code and OpenCode.</p>
+              <p>The episodes show what happens when an agent has to guess. The Harness helps people and agents start from the same understanding: business context, structured artefacts, working rules, approved tools and human approval boundaries.</p>
+              <ul className="kentaro-harness__principles">
+                <li><strong>Less missing context</strong><span>Objectives, use cases, data products and evidence travel with the agent.</span></li>
+                <li><strong>Less ambiguous action</strong><span>Working rules, approved tools and human approval remain explicit.</span></li>
+                <li><strong>Less friction over time</strong><span>Maysano Platform keeps the shared context, workflow state, approvals, evidence and audit trail.</span></li>
+              </ul>
+              <a className="button button--light" href={kentaroHarnessUrl} target="_blank" rel="noreferrer" aria-label="Explore the Kentaro Harness on GitHub">Explore the Kentaro Harness on GitHub <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+        </section>
         <section className="kentaro-character section" aria-labelledby="kentaro-character-title">
           <div className="container kentaro-character__grid">
             <figure className="kentaro-character__image">
