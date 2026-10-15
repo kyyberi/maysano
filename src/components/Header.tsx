@@ -8,7 +8,6 @@ const navItems = [
   ['Architecture', `${siteConfig.siteUrl}architecture/`, 'architecture'],
   ['AI Agents', `${siteConfig.siteUrl}#agents`, 'agents'],
   ['Insights', `${siteConfig.siteUrl}insights/`, 'insights'],
-  ['Kentaro', `${siteConfig.siteUrl}kentaro/`, 'kentaro'],
 ]
 
 // Shown only in the mobile menu; on desktop these stay reachable from the footer.
