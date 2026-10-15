@@ -301,7 +301,8 @@ function KentaroHome() {
                 <li><strong>Make decisions explicit</strong><span>Working rules, approved tools and human approval remain clear to people and the agent.</span></li>
                 <li><strong>Keep collaboration reviewable</strong><span>Maysano Platform keeps the shared context, workflow state, approvals, evidence and audit trail.</span></li>
               </ul>
-              <a className="button button--light" href={kentaroHarnessUrl} target="_blank" rel="noreferrer" aria-label="Explore the Kentaro Harness on GitHub">Explore the Kentaro Harness on GitHub <span aria-hidden="true">↗</span></a>
+              <p className="kentaro-harness__contribute"><strong>You can help too.</strong> Kentaro is open source, and contributions are welcome.</p>
+              <a className="button button--light" href={kentaroHarnessUrl} target="_blank" rel="noreferrer" aria-label="Contribute to Kentaro on GitHub">Contribute to Kentaro on GitHub <span aria-hidden="true">↗</span></a>
             </div>
           </div>
         </section>
