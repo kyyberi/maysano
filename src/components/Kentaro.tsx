@@ -273,7 +273,7 @@ function KentaroHome() {
             <div className="kentaro-purpose__copy">
               <p>Kentaro is an agent in trouble. AI agents are entering ordinary work, where they meet unclear requirements, competing priorities, old documents and words that mean different things to different people.</p>
               <p>The result is often blamed on the agent.</p>
-              <p>Kentaro shows the other side. He takes workplace language seriously. When BO says everything is Priority One, Kentaro starts everything. When BO asks for speed, Kentaro optimises the number. When BO says “use your judgment,” Kentaro asks which judgment is approved.</p>
+              <p>Kentaro shows the other side. He takes workplace language seriously. When the business owner says everything is Priority One, Kentaro starts everything. When the business owner asks for speed, Kentaro optimises the number. When the business owner says “use your judgment,” Kentaro asks which judgment is approved.</p>
               <p>The stories raise these tensions to the surface through office comedy. Each episode ends with one practical principle for working with agents.</p>
               <ul className="kentaro-purpose__principles">
                 <li>Agents need business context, not missing history.</li>
