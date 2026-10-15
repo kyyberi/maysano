@@ -295,7 +295,7 @@ function KentaroHome() {
               <p>Open-source, MIT-licensed and made for people and agents to work from shared context.</p>
             </div>
             <div className="kentaro-harness__copy">
-              <p>Kentaro is the open-source Agentic Maysano Harness for working with Maysano through Codex, Claude Code and OpenCode.</p>
+              <p>Kentaro uses the open-source Agentic Maysano Harness for working with Maysano through Codex, Claude Code and OpenCode.</p>
               <p>The episodes show what happens when Kentaro has to infer human intent alone. The Harness helps lift that friction by giving people and the agent the same business context, structured artefacts, working rules, approved tools and human approval boundaries.</p>
               <ul className="kentaro-harness__principles">
                 <li><strong>Start from the same context</strong><span>Objectives, use cases, data products and evidence travel with the agent.</span></li>
