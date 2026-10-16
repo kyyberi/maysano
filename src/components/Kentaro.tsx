@@ -13,6 +13,7 @@ import {
 } from '../content/kentaroEpisodes'
 import { Footer } from './Footer'
 import { Header } from './Header'
+import { KentaroUpdatesForm } from './KentaroUpdatesForm'
 
 const pageSize = 9
 const kentaroBaseUrl = `${siteConfig.siteUrl}kentaro/`
@@ -358,7 +359,8 @@ function KentaroHome() {
               <p className="eyebrow">KEEP UP WITH KENTARO</p>
               <div className="kentaro-harness__copy" style={{ display: 'flex', flex: 1, flexDirection: 'column' }}>
                 <h2 id="kentaro-follow-title">Follow Kentaro’s next assignment.</h2>
-                <p style={{ marginTop: 'auto' }}>New episodes. Same reasonable questions.</p>
+                <p style={{ marginTop: 'auto' }}>New Kentaro stories and Harness development updates. Same reasonable questions.</p>
+                <KentaroUpdatesForm />
                 <small>A series by Maysano.</small>
               </div>
             </div>
