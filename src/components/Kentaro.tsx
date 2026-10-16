@@ -145,7 +145,7 @@ function EpisodeLibrary() {
       <div className="container">
         <div className="section-intro">
           <p className="eyebrow">WATCH KENTARO AT WORK</p>
-          <h2 id="kentaro-episodes-title">One-minute stories about business people and AI agents.</h2>
+          <h2 id="kentaro-episodes-title" className="kentaro-section-title">One-minute stories about business people and AI agents.</h2>
           <p className="section-copy">Every story starts with ordinary work. Then the missing context, unclear mandate, or blurred accountability becomes visible.</p>
         </div>
         <div className="kentaro-episode-grid">
@@ -157,6 +157,7 @@ function EpisodeLibrary() {
 }
 
 const kentaroPurposeStyles = `
+  .kentaro-section-title.kentaro-section-title { margin: 0 0 24px; font-size: clamp(2.5rem, 3.6vw, 3.75rem); font-weight: 600; letter-spacing: -.06em; line-height: .96; }
   .kentaro-purpose { padding: clamp(72px, 9vw, 142px) 0; background: hsl(var(--secondary)); }
   .kentaro-purpose > .container { width: min(1400px, calc(100% - 64px)); }
   .kentaro-purpose__layout { display: grid; grid-template-columns: minmax(360px, .75fr) minmax(0, 1fr); align-items: start; gap: clamp(54px, 8vw, 132px); max-width: 1400px; }
@@ -164,7 +165,7 @@ const kentaroPurposeStyles = `
   .kentaro-purpose__image img { display: block; width: 100%; min-height: 640px; height: 100%; object-fit: cover; object-position: center; }
   .kentaro-purpose__content { max-width: 785px; }
   .kentaro-purpose__content .eyebrow { margin-bottom: 19px; color: hsl(var(--primary)); }
-  .kentaro-purpose__content h2 { max-width: 710px; margin: 0 0 26px; color: hsl(var(--heading)); font-size: clamp(3rem, 5vw, 5.45rem); letter-spacing: -.07em; line-height: .9; }
+  .kentaro-purpose__content h2 { max-width: 710px; color: hsl(var(--heading)); }
   .kentaro-purpose__intro, .kentaro-purpose__bridge { max-width: 740px; margin: 0; color: hsl(var(--muted-foreground)); font-size: clamp(1.08rem, 1.7vw, 1.33rem); line-height: 1.55; }
   .kentaro-purpose__comparison { margin: 42px 0 30px; border-top: 1px solid hsl(var(--border)); }
   .kentaro-purpose__comparison-labels, .kentaro-purpose__comparison-row { display: grid; grid-template-columns: minmax(180px, .82fr) minmax(0, 1fr); column-gap: 36px; }
@@ -189,7 +190,7 @@ const kentaroPurposeStyles = `
   .kentaro-purpose__path:hover .kentaro-purpose__path-arrow { transform: translateX(3px); }
   @media (max-width: 1050px) { .kentaro-purpose__layout { grid-template-columns: minmax(300px, .72fr) minmax(0, 1fr); gap: 48px; } .kentaro-purpose__image img { min-height: 580px; } .kentaro-purpose__comparison-labels, .kentaro-purpose__comparison-row { column-gap: 22px; } .kentaro-purpose__comparison-row > dd { padding-left: 22px; } }
   @media (max-width: 820px) { .kentaro-purpose__layout { grid-template-columns: 1fr; gap: 38px; } .kentaro-purpose__image { width: min(100%, 680px); } .kentaro-purpose__image img { min-height: 0; aspect-ratio: 4 / 3; } .kentaro-purpose__content { max-width: 760px; } }
-  @media (max-width: 620px) { .kentaro-purpose { padding: 74px 0; } .kentaro-purpose__content h2 { font-size: clamp(2.6rem, 12vw, 4.15rem); } .kentaro-purpose__intro { font-size: 1.02rem; } .kentaro-purpose__comparison { margin-top: 34px; } .kentaro-purpose__comparison-labels { display: none; } .kentaro-purpose__comparison-row { grid-template-columns: 1fr; gap: 12px; padding: 18px 0; } .kentaro-purpose__comparison-row > dt, .kentaro-purpose__comparison-row > dd { font-size: 1rem; } .kentaro-purpose__comparison-row > dd { padding-left: 0; border-left: 0; } .kentaro-purpose__paths { grid-template-columns: 1fr; } .kentaro-purpose__path { min-height: 112px; } }
+  @media (max-width: 620px) { .kentaro-section-title.kentaro-section-title { font-size: clamp(2.35rem, 10vw, 3.15rem); } .kentaro-purpose { padding: 74px 0; } .kentaro-purpose__intro { font-size: 1.02rem; } .kentaro-purpose__comparison { margin-top: 34px; } .kentaro-purpose__comparison-labels { display: none; } .kentaro-purpose__comparison-row { grid-template-columns: 1fr; gap: 12px; padding: 18px 0; } .kentaro-purpose__comparison-row > dt, .kentaro-purpose__comparison-row > dd { font-size: 1rem; } .kentaro-purpose__comparison-row > dd { padding-left: 0; border-left: 0; } .kentaro-purpose__paths { grid-template-columns: 1fr; } .kentaro-purpose__path { min-height: 112px; } }
 `
 
 function KentaroHome() {
@@ -226,7 +227,7 @@ function KentaroHome() {
             </figure>
             <div className="kentaro-character__copy">
               <p className="eyebrow">MEET KENTARO</p>
-              <h2 id="kentaro-character-title">Kentaro is an AI agent at work.</h2>
+              <h2 id="kentaro-character-title" className="kentaro-section-title">Kentaro is an AI agent at work.</h2>
               <p>Kentaro is the AI agent at the centre of these one-minute workplace stories. His job is to turn ordinary business instructions, documents and decisions into useful work.</p>
               <p>That sounds simple until the brief is unclear or the authority is missing. Kentaro takes the words literally and asks the questions people hoped would stay unasked.</p>
               <p>Before a difficult conversation, he straightens his purple badge. When he tilts his head, someone is about to explain an assumption they forgot to mention.</p>
@@ -242,7 +243,7 @@ function KentaroHome() {
             </figure>
             <div className="kentaro-purpose__content">
               <p className="eyebrow">WHY THESE STORIES</p>
-              <h2 id="kentaro-purpose-title">Clear to people.<br />Ambiguous to Kentaro.</h2>
+              <h2 id="kentaro-purpose-title" className="kentaro-section-title">Clear to people.<br />Ambiguous to Kentaro.</h2>
               <p className="kentaro-purpose__intro">Business people work through shared history, informal decisions and assumptions that rarely appear in a brief. Kentaro does not have that social memory.</p>
               <dl className="kentaro-purpose__comparison">
                 <div className="kentaro-purpose__comparison-labels" aria-hidden="true"><span>What people say</span><span>What Kentaro needs to know</span></div>
@@ -280,7 +281,7 @@ function KentaroHome() {
           <div className="container kentaro-harness__grid">
             <div className="kentaro-harness__heading">
               <p className="eyebrow">THE KENTARO HARNESS</p>
-              <h2 id="kentaro-harness-title">A working layer for shared context.</h2>
+              <h2 id="kentaro-harness-title" className="kentaro-section-title">A working layer for shared context.</h2>
               <p>Open-source, MIT-licensed and made for people and agents to work from shared context.</p>
             </div>
             <div className="kentaro-harness__copy">
@@ -300,7 +301,7 @@ function KentaroHome() {
           <div className="container">
             <div className="section-intro">
               <p className="eyebrow">KENTARO HARNESS ROADMAP</p>
-              <h2 id="kentaro-roadmap-title">From a business objective to evidence-backed delivery.</h2>
+              <h2 id="kentaro-roadmap-title" className="kentaro-section-title">From a business objective to evidence-backed delivery.</h2>
               <p className="section-copy">Kentaro harness starts as a local harness that turns products, objectives, and use cases into governed execution packages. Each next phase extends that proven foundation, first into Maysano, then into agent clients and approved execution runtimes.</p>
             </div>
             <ol className="kentaro-roadmap-grid kentaro-episode-grid" aria-label="Kentaro delivery roadmap" style={{ margin: 0, padding: 0, listStyle: 'none' }}>
@@ -323,7 +324,7 @@ function KentaroHome() {
             <div className="kentaro-follow__column kentaro-follow__column--updates" style={{ display: 'flex', flexDirection: 'column' }}>
               <p className="eyebrow">KEEP UP WITH KENTARO</p>
               <div className="kentaro-harness__copy" style={{ display: 'flex', flex: 1, flexDirection: 'column' }}>
-                <h2 id="kentaro-follow-title">Follow Kentaro’s next assignment.</h2>
+                <h2 id="kentaro-follow-title" className="kentaro-section-title">Follow Kentaro’s next assignment.</h2>
                 <p style={{ marginTop: 'auto' }}>New Kentaro stories and Harness development updates. Same reasonable questions.</p>
                 <KentaroUpdatesForm />
                 <small>A series by Maysano.</small>
@@ -332,7 +333,7 @@ function KentaroHome() {
             <div className="kentaro-follow__column kentaro-follow__column--harness" style={{ display: 'flex', flexDirection: 'column' }}>
               <p className="eyebrow">THE KENTARO HARNESS</p>
               <div className="kentaro-harness__copy" style={{ display: 'flex', flex: 1, flexDirection: 'column' }}>
-                <h2>Help build the Harness.</h2>
+                <h2 className="kentaro-section-title">Help build the Harness.</h2>
                 <p style={{ marginTop: 'auto' }}>Kentaro is open source, and contributions are welcome. Explore the Agentic Maysano Harness and help make human–agent collaboration clearer.</p>
                 <a className="button button--light" href={kentaroHarnessUrl} target="_blank" rel="noreferrer">Contribute on GitHub <span aria-hidden="true">↗</span></a>
               </div>
