@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import kentaroBadgeImage from '../assets/kentaro/kentaro-badge.png'
+import kentaroHarnessOfficeImage from '../assets/kentaro/kentaro-harness-office.png'
 import kentaroPaperMountainImage from '../assets/kentaro/kentaro-paper-mountain.png'
 import kentaroWorkplaceUncertaintyImage from '../assets/kentaro/kentaro-workplace-uncertainty.png'
 import { siteConfig } from '../config/site'
@@ -193,6 +194,46 @@ const kentaroPurposeStyles = `
   @media (max-width: 620px) { .kentaro-section-title.kentaro-section-title { font-size: clamp(2.35rem, 10vw, 3.15rem); } .kentaro-purpose { padding: 74px 0; } .kentaro-purpose__intro { font-size: 1.02rem; } .kentaro-purpose__comparison { margin-top: 34px; } .kentaro-purpose__comparison-labels { display: none; } .kentaro-purpose__comparison-row { grid-template-columns: 1fr; gap: 12px; padding: 18px 0; } .kentaro-purpose__comparison-row > dt, .kentaro-purpose__comparison-row > dd { font-size: 1rem; } .kentaro-purpose__comparison-row > dd { padding-left: 0; border-left: 0; } .kentaro-purpose__paths { grid-template-columns: 1fr; } .kentaro-purpose__path { min-height: 112px; } }
 `
 
+const kentaroHarnessAgreementStyles = `
+  .kentaro-harness-agreement { padding: clamp(84px, 10vw, 148px) 0; background: hsl(var(--navy)); color: #F4F6EE; }
+  .kentaro-harness-agreement > .container { width: min(1400px, calc(100% - 64px)); }
+  .kentaro-harness-agreement__layout { display: grid; grid-template-columns: minmax(360px, .82fr) minmax(0, 1fr); gap: clamp(64px, 9vw, 150px); align-items: start; }
+  .kentaro-harness-agreement .eyebrow { margin-bottom: 20px; color: #C2D897; }
+  .kentaro-harness-agreement .kentaro-section-title { max-width: 650px; color: #F4F6EE; }
+  .kentaro-harness-agreement__intro { max-width: 630px; margin: 0; color: #B7C0BF; font-size: clamp(1.05rem, 1.45vw, 1.22rem); line-height: 1.58; }
+  .kentaro-harness-agreement__visual { display: grid; grid-template-columns: minmax(0, 1fr) minmax(178px, .54fr); gap: clamp(20px, 3vw, 46px); align-items: end; margin: clamp(46px, 6vw, 80px) 0 0; }
+  .kentaro-harness-agreement__image { align-self: end; margin: 0; overflow: hidden; border-radius: 10px 10px 0 0; background: #132a3c; }
+  .kentaro-harness-agreement__image img { display: block; width: 100%; height: clamp(340px, 34vw, 510px); object-fit: cover; object-position: center 58%; }
+  .kentaro-harness-agreement__agreement { display: grid; gap: 0; margin: 0 0 clamp(8px, 2vw, 24px); padding: 0; list-style: none; }
+  .kentaro-harness-agreement__agreement li { position: relative; display: flex; align-items: center; gap: 14px; min-height: 84px; padding: 16px 0 16px 24px; border-top: 1px solid #455864; color: #F4F6EE; font-size: clamp(1.05rem, 1.5vw, 1.3rem); font-weight: 600; letter-spacing: -.03em; }
+  .kentaro-harness-agreement__agreement li:last-child { border-bottom: 1px solid #455864; }
+  .kentaro-harness-agreement__agreement li::before { position: absolute; left: 0; width: 9px; height: 9px; border-radius: 50%; background: #C2D897; content: ''; }
+  .kentaro-harness-agreement__agreement li:not(:last-child)::after { position: absolute; top: 50%; bottom: -50%; left: 4px; width: 1px; background: #C2D897; content: ''; }
+  .kentaro-harness-agreement__agreement svg { width: 29px; height: 29px; flex: 0 0 auto; color: #C2D897; }
+  .kentaro-harness-agreement__body { max-width: 710px; }
+  .kentaro-harness-agreement__body > p { max-width: 680px; margin: 4px 0 38px; color: #F4F6EE; font-size: clamp(1.18rem, 2vw, 1.55rem); line-height: 1.45; }
+  .kentaro-harness-agreement__rows { margin: 0; padding: 0; border-top: 1px solid #455864; }
+  .kentaro-harness-agreement__rows > div { display: grid; grid-template-columns: 42px minmax(0, 1fr); column-gap: 18px; padding: 25px 0; border-bottom: 1px solid #455864; }
+  .kentaro-harness-agreement__row-icon { display: grid; width: 40px; height: 40px; place-items: center; border: 1px solid #455864; border-radius: 50%; color: #C2D897; }
+  .kentaro-harness-agreement__row-icon svg { width: 22px; height: 22px; }
+  .kentaro-harness-agreement__rows dt { margin: 0 0 7px; color: #F4F6EE; font-size: clamp(1.15rem, 1.65vw, 1.42rem); font-weight: 600; letter-spacing: -.035em; line-height: 1.15; }
+  .kentaro-harness-agreement__rows dd { margin: 0; color: #B7C0BF; font-size: 1rem; line-height: 1.55; }
+  .kentaro-harness-agreement__roadmap { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px; align-items: end; margin-top: 34px; padding: clamp(24px, 3vw, 34px); border: 1px solid #455864; border-radius: 9px; background: #243d51; color: inherit; text-decoration: none; transition: border-color .2s ease, background-color .2s ease; }
+  .kentaro-harness-agreement__roadmap:hover { border-color: #C2D897; background: #294357; }
+  .kentaro-harness-agreement__roadmap .eyebrow { margin: 0 0 10px; }
+  .kentaro-harness-agreement__roadmap strong { display: block; color: #F4F6EE; font-size: clamp(1.35rem, 2.2vw, 1.85rem); letter-spacing: -.045em; line-height: 1.1; }
+  .kentaro-harness-agreement__roadmap p { margin: 11px 0 0; color: #B7C0BF; font-size: .98rem; line-height: 1.5; }
+  .kentaro-harness-agreement__progress { display: flex; align-items: center; gap: 0; margin-top: 25px; color: #C2D897; }
+  .kentaro-harness-agreement__progress span { display: block; width: 10px; height: 10px; border: 1px solid #C2D897; border-radius: 50%; background: hsl(var(--navy)); }
+  .kentaro-harness-agreement__progress span:first-child { background: #C2D897; }
+  .kentaro-harness-agreement__progress i { width: min(13vw, 92px); height: 1px; background: #B7C0BF; }
+  .kentaro-harness-agreement__roadmap-action { display: flex; align-items: center; gap: 16px; color: #C2D897; font-size: .95rem; font-weight: 700; white-space: nowrap; }
+  .kentaro-harness-agreement__arrow { display: grid; width: 56px; height: 56px; flex: 0 0 auto; place-items: center; border-radius: 50%; background: #C2D897; color: hsl(var(--navy)); font-size: 2rem; line-height: 1; transition: transform .2s ease; }
+  .kentaro-harness-agreement__roadmap:hover .kentaro-harness-agreement__arrow { transform: translateX(4px); }
+  @media (max-width: 900px) { .kentaro-harness-agreement__layout { grid-template-columns: 1fr; gap: 58px; } .kentaro-harness-agreement__left { max-width: 720px; } .kentaro-harness-agreement__visual { width: min(100%, 720px); } .kentaro-harness-agreement__body { max-width: 760px; } }
+  @media (max-width: 620px) { .kentaro-harness-agreement { padding: 78px 0; } .kentaro-harness-agreement > .container { width: min(100% - 40px, 1400px); } .kentaro-harness-agreement__visual { grid-template-columns: 1fr; gap: 20px; margin-top: 42px; } .kentaro-harness-agreement__image img { height: min(122vw, 510px); } .kentaro-harness-agreement__agreement { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin-bottom: 0; } .kentaro-harness-agreement__agreement li { min-height: 0; flex-direction: column; align-items: flex-start; gap: 9px; padding: 16px 10px 12px 19px; font-size: .94rem; } .kentaro-harness-agreement__agreement li::before { top: 21px; } .kentaro-harness-agreement__agreement li:not(:last-child)::after { top: 25px; right: -4px; bottom: auto; left: auto; width: 8px; } .kentaro-harness-agreement__agreement svg { width: 24px; height: 24px; } .kentaro-harness-agreement__body > p { margin-bottom: 30px; } .kentaro-harness-agreement__rows > div { grid-template-columns: 36px minmax(0, 1fr); column-gap: 13px; padding: 21px 0; } .kentaro-harness-agreement__row-icon { width: 34px; height: 34px; } .kentaro-harness-agreement__row-icon svg { width: 19px; height: 19px; } .kentaro-harness-agreement__roadmap { grid-template-columns: 1fr; gap: 20px; padding: 23px; } .kentaro-harness-agreement__roadmap-action { justify-content: space-between; } .kentaro-harness-agreement__progress i { width: min(15vw, 64px); } .kentaro-harness-agreement__arrow { width: 48px; height: 48px; font-size: 1.7rem; } }
+`
+
 function KentaroHome() {
   return (
     <>
@@ -276,27 +317,37 @@ function KentaroHome() {
           </div>
         </section>
         <EpisodeLibrary />
-        <section id="kentaro-harness" className="kentaro-harness section" aria-labelledby="kentaro-harness-title">
-          <div className="container kentaro-harness__grid">
-            <div className="kentaro-harness__heading">
+        <section id="kentaro-harness" className="kentaro-harness-agreement" aria-labelledby="kentaro-harness-title">
+          <style>{kentaroHarnessAgreementStyles}</style>
+          <div className="container kentaro-harness-agreement__layout">
+            <div className="kentaro-harness-agreement__left">
               <p className="eyebrow">THE KENTARO HARNESS</p>
-              <h2 id="kentaro-harness-title" className="kentaro-section-title">A working layer for shared context.</h2>
-              <p>Open-source, MIT-licensed and made for people and agents to work from shared context.</p>
+              <h2 id="kentaro-harness-title" className="kentaro-section-title">A working agreement<br />for people and agents.</h2>
+              <p className="kentaro-harness-agreement__intro">Kentaro turns business context into working context for an agent. It is open source, MIT licensed and built to work with Maysano.</p>
+              <div className="kentaro-harness-agreement__visual">
+                <figure className="kentaro-harness-agreement__image"><img src={kentaroHarnessOfficeImage} alt="Kentaro works calmly at a laptop in an office." width="1102" height="1427" loading="lazy" /></figure>
+                <ol className="kentaro-harness-agreement__agreement" aria-label="The Kentaro working agreement">
+                  <li><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><rect x="7" y="4.5" width="18" height="23" rx="2" /><path d="M11 11h10M11 16h10M11 21h7" /></svg>Context</li>
+                  <li><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><circle cx="16" cy="16" r="10" /><circle cx="16" cy="16" r="5" /><path d="m16 16 10-10" /></svg>Mandate</li>
+                  <li><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><circle cx="16" cy="10" r="4" /><path d="M8 27c.8-5 3.5-7.5 8-7.5s7.2 2.5 8 7.5M22 21l2.2 2.2L28 18.8" /></svg>Review</li>
+                </ol>
+              </div>
             </div>
-            <div className="kentaro-harness__copy">
-              <p>Kentaro is the open-source Agentic Maysano Harness for governed local execution. Phase 3 adds Codex, Claude Code and OpenCode as agent-client integrations on the same Kentaro core.</p>
-              <p>The Harness requires a Maysano Platform API key in every version. v0.1 uses the API read-only; v0.2 adds tested synchronisation of products, objectives and use cases.</p>
-              <ul className="kentaro-harness__principles">
-                <li><strong>Start from the same context</strong><span>Objectives, use cases, data products and evidence travel with the agent.</span></li>
-                <li><strong>Make decisions explicit</strong><span>Working rules, approved tools and human approval remain clear to people and the agent.</span></li>
-                <li><strong>Keep collaboration reviewable</strong><span>Maysano provides the user-facing platform, portfolio view and platform-hosted agents above the local Harness.</span></li>
-              </ul>
-              <p className="kentaro-harness__contribute"><strong>You can help too.</strong> Kentaro is open source, and contributions are welcome.</p>
-              <a className="button button--light" href={kentaroHarnessUrl} target="_blank" rel="noreferrer" aria-label="Contribute to Kentaro on GitHub">Contribute to Kentaro on GitHub <span aria-hidden="true">↗</span></a>
+            <div className="kentaro-harness-agreement__body">
+              <p>The Kentaro Harness is the working layer between a human business owner and an agent. It gives the agent a defined mandate, the context behind the work and a path for human review.</p>
+              <dl className="kentaro-harness-agreement__rows">
+                <div><span className="kentaro-harness-agreement__row-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="7" y="4.5" width="18" height="23" rx="2" /><path d="M11 11h10M11 16h10M11 21h7" /></svg></span><div><dt>Start from shared context</dt><dd>Objectives, use cases, data products and evidence travel with the agent.</dd></div></div>
+                <div><span className="kentaro-harness-agreement__row-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.8"><circle cx="16" cy="16" r="10" /><circle cx="16" cy="16" r="5" /><path d="m16 16 10-10" /></svg></span><div><dt>Make the mandate explicit</dt><dd>Scope, approved tools, decision rights and escalation stay clear.</dd></div></div>
+                <div><span className="kentaro-harness-agreement__row-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.8"><circle cx="16" cy="10" r="4" /><path d="M8 27c.8-5 3.5-7.5 8-7.5s7.2 2.5 8 7.5M22 21l2.2 2.2L28 18.8" /></svg></span><div><dt>Keep people accountable</dt><dd>People review consequential work and retain responsibility for the outcome.</dd></div></div>
+              </dl>
+              <a className="kentaro-harness-agreement__roadmap" href="#kentaro-roadmap">
+                <span><span className="eyebrow">NEXT</span><strong>See how Kentaro is being built</strong><p>Follow the roadmap from read-only context to agent-client integration.</p><span className="kentaro-harness-agreement__progress" aria-hidden="true"><span></span><i></i><span></span><i></i><span></span></span></span>
+                <span className="kentaro-harness-agreement__roadmap-action"><span>View the Kentaro roadmap</span><span className="kentaro-harness-agreement__arrow" aria-hidden="true">→</span></span>
+              </a>
             </div>
           </div>
         </section>
-        <section className="section" aria-labelledby="kentaro-roadmap-title" style={{ background: 'hsl(var(--secondary))' }}>
+        <section id="kentaro-roadmap" className="section" aria-labelledby="kentaro-roadmap-title" style={{ background: 'hsl(var(--secondary))' }}>
           <div className="container">
             <div className="section-intro">
               <p className="eyebrow">KENTARO HARNESS ROADMAP</p>
