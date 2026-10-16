@@ -347,9 +347,9 @@ function KentaroHome() {
         <section className="section" aria-labelledby="kentaro-roadmap-title" style={{ background: 'hsl(var(--secondary))' }}>
           <div className="container">
             <div className="section-intro">
-              <p className="eyebrow">KENTARO ROADMAP</p>
-              <h2 id="kentaro-roadmap-title">Prove the governed loop before expanding it.</h2>
-              <p className="section-copy">The plan starts with one complete local governed delivery journey, using the Maysano Platform API read-only. Platform synchronisation, agent-native tools, pluggable runtimes and enterprise operations follow only once that loop is proven.</p>
+              <p className="eyebrow">KENTARO HARNESS ROADMAP</p>
+              <h2 id="kentaro-roadmap-title">From a business objective to evidence-backed delivery.</h2>
+              <p className="section-copy">Kentaro harness starts as a local harness that turns products, objectives, and use cases into governed execution packages. Each next phase extends that proven foundation, first into Maysano, then into agent clients and approved execution runtimes.</p>
             </div>
             <ol className="kentaro-roadmap-grid kentaro-episode-grid" aria-label="Kentaro delivery roadmap" style={{ margin: 0, padding: 0, listStyle: 'none' }}>
               {kentaroRoadmap.map((phase) => (
