@@ -21,13 +21,12 @@ const episodeHref = (episode: KentaroEpisode) => `${kentaroBaseUrl}episodes/${ep
 const episodeNumber = (episode: KentaroEpisode) => `Episode ${String(episode.episodeNumber).padStart(2, '0')}`
 
 const kentaroRoadmap = [
-  { phase: 'Phase 0', title: 'Product foundation', summary: 'Establish the MIT-licensed GitHub project, package skeleton, release workflow, product schemas and a demonstrable reference use case.', status: 'Foundation', foundation: true },
+  { phase: 'Phase 0', title: 'Product foundation', summary: 'Establish the MIT-licensed GitHub project, package skeleton, release workflow, product schemas and a demonstrable reference use case.', status: 'Foundation' },
   { phase: 'Phase 1', title: 'v0.1 — Local governed Harness', summary: 'Publish kentaro-harness on PyPI. Initialise a Codex project, run the CLI from use case to execution, evidence and report, with local or cloud model configuration and a Maysano Platform API key.', status: 'Active build target', active: true },
   { phase: 'Phase 2', title: 'v0.2 — Maysano Platform synchronisation', summary: 'Expand the existing API connection with tested authenticated read and write synchronisation of products, objectives and use cases.', status: 'Planned' },
   { phase: 'Phase 3', title: 'v0.3 — Agent-native experience', summary: 'Add an MCP server, Codex integration, structured JSON, reusable templates, version history and stronger gates.', status: 'Planned' },
-  { phase: 'Phase 4', title: 'v0.4 — Local web experience', summary: 'Add a lightweight local web interface, guided model setup, visual evidence and managed local installation.', status: 'Planned' },
-  { phase: 'Phase 5', title: 'v0.5 — Pluggable runtimes', summary: 'Support optional execution runtimes while keeping governance, evidence and customer-controlled credentials comparable.', status: 'Planned' },
-  { phase: 'Phase 6', title: 'Maysano portfolio and enterprise operations', summary: 'Extend the proven API connection into portfolio decision-making, platform agents and organisation-level governance.', status: 'Planned' },
+  { phase: 'Phase 4', title: 'v0.4 — Pluggable runtimes', summary: 'Support optional execution runtimes while keeping governance, evidence and customer-controlled credentials comparable.', status: 'Planned' },
+  { phase: 'Phase 5', title: 'Maysano portfolio and enterprise operations', summary: 'Build the user-facing platform, portfolio view, platform-hosted agents and organisation-level governance above the proven Harness connection.', status: 'Planned' },
 ]
 
 type SortOrder = 'newest' | 'oldest'
@@ -305,13 +304,13 @@ function KentaroHome() {
               <p>Open-source, MIT-licensed and made for people and agents to work from shared context.</p>
             </div>
             <div className="kentaro-harness__copy">
-              <p>Kentaro uses the open-source Agentic Maysano Harness for working with Maysano through Codex, Claude Code and OpenCode.</p>
+              <p>Kentaro is the open-source Agentic Maysano Harness for governed local execution through Codex, Claude Code and OpenCode.</p>
               <p>The Harness requires a Maysano Platform API key in every version. v0.2 expands that connection with tested synchronisation of products, objectives and use cases.</p>
               <p>The episodes show what happens when Kentaro has to infer human intent alone. The Harness helps lift that friction by giving people and the agent the same business context, structured artefacts, working rules, approved tools and human approval boundaries.</p>
               <ul className="kentaro-harness__principles">
                 <li><strong>Start from the same context</strong><span>Objectives, use cases, data products and evidence travel with the agent.</span></li>
                 <li><strong>Make decisions explicit</strong><span>Working rules, approved tools and human approval remain clear to people and the agent.</span></li>
-                <li><strong>Keep collaboration reviewable</strong><span>Maysano Platform keeps the shared context, workflow state, approvals, evidence and audit trail.</span></li>
+                <li><strong>Keep collaboration reviewable</strong><span>Maysano provides the user-facing platform, portfolio view and platform-hosted agents above the local Harness.</span></li>
               </ul>
               <p className="kentaro-harness__contribute"><strong>You can help too.</strong> Kentaro is open source, and contributions are welcome.</p>
               <a className="button button--light" href={kentaroHarnessUrl} target="_blank" rel="noreferrer" aria-label="Contribute to Kentaro on GitHub">Contribute to Kentaro on GitHub <span aria-hidden="true">↗</span></a>
@@ -323,11 +322,11 @@ function KentaroHome() {
             <div className="section-intro">
               <p className="eyebrow">KENTARO ROADMAP</p>
               <h2 id="kentaro-roadmap-title">Prove the governed loop before expanding it.</h2>
-              <p className="section-copy">The plan starts with one complete local governed delivery journey, using a Maysano Platform API key. Platform synchronisation, agent-native tools, a usable local product, pluggable runtimes and enterprise operations follow only once that loop is proven.</p>
+              <p className="section-copy">The plan starts with one complete local governed delivery journey, using a Maysano Platform API key. Platform synchronisation, agent-native tools, pluggable runtimes and enterprise operations follow only once that loop is proven.</p>
             </div>
             <ol className="kentaro-roadmap-grid kentaro-episode-grid" aria-label="Kentaro delivery roadmap" style={{ margin: 0, padding: 0, listStyle: 'none' }}>
               {kentaroRoadmap.map((phase) => (
-                <li key={phase.phase} className="kentaro-roadmap-card kentaro-episode-card" style={phase.active ? { borderColor: 'hsl(var(--primary))', background: 'hsl(var(--accent))' } : phase.foundation ? { gridColumn: '1 / -1' } : undefined}>
+                <li key={phase.phase} className="kentaro-roadmap-card kentaro-episode-card" style={phase.active ? { borderColor: 'hsl(var(--primary))', background: 'hsl(var(--accent))' } : undefined}>
                   <div className="kentaro-episode-card__content">
                     <p className="kentaro-episode-card__number">{phase.phase}</p>
                     <h3>{phase.title}</h3>
