@@ -20,6 +20,15 @@ const kentaroHarnessUrl = 'https://github.com/Maysano/Kentaro'
 const episodeHref = (episode: KentaroEpisode) => `${kentaroBaseUrl}episodes/${episode.slug}/`
 const episodeNumber = (episode: KentaroEpisode) => `Episode ${String(episode.episodeNumber).padStart(2, '0')}`
 
+const kentaroRoadmap = [
+  { phase: 'Phase 0', title: 'Product foundation', summary: 'Establish the open-source product, core vocabulary, schemas and a demonstrable reference use case.', status: 'Foundation' },
+  { phase: 'Phase 1', title: 'v0.1 — Local governed Harness', summary: 'Ship the smallest complete loop: initialise a Codex project, run one governed use case, collect evidence and produce a report.', status: 'Active build target', active: true },
+  { phase: 'Phase 2', title: 'v0.2 — Agent-native experience', summary: 'Add MCP tools, structured JSON, reusable templates, versioned packages and stronger gates.', status: 'Planned' },
+  { phase: 'Phase 3', title: 'v0.3 — Usable local product', summary: 'Add a lightweight local interface, guided model setup and exportable evidence for non-developer operators.', status: 'Planned' },
+  { phase: 'Phase 4', title: 'v0.4 — Pluggable runtimes', summary: 'Support optional execution adapters while keeping governance and evidence comparable.', status: 'Planned' },
+  { phase: 'Phase 5', title: 'Maysano Platform connection', summary: 'Optionally connect approved packages and outcomes to portfolio-level decisions and platform agents.', status: 'Planned' },
+]
+
 type SortOrder = 'newest' | 'oldest'
 
 function KentaroStructuredData({ episode }: { episode?: KentaroEpisode }) {
@@ -306,6 +315,27 @@ function KentaroHome() {
               <p className="kentaro-harness__contribute"><strong>You can help too.</strong> Kentaro is open source, and contributions are welcome.</p>
               <a className="button button--light" href={kentaroHarnessUrl} target="_blank" rel="noreferrer" aria-label="Contribute to Kentaro on GitHub">Contribute to Kentaro on GitHub <span aria-hidden="true">↗</span></a>
             </div>
+          </div>
+        </section>
+        <section className="section" aria-labelledby="kentaro-roadmap-title" style={{ background: 'hsl(var(--secondary))' }}>
+          <div className="container">
+            <div className="section-intro">
+              <p className="eyebrow">KENTARO ROADMAP</p>
+              <h2 id="kentaro-roadmap-title">Prove the governed loop before expanding it.</h2>
+              <p className="section-copy">The plan starts with one complete local delivery journey. Agent-native tools, a usable local product, optional runtimes and the Maysano Platform connection follow only when that loop is proven.</p>
+            </div>
+            <ol className="kentaro-roadmap-grid kentaro-episode-grid" aria-label="Kentaro delivery roadmap" style={{ margin: 0, padding: 0, listStyle: 'none' }}>
+              {kentaroRoadmap.map((phase) => (
+                <li key={phase.phase} className="kentaro-roadmap-card kentaro-episode-card" style={phase.active ? { borderColor: 'hsl(var(--primary))', background: 'hsl(var(--accent))' } : undefined}>
+                  <div className="kentaro-episode-card__content">
+                    <p className="kentaro-episode-card__number">{phase.phase}</p>
+                    <h3>{phase.title}</h3>
+                    <p>{phase.summary}</p>
+                    <div className="kentaro-episode-card__meta"><span>{phase.status}</span></div>
+                  </div>
+                </li>
+              ))}
+            </ol>
           </div>
         </section>
         <section className="kentaro-character section" aria-labelledby="kentaro-character-title">
