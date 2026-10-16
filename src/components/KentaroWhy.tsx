@@ -133,7 +133,7 @@ export function KentaroWhyPage() {
         <BackgroundSection eyebrow="WHAT KENTARO EXPLORES" title="The stories make the tension visible.">
           <p>Kentaro’s one-minute office stories put an AI agent and a business owner in recognisable situations: taking ownership without authority; being expected to know a decision from a meeting; receiving data without objective or decision context; being challenged without a correction path; or seeing a recommendation treated as a decision while the accountable owner is absent.</p>
           <p>The stories do not teach theory directly. They surface the contradictions through comedy. Each episode ends with one practical principle for working with agents.</p>
-          <a className="text-link" href={`${kentaroBaseUrl}#episodes`}>Watch Kentaro’s stories <span aria-hidden="true">→</span></a>
+          <a className="text-link" href={`${kentaroBaseUrl}#featured-stories`}>Watch Kentaro’s stories <span aria-hidden="true">→</span></a>
         </BackgroundSection>
 
         <BackgroundSection eyebrow="FROM STORIES TO THE HARNESS" title="The solution is a clearer working relationship." tone="navy">

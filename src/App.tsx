@@ -32,7 +32,7 @@ export function AppContent({ pathname = '/', InsightRenderer, KentaroRenderer, K
     if (KentaroWhyRenderer) return <KentaroWhyRenderer />
     return <Suspense fallback={null}><KentaroWhyRoute /></Suspense>
   }
-  if (path === '/kentaro' || path.startsWith('/kentaro/episodes/')) {
+  if (path === '/kentaro') {
     if (KentaroRenderer) return <KentaroRenderer pathname={path} />
     return <Suspense fallback={null}><KentaroRoute pathname={path} /></Suspense>
   }

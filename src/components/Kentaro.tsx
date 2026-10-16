@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import '../styles/kentaro.css'
 import kentaroBadgeImage from '../assets/kentaro/kentaro-badge.webp'
 import kentaroHarnessOfficeImage from '../assets/kentaro/kentaro-harness-office.webp'
@@ -6,8 +5,6 @@ import kentaroPaperMountainImage from '../assets/kentaro/kentaro-paper-mountain.
 import kentaroWorkplaceUncertaintyImage from '../assets/kentaro/kentaro-workplace-uncertainty.webp'
 import { siteConfig } from '../config/site'
 import {
-  getKentaroEpisode,
-  kentaroEpisodes,
   publishedKentaroEpisodes,
   type KentaroEpisode,
 } from '../content/kentaroEpisodes'
@@ -17,17 +14,18 @@ import { KentaroUpdatesForm } from './KentaroUpdatesForm'
 
 const kentaroBaseUrl = `${siteConfig.siteUrl}kentaro/`
 const kentaroHarnessUrl = 'https://github.com/Maysano/Kentaro'
+const kentaroPlaylistUrl = 'https://www.youtube.com/playlist?list=PLCfcf0t6CobQ'
 const kentaroSocialImageUrl = `${siteConfig.siteUrl}og/kentaro-business-experience.jpg`
 const kentaroSocialImageAlt = 'Kentaro, an AI agent, and a business owner working together in an office.'
-const episodeHref = (episode: KentaroEpisode) => `${kentaroBaseUrl}episodes/${episode.slug}/`
 const episodeNumber = (episode: KentaroEpisode) => `Episode ${String(episode.episodeNumber).padStart(2, '0')}`
 const episodeStill = (episode: KentaroEpisode) => episode.thumbnail ?? (episode.episodeNumber % 2 === 0 ? kentaroPaperMountainImage : kentaroBadgeImage)
 const episodeStillAlt = (episode: KentaroEpisode) => episode.thumbnailAlt ?? 'Kentaro at work in an office.'
 const episodeFrictionLabels: Record<string, string> = {
-  'new-team-member': 'Friction: undefined role',
-  'the-data-is-there': 'Friction: data without purpose',
-  'one-small-extra-thing': 'Friction: scope without a renewed mandate',
+  'new-team-member': 'Undefined role',
+  'the-data-is-there': 'Data without purpose',
+  'one-small-extra-thing': 'Scope without a renewed mandate',
 }
+const featuredEpisodeSlugs = ['new-team-member', 'the-data-is-there', 'one-small-extra-thing']
 
 const kentaroRoadmap = [
   { phase: 'Phase 0', title: 'Product foundation', summary: 'Establish the MIT-licensed GitHub project, package skeleton, release workflow, product schemas and a demonstrable reference use case.', status: 'Foundation' },
@@ -50,165 +48,66 @@ const kentaroFollowPanelStyles = `
   }
 `
 
-function KentaroStructuredData({ episode }: { episode?: KentaroEpisode }) {
-  const url = episode ? episodeHref(episode) : kentaroBaseUrl
+function KentaroStructuredData() {
+  const url = kentaroBaseUrl
   const page = {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     '@id': `${url}#webpage`,
     url,
-    name: episode ? `${episode.title} | Kentaro at Work` : 'Kentaro | Maysano',
-    description: episode?.metaDescription ?? 'One-minute stories about an AI agent working with humans.',
-    image: episode?.socialImage ?? kentaroSocialImageUrl,
+    name: 'Kentaro | Maysano',
+    description: 'One-minute stories about an AI agent working with humans.',
+    image: kentaroSocialImageUrl,
     about: { '@type': 'Thing', name: 'Human-agent collaboration' },
     isPartOf: { '@id': `${siteConfig.siteUrl}#website` },
     inLanguage: 'en',
   }
 
-  if (!episode) return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(page) }} />
-
-  const article = {
-    '@context': 'https://schema.org',
-    '@type': 'BlogPosting',
-    '@id': `${url}#article`,
-    headline: episode.title,
-    description: episode.metaDescription,
-    image: episode.socialImage,
-    mainEntityOfPage: { '@id': `${url}#webpage` },
-    isPartOf: { '@id': `${kentaroBaseUrl}#webpage` },
-    publisher: { '@type': 'Organization', name: 'Maysano' },
-    inLanguage: 'en',
-  }
-  const breadcrumb = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: siteConfig.siteUrl },
-      { '@type': 'ListItem', position: 2, name: 'Kentaro at Work', item: kentaroBaseUrl },
-      { '@type': 'ListItem', position: 3, name: episode.title, item: url },
-    ],
-  }
-  const video = episode.youtubeVideoId && episode.publicationDate && episode.duration && episode.videoPoster
-    ? {
-        '@context': 'https://schema.org',
-        '@type': 'VideoObject',
-        name: episode.title,
-        description: episode.metaDescription,
-        thumbnailUrl: episode.videoPoster,
-        uploadDate: episode.publicationDate,
-        duration: episode.duration,
-        embedUrl: `https://www.youtube-nocookie.com/embed/${episode.youtubeVideoId}`,
-        contentUrl: episode.videoUrl,
-      }
-    : null
-
-  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify([page, article, breadcrumb, video].filter(Boolean)) }} />
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(page) }} />
 }
 
-function EpisodeMedia({ episode, playable = false, presentation = 'detail' }: { episode: KentaroEpisode; playable?: boolean; presentation?: 'detail' | 'card' }) {
-  const [isPlaying, setIsPlaying] = useState(false)
-  const still = episodeStill(episode)
-  const stillAlt = episodeStillAlt(episode)
-
-  if (!episode.youtubeVideoId) {
-    return (
-      <figure className={`kentaro-episode-media kentaro-episode-media--poster kentaro-episode-media--${presentation}`} style={{ aspectRatio: episode.videoAspectRatio }}>
-        <img src={still} alt={stillAlt} loading={presentation === 'detail' ? 'eager' : 'lazy'} />
-      </figure>
-    )
-  }
-
-  if (!playable || !isPlaying) {
-    return (
-      <button
-        className={`kentaro-episode-media kentaro-episode-media--ready kentaro-episode-media--${presentation}`}
-        style={{ aspectRatio: episode.videoAspectRatio }}
-        type="button"
-        aria-label={`Play ${episode.title}`}
-        onClick={() => setIsPlaying(true)}
-      >
-        <img src={still} alt={stillAlt} loading={presentation === 'detail' ? 'eager' : 'lazy'} />
-        <span className="kentaro-play-label">Play episode</span>
-      </button>
-    )
-  }
-
-  return (
-    <iframe
-      className={`kentaro-episode-media kentaro-episode-media--player kentaro-episode-media--${presentation}`}
-      style={{ aspectRatio: episode.videoAspectRatio }}
-      src={`https://www.youtube-nocookie.com/embed/${episode.youtubeVideoId}`}
-      title={`Kentaro: ${episode.title}`}
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      referrerPolicy="strict-origin-when-cross-origin"
-      allowFullScreen
-    />
-  )
-}
-
-function EpisodeCard({ episode }: { episode: KentaroEpisode }) {
-  const isPublished = episode.status === 'published'
+function FeaturedEpisodeCard({ episode }: { episode: KentaroEpisode }) {
   const frictionLabel = episodeFrictionLabels[episode.slug]
+  const content = <>
+    <figure className="kentaro-featured-card__image">
+      <img src={episodeStill(episode)} alt={episodeStillAlt(episode)} loading="lazy" />
+    </figure>
+    <div className="kentaro-featured-card__content">
+      <p className="kentaro-featured-card__number">{episodeNumber(episode)}</p>
+      <h3>{episode.title}</h3>
+      <p className="kentaro-featured-card__friction">{frictionLabel}</p>
+      <p className="kentaro-featured-card__description">{episode.description}</p>
+      {episode.videoUrl && <span className="kentaro-featured-card__watch">Watch on YouTube <span aria-hidden="true">▶ ↗</span></span>}
+    </div>
+  </>
 
-  return (
-    <article className={`kentaro-episode-card ${isPublished ? '' : 'kentaro-episode-card--coming-soon'}`}>
-      {episode.youtubeVideoId ? (
-        <EpisodeMedia episode={episode} playable presentation="card" />
-      ) : !isPublished ? (
-        <div className="kentaro-episode-card__media" aria-hidden="true">
-          <span className="kentaro-thumbnail-pending kentaro-thumbnail-pending--coming">
-            <small>{episodeNumber(episode)}</small>
-            <strong>Coming soon</strong>
-          </span>
-        </div>
-      ) : (
-        <a className="kentaro-episode-card__media" href={episodeHref(episode)} aria-label={`Open ${episode.title}`}>
-          {episode.thumbnail ? (
-            <img src={episode.thumbnail} alt={episode.thumbnailAlt ?? ''} loading="lazy" />
-          ) : (
-            <img src={episodeStill(episode)} alt={episodeStillAlt(episode)} loading="lazy" />
-          )}
-        </a>
-      )}
-      <div className="kentaro-episode-card__content">
-        <p className="kentaro-episode-card__number">{episodeNumber(episode)}</p>
-        <h3>{isPublished ? <a href={episodeHref(episode)}>{episode.title}</a> : episode.title}</h3>
-        {frictionLabel && <p className="kentaro-episode-card__friction">{frictionLabel}</p>}
-        {episode.description && <p>{episode.description}</p>}
-        <div className="kentaro-episode-card__meta">
-          {episode.duration && <span>{episode.duration}</span>}
-          {isPublished && <a className="kentaro-episode-card__watch" href={episodeHref(episode)}>Watch episode <span aria-hidden="true">→</span></a>}
-          {episode.status === 'comingSoon' && <span>Coming soon</span>}
-        </div>
-      </div>
-    </article>
-  )
+  if (!episode.videoUrl) return <article className="kentaro-featured-card">{content}</article>
+
+  return <a className="kentaro-featured-card kentaro-featured-card--linked" href={episode.videoUrl} target="_blank" rel="noreferrer" aria-label={`Watch ${episode.title} on YouTube`}>{content}</a>
 }
 
-function ClarityIcon({ item }: { item: keyof KentaroEpisode['clarityItems'] }) {
-  if (item === 'role') return <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><circle cx="16" cy="10" r="4" /><path d="M8 27c.8-5 3.5-7.5 8-7.5s7.2 2.5 8 7.5" /></svg>
-  if (item === 'scope') return <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><rect x="6" y="6" width="20" height="20" rx="2" /><path d="M11 16h10M16 11v10" /></svg>
-  if (item === 'approvalPoints') return <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><circle cx="16" cy="16" r="10" /><path d="m11 16 3.2 3.2L21.5 12" /></svg>
-  return <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><circle cx="16" cy="10" r="4" /><path d="M8 27c.8-5 3.5-7.5 8-7.5s7.2 2.5 8 7.5M23 8v8M19 12h8" /></svg>
-}
-
-function EpisodeLibrary() {
-  const featuredEpisodes = [...publishedKentaroEpisodes]
-    .sort((a, b) => b.episodeNumber - a.episodeNumber)
+function FeaturedStories() {
+  const featuredEpisodes = featuredEpisodeSlugs
+    .map((slug) => publishedKentaroEpisodes.find((episode) => episode.slug === slug))
+    .filter((episode): episode is KentaroEpisode => Boolean(episode))
 
   return (
-    <section className="kentaro-library section" id="episodes" aria-labelledby="kentaro-episodes-title">
+    <section className="kentaro-featured-stories section" id="featured-stories" aria-labelledby="featured-stories-title">
       <div className="container">
         <div className="section-intro">
-          <p className="eyebrow">THE FRICTION, EPISODE BY EPISODE</p>
-          <h2 id="kentaro-episodes-title" className="kentaro-section-title">One-minute stories about work that was never made clear.</h2>
-          <p className="section-copy">Kentaro does not fail because he lacks effort. He fails because the work arrives without the context, mandate or decision path it needs. Each episode makes one of those gaps visible.</p>
-          <a className="kentaro-library__harness-link" href="#kentaro-harness">See how Kentaro Harness is being built to reduce this friction <span aria-hidden="true">→</span></a>
+          <p className="eyebrow">FEATURED EPISODES</p>
+          <h2 id="featured-stories-title" className="kentaro-section-title">The friction, episode by episode.</h2>
+          <p className="section-copy">Kentaro does not fail because he lacks effort. He gets stuck when work arrives without the context, mandate or decision path it needs. These short office stories make one missing part of the working relationship visible at a time.</p>
+          <a className="kentaro-featured-stories__harness-link" href="#kentaro-harness">Explore Kentaro Harness <span aria-hidden="true">→</span></a>
         </div>
-        <p className="eyebrow kentaro-library__grid-label">THE WORKPLACE PROBLEMS KENTARO EXPOSES</p>
-        <div className="kentaro-episode-grid">
-          {featuredEpisodes.map((episode) => <EpisodeCard key={episode.id} episode={episode} />)}
+        <div className="kentaro-featured-stories__grid">
+          {featuredEpisodes.map((episode) => <FeaturedEpisodeCard key={episode.id} episode={episode} />)}
         </div>
+        <a className="kentaro-featured-stories__playlist" href={kentaroPlaylistUrl} target="_blank" rel="noreferrer">
+          <span className="kentaro-featured-stories__playlist-icon" aria-hidden="true">▶</span>
+          <span><span className="eyebrow">ALL EPISODES</span><strong>Watch the full Kentaro series on YouTube.</strong><span>Follow Kentaro’s workplace stories as new episodes are released.</span></span>
+          <span className="kentaro-featured-stories__playlist-action">Open the Kentaro YouTube playlist <span aria-hidden="true">→</span></span>
+        </a>
       </div>
     </section>
   )
@@ -307,7 +206,7 @@ function KentaroHome() {
               <p className="kentaro-hero__lead">Kentaro’s one-minute stories reveal the friction between business people and AI agents.<br />Unclear mandates. Missing context. Authority without accountability.</p>
               <p className="kentaro-hero__supporting">Kentaro Harness is being built to reduce that friction, giving people and agents a clearer way to work together.</p>
               <div className="kentaro-hero__actions">
-                <a className="button button--light" href="#episodes">Watch Kentaro stories <span aria-hidden="true">↓</span></a>
+                <a className="button button--light" href="#featured-stories">Watch Kentaro stories <span aria-hidden="true">↓</span></a>
                 <a className="text-link text-link--light" href="#kentaro-harness">Explore Kentaro Harness <span aria-hidden="true">↓</span></a>
               </div>
             </div>
@@ -358,7 +257,7 @@ function KentaroHome() {
               </dl>
               <p className="kentaro-purpose__bridge">The stories show this friction. Kentaro Harness gives people and agents a clearer way to work through it.</p>
               <nav className="kentaro-purpose__paths" aria-label="Explore Kentaro stories or Harness">
-                <a className="kentaro-purpose__path" href="#episodes">
+                <a className="kentaro-purpose__path" href="#featured-stories">
                   <span className="kentaro-purpose__path-icon" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.6"><rect x="4.5" y="9" width="39" height="30" rx="3" /><path d="m21 18 10 6-10 6v-12Z" fill="currentColor" stroke="none" /></svg></span>
                   <span className="kentaro-purpose__path-copy"><strong>Watch the stories</strong><span>See the friction play out in one-minute office stories.</span></span>
                   <span className="kentaro-purpose__path-arrow" aria-hidden="true">→</span>
@@ -372,7 +271,7 @@ function KentaroHome() {
             </div>
           </div>
         </section>
-        <EpisodeLibrary />
+        <FeaturedStories />
         <section id="kentaro-harness" className="kentaro-harness-agreement" aria-labelledby="kentaro-harness-title">
           <style>{kentaroHarnessAgreementStyles}</style>
           <div className="container kentaro-harness-agreement__layout">
@@ -534,107 +433,8 @@ const kentaroEpisodePageStyles = `
   }
 `
 
-function KentaroEpisodePage({ episode }: { episode: KentaroEpisode }) {
-  const previous = episode.previousEpisode ? getKentaroEpisode(episode.previousEpisode) : null
-  const next = episode.nextEpisode ? getKentaroEpisode(episode.nextEpisode) : null
-  const clarityLabels: Array<[keyof KentaroEpisode['clarityItems'], string]> = [
-    ['role', 'Role'],
-    ['scope', 'Scope'],
-    ['approvalPoints', 'Approval points'],
-    ['accountableOwner', 'Accountable owner'],
-  ]
-
-  return (
-    <>
-      <KentaroStructuredData episode={episode} />
-      <a className="skip-link" href="#main-content">Skip to content</a>
-      <Header activePath="kentaro" />
-      <main id="main-content">
-        <article className="kentaro-episode-page">
-          <style>{kentaroEpisodePageStyles}</style>
-          <header className="kentaro-episode-page__hero">
-            <div className="container kentaro-episode-page__hero-grid">
-              <div className="kentaro-episode-page__hero-copy">
-                <a className="kentaro-back" href={kentaroBaseUrl}>Back to Kentaro at Work <span aria-hidden="true">→</span></a>
-                <p className="eyebrow">{episodeNumber(episode)}</p>
-                <h1>{episode.title}</h1>
-                <p className="kentaro-episode-page__summary">{episode.description}</p>
-              </div>
-              <div className="kentaro-episode-page__video">
-                <EpisodeMedia episode={episode} playable />
-              </div>
-            </div>
-          </header>
-          <section className="kentaro-episode-scene" aria-labelledby="episode-scene-title">
-            <div className="container kentaro-episode-scene__grid">
-              <div>
-                <p className="eyebrow kentaro-episode-page__eyebrow">THE SCENE</p>
-                <h2 id="episode-scene-title" className="kentaro-episode-page__heading">{episode.sceneHeading}</h2>
-                <dl className="kentaro-episode-dialogue">
-                  <div><dt>Business owner</dt><dd>“{episode.sceneDialogueBusinessOwner}”</dd></div>
-                  <div><dt>Kentaro</dt><dd>“{episode.sceneDialogueKentaro}”</dd></div>
-                </dl>
-              </div>
-              <div className="kentaro-episode-scene__copy"><p>{episode.story.situation}</p></div>
-            </div>
-          </section>
-          <section className="kentaro-episode-problem" aria-labelledby="episode-problem-title">
-            <div className="container kentaro-episode-problem__inner">
-              <p className="eyebrow kentaro-episode-page__eyebrow">THE HIDDEN PROBLEM</p>
-              <h2 id="episode-problem-title" className="kentaro-episode-page__heading">{episode.problemHeading}</h2>
-              <div className="kentaro-episode-problem__copy"><p>{episode.problemText[0]}</p><p>{episode.problemText[1]}</p></div>
-              <blockquote className="kentaro-episode-pullquote">“{episode.pullQuote}”</blockquote>
-            </div>
-          </section>
-          <section className="kentaro-episode-clarity" aria-labelledby="episode-clarity-title">
-            <div className="container">
-              <div className="kentaro-episode-clarity__header">
-                <div><p className="eyebrow kentaro-episode-page__eyebrow">BEFORE THE AGENT STARTS</p><h2 id="episode-clarity-title" className="kentaro-episode-page__heading">{episode.story.principleTitle}</h2></div>
-              </div>
-              <div className="kentaro-episode-clarity__grid">
-                {clarityLabels.map(([key, label]) => <div className="kentaro-episode-clarity__item" key={key}><ClarityIcon item={key} /><h3>{label}</h3><p>{episode.clarityItems[key]}</p></div>)}
-              </div>
-              <p className="kentaro-episode-clarity__principle">{episode.story.principleExplanation}</p>
-            </div>
-          </section>
-          <section className="kentaro-episode-harness" aria-labelledby="episode-harness-title">
-            <div className="container kentaro-episode-harness__grid">
-              <div>
-                <p className="eyebrow kentaro-episode-page__eyebrow">FROM STORY TO HARNESS</p>
-                <h2 id="episode-harness-title" className="kentaro-episode-page__heading">{episode.harnessHeading}</h2>
-                <p className="kentaro-episode-harness__copy">{episode.story.harness}</p>
-                <div className="kentaro-episode-harness__links">
-                  <a href={`${kentaroBaseUrl}#kentaro-harness`}>Explore Kentaro Harness <span aria-hidden="true">→</span></a>
-                  <a href={`${kentaroBaseUrl}#kentaro-roadmap`}>See how Kentaro is being built <span aria-hidden="true">→</span></a>
-                  <a href={`${kentaroBaseUrl}why-kentaro-exists/`}>Why Kentaro exists <span aria-hidden="true">→</span></a>
-                </div>
-              </div>
-              <div className="kentaro-episode-topics" aria-label="Relevant Kentaro Harness topics">{episode.harnessTopics.map((topic) => <span key={topic}>{topic}</span>)}</div>
-            </div>
-          </section>
-          <section className="kentaro-episode-continue" aria-label="Continue watching Kentaro stories">
-            <nav className="container kentaro-episode-continue__grid" aria-label="Adjacent episodes">
-              {previous && <a className="kentaro-episode-continue__item" href={episodeHref(previous)}><small>Previous story</small><strong>{previous.title} <span aria-hidden="true">←</span></strong></a>}
-              {next && <a className="kentaro-episode-continue__item" href={episodeHref(next)}><small>Next story</small><strong>{next.title} <span aria-hidden="true">→</span></strong></a>}
-              <a className="kentaro-episode-continue__item" href={kentaroBaseUrl}><small>All stories</small><strong>Back to Kentaro at Work <span aria-hidden="true">→</span></strong></a>
-            </nav>
-          </section>
-        </article>
-      </main>
-      <Footer />
-    </>
-  )
-}
-
-export function KentaroPage({ pathname }: { pathname: string }) {
-  const match = pathname.match(/^\/kentaro\/episodes\/([^/]+)$/)
-  const episode = match ? getKentaroEpisode(match[1]) : undefined
-
-  if (episode) return <KentaroEpisodePage episode={episode} />
+export function KentaroPage(_: { pathname: string }) {
   return <KentaroHome />
 }
 
-export const kentaroRoutePaths = [
-  '/kentaro/',
-  ...kentaroEpisodes.map((episode) => `/kentaro/episodes/${episode.slug}/`),
-]
+export const kentaroRoutePaths = ['/kentaro/']

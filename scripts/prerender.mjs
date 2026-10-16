@@ -20,17 +20,6 @@ if (!template.includes(rootMarker)) {
   throw new Error(`Unable to find the application root in ${outputPath.replace(projectRoot, '')}`)
 }
 
-const kentaroEpisodes = [
-  ['ownership-apparently', 'Ownership, Apparently', 'Kentaro is told to take ownership. Nobody gives him authority to decide.'],
-  ['meeting-he-wasnt-in', 'The Meeting He Wasn’t In', 'The answer exists. It was discussed in a meeting Kentaro never attended.'],
-  ['brief-that-wasnt', 'The Brief That Wasn’t', 'Kentaro has data, tools, and a deadline. He still does not know what success means.'],
-  ['can-you-fix-it', 'Can You Fix It?', 'Everyone agrees Kentaro’s output is wrong. Nobody can explain what the right answer is.'],
-  ['approved-by-nobody', 'Approved by Nobody', 'A recommendation turns into a decision because the responsible owner is absent.'],
-  ['one-small-extra-thing', 'One Small Extra Thing', 'A small request becomes a large task, but Kentaro’s mandate never changes.'],
-  ['the-data-is-there', 'The Data Is There', 'Kentaro has access to the data. He does not know why the business needs it.'],
-  ['new-team-member', 'The New Team Member', 'Kentaro has joined the team. The team has not agreed what role he has.'],
-]
-
 const kentaroOgImage = 'https://maysano.com/og/kentaro-business-experience.jpg'
 const kentaroOgImageAlt = 'Kentaro, an AI agent, and a business owner working together in an office.'
 const kentaroHeroAlt = 'Kentaro navigates workplace uncertainty across meetings, requests and paperwork.'
@@ -90,19 +79,6 @@ const pages = [
     routeStyle: 'kentaro',
     assetPrefix: '../../',
   },
-  ...kentaroEpisodes.map(([slug, title, description]) => ({
-    pathname: `/kentaro/episodes/${slug}/`,
-    outputPath: `${outputDirectory}kentaro/episodes/${slug}/index.html`,
-    title: `${title} | Kentaro at Work`,
-    description,
-    canonical: `https://maysano.com/kentaro/episodes/${slug}/`,
-    ogType: 'article',
-    ogImage: kentaroOgImage,
-    ogImageAlt: kentaroOgImageAlt,
-    ogImageType: 'image/jpeg',
-    routeStyle: 'kentaro',
-    assetPrefix: '../../../',
-  })),
   {
     pathname: '/insights/data-catalog-vs-data-product-portfolio-management/',
     outputPath: `${outputDirectory}insights/data-catalog-vs-data-product-portfolio-management/index.html`,

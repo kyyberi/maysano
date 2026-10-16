@@ -125,12 +125,33 @@
   line-height: 1.7;
 }
 
-.kentaro-library { background: hsl(var(--background)); }
-
-.kentaro-library .section-intro { max-width: 760px; margin-bottom: 30px; }
-.kentaro-library__harness-link { display: inline-flex; align-items: center; gap: 7px; margin-top: 22px; color: hsl(var(--primary)); font-size: .88rem; font-weight: 700; text-decoration: none; }
-.kentaro-library__harness-link:hover { color: hsl(var(--heading)); text-decoration: underline; text-underline-offset: 5px; }
-.kentaro-library__grid-label { margin: 0 0 15px; color: hsl(var(--primary)); }
+.kentaro-featured-stories { background: hsl(var(--background)); }
+.kentaro-featured-stories .section-intro { max-width: 800px; margin-bottom: 38px; }
+.kentaro-featured-stories__harness-link { display: inline-flex; align-items: center; gap: 7px; margin-top: 22px; color: hsl(var(--primary)); font-size: .88rem; font-weight: 700; text-decoration: none; }
+.kentaro-featured-stories__harness-link:hover { color: hsl(var(--heading)); text-decoration: underline; text-underline-offset: 5px; }
+.kentaro-featured-stories__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 2vw, 30px); }
+.kentaro-featured-card { display: block; min-width: 0; color: inherit; text-decoration: none; }
+.kentaro-featured-card__image { position: relative; margin: 0; overflow: hidden; border: 1px solid hsl(var(--border)); border-radius: 11px; background: hsl(var(--navy)); transition: border-color .2s ease; }
+.kentaro-featured-card__image img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+.kentaro-featured-card__content { padding: 18px 1px 0; }
+.kentaro-featured-card__number { margin: 0 0 9px; color: hsl(var(--primary)); font-size: .66rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.kentaro-featured-card h3 { margin: 0 0 7px; color: hsl(var(--heading)); font-size: clamp(1.18rem, 1.55vw, 1.42rem); letter-spacing: -.045em; line-height: 1.12; }
+.kentaro-featured-card__friction { margin: 0 0 10px; color: #789452; font-size: .72rem; font-weight: 700; letter-spacing: .04em; line-height: 1.4; }
+.kentaro-featured-card__description { margin: 0; color: hsl(var(--muted-foreground)); font-size: .9rem; line-height: 1.52; }
+.kentaro-featured-card__watch { display: inline-flex; gap: 8px; margin-top: 15px; color: hsl(var(--primary)); font-size: .78rem; font-weight: 700; }
+.kentaro-featured-card--linked:hover .kentaro-featured-card__image { border-color: hsl(var(--primary)); }
+.kentaro-featured-card--linked:hover .kentaro-featured-card__watch span { transform: translateX(3px); }
+.kentaro-featured-card--linked .kentaro-featured-card__watch span { transition: transform .2s ease; }
+.kentaro-featured-stories__playlist { display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; align-items: center; gap: 20px; min-height: 142px; margin-top: clamp(42px, 5vw, 68px); padding: 27px clamp(24px, 3vw, 38px); border: 1px solid #455864; border-radius: 10px; background: #243A4B; color: #F4F6EE; text-decoration: none; transition: border-color .2s ease, background-color .2s ease; }
+.kentaro-featured-stories__playlist:hover { border-color: #C2D897; background: #294357; }
+.kentaro-featured-stories__playlist-icon { display: grid; width: 42px; height: 30px; place-items: center; border-radius: 7px; background: #F4F6EE; color: #1C3245; font-size: .9rem; }
+.kentaro-featured-stories__playlist .eyebrow { display: block; margin: 0 0 8px; color: #C2D897; }
+.kentaro-featured-stories__playlist strong, .kentaro-featured-stories__playlist > span:nth-child(2) > span:last-child { display: block; }
+.kentaro-featured-stories__playlist strong { font-size: clamp(1.25rem, 2vw, 1.62rem); letter-spacing: -.045em; line-height: 1.15; }
+.kentaro-featured-stories__playlist > span:nth-child(2) > span:last-child { margin-top: 7px; color: #B7C0BF; font-size: .92rem; }
+.kentaro-featured-stories__playlist-action { display: inline-flex; align-items: center; gap: 11px; color: #C2D897; font-size: .86rem; font-weight: 700; white-space: nowrap; }
+.kentaro-featured-stories__playlist-action span { display: grid; width: 38px; height: 38px; place-items: center; border-radius: 50%; background: #C2D897; color: #1C3245; font-size: 1.35rem; transition: transform .2s ease; }
+.kentaro-featured-stories__playlist:hover .kentaro-featured-stories__playlist-action span { transform: translateX(3px); }
 
 .kentaro-episode-grid {
   display: grid;
@@ -286,6 +307,7 @@
 
 @media (max-width: 1100px) {
   .kentaro-hero__grid { grid-template-columns: minmax(0, 0.98fr) minmax(360px, 0.82fr); gap: 42px; }
+  .kentaro-featured-stories__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .kentaro-episode-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
@@ -317,6 +339,9 @@
   .kentaro-purpose__heading h2 { font-size: clamp(2.25rem, 10vw, 3.1rem); }
   .kentaro-purpose__copy > p { font-size: 0.98rem; }
   .kentaro-harness { padding: 78px 0; }
+  .kentaro-featured-stories__grid { grid-template-columns: 1fr; }
+  .kentaro-featured-stories__playlist { grid-template-columns: 38px minmax(0, 1fr); align-items: start; gap: 16px; min-height: 0; }
+  .kentaro-featured-stories__playlist-action { grid-column: 1 / -1; justify-content: space-between; }
   .kentaro-episode-grid { grid-template-columns: 1fr; }
   .kentaro-thumbnail-pending { min-height: 150px; }
   .kentaro-character__copy h2,
