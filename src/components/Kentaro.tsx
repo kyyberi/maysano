@@ -103,11 +103,18 @@ function FeaturedStories() {
         <div className="kentaro-featured-stories__grid">
           {featuredEpisodes.map((episode) => <FeaturedEpisodeCard key={episode.id} episode={episode} />)}
         </div>
-        <a className="kentaro-featured-stories__playlist" href={kentaroPlaylistUrl} target="_blank" rel="noreferrer">
-          <span className="kentaro-featured-stories__playlist-icon" aria-hidden="true">▶</span>
-          <span><span className="eyebrow">ALL EPISODES</span><strong>Watch the full Kentaro series on YouTube.</strong><span>Follow Kentaro’s workplace stories as new episodes are released.</span></span>
-          <span className="kentaro-featured-stories__playlist-action">Open the Kentaro YouTube playlist <span aria-hidden="true">→</span></span>
-        </a>
+        <div className="kentaro-featured-stories__destinations" aria-label="Continue with Kentaro stories or Harness">
+          <a className="kentaro-featured-stories__destination" href={kentaroPlaylistUrl} target="_blank" rel="noreferrer">
+            <span className="kentaro-featured-stories__destination-icon" aria-hidden="true">▶</span>
+            <span><span className="eyebrow">ALL EPISODES</span><strong>Watch the full Kentaro series on YouTube.</strong><span>More funny, yet painful, workplace stories as new episodes are released.</span></span>
+            <span className="kentaro-featured-stories__destination-action">Open the YouTube playlist <span aria-hidden="true">→</span></span>
+          </a>
+          <a className="kentaro-featured-stories__destination kentaro-featured-stories__destination--harness" href="#kentaro-harness">
+            <span className="kentaro-featured-stories__destination-icon" aria-hidden="true">✓</span>
+            <span><span className="eyebrow">THE SOLUTION</span><strong>Take the Harness and avoid the trouble.</strong><span>Give people and agents shared context, a clear mandate and a path for review.</span></span>
+            <span className="kentaro-featured-stories__destination-action">Explore Kentaro Harness <span aria-hidden="true">→</span></span>
+          </a>
+        </div>
       </div>
     </section>
   )

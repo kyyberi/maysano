@@ -4,8 +4,7 @@
 
 .kentaro-background__callout{display:grid;gap:10px;margin:38px 0;padding:clamp(25px,4vw,42px);border-left:3px solid hsl(var(--lime));background:hsl(var(--navy-foreground) / .07)}.kentaro-background__callout strong{font-size:clamp(1.28rem,2vw,1.7rem)}.kentaro-background__source-links,.kentaro-background__actions{display:flex;flex-wrap:wrap;gap:15px 22px;margin-top:32px}.kentaro-background__definitions{margin:34px 0;padding:0;list-style:none}.kentaro-background__definitions>div{padding:16px 0;border-top:1px solid hsl(var(--border))}.kentaro-background__definitions dd{margin:4px 0 0}.kentaro-relationship{display:grid;grid-template-columns:1fr 1.1fr 1fr;margin:42px 0 0;border:1px solid hsl(var(--border));text-align:center}.kentaro-relationship__person,.kentaro-relationship__harness{display:grid;gap:8px;align-content:center;min-height:132px;padding:18px}.kentaro-relationship__harness{background:hsl(var(--navy));color:hsl(var(--lime))}.kentaro-relationship small{font-size:.68rem}.kentaro-relationship figcaption{grid-column:1/-1;padding:12px;border-top:1px solid hsl(var(--border));font-size:.77rem}.kentaro-background__reference-list{display:grid;gap:12px;max-width:720px;padding-left:22px;line-height:1.5}
 
-.kentaro-hero,
-.kentaro-episode-page__hero {
+.kentaro-hero {
   overflow: hidden;
   background: hsl(var(--navy));
   color: hsl(var(--navy-foreground));
@@ -23,11 +22,9 @@
 .kentaro-hero__copy { max-width: 620px; }
 .kentaro-hero .eyebrow,
 .kentaro-follow .eyebrow,
-.kentaro-harness .eyebrow,
-.kentaro-episode-page__hero .eyebrow { color: hsl(var(--lime)); }
+.kentaro-harness .eyebrow { color: hsl(var(--lime)); }
 
-.kentaro-hero h1,
-.kentaro-episode-page__hero h1 {
+.kentaro-hero h1 {
   margin: 0 0 25px;
   color: hsl(var(--navy-foreground));
   font-size: clamp(3rem, 5vw, 5.15rem);
@@ -142,16 +139,18 @@
 .kentaro-featured-card--linked:hover .kentaro-featured-card__image { border-color: hsl(var(--primary)); }
 .kentaro-featured-card--linked:hover .kentaro-featured-card__watch span { transform: translateX(3px); }
 .kentaro-featured-card--linked .kentaro-featured-card__watch span { transition: transform .2s ease; }
-.kentaro-featured-stories__playlist { display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; align-items: center; gap: 20px; min-height: 142px; margin-top: clamp(42px, 5vw, 68px); padding: 27px clamp(24px, 3vw, 38px); border: 1px solid #455864; border-radius: 10px; background: #243A4B; color: #F4F6EE; text-decoration: none; transition: border-color .2s ease, background-color .2s ease; }
-.kentaro-featured-stories__playlist:hover { border-color: #C2D897; background: #294357; }
-.kentaro-featured-stories__playlist-icon { display: grid; width: 42px; height: 30px; place-items: center; border-radius: 7px; background: #F4F6EE; color: #1C3245; font-size: .9rem; }
-.kentaro-featured-stories__playlist .eyebrow { display: block; margin: 0 0 8px; color: #C2D897; }
-.kentaro-featured-stories__playlist strong, .kentaro-featured-stories__playlist > span:nth-child(2) > span:last-child { display: block; }
-.kentaro-featured-stories__playlist strong { font-size: clamp(1.25rem, 2vw, 1.62rem); letter-spacing: -.045em; line-height: 1.15; }
-.kentaro-featured-stories__playlist > span:nth-child(2) > span:last-child { margin-top: 7px; color: #B7C0BF; font-size: .92rem; }
-.kentaro-featured-stories__playlist-action { display: inline-flex; align-items: center; gap: 11px; color: #C2D897; font-size: .86rem; font-weight: 700; white-space: nowrap; }
-.kentaro-featured-stories__playlist-action span { display: grid; width: 38px; height: 38px; place-items: center; border-radius: 50%; background: #C2D897; color: #1C3245; font-size: 1.35rem; transition: transform .2s ease; }
-.kentaro-featured-stories__playlist:hover .kentaro-featured-stories__playlist-action span { transform: translateX(3px); }
+.kentaro-featured-stories__destinations { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: clamp(42px, 5vw, 68px); }
+.kentaro-featured-stories__destination { display: grid; grid-template-columns: 42px minmax(0, 1fr); grid-template-rows: auto auto; align-items: start; column-gap: 18px; row-gap: 19px; min-height: 196px; padding: 27px clamp(24px, 3vw, 34px); border: 1px solid #455864; border-radius: 10px; background: #243A4B; color: #F4F6EE; text-decoration: none; transition: border-color .2s ease, background-color .2s ease; }
+.kentaro-featured-stories__destination:hover { border-color: #C2D897; background: #294357; }
+.kentaro-featured-stories__destination-icon { display: grid; width: 42px; height: 30px; place-items: center; border-radius: 7px; background: #F4F6EE; color: #1C3245; font-size: .9rem; }
+.kentaro-featured-stories__destination--harness .kentaro-featured-stories__destination-icon { width: 36px; height: 36px; border-radius: 50%; background: #C2D897; font-size: 1.1rem; }
+.kentaro-featured-stories__destination .eyebrow { display: block; margin: 0 0 8px; color: #C2D897; }
+.kentaro-featured-stories__destination strong, .kentaro-featured-stories__destination > span:nth-child(2) > span:last-child { display: block; }
+.kentaro-featured-stories__destination strong { font-size: clamp(1.2rem, 1.9vw, 1.54rem); letter-spacing: -.045em; line-height: 1.15; }
+.kentaro-featured-stories__destination > span:nth-child(2) > span:last-child { margin-top: 7px; color: #B7C0BF; font-size: .9rem; line-height: 1.48; }
+.kentaro-featured-stories__destination-action { grid-column: 1 / -1; display: inline-flex; align-items: center; justify-content: space-between; gap: 11px; color: #C2D897; font-size: .84rem; font-weight: 700; }
+.kentaro-featured-stories__destination-action span { display: grid; width: 38px; height: 38px; place-items: center; border-radius: 50%; background: #C2D897; color: #1C3245; font-size: 1.35rem; transition: transform .2s ease; }
+.kentaro-featured-stories__destination:hover .kentaro-featured-stories__destination-action span { transform: translateX(3px); }
 
 .kentaro-episode-grid {
   display: grid;
@@ -288,22 +287,8 @@
 .kentaro-follow > .container > p:not(.eyebrow) { margin: 0 0 30px; color: hsl(var(--navy-foreground) / 0.76); font-size: 1.08rem; }
 .kentaro-follow small { display: block; margin-top: 24px; color: hsl(var(--navy-foreground) / 0.62); font-size: 0.78rem; }
 
-.kentaro-episode-page__hero { padding: 34px 0 76px; }
-.kentaro-back { display: inline-block; margin-bottom: 62px; padding-bottom: 3px; border-bottom: 1px solid hsl(var(--lime)); color: hsl(var(--lime)); font-size: 0.82rem; font-weight: 700; }
-.kentaro-back::before { content: '← '; }
-.kentaro-episode-page__hero h1 { max-width: 820px; margin-bottom: 22px; }
-.kentaro-episode-page__hero p:not(.eyebrow) { max-width: 640px; margin: 0; color: hsl(var(--navy-foreground) / 0.76); font-size: 1.13rem; line-height: 1.6; }
-
-.kentaro-episode-media { display: block; width: min(100%, 510px); margin-inline: auto; border: 0; border-radius: 8px; }
-.kentaro-episode-media--card { width: 100%; margin: 0; border-radius: 0; }
-.kentaro-episode-media--ready { position: relative; overflow: hidden; background: hsl(var(--navy)); color: hsl(var(--navy-foreground)); cursor: pointer; }
-.kentaro-episode-media--ready > img { width: 100%; height: 100%; object-fit: cover; }
-.kentaro-episode-media--ready > span:first-child { display: grid; width: 100%; height: 100%; place-items: center; color: hsl(var(--lime)); font-size: 0.76rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
-.kentaro-play-label { position: absolute; right: 18px; bottom: 18px; padding: 9px 12px; border: 1px solid hsl(var(--lime)); border-radius: 999px; background: hsl(var(--navy)); color: hsl(var(--lime)); font-size: 0.76rem; font-weight: 700; }
-.kentaro-episode-media--player { background: hsl(var(--navy)); }
 .kentaro-hero :focus-visible,
-.kentaro-follow :focus-visible,
-.kentaro-episode-page__hero :focus-visible { outline-color: hsl(var(--lime)); }
+.kentaro-follow :focus-visible { outline-color: hsl(var(--lime)); }
 
 @media (max-width: 1100px) {
   .kentaro-hero__grid { grid-template-columns: minmax(0, 0.98fr) minmax(360px, 0.82fr); gap: 42px; }
@@ -329,8 +314,7 @@
   .kentaro-relationship__person,
   .kentaro-relationship__harness { min-height: 0; padding: 22px 18px; }
   .kentaro-hero { padding: 54px 0 64px; }
-  .kentaro-hero h1,
-  .kentaro-episode-page__hero h1 { font-size: clamp(2.65rem, 12vw, 3.7rem); }
+  .kentaro-hero h1 { font-size: clamp(2.65rem, 12vw, 3.7rem); }
   .kentaro-hero__actions { align-items: stretch; flex-direction: column; gap: 13px; }
   .kentaro-hero__actions .text-link { align-self: flex-start; }
   .kentaro-hero__image img,
@@ -340,14 +324,12 @@
   .kentaro-purpose__copy > p { font-size: 0.98rem; }
   .kentaro-harness { padding: 78px 0; }
   .kentaro-featured-stories__grid { grid-template-columns: 1fr; }
-  .kentaro-featured-stories__playlist { grid-template-columns: 38px minmax(0, 1fr); align-items: start; gap: 16px; min-height: 0; }
-  .kentaro-featured-stories__playlist-action { grid-column: 1 / -1; justify-content: space-between; }
+  .kentaro-featured-stories__destinations { grid-template-columns: 1fr; }
+  .kentaro-featured-stories__destination { min-height: 0; }
   .kentaro-episode-grid { grid-template-columns: 1fr; }
   .kentaro-thumbnail-pending { min-height: 150px; }
   .kentaro-character__copy h2,
   .kentaro-follow h2,
   .kentaro-harness h2 { font-size: clamp(2.25rem, 10vw, 3.1rem); }
   .kentaro-follow { padding: 74px 0; }
-  .kentaro-episode-page__hero { padding: 30px 0 58px; }
-  .kentaro-back { margin-bottom: 42px; }
 }
