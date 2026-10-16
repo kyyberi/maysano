@@ -477,7 +477,7 @@ const kentaroEpisodePageStyles = `
   .kentaro-episode-scene__copy { max-width: 700px; padding-top: 5px; color: hsl(var(--muted-foreground)); font-size: clamp(1.04rem, 1.4vw, 1.18rem); line-height: 1.75; }
   .kentaro-episode-scene__copy p { margin: 0; }
   .kentaro-episode-problem { padding: 0 0 clamp(72px, 9vw, 120px); }
-  .kentaro-episode-problem__inner { max-width: 920px; padding-top: clamp(52px, 6vw, 80px); border-top: 1px solid hsl(var(--border)); }
+  .kentaro-episode-problem__inner { width: 100%; max-width: none; padding-top: clamp(52px, 6vw, 80px); border-top: 1px solid hsl(var(--border)); }
   .kentaro-episode-problem__copy { max-width: 760px; margin-top: 28px; color: hsl(var(--muted-foreground)); font-size: 1.04rem; line-height: 1.72; }
   .kentaro-episode-problem__copy p { margin: 0 0 17px; }
   .kentaro-episode-pullquote { max-width: 870px; margin: 42px 0 0; padding: 4px 0 4px clamp(22px, 3vw, 38px); border-left: 3px solid #C2D897; color: hsl(var(--heading)); font-size: clamp(1.7rem, 3.1vw, 3rem); font-weight: 600; letter-spacing: -.055em; line-height: 1.06; }
