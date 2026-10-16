@@ -22,11 +22,11 @@ const episodeNumber = (episode: KentaroEpisode) => `Episode ${String(episode.epi
 
 const kentaroRoadmap = [
   { phase: 'Phase 0', title: 'Product foundation', summary: 'Establish the open-source product, core vocabulary, schemas and a demonstrable reference use case.', status: 'Foundation' },
-  { phase: 'Phase 1', title: 'v0.1 — Local governed Harness', summary: 'Ship the smallest complete loop: initialise a Codex project, run one governed use case, collect evidence and produce a report.', status: 'Active build target', active: true },
+  { phase: 'Phase 1', title: 'v0.1 — Governed Harness with Maysano', summary: 'Publish the first PyPI package and ship the smallest complete loop: initialise a Codex project, connect to Maysano through its REST API, run one governed use case, collect evidence and produce a report.', status: 'Active build target', active: true },
   { phase: 'Phase 2', title: 'v0.2 — Agent-native experience', summary: 'Add MCP tools, structured JSON, reusable templates, versioned packages and stronger gates.', status: 'Planned' },
   { phase: 'Phase 3', title: 'v0.3 — Usable local product', summary: 'Add a lightweight local interface, guided model setup and exportable evidence for non-developer operators.', status: 'Planned' },
   { phase: 'Phase 4', title: 'v0.4 — Pluggable runtimes', summary: 'Support optional execution adapters while keeping governance and evidence comparable.', status: 'Planned' },
-  { phase: 'Phase 5', title: 'Maysano Platform connection', summary: 'Optionally connect approved packages and outcomes to portfolio-level decisions and platform agents.', status: 'Planned' },
+  { phase: 'Phase 5', title: 'Maysano Platform coordination', summary: 'Extend the connected Harness with portfolio-level decisions, platform agents and managed enterprise operations.', status: 'Planned' },
 ]
 
 type SortOrder = 'newest' | 'oldest'
@@ -322,7 +322,7 @@ function KentaroHome() {
             <div className="section-intro">
               <p className="eyebrow">KENTARO ROADMAP</p>
               <h2 id="kentaro-roadmap-title">Prove the governed loop before expanding it.</h2>
-              <p className="section-copy">The plan starts with one complete local delivery journey. Agent-native tools, a usable local product, optional runtimes and the Maysano Platform connection follow only when that loop is proven.</p>
+              <p className="section-copy">The plan starts with one complete governed delivery journey, connected to Maysano from v0.1 through its REST API. Agent-native tools, a usable local product, optional runtimes and platform-wide coordination follow once that loop is proven.</p>
             </div>
             <ol className="kentaro-roadmap-grid kentaro-episode-grid" aria-label="Kentaro delivery roadmap" style={{ margin: 0, padding: 0, listStyle: 'none' }}>
               {kentaroRoadmap.map((phase) => (
