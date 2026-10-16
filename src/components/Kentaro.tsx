@@ -205,8 +205,7 @@ function KentaroHome() {
             <div className="kentaro-hero__copy">
               <p className="eyebrow">KENTARO AT WORK</p>
               <h1>
-                <span className="kentaro-hero__title-line kentaro-hero__title-line--light">The Office.</span>
-                <span className="kentaro-hero__title-line kentaro-hero__title-line--sage">An agentic experience.</span>
+                <span className="kentaro-hero__title-line kentaro-hero__title-line--sage">An agentic business experience.</span>
               </h1>
               <p className="kentaro-hero__lead">Kentaro’s one-minute stories reveal the friction between business people and AI agents.<br />Unclear mandates. Missing context. Authority without accountability.</p>
               <p className="kentaro-hero__supporting">Kentaro Harness is being built to reduce that friction, giving people and agents a clearer way to work together.</p>
