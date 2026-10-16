@@ -30,6 +30,18 @@ const kentaroRoadmap = [
   { phase: 'Phase 5', title: 'Maysano portfolio and enterprise operations', summary: 'Build the user-facing platform, portfolio view, platform-hosted agents and organisation-level governance above the proven Harness connection.', status: 'Planned' },
 ]
 
+const kentaroFollowPanelStyles = `
+  .kentaro-follow__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; }
+  .kentaro-follow__column { min-width: 0; }
+  .kentaro-follow__column--updates { padding-right: clamp(40px, 6vw, 96px); }
+  .kentaro-follow__column--harness { padding-left: clamp(40px, 6vw, 96px); border-left: 1px solid hsl(var(--navy-foreground) / 0.2); }
+  @media (max-width: 900px) {
+    .kentaro-follow__grid { grid-template-columns: 1fr; gap: 36px; }
+    .kentaro-follow__column--updates { padding-right: 0; padding-bottom: 36px; border-bottom: 1px solid hsl(var(--navy-foreground) / 0.2); }
+    .kentaro-follow__column--harness { padding-left: 0; border-left: 0; }
+  }
+`
+
 type SortOrder = 'newest' | 'oldest'
 
 function KentaroStructuredData({ episode }: { episode?: KentaroEpisode }) {
@@ -354,8 +366,9 @@ function KentaroHome() {
           </div>
         </section>
         <section className="kentaro-follow" aria-labelledby="kentaro-follow-title">
-          <div className="container kentaro-harness__grid">
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <style>{kentaroFollowPanelStyles}</style>
+          <div className="container kentaro-harness__grid kentaro-follow__grid">
+            <div className="kentaro-follow__column kentaro-follow__column--updates" style={{ display: 'flex', flexDirection: 'column' }}>
               <p className="eyebrow">KEEP UP WITH KENTARO</p>
               <div className="kentaro-harness__copy" style={{ display: 'flex', flex: 1, flexDirection: 'column' }}>
                 <h2 id="kentaro-follow-title">Follow Kentaro’s next assignment.</h2>
@@ -364,7 +377,7 @@ function KentaroHome() {
                 <small>A series by Maysano.</small>
               </div>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <div className="kentaro-follow__column kentaro-follow__column--harness" style={{ display: 'flex', flexDirection: 'column' }}>
               <p className="eyebrow">THE KENTARO HARNESS</p>
               <div className="kentaro-harness__copy" style={{ display: 'flex', flex: 1, flexDirection: 'column' }}>
                 <h2>Help build the Harness.</h2>
