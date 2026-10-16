@@ -3759,7 +3759,10 @@ html.js .reveal:not(.is-in) .rise { opacity: 0; transform: translateY(18px); }
 
 .kentaro-library { background: hsl(var(--background)); }
 
-.kentaro-library .section-intro { max-width: 710px; margin-bottom: 42px; }
+.kentaro-library .section-intro { max-width: 760px; margin-bottom: 30px; }
+.kentaro-library__harness-link { display: inline-flex; align-items: center; gap: 7px; margin-top: 22px; color: hsl(var(--primary)); font-size: .88rem; font-weight: 700; text-decoration: none; }
+.kentaro-library__harness-link:hover { color: hsl(var(--heading)); text-decoration: underline; text-underline-offset: 5px; }
+.kentaro-library__grid-label { margin: 0 0 15px; color: hsl(var(--primary)); }
 
 .kentaro-episode-grid {
   display: grid;
@@ -3812,6 +3815,7 @@ html.js .reveal:not(.is-in) .rise { opacity: 0; transform: translateY(18px); }
 .kentaro-episode-card h3 a { color: hsl(var(--heading)); }
 .kentaro-episode-card h3 a:hover { color: hsl(var(--primary)); }
 .kentaro-episode-card__content > p:not(.kentaro-episode-card__number) { margin: 0; color: hsl(var(--muted-foreground)); font-size: 0.88rem; line-height: 1.55; }
+.kentaro-episode-card__content > p.kentaro-episode-card__friction { margin: -2px 0 9px; color: hsl(var(--primary)); font-size: .72rem; font-weight: 700; letter-spacing: .035em; line-height: 1.35; }
 
 .kentaro-episode-card__meta {
   display: flex;
@@ -3988,10 +3992,6 @@ html.js .reveal:not(.is-in) .rise { opacity: 0; transform: translateY(18px); }
   .kentaro-purpose__grid { gap: 28px; }
   .kentaro-purpose__heading { max-width: 580px; }
   .kentaro-harness__grid { gap: 28px; }
-  .kentaro-library__heading { align-items: start; flex-direction: column; gap: 0; }
-  .kentaro-search { margin-bottom: 0; }
-  .kentaro-library__controls { align-items: start; flex-direction: column; }
-  .kentaro-sort { width: min(100%, 240px); }
   .kentaro-character__image { width: min(100%, 680px); }
 }
 

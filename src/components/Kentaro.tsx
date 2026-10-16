@@ -20,6 +20,11 @@ const episodeHref = (episode: KentaroEpisode) => `${kentaroBaseUrl}episodes/${ep
 const episodeNumber = (episode: KentaroEpisode) => `Episode ${String(episode.episodeNumber).padStart(2, '0')}`
 const episodeStill = (episode: KentaroEpisode) => episode.thumbnail ?? (episode.episodeNumber % 2 === 0 ? kentaroPaperMountainImage : kentaroBadgeImage)
 const episodeStillAlt = (episode: KentaroEpisode) => episode.thumbnailAlt ?? 'Kentaro at work in an office.'
+const episodeFrictionLabels: Record<string, string> = {
+  'new-team-member': 'Friction: undefined role',
+  'the-data-is-there': 'Friction: data without purpose',
+  'one-small-extra-thing': 'Friction: scope without a renewed mandate',
+}
 
 const kentaroRoadmap = [
   { phase: 'Phase 0', title: 'Product foundation', summary: 'Establish the MIT-licensed GitHub project, package skeleton, release workflow, product schemas and a demonstrable reference use case.', status: 'Foundation' },
@@ -102,6 +107,7 @@ function EpisodeMedia({ episode, playable = false, presentation = 'detail' }: { 
 
 function EpisodeCard({ episode }: { episode: KentaroEpisode }) {
   const isPublished = episode.status === 'published'
+  const frictionLabel = episodeFrictionLabels[episode.slug]
 
   return (
     <article className={`kentaro-episode-card ${isPublished ? '' : 'kentaro-episode-card--coming-soon'}`}>
@@ -126,6 +132,7 @@ function EpisodeCard({ episode }: { episode: KentaroEpisode }) {
       <div className="kentaro-episode-card__content">
         <p className="kentaro-episode-card__number">{episodeNumber(episode)}</p>
         <h3>{isPublished ? <a href={episodeHref(episode)}>{episode.title}</a> : episode.title}</h3>
+        {frictionLabel && <p className="kentaro-episode-card__friction">{frictionLabel}</p>}
         {episode.description && <p>{episode.description}</p>}
         <div className="kentaro-episode-card__meta">
           {episode.duration && <span>{episode.duration}</span>}
@@ -145,10 +152,12 @@ function EpisodeLibrary() {
     <section className="kentaro-library section" id="episodes" aria-labelledby="kentaro-episodes-title">
       <div className="container">
         <div className="section-intro">
-          <p className="eyebrow">WATCH KENTARO AT WORK</p>
-          <h2 id="kentaro-episodes-title" className="kentaro-section-title">One-minute stories about business people and AI agents.</h2>
-          <p className="section-copy">Every story starts with ordinary work. Then the missing context, unclear mandate, or blurred accountability becomes visible.</p>
+          <p className="eyebrow">THE FRICTION, EPISODE BY EPISODE</p>
+          <h2 id="kentaro-episodes-title" className="kentaro-section-title">One-minute stories about work that was never made clear.</h2>
+          <p className="section-copy">Kentaro does not fail because he lacks effort. He fails because the work arrives without the context, mandate or decision path it needs. Each episode makes one of those gaps visible.</p>
+          <a className="kentaro-library__harness-link" href="#kentaro-harness">See how Kentaro Harness is being built to reduce this friction <span aria-hidden="true">→</span></a>
         </div>
+        <p className="eyebrow kentaro-library__grid-label">THE WORKPLACE PROBLEMS KENTARO EXPOSES</p>
         <div className="kentaro-episode-grid">
           {featuredEpisodes.map((episode) => <EpisodeCard key={episode.id} episode={episode} />)}
         </div>
