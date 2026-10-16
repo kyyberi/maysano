@@ -286,6 +286,20 @@ function KentaroHome() {
             </figure>
           </div>
         </section>
+        <section className="kentaro-character section" aria-labelledby="kentaro-character-title">
+          <div className="container kentaro-character__grid">
+            <figure className="kentaro-character__image">
+              <img src={kentaroBadgeImage} alt="Kentaro straightens his purple badge in an office." width="1448" height="1086" loading="lazy" />
+            </figure>
+            <div className="kentaro-character__copy">
+              <p className="eyebrow">MEET KENTARO</p>
+              <h2 id="kentaro-character-title">He means well. He also has questions.</h2>
+              <p>Kentaro is curious, earnest and quietly stubborn. He wants to do useful work and takes instructions seriously, sometimes too seriously. He remembers what everyone agreed last Tuesday, which makes him an uncomfortable addition to Thursday’s meeting.</p>
+              <p>Before a difficult conversation, he straightens his purple badge. When he tilts his head, someone is about to explain an assumption they forgot to mention.</p>
+              <blockquote>“I found the single source of truth. There are four.”</blockquote>
+            </div>
+          </div>
+        </section>
         <section className="kentaro-purpose section" aria-labelledby="kentaro-purpose-title">
           <div className="container kentaro-purpose__grid">
             <div className="kentaro-purpose__heading">
@@ -349,20 +363,6 @@ function KentaroHome() {
                 </li>
               ))}
             </ol>
-          </div>
-        </section>
-        <section className="kentaro-character section" aria-labelledby="kentaro-character-title">
-          <div className="container kentaro-character__grid">
-            <figure className="kentaro-character__image">
-              <img src={kentaroBadgeImage} alt="Kentaro straightens his purple badge in an office." width="1448" height="1086" loading="lazy" />
-            </figure>
-            <div className="kentaro-character__copy">
-              <p className="eyebrow">MEET KENTARO</p>
-              <h2 id="kentaro-character-title">He means well. He also has questions.</h2>
-              <p>Kentaro is curious, earnest and quietly stubborn. He wants to do useful work and takes instructions seriously, sometimes too seriously. He remembers what everyone agreed last Tuesday, which makes him an uncomfortable addition to Thursday’s meeting.</p>
-              <p>Before a difficult conversation, he straightens his purple badge. When he tilts his head, someone is about to explain an assumption they forgot to mention.</p>
-              <blockquote>“I found the single source of truth. There are four.”</blockquote>
-            </div>
           </div>
         </section>
         <section className="kentaro-follow" aria-labelledby="kentaro-follow-title">
