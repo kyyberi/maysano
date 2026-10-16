@@ -3844,7 +3844,7 @@ html.js .reveal:not(.is-in) .rise { opacity: 0; transform: translateY(18px); }
 .kentaro-episode-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 22px;
+  gap: 18px;
 }
 
 .kentaro-episode-card {
@@ -3863,8 +3863,8 @@ html.js .reveal:not(.is-in) .rise { opacity: 0; transform: translateY(18px); }
 
 .kentaro-thumbnail-pending {
   display: grid;
-  min-height: 220px;
-  aspect-ratio: 4 / 5;
+  min-height: 168px;
+  aspect-ratio: 16 / 7;
   align-content: end;
   gap: 8px;
   padding: 21px;
@@ -4111,7 +4111,7 @@ html.js .reveal:not(.is-in) .rise { opacity: 0; transform: translateY(18px); }
   .kentaro-harness { padding: 78px 0; }
   .kentaro-harness__principles li { grid-template-columns: 1fr; gap: 6px; }
   .kentaro-episode-grid { grid-template-columns: 1fr; }
-  .kentaro-thumbnail-pending { min-height: 195px; }
+  .kentaro-thumbnail-pending { min-height: 150px; }
   .kentaro-character__copy h2,
   .kentaro-follow h2,
   .kentaro-related h2,

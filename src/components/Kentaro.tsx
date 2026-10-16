@@ -1,21 +1,17 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useState } from 'react'
 import kentaroBadgeImage from '../assets/kentaro/kentaro-badge.png'
 import kentaroPaperMountainImage from '../assets/kentaro/kentaro-paper-mountain.png'
 import { siteConfig } from '../config/site'
 import {
   getKentaroEpisode,
   kentaroEpisodes,
-  kentaroTopicLabel,
-  kentaroTopics,
   publishedKentaroEpisodes,
   type KentaroEpisode,
-  type KentaroTopic,
 } from '../content/kentaroEpisodes'
 import { Footer } from './Footer'
 import { Header } from './Header'
 import { KentaroUpdatesForm } from './KentaroUpdatesForm'
 
-const pageSize = 9
 const kentaroBaseUrl = `${siteConfig.siteUrl}kentaro/`
 const kentaroHarnessUrl = 'https://github.com/Maysano/Kentaro'
 const episodeHref = (episode: KentaroEpisode) => `${kentaroBaseUrl}episodes/${episode.slug}/`
@@ -41,8 +37,6 @@ const kentaroFollowPanelStyles = `
     .kentaro-follow__column--harness { padding-left: 0; border-left: 0; }
   }
 `
-
-type SortOrder = 'newest' | 'oldest'
 
 function KentaroStructuredData({ episode }: { episode?: KentaroEpisode }) {
   const url = episode ? episodeHref(episode) : kentaroBaseUrl
@@ -141,116 +135,21 @@ function EpisodeCard({ episode }: { episode: KentaroEpisode }) {
 }
 
 function EpisodeLibrary() {
-  const [query, setQuery] = useState('')
-  const [topic, setTopic] = useState<KentaroTopic | 'all'>('all')
-  const [sort, setSort] = useState<SortOrder>('newest')
-  const [page, setPage] = useState(1)
-  const [isReady, setIsReady] = useState(false)
-
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search)
-    const topicParam = params.get('topic')
-    const validTopic = kentaroTopics.some((item) => item.id === topicParam)
-    setQuery(params.get('q') ?? '')
-    setTopic(validTopic ? topicParam as KentaroTopic : 'all')
-    setSort(params.get('sort') === 'oldest' ? 'oldest' : 'newest')
-    setPage(Math.max(1, Number(params.get('page')) || 1))
-    setIsReady(true)
-  }, [])
-
-  useEffect(() => {
-    if (!isReady) return
-    const params = new URLSearchParams()
-    if (query) params.set('q', query)
-    if (topic !== 'all') params.set('topic', topic)
-    if (sort !== 'newest') params.set('sort', sort)
-    if (page > 1) params.set('page', String(page))
-    const search = params.toString()
-    window.history.replaceState(null, '', `${window.location.pathname}${search ? `?${search}` : ''}`)
-  }, [isReady, page, query, sort, topic])
-
-  const matchingEpisodes = useMemo(() => {
-    const normalizedQuery = query.trim().toLowerCase()
-    return kentaroEpisodes
-      .filter((episode) => episode.status !== 'draft')
-      .filter((episode) => topic === 'all' || episode.topics.includes(topic))
-      .filter((episode) => !normalizedQuery || [episode.title, episode.description, ...episode.topics.map(kentaroTopicLabel)]
-        .join(' ')
-        .toLowerCase()
-        .includes(normalizedQuery))
-      .sort((a, b) => {
-        const statusOrder = Number(a.status === 'comingSoon') - Number(b.status === 'comingSoon')
-        if (statusOrder) return statusOrder
-        return sort === 'newest' ? b.episodeNumber - a.episodeNumber : a.episodeNumber - b.episodeNumber
-      })
-  }, [query, sort, topic])
-
-  const pageCount = Math.ceil(matchingEpisodes.length / pageSize)
-  const safePage = Math.min(page, Math.max(pageCount, 1))
-  const visibleEpisodes = matchingEpisodes.slice((safePage - 1) * pageSize, safePage * pageSize)
-  const resetFilters = () => {
-    setQuery('')
-    setTopic('all')
-    setSort('newest')
-    setPage(1)
-  }
+  const featuredEpisodes = [...publishedKentaroEpisodes]
+    .sort((a, b) => b.episodeNumber - a.episodeNumber)
+    .slice(0, 3)
 
   return (
     <section className="kentaro-library section" id="episodes" aria-labelledby="kentaro-episodes-title">
       <div className="container">
-        <div className="kentaro-library__heading">
-          <div className="section-intro">
-            <p className="eyebrow">EPISODE LIBRARY</p>
-            <h2 id="kentaro-episodes-title">The episodes</h2>
-            <p className="section-copy">The instructions were clear. Apparently.</p>
-          </div>
-          <label className="kentaro-search">
-            <span>Search episodes</span>
-            <input
-              type="search"
-              value={query}
-              placeholder="Search titles, descriptions, topics"
-              onChange={(event) => { setQuery(event.target.value); setPage(1) }}
-            />
-          </label>
+        <div className="section-intro">
+          <p className="eyebrow">EPISODE LIBRARY</p>
+          <h2 id="kentaro-episodes-title">The episodes</h2>
+          <p className="section-copy">The instructions were clear. Apparently.</p>
         </div>
-
-        <div className="kentaro-library__controls">
-          <div className="kentaro-topic-filters" role="group" aria-label="Filter episodes by topic">
-            <button className={topic === 'all' ? 'is-active' : ''} type="button" onClick={() => { setTopic('all'); setPage(1) }}>All episodes</button>
-            {kentaroTopics.map((item) => (
-              <button key={item.id} className={topic === item.id ? 'is-active' : ''} type="button" onClick={() => { setTopic(item.id); setPage(1) }}>{item.label}</button>
-            ))}
-          </div>
-          <label className="kentaro-sort">
-            <span>Sort episodes</span>
-            <select value={sort} onChange={(event) => { setSort(event.target.value as SortOrder); setPage(1) }}>
-              <option value="newest">Newest first</option>
-              <option value="oldest">Oldest first</option>
-            </select>
-          </label>
+        <div className="kentaro-episode-grid">
+          {featuredEpisodes.map((episode) => <EpisodeCard key={episode.id} episode={episode} />)}
         </div>
-
-        {visibleEpisodes.length ? (
-          <>
-            <div className="kentaro-episode-grid">
-              {visibleEpisodes.map((episode) => <EpisodeCard key={episode.id} episode={episode} />)}
-            </div>
-            {pageCount > 1 && (
-              <nav className="kentaro-pagination" aria-label="Episode pagination">
-                <button type="button" disabled={safePage === 1} onClick={() => setPage(safePage - 1)}>Previous</button>
-                <span>Page {safePage} of {pageCount}</span>
-                <button type="button" disabled={safePage === pageCount} onClick={() => setPage(safePage + 1)}>Next</button>
-              </nav>
-            )}
-          </>
-        ) : (
-          <div className="kentaro-empty-state">
-            <h3>No episodes match those filters.</h3>
-            <p>Try another search or return to the full episode library.</p>
-            <button className="button" type="button" onClick={resetFilters}>Reset filters</button>
-          </div>
-        )}
       </div>
     </section>
   )
@@ -271,11 +170,11 @@ function KentaroHome() {
                 <span className="kentaro-hero__title-line kentaro-hero__title-line--light">The Office.</span>
                 <span className="kentaro-hero__title-line kentaro-hero__title-line--sage">An agentic experience.</span>
               </h1>
-              <p className="kentaro-hero__lead">Kentaro has a job, colleagues and increasingly specific questions.</p>
-              <p className="kentaro-hero__supporting">One-minute stories about working with humans.</p>
+              <p className="kentaro-hero__lead">Kentaro’s one-minute stories reveal the friction between business people and AI agents.<br />Unclear mandates. Missing context. Authority without accountability.</p>
+              <p className="kentaro-hero__supporting">Kentaro Harness is being built to reduce that friction, giving people and agents a clearer way to work together.</p>
               <div className="kentaro-hero__actions">
-                <a className="button button--light" href="#episodes">Browse Kentaro stories <span aria-hidden="true">↓</span></a>
-                <a className="text-link text-link--light" href="#kentaro-harness">See the Harness solution <span aria-hidden="true">↓</span></a>
+                <a className="button button--light" href="#episodes">Watch Kentaro stories <span aria-hidden="true">↓</span></a>
+                <a className="text-link text-link--light" href="#kentaro-harness">Explore Kentaro Harness <span aria-hidden="true">↓</span></a>
               </div>
             </div>
             <figure className="kentaro-hero__image">
