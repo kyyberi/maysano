@@ -156,6 +156,42 @@ function EpisodeLibrary() {
   )
 }
 
+const kentaroPurposeStyles = `
+  .kentaro-purpose { padding: clamp(72px, 9vw, 142px) 0; background: hsl(var(--secondary)); }
+  .kentaro-purpose > .container { width: min(1400px, calc(100% - 64px)); }
+  .kentaro-purpose__layout { display: grid; grid-template-columns: minmax(360px, .75fr) minmax(0, 1fr); align-items: start; gap: clamp(54px, 8vw, 132px); max-width: 1400px; }
+  .kentaro-purpose__image { margin: 0; overflow: hidden; border-radius: 10px; background: hsl(var(--navy)); }
+  .kentaro-purpose__image img { display: block; width: 100%; min-height: 640px; height: 100%; object-fit: cover; object-position: center; }
+  .kentaro-purpose__content { max-width: 785px; }
+  .kentaro-purpose__content .eyebrow { margin-bottom: 19px; color: hsl(var(--primary)); }
+  .kentaro-purpose__content h2 { max-width: 710px; margin: 0 0 26px; color: hsl(var(--heading)); font-size: clamp(3rem, 5vw, 5.45rem); letter-spacing: -.07em; line-height: .9; }
+  .kentaro-purpose__intro, .kentaro-purpose__bridge { max-width: 740px; margin: 0; color: hsl(var(--muted-foreground)); font-size: clamp(1.08rem, 1.7vw, 1.33rem); line-height: 1.55; }
+  .kentaro-purpose__comparison { margin: 42px 0 30px; border-top: 1px solid hsl(var(--border)); }
+  .kentaro-purpose__comparison-labels, .kentaro-purpose__comparison-row { display: grid; grid-template-columns: minmax(180px, .82fr) minmax(0, 1fr); column-gap: 36px; }
+  .kentaro-purpose__comparison-labels { padding: 18px 0 13px; }
+  .kentaro-purpose__comparison-labels span { color: hsl(var(--muted-foreground)); font-size: .68rem; font-weight: 700; letter-spacing: .14em; line-height: 1.3; text-transform: uppercase; }
+  .kentaro-purpose__comparison-row { min-height: 74px; align-items: center; border-top: 1px solid hsl(var(--border)); }
+  .kentaro-purpose__comparison-row:first-of-type { border-top: 0; }
+  .kentaro-purpose__comparison-row > dt, .kentaro-purpose__comparison-row > dd { display: flex; align-items: center; gap: 16px; min-width: 0; margin: 0; color: hsl(var(--heading)); font-size: clamp(1rem, 1.35vw, 1.2rem); letter-spacing: -.02em; line-height: 1.32; }
+  .kentaro-purpose__comparison-row > dd { padding-left: 36px; border-left: 1px solid hsl(var(--border)); }
+  .kentaro-purpose__speech { width: 27px; height: 27px; flex: 0 0 auto; color: hsl(var(--heading)); }
+  .kentaro-purpose__question { display: grid; width: 38px; height: 38px; flex: 0 0 auto; place-items: center; border-radius: 50%; background: hsl(var(--lime)); color: hsl(var(--heading)); font-size: 1.12rem; font-weight: 700; }
+  .kentaro-purpose__bridge { margin-bottom: 28px; font-size: 1.05rem; }
+  .kentaro-purpose__paths { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  .kentaro-purpose__path { display: grid; grid-template-columns: 44px minmax(0, 1fr) 34px; gap: 14px; align-items: center; min-height: 126px; padding: 20px; border: 1px solid hsl(var(--border)); border-radius: 8px; background: hsl(var(--background) / .72); color: inherit; text-decoration: none; transition: border-color .2s ease, background-color .2s ease; }
+  .kentaro-purpose__path:hover { border-color: hsl(var(--primary)); background: hsl(var(--accent)); }
+  .kentaro-purpose__path-icon { display: grid; width: 44px; height: 44px; place-items: center; color: hsl(var(--primary)); }
+  .kentaro-purpose__path-icon svg { width: 100%; height: 100%; }
+  .kentaro-purpose__path-copy { display: grid; gap: 5px; }
+  .kentaro-purpose__path strong { color: hsl(var(--heading)); font-size: 1rem; letter-spacing: -.035em; line-height: 1.18; }
+  .kentaro-purpose__path span { color: hsl(var(--muted-foreground)); font-size: .84rem; line-height: 1.45; }
+  .kentaro-purpose__path-arrow { display: grid; width: 32px; height: 32px; place-items: center; border-radius: 50%; background: hsl(var(--lime)); color: hsl(var(--heading)); font-size: 1.15rem; transition: transform .2s ease; }
+  .kentaro-purpose__path:hover .kentaro-purpose__path-arrow { transform: translateX(3px); }
+  @media (max-width: 1050px) { .kentaro-purpose__layout { grid-template-columns: minmax(300px, .72fr) minmax(0, 1fr); gap: 48px; } .kentaro-purpose__image img { min-height: 580px; } .kentaro-purpose__comparison-labels, .kentaro-purpose__comparison-row { column-gap: 22px; } .kentaro-purpose__comparison-row > dd { padding-left: 22px; } }
+  @media (max-width: 820px) { .kentaro-purpose__layout { grid-template-columns: 1fr; gap: 38px; } .kentaro-purpose__image { width: min(100%, 680px); } .kentaro-purpose__image img { min-height: 0; aspect-ratio: 4 / 3; } .kentaro-purpose__content { max-width: 760px; } }
+  @media (max-width: 620px) { .kentaro-purpose { padding: 74px 0; } .kentaro-purpose__content h2 { font-size: clamp(2.6rem, 12vw, 4.15rem); } .kentaro-purpose__intro { font-size: 1.02rem; } .kentaro-purpose__comparison { margin-top: 34px; } .kentaro-purpose__comparison-labels { display: none; } .kentaro-purpose__comparison-row { grid-template-columns: 1fr; gap: 12px; padding: 18px 0; } .kentaro-purpose__comparison-row > dt, .kentaro-purpose__comparison-row > dd { font-size: 1rem; } .kentaro-purpose__comparison-row > dd { padding-left: 0; border-left: 0; } .kentaro-purpose__paths { grid-template-columns: 1fr; } .kentaro-purpose__path { min-height: 112px; } }
+`
+
 function KentaroHome() {
   return (
     <>
@@ -198,24 +234,44 @@ function KentaroHome() {
             </div>
           </div>
         </section>
-        <section className="kentaro-purpose section" aria-labelledby="kentaro-purpose-title">
-          <div className="container kentaro-purpose__grid">
-            <div className="kentaro-purpose__heading">
-              <p className="eyebrow">WHY KENTARO IS IN TROUBLE</p>
-              <h2 id="kentaro-purpose-title">The work starts before the prompt.</h2>
-            </div>
-            <div className="kentaro-purpose__copy">
-              <p>Kentaro is an agent in trouble. AI agents are entering ordinary work, where they meet unclear requirements, competing priorities, old documents, and words that mean different things to different people.</p>
-              <p>The result is often blamed on the agent.</p>
-              <p>Kentaro shows the other side. He takes workplace language seriously. When the business owner says everything is Priority One, Kentaro starts everything. When the business owner asks for speed, Kentaro optimises the number. When the business owner says, “Use your judgment,” Kentaro asks which judgment is approved.</p>
-              <p>The stories raise these tensions to the surface through office comedy. Each episode ends with one practical principle for working with agents.</p>
-              <ul className="kentaro-purpose__statements">
-                <li><strong>Business context</strong><span>Not missing history.</span></li>
-                <li><strong>Definition of success</strong><span>Not a KPI.</span></li>
-                <li><strong>Trade-offs</strong><span>Not priority labels.</span></li>
-                <li><strong>A working Harness</strong><span>Not another prompt.</span></li>
-              </ul>
-              <p>Kentaro Harness is being built as an open-source working layer that gives agents the context, mandate, boundaries, and approval path needed to work with people.</p>
+        <section className="kentaro-purpose" aria-labelledby="kentaro-purpose-title">
+          <style>{kentaroPurposeStyles}</style>
+          <div className="container kentaro-purpose__layout">
+            <figure className="kentaro-purpose__image">
+              <img src={kentaroPaperMountainImage} alt="Kentaro looks concerned beside a towering stack of office paperwork." width="1448" height="1086" loading="lazy" />
+            </figure>
+            <div className="kentaro-purpose__content">
+              <p className="eyebrow">WHY THESE STORIES</p>
+              <h2 id="kentaro-purpose-title">Clear to people.<br />Ambiguous to Kentaro.</h2>
+              <p className="kentaro-purpose__intro">Business people work through shared history, informal decisions and assumptions that rarely appear in a brief. Kentaro does not have that social memory.</p>
+              <dl className="kentaro-purpose__comparison">
+                <div className="kentaro-purpose__comparison-labels" aria-hidden="true"><span>What people say</span><span>What Kentaro needs to know</span></div>
+                <div className="kentaro-purpose__comparison-row">
+                  <dt><svg className="kentaro-purpose__speech" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><path d="M27 15.5c0 6-5 10.5-11.5 10.5-1.8 0-3.4-.3-4.9-1l-5.1 2.2 1.4-4.8C5.7 20.5 5 18.1 5 15.5 5 9.5 10 5 16 5s11 4.5 11 10.5Z" /></svg>Take ownership.</dt>
+                  <dd><span className="kentaro-purpose__question" aria-hidden="true">?</span>What decisions am I authorised to make?</dd>
+                </div>
+                <div className="kentaro-purpose__comparison-row">
+                  <dt><svg className="kentaro-purpose__speech" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><path d="M27 15.5c0 6-5 10.5-11.5 10.5-1.8 0-3.4-.3-4.9-1l-5.1 2.2 1.4-4.8C5.7 20.5 5 18.1 5 15.5 5 9.5 10 5 16 5s11 4.5 11 10.5Z" /></svg>Use your judgment.</dt>
+                  <dd><span className="kentaro-purpose__question" aria-hidden="true">?</span>Which judgment is approved, and by whom?</dd>
+                </div>
+                <div className="kentaro-purpose__comparison-row">
+                  <dt><svg className="kentaro-purpose__speech" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><path d="M27 15.5c0 6-5 10.5-11.5 10.5-1.8 0-3.4-.3-4.9-1l-5.1 2.2 1.4-4.8C5.7 20.5 5 18.1 5 15.5 5 9.5 10 5 16 5s11 4.5 11 10.5Z" /></svg>Make it happen.</dt>
+                  <dd><span className="kentaro-purpose__question" aria-hidden="true">?</span>What result counts as success?</dd>
+                </div>
+              </dl>
+              <p className="kentaro-purpose__bridge">The stories show this friction. Kentaro Harness gives people and agents a clearer way to work through it.</p>
+              <nav className="kentaro-purpose__paths" aria-label="Explore Kentaro stories or Harness">
+                <a className="kentaro-purpose__path" href="#episodes">
+                  <span className="kentaro-purpose__path-icon" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.6"><rect x="4.5" y="9" width="39" height="30" rx="3" /><path d="m21 18 10 6-10 6v-12Z" fill="currentColor" stroke="none" /></svg></span>
+                  <span className="kentaro-purpose__path-copy"><strong>Watch the stories</strong><span>See the friction play out in one-minute office stories.</span></span>
+                  <span className="kentaro-purpose__path-arrow" aria-hidden="true">→</span>
+                </a>
+                <a className="kentaro-purpose__path" href="#kentaro-harness">
+                  <span className="kentaro-purpose__path-icon" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.6"><path d="M5 7.5h18v30H5z" /><path d="M9 15h10M9 20h10M9 25h6" /><circle cx="32.5" cy="19" r="7" /><path d="m29.5 19 2 2 4-5M32.5 28v10M25 42c1-3.4 3.5-5 7.5-5s6.5 1.6 7.5 5" /></svg></span>
+                  <span className="kentaro-purpose__path-copy"><strong>Explore Kentaro Harness</strong><span>See the working layer being built to reduce it.</span></span>
+                  <span className="kentaro-purpose__path-arrow" aria-hidden="true">→</span>
+                </a>
+              </nav>
             </div>
           </div>
         </section>
@@ -224,13 +280,12 @@ function KentaroHome() {
           <div className="container kentaro-harness__grid">
             <div className="kentaro-harness__heading">
               <p className="eyebrow">THE KENTARO HARNESS</p>
-              <h2 id="kentaro-harness-title">The stories show Kentaro in trouble.<br /><span className="kentaro-harness__title-highlight" style={{ color: 'hsl(var(--lime))' }}>The Harness changes the collaboration.</span></h2>
+              <h2 id="kentaro-harness-title">A working layer for shared context.</h2>
               <p>Open-source, MIT-licensed and made for people and agents to work from shared context.</p>
             </div>
             <div className="kentaro-harness__copy">
               <p>Kentaro is the open-source Agentic Maysano Harness for governed local execution. Phase 3 adds Codex, Claude Code and OpenCode as agent-client integrations on the same Kentaro core.</p>
               <p>The Harness requires a Maysano Platform API key in every version. v0.1 uses the API read-only; v0.2 adds tested synchronisation of products, objectives and use cases.</p>
-              <p>The episodes show what happens when Kentaro has to infer human intent alone. The Harness helps lift that friction by giving people and the agent the same business context, structured artefacts, working rules, approved tools and human approval boundaries.</p>
               <ul className="kentaro-harness__principles">
                 <li><strong>Start from the same context</strong><span>Objectives, use cases, data products and evidence travel with the agent.</span></li>
                 <li><strong>Make decisions explicit</strong><span>Working rules, approved tools and human approval remain clear to people and the agent.</span></li>
