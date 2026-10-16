@@ -143,9 +143,9 @@ function EpisodeLibrary() {
     <section className="kentaro-library section" id="episodes" aria-labelledby="kentaro-episodes-title">
       <div className="container">
         <div className="section-intro">
-          <p className="eyebrow">EPISODE LIBRARY</p>
-          <h2 id="kentaro-episodes-title">The episodes</h2>
-          <p className="section-copy">The instructions were clear. Apparently.</p>
+          <p className="eyebrow">ONE-MINUTE STORIES</p>
+          <h2 id="kentaro-episodes-title">Stories about business people and AI agents.</h2>
+          <p className="section-copy">Kentaro works through everyday business situations where instructions are incomplete, context is missing, and nobody is clear about authority or accountability. Each story reveals one problem. The Kentaro Harness is being built to make this work clearer.</p>
         </div>
         <div className="kentaro-episode-grid">
           {featuredEpisodes.map((episode) => <EpisodeCard key={episode.id} episode={episode} />)}
