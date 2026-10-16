@@ -257,8 +257,6 @@ function EpisodeLibrary() {
 }
 
 function KentaroHome() {
-  const latestEpisode = publishedKentaroEpisodes[publishedKentaroEpisodes.length - 1]
-
   return (
     <>
       <KentaroStructuredData />
@@ -276,10 +274,9 @@ function KentaroHome() {
               <p className="kentaro-hero__lead">Kentaro has a job, colleagues and increasingly specific questions.</p>
               <p className="kentaro-hero__supporting">One-minute stories about working with humans.</p>
               <div className="kentaro-hero__actions">
-                {latestEpisode?.youtubeVideoId ? <a className="button button--light" href={episodeHref(latestEpisode)}>Watch latest episode</a> : <button className="button button--light" type="button" disabled title="The latest episode video has not been configured">Watch latest episode</button>}
-                <a className="text-link text-link--light" href="#episodes">Browse episodes <span aria-hidden="true">↓</span></a>
+                <a className="button button--light" href="#episodes">Browse Kentaro stories <span aria-hidden="true">↓</span></a>
+                <a className="text-link text-link--light" href="#kentaro-harness">See the Harness solution <span aria-hidden="true">↓</span></a>
               </div>
-              {!latestEpisode?.youtubeVideoId && <p className="kentaro-hero__availability">Latest episode video pending.</p>}
             </div>
             <figure className="kentaro-hero__image">
               <img src={kentaroPaperMountainImage} alt="Kentaro looks worried beside a towering stack of office paperwork." width="1448" height="1086" />
