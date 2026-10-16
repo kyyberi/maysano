@@ -23,6 +23,13 @@ export type KentaroEpisodeStory = {
   harness: string
 }
 
+export type KentaroClarityItems = {
+  role: string
+  scope: string
+  approvalPoints: string
+  accountableOwner: string
+}
+
 export type KentaroEpisode = {
   id: string
   episodeNumber: number
@@ -41,11 +48,28 @@ export type KentaroEpisode = {
   behindTheEpisode: string | null
   relatedLink?: KentaroRelatedLink
   story: KentaroEpisodeStory
+  videoUrl: string | null
+  videoPoster: string | null
+  sceneHeading: string
+  sceneDialogueBusinessOwner: string
+  sceneDialogueKentaro: string
+  problemHeading: string
+  problemText: [string, string]
+  pullQuote: string
+  clarityItems: KentaroClarityItems
+  harnessHeading: string
+  harnessTopics: string[]
+  previousEpisode: string | null
+  nextEpisode: string | null
+  socialImage: string
+  metaDescription: string
 }
+
+type KentaroEpisodeDraft = Omit<KentaroEpisode, 'videoUrl' | 'videoPoster' | 'sceneHeading' | 'sceneDialogueBusinessOwner' | 'sceneDialogueKentaro' | 'problemHeading' | 'problemText' | 'pullQuote' | 'clarityItems' | 'harnessHeading' | 'harnessTopics' | 'previousEpisode' | 'nextEpisode' | 'socialImage' | 'metaDescription'>
 
 // This is the single content collection for the Kentaro series. Add real media
 // metadata here as each episode is ready; the UI intentionally treats null as unavailable.
-export const kentaroEpisodes: KentaroEpisode[] = [
+const kentaroEpisodeDrafts: KentaroEpisodeDraft[] = [
   {
     id: 'kentaro-01',
     episodeNumber: 1,
@@ -271,6 +295,141 @@ export const kentaroEpisodes: KentaroEpisode[] = [
     },
   },
 ]
+
+const kentaroEpisodeDetails: Record<string, Omit<KentaroEpisode, keyof KentaroEpisodeDraft | 'videoUrl' | 'videoPoster' | 'previousEpisode' | 'nextEpisode' | 'socialImage'>> = {
+  'ownership-apparently': {
+    sceneHeading: 'What does ownership mean?',
+    sceneDialogueBusinessOwner: 'Please own the customer issue.',
+    sceneDialogueKentaro: 'May I choose the fix, change the service and accept the risk if it fails?',
+    problemHeading: 'Ownership is not a mandate.',
+    problemText: [
+      'Ownership is being used as a mood rather than a responsibility. The request sounds empowering, but it does not say what Kentaro may decide, what he may change, or who carries the consequence.',
+      'Without decision rights and an accountable owner, an agent can either act beyond its mandate or keep escalating. Neither is a failure of initiative. The work was never defined well enough to own.',
+    ],
+    pullQuote: 'An agent needs decision rights, not a vague request to own the outcome.',
+    clarityItems: { role: 'Prepare options and coordinate the issue.', scope: 'Investigate and recommend; do not make irreversible changes.', approvalPoints: 'Approve a service or risk change before Kentaro acts.', accountableOwner: 'Name the customer-operations lead who accepts the outcome.' },
+    harnessHeading: 'Turn ownership into decision rights.',
+    harnessTopics: ['Mandate', 'Decision rights', 'Approval route'],
+    metaDescription: 'Kentaro is asked to take ownership without authority. A workplace story about decision rights and accountable ownership.',
+  },
+  'meeting-he-wasnt-in': {
+    sceneHeading: 'The decision is somewhere else.',
+    sceneDialogueBusinessOwner: 'The answer was agreed last Tuesday.',
+    sceneDialogueKentaro: 'Where can I find that decision and what did it change?',
+    problemHeading: 'A remembered decision is not working context.',
+    problemText: [
+      'A decision that is not recorded in the working context is not available to the people or agents who need to carry it forward. Access to documents is not the same as access to the decision trail.',
+      'The agent is blamed for missing an answer that was never made part of the work. The real gap is between a conversation being held and a decision being usable.',
+    ],
+    pullQuote: 'An agent needs recorded decisions, not access to the aftermath.',
+    clarityItems: { role: 'Use the agreed direction to prepare the next piece of work.', scope: 'Work only from decisions linked to the assignment.', approvalPoints: 'Confirm a new or changed decision before replacing the record.', accountableOwner: 'Name the decision owner and the person responsible for recording it.' },
+    harnessHeading: 'Carry decisions with the work.',
+    harnessTopics: ['Business context', 'Decision record', 'Correction path'],
+    metaDescription: 'Kentaro misses an answer agreed in a meeting he never attended. A workplace story about decision trails and shared context.',
+  },
+  'brief-that-wasnt': {
+    sceneHeading: 'A brief without a decision.',
+    sceneDialogueBusinessOwner: 'We need a strategic brief by Friday.',
+    sceneDialogueKentaro: 'What decision should it support, and how will the reader use it?',
+    problemHeading: 'A deliverable is not a definition of success.',
+    problemText: [
+      'The team supplied inputs, tools and urgency, but not an outcome. A deliverable is not a definition of success, and examples from old work cannot silently become the new requirement.',
+      'Kentaro can generate many plausible briefs. He cannot know which one matters unless the business purpose and decision are stated.',
+    ],
+    pullQuote: 'An agent needs a definition of success, not a deadline and a tool.',
+    clarityItems: { role: 'Prepare a decision-ready brief.', scope: 'Use the agreed audience, evidence and question only.', approvalPoints: 'Review the intended decision and success criteria before drafting.', accountableOwner: 'Name the person who will use and judge the brief.' },
+    harnessHeading: 'Connect the brief to its purpose.',
+    harnessTopics: ['Business context', 'Expected evidence', 'Review'],
+    metaDescription: 'Kentaro receives data, tools and a deadline but no definition of success. A workplace story about useful briefs.',
+  },
+  'can-you-fix-it': {
+    sceneHeading: 'Correct according to what?',
+    sceneDialogueBusinessOwner: 'Can you fix it? It does not feel right.',
+    sceneDialogueKentaro: 'Which business condition should the result meet?',
+    problemHeading: 'Feedback needs a correction test.',
+    problemText: [
+      'The team is reacting to a result without being able to name the criterion that makes it wrong. “Fix it” is feedback on a feeling, not a correction instruction.',
+      'When success criteria stay implicit, every revision becomes a new guess. The agent can improve the output only after the business meaning of correct is made explicit.',
+    ],
+    pullQuote: 'An agent needs a correction criterion, not feedback that something feels wrong.',
+    clarityItems: { role: 'Analyse the metric against the business question.', scope: 'Use agreed definitions and named exceptions.', approvalPoints: 'Confirm the correction criterion before recalculating.', accountableOwner: 'Name the reviewer who decides the result is fit for use.' },
+    harnessHeading: 'Make review criteria usable.',
+    harnessTopics: ['Data meaning', 'Review criteria', 'Correction path'],
+    metaDescription: 'Kentaro is told to fix a correct analysis without a usable correction criterion. A workplace story about feedback.',
+  },
+  'approved-by-nobody': {
+    sceneHeading: 'A recommendation becomes a decision.',
+    sceneDialogueBusinessOwner: 'Looks good. Let’s move ahead.',
+    sceneDialogueKentaro: 'Has the accountable approver authorised this change?',
+    problemHeading: 'Agreement is not approval.',
+    problemText: [
+      'A recommendation and a decision are different things. When the approval route is invisible, casual agreement can be mistaken for authority.',
+      'The agent cannot safely bridge that gap by itself. It needs to know which person or role can approve, what evidence they need and what to do when that person is unavailable.',
+    ],
+    pullQuote: 'An agent needs an approval route, not a silent room.',
+    clarityItems: { role: 'Compare options and prepare a recommendation.', scope: 'Do not execute a supplier change.', approvalPoints: 'Route the recommendation to the named approver with evidence.', accountableOwner: 'Name the business owner who can authorise the decision.' },
+    harnessHeading: 'Keep recommendation and approval distinct.',
+    harnessTopics: ['Approval route', 'Authority', 'Escalation'],
+    metaDescription: 'Kentaro sees a recommendation mistaken for approval. A workplace story about decision authority and escalation.',
+  },
+  'one-small-extra-thing': {
+    sceneHeading: 'The small request that changed the work.',
+    sceneDialogueBusinessOwner: 'Could you add one small extra thing?',
+    sceneDialogueKentaro: 'Does this change the outcome, review or approval needed?',
+    problemHeading: 'Small additions can change the mandate.',
+    problemText: [
+      'Scope change often arrives disguised as a small addition. The request is not only longer; it can require new sources, different review, higher stakes and a different owner.',
+      'An agent that follows every addition literally may produce more work than the original mandate allowed. An agent that refuses needs a clear way to ask whether the work has changed.',
+    ],
+    pullQuote: 'An agent needs a renewed mandate when a small request changes the work.',
+    clarityItems: { role: 'Deliver the agreed project update.', scope: 'Flag added research, legal review or board material as scope change.', approvalPoints: 'Confirm a revised mandate before absorbing new work.', accountableOwner: 'Name the owner who accepts the new outcome, time and risk.' },
+    harnessHeading: 'Make scope change an explicit decision.',
+    harnessTopics: ['Scope', 'Mandate', 'Review point'],
+    metaDescription: 'Kentaro receives one small extra thing that changes the whole assignment. A workplace story about scope and mandate.',
+  },
+  'the-data-is-there': {
+    sceneHeading: 'Data without a business question.',
+    sceneDialogueBusinessOwner: 'The data is there. Find the insight.',
+    sceneDialogueKentaro: 'Which decision should this analysis help you make?',
+    problemHeading: 'Data access does not define the question.',
+    problemText: [
+      'Data access gives an agent material to analyse, not a reason to analyse it. The same data can support different questions, measures and recommendations depending on the business decision at stake.',
+      'When the purpose is missing, an agent may produce accurate findings that are irrelevant. The problem is not that the data is absent; it is that the question is undefined.',
+    ],
+    pullQuote: 'An agent needs a business question, not just data access.',
+    clarityItems: { role: 'Analyse data for one stated decision.', scope: 'Use the agreed measures, audience and time horizon.', approvalPoints: 'Confirm the question before selecting analysis or recommendations.', accountableOwner: 'Name the business owner who will use the finding.' },
+    harnessHeading: 'Link data work to its decision.',
+    harnessTopics: ['Business context', 'Data meaning', 'Evidence'],
+    metaDescription: 'Kentaro has access to the data but not the purpose behind it. A workplace story about business questions.',
+  },
+  'new-team-member': {
+    sceneHeading: 'An agent joins without a role.',
+    sceneDialogueBusinessOwner: 'Help the team wherever you can.',
+    sceneDialogueKentaro: 'Am I assisting, recommending, acting, or escalating a decision?',
+    problemHeading: 'Access does not establish a role.',
+    problemText: [
+      'The team added an agent before defining its role. Access to information does not establish a mandate. An agent needs to know whether it is preparing work, recommending a direction, carrying out an approved action or escalating a decision to a person.',
+      'Without that agreement, every request carries a different expectation. Kentaro is not being difficult when he asks. He is exposing the role the team never defined.',
+    ],
+    pullQuote: 'An agent needs a defined role, not an assumed place in the team.',
+    clarityItems: { role: 'State whether Kentaro assists, analyses, recommends or acts.', scope: 'Set the work, systems and decisions that are in bounds.', approvalPoints: 'Name the points where a person must review or authorise work.', accountableOwner: 'Name the business owner responsible for Kentaro’s outcome.' },
+    harnessHeading: 'Give the agent a working role.',
+    harnessTopics: ['Mandate', 'Authority', 'Accountable ownership'],
+    metaDescription: 'Kentaro joins a team that has not agreed his role. A workplace story about mandate, authority and ownership.',
+  },
+}
+
+const defaultSocialImage = 'https://maysano.com/og/kentaro-business-experience.jpg'
+
+export const kentaroEpisodes: KentaroEpisode[] = kentaroEpisodeDrafts.map((episode, index, episodes) => ({
+  ...episode,
+  ...kentaroEpisodeDetails[episode.slug],
+  videoUrl: episode.youtubeVideoId ? `https://www.youtube.com/shorts/${episode.youtubeVideoId}` : null,
+  videoPoster: episode.thumbnail,
+  previousEpisode: episodes[index - 1]?.slug ?? null,
+  nextEpisode: episodes[index + 1]?.slug ?? null,
+  socialImage: defaultSocialImage,
+}))
 
 export const publishedKentaroEpisodes = kentaroEpisodes
   .filter((episode) => episode.status === 'published')

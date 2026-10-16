@@ -52,20 +52,57 @@ const kentaroFollowPanelStyles = `
 
 function KentaroStructuredData({ episode }: { episode?: KentaroEpisode }) {
   const url = episode ? episodeHref(episode) : kentaroBaseUrl
-  const data = {
+  const page = {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     '@id': `${url}#webpage`,
     url,
-    name: episode ? `${episode.title} | Kentaro` : 'Kentaro | Maysano',
-    description: episode?.description ?? 'One-minute stories about an AI agent working with humans.',
-    image: kentaroSocialImageUrl,
+    name: episode ? `${episode.title} | Kentaro at Work` : 'Kentaro | Maysano',
+    description: episode?.metaDescription ?? 'One-minute stories about an AI agent working with humans.',
+    image: episode?.socialImage ?? kentaroSocialImageUrl,
     about: { '@type': 'Thing', name: 'Human-agent collaboration' },
     isPartOf: { '@id': `${siteConfig.siteUrl}#website` },
     inLanguage: 'en',
   }
 
-  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />
+  if (!episode) return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(page) }} />
+
+  const article = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    '@id': `${url}#article`,
+    headline: episode.title,
+    description: episode.metaDescription,
+    image: episode.socialImage,
+    mainEntityOfPage: { '@id': `${url}#webpage` },
+    isPartOf: { '@id': `${kentaroBaseUrl}#webpage` },
+    publisher: { '@type': 'Organization', name: 'Maysano' },
+    inLanguage: 'en',
+  }
+  const breadcrumb = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: siteConfig.siteUrl },
+      { '@type': 'ListItem', position: 2, name: 'Kentaro at Work', item: kentaroBaseUrl },
+      { '@type': 'ListItem', position: 3, name: episode.title, item: url },
+    ],
+  }
+  const video = episode.youtubeVideoId && episode.publicationDate && episode.duration && episode.videoPoster
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'VideoObject',
+        name: episode.title,
+        description: episode.metaDescription,
+        thumbnailUrl: episode.videoPoster,
+        uploadDate: episode.publicationDate,
+        duration: episode.duration,
+        embedUrl: `https://www.youtube-nocookie.com/embed/${episode.youtubeVideoId}`,
+        contentUrl: episode.videoUrl,
+      }
+    : null
+
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify([page, article, breadcrumb, video].filter(Boolean)) }} />
 }
 
 function EpisodeMedia({ episode, playable = false, presentation = 'detail' }: { episode: KentaroEpisode; playable?: boolean; presentation?: 'detail' | 'card' }) {
@@ -76,8 +113,7 @@ function EpisodeMedia({ episode, playable = false, presentation = 'detail' }: { 
   if (!episode.youtubeVideoId) {
     return (
       <figure className={`kentaro-episode-media kentaro-episode-media--poster kentaro-episode-media--${presentation}`} style={{ aspectRatio: episode.videoAspectRatio }}>
-        <img src={still} alt={stillAlt} loading="lazy" />
-        <figcaption>Episode video coming soon</figcaption>
+        <img src={still} alt={stillAlt} loading={presentation === 'detail' ? 'eager' : 'lazy'} />
       </figure>
     )
   }
@@ -91,7 +127,7 @@ function EpisodeMedia({ episode, playable = false, presentation = 'detail' }: { 
         aria-label={`Play ${episode.title}`}
         onClick={() => setIsPlaying(true)}
       >
-        <img src={still} alt={stillAlt} loading="lazy" />
+        <img src={still} alt={stillAlt} loading={presentation === 'detail' ? 'eager' : 'lazy'} />
         <span className="kentaro-play-label">Play episode</span>
       </button>
     )
@@ -147,6 +183,13 @@ function EpisodeCard({ episode }: { episode: KentaroEpisode }) {
       </div>
     </article>
   )
+}
+
+function ClarityIcon({ item }: { item: keyof KentaroEpisode['clarityItems'] }) {
+  if (item === 'role') return <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><circle cx="16" cy="10" r="4" /><path d="M8 27c.8-5 3.5-7.5 8-7.5s7.2 2.5 8 7.5" /></svg>
+  if (item === 'scope') return <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><rect x="6" y="6" width="20" height="20" rx="2" /><path d="M11 16h10M16 11v10" /></svg>
+  if (item === 'approvalPoints') return <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><circle cx="16" cy="16" r="10" /><path d="m11 16 3.2 3.2L21.5 12" /></svg>
+  return <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><circle cx="16" cy="10" r="4" /><path d="M8 27c.8-5 3.5-7.5 8-7.5s7.2 2.5 8 7.5M23 8v8M19 12h8" /></svg>
 }
 
 function EpisodeLibrary() {
@@ -410,62 +453,96 @@ function KentaroHome() {
 }
 
 const kentaroEpisodePageStyles = `
-  .kentaro-episode-page__hero { padding: clamp(42px, 6vw, 84px) 0; }
-  .kentaro-episode-page__hero-grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(320px, .78fr); align-items: center; gap: clamp(44px, 8vw, 120px); }
-  .kentaro-episode-page__hero-copy { max-width: 650px; }
+  .kentaro-episode-page__hero { padding: clamp(54px, 7vw, 96px) 0; }
+  .kentaro-episode-page__hero-grid { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(440px, .92fr); align-items: start; gap: clamp(54px, 8vw, 130px); }
+  .kentaro-episode-page__hero-copy { max-width: 680px; padding-top: 6px; }
   .kentaro-episode-page__hero .kentaro-back::before { content: none; }
-  .kentaro-episode-page__hero .kentaro-back { margin-bottom: clamp(38px, 6vw, 72px); }
-  .kentaro-episode-page__hero h1 { max-width: 630px; margin-bottom: 20px; font-size: clamp(3.2rem, 5.4vw, 5.8rem); }
-  .kentaro-episode-page__summary { max-width: 570px; margin: 0; color: hsl(var(--navy-foreground) / .8); font-size: clamp(1.06rem, 1.5vw, 1.22rem); line-height: 1.58; }
-  .kentaro-episode-page__video { width: min(100%, 440px); justify-self: end; }
+  .kentaro-episode-page__hero .kentaro-back { margin-bottom: clamp(32px, 4vw, 56px); }
+  .kentaro-episode-page__hero h1 { max-width: 670px; margin-bottom: 20px; font-size: clamp(3.25rem, 5.3vw, 5.8rem); }
+  .kentaro-episode-page__summary { max-width: 590px; margin: 0; color: hsl(var(--navy-foreground) / .8); font-size: clamp(1.06rem, 1.5vw, 1.23rem); line-height: 1.58; }
+  .kentaro-episode-page__summary::after { display: block; width: 54px; height: 3px; margin-top: 27px; background: #C2D897; content: ''; }
+  .kentaro-episode-page__video { width: clamp(440px, 35vw, 520px); justify-self: end; }
   .kentaro-episode-page__video .kentaro-episode-media { width: 100%; }
-  .kentaro-episode-media--poster { position: relative; overflow: hidden; margin: 0; border: 1px solid hsl(var(--navy-foreground) / .24); border-radius: 9px; background: hsl(var(--navy) / .5); }
+  .kentaro-episode-media--poster { overflow: hidden; margin: 0; border: 0; border-radius: 12px; background: hsl(var(--navy) / .5); }
   .kentaro-episode-media--poster img { display: block; width: 100%; height: 100%; object-fit: cover; }
-  .kentaro-episode-media--poster figcaption { position: absolute; right: 14px; bottom: 14px; padding: 8px 10px; background: hsl(var(--navy) / .88); color: hsl(var(--lime)); font-size: .68rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; }
-  .kentaro-episode-page__story-section { padding: clamp(68px, 9vw, 128px) 0; }
-  .kentaro-episode-page__story-section--paper { background: hsl(var(--secondary)); }
-  .kentaro-episode-page__story-section--navy { background: hsl(var(--navy)); color: hsl(var(--navy-foreground)); }
-  .kentaro-episode-page__story-grid { display: grid; grid-template-columns: minmax(220px, .66fr) minmax(0, 1fr); align-items: start; gap: clamp(48px, 10vw, 170px); }
-  .kentaro-episode-page__story-heading { max-width: 390px; }
-  .kentaro-episode-page__story-heading .eyebrow { margin-bottom: 17px; color: hsl(var(--primary)); }
-  .kentaro-episode-page__story-section--navy .eyebrow { color: hsl(var(--lime)); }
-  .kentaro-episode-page__story-heading h2 { margin: 0; color: hsl(var(--heading)); font-size: clamp(2.3rem, 4vw, 4.1rem); letter-spacing: -.065em; line-height: .96; }
-  .kentaro-episode-page__story-section--navy .kentaro-episode-page__story-heading h2 { color: hsl(var(--navy-foreground)); }
-  .kentaro-episode-page__story-copy { max-width: 720px; }
-  .kentaro-episode-page__story-copy p { margin: 0 0 20px; color: hsl(var(--muted-foreground)); font-size: 1.04rem; line-height: 1.76; }
-  .kentaro-episode-page__story-copy p:last-child { margin-bottom: 0; }
-  .kentaro-episode-page__story-section--navy .kentaro-episode-page__story-copy p { color: hsl(var(--navy-foreground) / .8); }
-  .kentaro-episode-page__principle-statement { margin: 0 0 25px !important; padding: clamp(24px, 3vw, 36px); border-left: 3px solid hsl(var(--primary)); background: hsl(var(--accent)); color: hsl(var(--heading)) !important; font-size: clamp(1.3rem, 2.1vw, 1.82rem) !important; font-weight: 700; letter-spacing: -.045em; line-height: 1.18 !important; }
-  .kentaro-episode-page__harness-cta { display: inline-flex; align-items: center; gap: 9px; margin-top: 14px; color: hsl(var(--lime)); font-size: .92rem; font-weight: 700; text-decoration: none; }
-  .kentaro-episode-page__harness-cta:hover { text-decoration: underline; text-underline-offset: 5px; }
-  .kentaro-episode-continue { padding: clamp(62px, 8vw, 110px) 0; background: hsl(var(--navy)); }
-  .kentaro-episode-continue__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid hsl(var(--navy-foreground) / .22); border-bottom: 1px solid hsl(var(--navy-foreground) / .22); }
-  .kentaro-episode-continue__item { display: grid; gap: 10px; min-height: 144px; align-content: center; padding: 24px clamp(20px, 3vw, 42px); border-left: 1px solid hsl(var(--navy-foreground) / .22); color: hsl(var(--navy-foreground)); text-decoration: none; }
+  .kentaro-episode-scene, .kentaro-episode-problem { background: hsl(var(--secondary)); }
+  .kentaro-episode-scene { padding: clamp(70px, 8vw, 112px) 0 48px; }
+  .kentaro-episode-scene__grid { display: grid; grid-template-columns: minmax(300px, .82fr) minmax(0, 1fr); gap: clamp(56px, 9vw, 150px); align-items: start; }
+  .kentaro-episode-page__eyebrow { margin-bottom: 16px; color: hsl(var(--primary)); }
+  .kentaro-episode-page__heading { max-width: 460px; margin: 0; color: hsl(var(--heading)); font-size: clamp(2.45rem, 4.1vw, 4.35rem); letter-spacing: -.065em; line-height: .96; }
+  .kentaro-episode-dialogue { margin: 38px 0 0; border-top: 1px solid hsl(var(--border)); }
+  .kentaro-episode-dialogue div { padding: 17px 0; border-bottom: 1px solid hsl(var(--border)); }
+  .kentaro-episode-dialogue dt { margin-bottom: 7px; color: hsl(var(--primary)); font-size: .68rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+  .kentaro-episode-dialogue dd { margin: 0; color: hsl(var(--heading)); font-size: 1rem; line-height: 1.5; }
+  .kentaro-episode-scene__copy { max-width: 700px; padding-top: 5px; color: hsl(var(--muted-foreground)); font-size: clamp(1.04rem, 1.4vw, 1.18rem); line-height: 1.75; }
+  .kentaro-episode-scene__copy p { margin: 0; }
+  .kentaro-episode-problem { padding: 0 0 clamp(72px, 9vw, 120px); }
+  .kentaro-episode-problem__inner { max-width: 920px; padding-top: clamp(52px, 6vw, 80px); border-top: 1px solid hsl(var(--border)); }
+  .kentaro-episode-problem__copy { max-width: 760px; margin-top: 28px; color: hsl(var(--muted-foreground)); font-size: 1.04rem; line-height: 1.72; }
+  .kentaro-episode-problem__copy p { margin: 0 0 17px; }
+  .kentaro-episode-pullquote { max-width: 870px; margin: 42px 0 0; padding: 4px 0 4px clamp(22px, 3vw, 38px); border-left: 3px solid #C2D897; color: hsl(var(--heading)); font-size: clamp(1.7rem, 3.1vw, 3rem); font-weight: 600; letter-spacing: -.055em; line-height: 1.06; }
+  .kentaro-episode-clarity { padding: clamp(58px, 6vw, 86px) 0; background: hsl(var(--accent)); }
+  .kentaro-episode-clarity__header { display: flex; align-items: end; justify-content: space-between; gap: 32px; margin-bottom: 42px; }
+  .kentaro-episode-clarity__header .kentaro-episode-page__heading { max-width: 620px; }
+  .kentaro-episode-clarity__grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid hsl(var(--border)); border-bottom: 1px solid hsl(var(--border)); }
+  .kentaro-episode-clarity__item { min-height: 174px; padding: 24px clamp(18px, 2.3vw, 32px); border-left: 1px solid hsl(var(--border)); }
+  .kentaro-episode-clarity__item:first-child { border-left: 0; }
+  .kentaro-episode-clarity__item svg { width: 28px; height: 28px; margin-bottom: 23px; color: hsl(var(--primary)); }
+  .kentaro-episode-clarity__item h3 { margin: 0 0 8px; color: hsl(var(--heading)); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
+  .kentaro-episode-clarity__item p { margin: 0; color: hsl(var(--muted-foreground)); font-size: .9rem; line-height: 1.45; }
+  .kentaro-episode-clarity__principle { max-width: 790px; margin: 32px 0 0; color: hsl(var(--heading)); font-size: 1.05rem; line-height: 1.65; }
+  .kentaro-episode-harness { padding: clamp(56px, 6vw, 86px) 0; background: hsl(var(--navy)); color: #F4F6EE; }
+  .kentaro-episode-harness__grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(260px, .65fr); gap: clamp(42px, 8vw, 120px); align-items: center; }
+  .kentaro-episode-harness .kentaro-episode-page__eyebrow { color: #C2D897; }
+  .kentaro-episode-harness .kentaro-episode-page__heading { color: #F4F6EE; }
+  .kentaro-episode-harness__copy { max-width: 700px; margin: 24px 0 0; color: #B7C0BF; font-size: 1rem; line-height: 1.65; }
+  .kentaro-episode-harness__links { display: flex; flex-wrap: wrap; gap: 14px 28px; margin-top: 25px; }
+  .kentaro-episode-harness__links a { color: #C2D897; font-size: .9rem; font-weight: 700; text-decoration: none; }
+  .kentaro-episode-harness__links a:hover { text-decoration: underline; text-underline-offset: 5px; }
+  .kentaro-episode-topics { display: grid; gap: 0; padding-left: 28px; border-left: 1px solid #C2D897; }
+  .kentaro-episode-topics span { position: relative; padding: 14px 0 14px 20px; border-bottom: 1px solid #455864; color: #F4F6EE; font-size: clamp(1.1rem, 1.65vw, 1.35rem); font-weight: 600; letter-spacing: -.035em; }
+  .kentaro-episode-topics span::before { position: absolute; top: calc(50% - 4px); left: -33px; width: 8px; height: 8px; border-radius: 50%; background: #C2D897; content: ''; }
+  .kentaro-episode-continue { padding: clamp(44px, 5vw, 70px) 0; background: hsl(var(--background)); }
+  .kentaro-episode-continue__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); border-top: 1px solid hsl(var(--border)); border-bottom: 1px solid hsl(var(--border)); }
+  .kentaro-episode-continue__item { display: grid; gap: 9px; min-height: 116px; align-content: center; padding: 21px clamp(18px, 2.6vw, 34px); border-left: 1px solid hsl(var(--border)); color: hsl(var(--heading)); text-decoration: none; }
   .kentaro-episode-continue__item:first-child { border-left: 0; }
-  .kentaro-episode-continue__item small { color: hsl(var(--lime)); font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
-  .kentaro-episode-continue__item strong { font-size: clamp(1.15rem, 1.65vw, 1.5rem); letter-spacing: -.045em; line-height: 1.1; }
-  .kentaro-episode-continue__item:not([aria-disabled="true"]):hover { background: hsl(var(--navy-foreground) / .07); }
-  .kentaro-episode-continue__item[aria-disabled="true"] { opacity: .56; }
+  .kentaro-episode-continue__item small { color: hsl(var(--primary)); font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+  .kentaro-episode-continue__item strong { font-size: clamp(1.08rem, 1.5vw, 1.32rem); letter-spacing: -.04em; line-height: 1.12; }
+  .kentaro-episode-continue__item span { color: hsl(var(--primary)); }
+  .kentaro-episode-continue__item:hover { background: hsl(var(--secondary)); }
   @media (max-width: 900px) {
-    .kentaro-episode-page__hero-grid, .kentaro-episode-page__story-grid { grid-template-columns: 1fr; gap: 30px; }
+    .kentaro-episode-page__hero-grid, .kentaro-episode-scene__grid, .kentaro-episode-harness__grid { grid-template-columns: 1fr; gap: 32px; }
     .kentaro-episode-page__video { width: min(100%, 500px); justify-self: start; }
-    .kentaro-episode-page__story-heading { max-width: 620px; }
+    .kentaro-episode-clarity__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .kentaro-episode-clarity__item:nth-child(odd) { border-left: 0; }
+    .kentaro-episode-clarity__item:nth-child(n + 3) { border-top: 1px solid hsl(var(--border)); }
   }
   @media (max-width: 680px) {
     .kentaro-episode-page__hero { padding: 30px 0 62px; }
     .kentaro-episode-page__hero h1 { font-size: clamp(2.8rem, 13vw, 4.3rem); }
-    .kentaro-episode-page__story-heading h2 { font-size: clamp(2.25rem, 10vw, 3.2rem); }
-    .kentaro-episode-page__story-copy p { font-size: .98rem; line-height: 1.7; }
+    .kentaro-episode-page__video { width: 100%; }
+    .kentaro-episode-page__heading { font-size: clamp(2.25rem, 10vw, 3.2rem); }
+    .kentaro-episode-scene { padding-bottom: 36px; }
+    .kentaro-episode-clarity__header { display: block; margin-bottom: 30px; }
+    .kentaro-episode-clarity__grid { grid-template-columns: 1fr; }
+    .kentaro-episode-clarity__item { min-height: 0; border-top: 1px solid hsl(var(--border)); border-left: 0; }
+    .kentaro-episode-clarity__item:first-child { border-top: 0; }
+    .kentaro-episode-topics { max-width: 360px; }
     .kentaro-episode-continue__grid { grid-template-columns: 1fr; }
-    .kentaro-episode-continue__item { min-height: 0; padding: 22px 0; border-top: 1px solid hsl(var(--navy-foreground) / .22); border-left: 0; }
+    .kentaro-episode-continue__item { min-height: 0; padding: 22px 0; border-top: 1px solid hsl(var(--border)); border-left: 0; }
     .kentaro-episode-continue__item:first-child { border-top: 0; }
   }
 `
 
 function KentaroEpisodePage({ episode }: { episode: KentaroEpisode }) {
-  const index = publishedKentaroEpisodes.findIndex((item) => item.id === episode.id)
-  const previous = index > 0 ? publishedKentaroEpisodes[index - 1] : null
-  const next = index >= 0 && index < publishedKentaroEpisodes.length - 1 ? publishedKentaroEpisodes[index + 1] : null
+  const previous = episode.previousEpisode ? getKentaroEpisode(episode.previousEpisode) : null
+  const next = episode.nextEpisode ? getKentaroEpisode(episode.nextEpisode) : null
+  const clarityLabels: Array<[keyof KentaroEpisode['clarityItems'], string]> = [
+    ['role', 'Role'],
+    ['scope', 'Scope'],
+    ['approvalPoints', 'Approval points'],
+    ['accountableOwner', 'Accountable owner'],
+  ]
 
   return (
     <>
@@ -488,35 +565,58 @@ function KentaroEpisodePage({ episode }: { episode: KentaroEpisode }) {
               </div>
             </div>
           </header>
-          <section className="kentaro-episode-page__story-section kentaro-episode-page__story-section--paper" aria-labelledby="episode-situation-title">
-            <div className="container kentaro-episode-page__story-grid">
-              <div className="kentaro-episode-page__story-heading"><p className="eyebrow">THE SITUATION</p><h2 id="episode-situation-title">What happened</h2></div>
-              <div className="kentaro-episode-page__story-copy"><p>{episode.story.situation}</p></div>
+          <section className="kentaro-episode-scene" aria-labelledby="episode-scene-title">
+            <div className="container kentaro-episode-scene__grid">
+              <div>
+                <p className="eyebrow kentaro-episode-page__eyebrow">THE SCENE</p>
+                <h2 id="episode-scene-title" className="kentaro-episode-page__heading">{episode.sceneHeading}</h2>
+                <dl className="kentaro-episode-dialogue">
+                  <div><dt>Business owner</dt><dd>“{episode.sceneDialogueBusinessOwner}”</dd></div>
+                  <div><dt>Kentaro</dt><dd>“{episode.sceneDialogueKentaro}”</dd></div>
+                </dl>
+              </div>
+              <div className="kentaro-episode-scene__copy"><p>{episode.story.situation}</p></div>
             </div>
           </section>
-          <section className="kentaro-episode-page__story-section" aria-labelledby="episode-tension-title">
-            <div className="container kentaro-episode-page__story-grid">
-              <div className="kentaro-episode-page__story-heading"><p className="eyebrow">THE WORK TENSION</p><h2 id="episode-tension-title">What went wrong</h2></div>
-              <div className="kentaro-episode-page__story-copy"><p>{episode.story.tension[0]}</p><p>{episode.story.tension[1]}</p></div>
+          <section className="kentaro-episode-problem" aria-labelledby="episode-problem-title">
+            <div className="container kentaro-episode-problem__inner">
+              <p className="eyebrow kentaro-episode-page__eyebrow">THE HIDDEN PROBLEM</p>
+              <h2 id="episode-problem-title" className="kentaro-episode-page__heading">{episode.problemHeading}</h2>
+              <div className="kentaro-episode-problem__copy"><p>{episode.problemText[0]}</p><p>{episode.problemText[1]}</p></div>
+              <blockquote className="kentaro-episode-pullquote">“{episode.pullQuote}”</blockquote>
             </div>
           </section>
-          <section className="kentaro-episode-page__story-section kentaro-episode-page__story-section--paper" aria-labelledby="episode-principle-title">
-            <div className="container kentaro-episode-page__story-grid">
-              <div className="kentaro-episode-page__story-heading"><p className="eyebrow">THE PRINCIPLE</p><h2 id="episode-principle-title">{episode.story.principleTitle}</h2></div>
-              <div className="kentaro-episode-page__story-copy"><p className="kentaro-episode-page__principle-statement">“{episode.story.principleStatement}”</p><p>{episode.story.principleExplanation}</p></div>
+          <section className="kentaro-episode-clarity" aria-labelledby="episode-clarity-title">
+            <div className="container">
+              <div className="kentaro-episode-clarity__header">
+                <div><p className="eyebrow kentaro-episode-page__eyebrow">BEFORE THE AGENT STARTS</p><h2 id="episode-clarity-title" className="kentaro-episode-page__heading">{episode.story.principleTitle}</h2></div>
+              </div>
+              <div className="kentaro-episode-clarity__grid">
+                {clarityLabels.map(([key, label]) => <div className="kentaro-episode-clarity__item" key={key}><ClarityIcon item={key} /><h3>{label}</h3><p>{episode.clarityItems[key]}</p></div>)}
+              </div>
+              <p className="kentaro-episode-clarity__principle">{episode.story.principleExplanation}</p>
             </div>
           </section>
-          <section className="kentaro-episode-page__story-section kentaro-episode-page__story-section--navy" aria-labelledby="episode-harness-title">
-            <div className="container kentaro-episode-page__story-grid">
-              <div className="kentaro-episode-page__story-heading"><p className="eyebrow">FROM STORY TO HARNESS</p><h2 id="episode-harness-title">How Kentaro Harness reduces this friction</h2></div>
-              <div className="kentaro-episode-page__story-copy"><p>{episode.story.harness}</p><a className="kentaro-episode-page__harness-cta" href={`${kentaroBaseUrl}#kentaro-harness`}>Explore Kentaro Harness <span aria-hidden="true">→</span></a></div>
+          <section className="kentaro-episode-harness" aria-labelledby="episode-harness-title">
+            <div className="container kentaro-episode-harness__grid">
+              <div>
+                <p className="eyebrow kentaro-episode-page__eyebrow">FROM STORY TO HARNESS</p>
+                <h2 id="episode-harness-title" className="kentaro-episode-page__heading">{episode.harnessHeading}</h2>
+                <p className="kentaro-episode-harness__copy">{episode.story.harness}</p>
+                <div className="kentaro-episode-harness__links">
+                  <a href={`${kentaroBaseUrl}#kentaro-harness`}>Explore Kentaro Harness <span aria-hidden="true">→</span></a>
+                  <a href={`${kentaroBaseUrl}#kentaro-roadmap`}>See how Kentaro is being built <span aria-hidden="true">→</span></a>
+                  <a href={`${kentaroBaseUrl}why-kentaro-exists/`}>Why Kentaro exists <span aria-hidden="true">→</span></a>
+                </div>
+              </div>
+              <div className="kentaro-episode-topics" aria-label="Relevant Kentaro Harness topics">{episode.harnessTopics.map((topic) => <span key={topic}>{topic}</span>)}</div>
             </div>
           </section>
           <section className="kentaro-episode-continue" aria-label="Continue watching Kentaro stories">
             <nav className="container kentaro-episode-continue__grid" aria-label="Adjacent episodes">
-              {previous ? <a className="kentaro-episode-continue__item" href={episodeHref(previous)}><small>Previous story</small><strong>{previous.title}</strong></a> : <span className="kentaro-episode-continue__item" aria-disabled="true"><small>Previous story</small><strong>No earlier story</strong></span>}
-              {next ? <a className="kentaro-episode-continue__item" href={episodeHref(next)}><small>Next story</small><strong>{next.title}</strong></a> : <span className="kentaro-episode-continue__item" aria-disabled="true"><small>Next story</small><strong>No later story</strong></span>}
-              <a className="kentaro-episode-continue__item" href={kentaroBaseUrl}><small>Continue watching</small><strong>Back to all Kentaro stories</strong></a>
+              {previous && <a className="kentaro-episode-continue__item" href={episodeHref(previous)}><small>Previous story</small><strong>{previous.title} <span aria-hidden="true">←</span></strong></a>}
+              {next && <a className="kentaro-episode-continue__item" href={episodeHref(next)}><small>Next story</small><strong>{next.title} <span aria-hidden="true">→</span></strong></a>}
+              <a className="kentaro-episode-continue__item" href={kentaroBaseUrl}><small>All stories</small><strong>Back to Kentaro at Work <span aria-hidden="true">→</span></strong></a>
             </nav>
           </section>
         </article>

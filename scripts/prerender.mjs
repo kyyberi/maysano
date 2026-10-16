@@ -93,10 +93,10 @@ const pages = [
   ...kentaroEpisodes.map(([slug, title, description]) => ({
     pathname: `/kentaro/episodes/${slug}/`,
     outputPath: `${outputDirectory}kentaro/episodes/${slug}/index.html`,
-    title: `${title} | Kentaro | Maysano`,
+    title: `${title} | Kentaro at Work`,
     description,
     canonical: `https://maysano.com/kentaro/episodes/${slug}/`,
-    ogType: 'website',
+    ogType: 'article',
     ogImage: kentaroOgImage,
     ogImageAlt: kentaroOgImageAlt,
     ogImageType: 'image/jpeg',
