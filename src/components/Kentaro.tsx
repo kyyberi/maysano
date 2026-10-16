@@ -142,6 +142,8 @@ const kentaroPurposeStyles = `
   .kentaro-purpose__content .eyebrow { margin-bottom: 19px; color: hsl(var(--primary)); }
   .kentaro-purpose__content h2 { max-width: 710px; color: hsl(var(--heading)); }
   .kentaro-purpose__intro, .kentaro-purpose__bridge { max-width: 740px; margin: 0; color: hsl(var(--muted-foreground)); font-size: clamp(1.08rem, 1.7vw, 1.33rem); line-height: 1.55; }
+  .kentaro-purpose__background-link { display: inline-flex; align-items: center; gap: 7px; margin-top: 18px; color: hsl(var(--primary)); font-size: .88rem; font-weight: 700; text-decoration: none; }
+  .kentaro-purpose__background-link:hover { color: hsl(var(--heading)); text-decoration: underline; text-underline-offset: 5px; }
   .kentaro-purpose__comparison { margin: 42px 0 30px; border-top: 1px solid hsl(var(--border)); }
   .kentaro-purpose__comparison-labels, .kentaro-purpose__comparison-row { display: grid; grid-template-columns: minmax(180px, .82fr) minmax(0, 1fr); column-gap: 36px; }
   .kentaro-purpose__comparison-labels { padding: 18px 0 13px; }
@@ -259,6 +261,7 @@ function KentaroHome() {
               <p className="eyebrow">WHY THESE STORIES</p>
               <h2 id="kentaro-purpose-title" className="kentaro-section-title">Clear to people.<br />Ambiguous to Kentaro.</h2>
               <p className="kentaro-purpose__intro">Business people work through shared history, informal decisions and assumptions that rarely appear in a brief. Kentaro does not have that social memory.</p>
+              <a className="kentaro-purpose__background-link" href={`${kentaroBaseUrl}why-kentaro-exists/`}>Why Kentaro exists <span aria-hidden="true">→</span></a>
               <dl className="kentaro-purpose__comparison">
                 <div className="kentaro-purpose__comparison-labels" aria-hidden="true"><span>What people say</span><span>What Kentaro needs to know</span></div>
                 <div className="kentaro-purpose__comparison-row">
