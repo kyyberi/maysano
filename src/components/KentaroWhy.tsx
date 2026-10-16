@@ -140,7 +140,7 @@ export function KentaroWhyPage() {
           <p>Kentaro Harness aims to reduce friction in practical work. It needs secure access to the right tools, data, and platform functions. It also needs an explicit working relationship: the objective, permitted information, boundaries, approvals, and accountable owner.</p>
           <p>The goal is not to make Kentaro appear independent. The goal is clearer, safer, more useful collaboration between business people and agents. Kentaro Harness is open source under the MIT licence.</p>
           <p>This is exploration and early work, not a claim that a final operating model already exists. The stories, Harness, and the ideas on this page are a way to learn in public about a problem that will matter well beyond one product.</p>
-          <div className="kentaro-background__actions"><a className="button button--light" href={kentaroHarnessUrl} target="_blank" rel="noreferrer">Explore Kentaro Harness <span aria-hidden="true">↗</span></a><a className="text-link text-link--light" href={`${kentaroBaseUrl}#kentaro-follow`}>Join the journey <span aria-hidden="true">→</span></a></div>
+          <div className="kentaro-background__actions"><a className="button button--light" href={kentaroHarnessUrl} target="_blank" rel="noreferrer">Explore Kentaro Harness <span aria-hidden="true">↗</span></a><a className="text-link text-link--light" href={`${kentaroBaseUrl}#kentaro-subscribe`}>Join the journey <span aria-hidden="true">→</span></a></div>
         </BackgroundSection>
 
         <section className="kentaro-purpose section">

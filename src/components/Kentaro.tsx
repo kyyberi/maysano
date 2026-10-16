@@ -103,6 +103,17 @@ function FeaturedStories() {
         <div className="kentaro-featured-stories__grid">
           {featuredEpisodes.map((episode) => <FeaturedEpisodeCard key={episode.id} episode={episode} />)}
         </div>
+        <a className="kentaro-featured-stories__subscribe-panel" href="#kentaro-subscribe">
+          <span className="kentaro-featured-stories__subscribe-icon" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.7"><rect x="4" y="7" width="24" height="18" rx="2" /><path d="m5.5 9 10.5 8L26.5 9" /></svg>
+          </span>
+          <span className="kentaro-featured-stories__subscribe-copy">
+            <span className="eyebrow">FOLLOW KENTARO</span>
+            <strong>Get the next story in your inbox.</strong>
+            <span>Kentaro exposes one workplace problem at a time. Join the list for new stories and practical thinking about how people and AI agents should work together.</span>
+          </span>
+          <span className="kentaro-featured-stories__subscribe-action">Join the Kentaro list <span aria-hidden="true">→</span></span>
+        </a>
         <div className="kentaro-featured-stories__destinations" aria-label="Continue with Kentaro stories or Harness">
           <a className="kentaro-featured-stories__destination" href={kentaroPlaylistUrl} target="_blank" rel="noreferrer">
             <span className="kentaro-featured-stories__destination-icon" aria-hidden="true">▶</span>
@@ -216,6 +227,7 @@ function KentaroHome() {
                 <a className="button button--light" href="#featured-stories">Watch Kentaro stories <span aria-hidden="true">↓</span></a>
                 <a className="text-link text-link--light" href="#kentaro-harness">Explore Kentaro Harness <span aria-hidden="true">↓</span></a>
               </div>
+              <a className="kentaro-hero__subscribe-link" href="#kentaro-subscribe">Get new Kentaro stories by email <span aria-hidden="true">→</span></a>
             </div>
             <figure className="kentaro-hero__image">
               <img src={kentaroWorkplaceUncertaintyImage} alt="Kentaro navigates workplace uncertainty across meetings, requests and paperwork." width="1448" height="1086" />
@@ -330,14 +342,14 @@ function KentaroHome() {
             </ol>
           </div>
         </section>
-        <section id="kentaro-follow" className="kentaro-follow" aria-labelledby="kentaro-follow-title">
+        <section id="kentaro-subscribe" className="kentaro-follow" aria-labelledby="kentaro-follow-title">
           <style>{kentaroFollowPanelStyles}</style>
           <div className="container kentaro-harness__grid kentaro-follow__grid">
             <div className="kentaro-follow__column kentaro-follow__column--updates" style={{ display: 'flex', flexDirection: 'column' }}>
-              <p className="eyebrow">KEEP UP WITH KENTARO</p>
+              <p className="eyebrow">STAY WITH KENTARO</p>
               <div className="kentaro-harness__copy" style={{ display: 'flex', flex: 1, flexDirection: 'column' }}>
-                <h2 id="kentaro-follow-title" className="kentaro-section-title">Follow Kentaro’s next assignment.</h2>
-                <p style={{ marginTop: 'auto' }}>New Kentaro stories and Harness development updates. Same reasonable questions.</p>
+                <h2 id="kentaro-follow-title" className="kentaro-section-title">The next workplace problem is already on its way.</h2>
+                <p style={{ marginTop: 'auto' }}>Join the Kentaro list for new office stories, practical principles and updates on Kentaro Harness.</p>
                 <KentaroUpdatesForm />
                 <small>A series by Maysano.</small>
               </div>

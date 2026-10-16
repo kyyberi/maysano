@@ -59,8 +59,9 @@ export function KentaroUpdatesForm() {
           <label className="sr-only" htmlFor="kentaro-updates-email">Email address</label>
           <div style={fieldsStyle}>
             <input id="kentaro-updates-email" type="email" name="fields[email]" placeholder="Your email address" autoComplete="email" required style={emailStyle} />
-            <button type="submit" style={submitStyle}>Get updates</button>
+            <button type="submit" style={submitStyle}>Join the Kentaro list</button>
           </div>
+          <p style={{ margin: '10px 0 0', color: 'hsl(var(--navy-foreground) / 0.62)', fontSize: '0.76rem', lineHeight: 1.4 }}>No noise. Unsubscribe whenever you want.</p>
           <div className="ml-form-recaptcha ml-validate-required" style={{ marginTop: 16 }}>
             <div className="g-recaptcha" data-sitekey="6Lf1KHQUAAAAAFNKEX1hdSWCS3mRMv4FlFaNslaD" />
           </div>

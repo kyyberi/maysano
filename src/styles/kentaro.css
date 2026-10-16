@@ -58,6 +58,9 @@
   margin-top: 32px;
 }
 
+.kentaro-hero__subscribe-link { display: inline-flex; align-items: center; gap: 7px; margin-top: 19px; color: hsl(var(--navy-foreground) / 0.7); font-size: .86rem; font-weight: 600; text-decoration: none; }
+.kentaro-hero__subscribe-link:hover { color: hsl(var(--lime)); text-decoration: underline; text-underline-offset: 5px; }
+
 .kentaro-hero .button:disabled,
 .kentaro-follow .button:disabled {
   cursor: not-allowed;
@@ -127,6 +130,17 @@
 .kentaro-featured-stories__harness-link { display: inline-flex; align-items: center; gap: 7px; margin-top: 22px; color: hsl(var(--primary)); font-size: .88rem; font-weight: 700; text-decoration: none; }
 .kentaro-featured-stories__harness-link:hover { color: hsl(var(--heading)); text-decoration: underline; text-underline-offset: 5px; }
 .kentaro-featured-stories__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 2vw, 30px); }
+.kentaro-featured-stories__subscribe-panel { display: grid; grid-template-columns: 48px minmax(0, 1fr) auto; align-items: center; gap: clamp(18px, 2.5vw, 34px); margin-top: clamp(40px, 5vw, 62px); padding: clamp(24px, 3vw, 34px); border: 1px solid #455864; border-radius: 10px; background: #243A4B; color: #F4F6EE; text-decoration: none; transition: border-color .2s ease, background-color .2s ease; }
+.kentaro-featured-stories__subscribe-panel:hover { border-color: #C2D897; background: #294357; }
+.kentaro-featured-stories__subscribe-icon { display: grid; width: 46px; height: 46px; place-items: center; border: 1px solid #607382; border-radius: 50%; color: #C2D897; }
+.kentaro-featured-stories__subscribe-icon svg { width: 24px; height: 24px; }
+.kentaro-featured-stories__subscribe-copy { display: grid; gap: 6px; max-width: 800px; }
+.kentaro-featured-stories__subscribe-copy .eyebrow { margin: 0 0 3px; color: #C2D897; }
+.kentaro-featured-stories__subscribe-copy strong { font-size: clamp(1.24rem, 2vw, 1.6rem); letter-spacing: -.045em; line-height: 1.14; }
+.kentaro-featured-stories__subscribe-copy > span:last-child { color: #B7C0BF; font-size: .92rem; line-height: 1.5; }
+.kentaro-featured-stories__subscribe-action { display: inline-flex; align-items: center; gap: 12px; color: #C2D897; font-size: .88rem; font-weight: 700; white-space: nowrap; }
+.kentaro-featured-stories__subscribe-action span { display: grid; width: 40px; height: 40px; place-items: center; border-radius: 50%; background: #C2D897; color: #1C3245; font-size: 1.35rem; transition: transform .2s ease; }
+.kentaro-featured-stories__subscribe-panel:hover .kentaro-featured-stories__subscribe-action span { transform: translateX(3px); }
 .kentaro-featured-card { display: block; min-width: 0; color: inherit; text-decoration: none; }
 .kentaro-featured-card__image { position: relative; margin: 0; overflow: hidden; border: 1px solid hsl(var(--border)); border-radius: 11px; background: hsl(var(--navy)); transition: border-color .2s ease; }
 .kentaro-featured-card__image img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
@@ -169,21 +183,6 @@
   box-shadow: var(--shadow-sm);
 }
 
-.kentaro-episode-card__media { display: block; background: hsl(var(--navy)); }
-.kentaro-episode-card__media img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
-
-.kentaro-thumbnail-pending {
-  display: grid;
-  min-height: 168px;
-  aspect-ratio: 16 / 7;
-  align-content: end;
-  gap: 8px;
-  padding: 21px;
-  background: linear-gradient(155deg, hsl(var(--navy) / 0.94), hsl(var(--navy)));
-  color: hsl(var(--navy-foreground));
-}
-
-.kentaro-thumbnail-pending small,
 .kentaro-episode-card__number {
   color: hsl(var(--lime));
   font-size: 0.66rem;
@@ -192,16 +191,9 @@
   text-transform: uppercase;
 }
 
-.kentaro-thumbnail-pending strong { font-size: 1rem; }
-.kentaro-thumbnail-pending--coming { background: hsl(var(--secondary)); color: hsl(var(--muted-foreground)); }
-.kentaro-thumbnail-pending--coming small { color: hsl(var(--primary)); }
-.kentaro-episode-card--coming-soon { box-shadow: none; }
-.kentaro-episode-card--coming-soon h3 { color: hsl(var(--muted-foreground)); }
 .kentaro-episode-card__content { display: flex; flex: 1; flex-direction: column; padding: 23px 23px 21px; }
 .kentaro-episode-card__number { margin: 0 0 14px; color: hsl(var(--primary)); }
 .kentaro-episode-card h3 { margin: 0 0 10px; font-size: 1.25rem; letter-spacing: -0.04em; line-height: 1.12; }
-.kentaro-episode-card h3 a { color: hsl(var(--heading)); }
-.kentaro-episode-card h3 a:hover { color: hsl(var(--primary)); }
 .kentaro-episode-card__content > p:not(.kentaro-episode-card__number) { margin: 0; color: hsl(var(--muted-foreground)); font-size: 0.88rem; line-height: 1.55; }
 .kentaro-episode-card__content > p.kentaro-episode-card__friction { margin: -2px 0 9px; color: hsl(var(--primary)); font-size: .72rem; font-weight: 700; letter-spacing: .035em; line-height: 1.35; }
 
@@ -222,8 +214,6 @@
   font-weight: 700;
 }
 
-.kentaro-episode-card__watch { color: hsl(var(--primary)); font-size: 0.76rem; font-weight: 700; }
-.kentaro-episode-card__watch:hover { color: hsl(var(--heading)); }
 
 .kentaro-harness {
   background: hsl(var(--navy));
@@ -317,6 +307,9 @@
   .kentaro-hero h1 { font-size: clamp(2.65rem, 12vw, 3.7rem); }
   .kentaro-hero__actions { align-items: stretch; flex-direction: column; gap: 13px; }
   .kentaro-hero__actions .text-link { align-self: flex-start; }
+  .kentaro-featured-stories__subscribe-panel { grid-template-columns: 42px minmax(0, 1fr); align-items: start; gap: 16px; }
+  .kentaro-featured-stories__subscribe-icon { width: 42px; height: 42px; }
+  .kentaro-featured-stories__subscribe-action { grid-column: 1 / -1; justify-content: space-between; }
   .kentaro-hero__image img,
   .kentaro-character__image img { aspect-ratio: 4 / 3; }
   .kentaro-purpose { padding: 78px 0; }
@@ -327,7 +320,6 @@
   .kentaro-featured-stories__destinations { grid-template-columns: 1fr; }
   .kentaro-featured-stories__destination { min-height: 0; }
   .kentaro-episode-grid { grid-template-columns: 1fr; }
-  .kentaro-thumbnail-pending { min-height: 150px; }
   .kentaro-character__copy h2,
   .kentaro-follow h2,
   .kentaro-harness h2 { font-size: clamp(2.25rem, 10vw, 3.1rem); }
