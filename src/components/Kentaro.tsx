@@ -24,7 +24,7 @@ const kentaroRoadmap = [
   { phase: 'Phase 0', title: 'Product foundation', summary: 'Establish the MIT-licensed GitHub project, package skeleton, release workflow, product schemas and a demonstrable reference use case.', status: 'Foundation' },
   { phase: 'Phase 1', title: 'v0.1 — Local governed Harness', summary: 'Publish kentaro-harness on PyPI. Initialise a Codex project, run the CLI from use case to execution, evidence and report, with local or cloud model configuration and read-only access through the Maysano Platform API.', status: 'Active build target', active: true },
   { phase: 'Phase 2', title: 'v0.2 — Maysano Platform synchronisation', summary: 'Expand the existing API connection with tested authenticated read and write synchronisation of products, objectives and use cases.', status: 'Planned' },
-  { phase: 'Phase 3', title: 'v0.3 — Agent-native experience', summary: 'Add an MCP server, Codex integration, structured JSON, reusable templates, version history and stronger gates.', status: 'Planned' },
+  { phase: 'Phase 3', title: 'v0.3 — Agent-client integrations', summary: 'Add Codex, Claude Code and OpenCode integrations on the same Kentaro core, CLI and schemas, with the MCP server, structured JSON, reusable templates and stronger gates.', status: 'Planned' },
   { phase: 'Phase 4', title: 'v0.4 — Pluggable runtimes', summary: 'Support optional execution runtimes while keeping governance, evidence and customer-controlled credentials comparable.', status: 'Planned' },
   { phase: 'Phase 5', title: 'Maysano portfolio and enterprise operations', summary: 'Build the user-facing platform, portfolio view, platform-hosted agents and organisation-level governance above the proven Harness connection.', status: 'Planned' },
 ]
@@ -304,7 +304,7 @@ function KentaroHome() {
               <p>Open-source, MIT-licensed and made for people and agents to work from shared context.</p>
             </div>
             <div className="kentaro-harness__copy">
-              <p>Kentaro is the open-source Agentic Maysano Harness for governed local execution through Codex, Claude Code and OpenCode.</p>
+              <p>Kentaro is the open-source Agentic Maysano Harness for governed local execution. Phase 3 adds Codex, Claude Code and OpenCode as agent-client integrations on the same Kentaro core.</p>
               <p>The Harness requires a Maysano Platform API key in every version. v0.1 uses the API read-only; v0.2 adds tested synchronisation of products, objectives and use cases.</p>
               <p>The episodes show what happens when Kentaro has to infer human intent alone. The Harness helps lift that friction by giving people and the agent the same business context, structured artefacts, working rules, approved tools and human approval boundaries.</p>
               <ul className="kentaro-harness__principles">
