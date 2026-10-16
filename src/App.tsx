@@ -1,26 +1,4 @@
 import { lazy, Suspense, type ComponentType } from 'react'
-import { AgentGraph } from './components/AgentGraph'
-import { ArchitectureLayer } from './components/ArchitectureLayer'
-import { ArchitecturePage } from './components/ArchitecturePage'
-import { ConcreteExample } from './components/ConcreteExample'
-import { CreatorProfile } from './components/CreatorProfile'
-import { DeploymentModels } from './components/DeploymentModels'
-import { EnterpriseTrust } from './components/EnterpriseTrust'
-import { Evidence } from './components/Evidence'
-import { FAQ } from './components/FAQ'
-import { FinalCTA } from './components/FinalCTA'
-import { Footer } from './components/Footer'
-import { GovernanceFlow } from './components/GovernanceFlow'
-import { Header } from './components/Header'
-import { Hero } from './components/Hero'
-import { KentaroWhyPage } from './components/KentaroWhy'
-import { OutcomeStrip } from './components/OutcomeStrip'
-import { ProblemBridge } from './components/ProblemBridge'
-import { ProductLifecycle } from './components/ProductLifecycle'
-import { ProductDemos } from './components/ProductDemos'
-import { Standards } from './components/Standards'
-import { StrategyGraph } from './components/StrategyGraph'
-import { StructuredData } from './components/StructuredData'
 
 type InsightRouteProps = {
   pathname: string
@@ -30,14 +8,19 @@ type KentaroRouteProps = {
   pathname: string
 }
 
+type RouteComponent = ComponentType<Record<string, never>>
+
 const InsightRoutes = lazy(() => import('./components/InsightRoutes').then((module) => ({ default: module.InsightRoutes })))
 const KentaroRoute = lazy(() => import('./components/Kentaro').then((module) => ({ default: module.KentaroPage })))
+const KentaroWhyRoute = lazy(() => import('./components/KentaroWhy').then((module) => ({ default: module.KentaroWhyPage })))
+const ArchitectureRoute = lazy(() => import('./components/ArchitecturePage').then((module) => ({ default: module.ArchitecturePage })))
+const HomeRoute = lazy(() => import('./components/HomePage').then((module) => ({ default: module.HomePage })))
 
 type AppProps = {
   pathname?: string
 }
 
-export function AppContent({ pathname = '/', InsightRenderer, KentaroRenderer }: AppProps & { InsightRenderer?: ComponentType<InsightRouteProps>; KentaroRenderer?: ComponentType<KentaroRouteProps> }) {
+export function AppContent({ pathname = '/', InsightRenderer, KentaroRenderer, KentaroWhyRenderer, ArchitectureRenderer, HomeRenderer }: AppProps & { InsightRenderer?: ComponentType<InsightRouteProps>; KentaroRenderer?: ComponentType<KentaroRouteProps>; KentaroWhyRenderer?: RouteComponent; ArchitectureRenderer?: RouteComponent; HomeRenderer?: RouteComponent }) {
   const path = pathname.replace(/\/+$/, '') || '/'
 
   if (path.startsWith('/insights')) {
@@ -45,41 +28,22 @@ export function AppContent({ pathname = '/', InsightRenderer, KentaroRenderer }:
     return <Suspense fallback={null}><InsightRoutes pathname={path} /></Suspense>
   }
 
-  if (path === '/kentaro/why-kentaro-exists') return <KentaroWhyPage />
+  if (path === '/kentaro/why-kentaro-exists') {
+    if (KentaroWhyRenderer) return <KentaroWhyRenderer />
+    return <Suspense fallback={null}><KentaroWhyRoute /></Suspense>
+  }
   if (path === '/kentaro' || path.startsWith('/kentaro/episodes/')) {
     if (KentaroRenderer) return <KentaroRenderer pathname={path} />
     return <Suspense fallback={null}><KentaroRoute pathname={path} /></Suspense>
   }
 
-  if (path === '/architecture') return <ArchitecturePage />
+  if (path === '/architecture') {
+    if (ArchitectureRenderer) return <ArchitectureRenderer />
+    return <Suspense fallback={null}><ArchitectureRoute /></Suspense>
+  }
 
-  return (
-    <>
-      <StructuredData />
-      <a className="skip-link" href="#main-content">Skip to content</a>
-      <Header />
-      <main id="main-content">
-        <Hero />
-        <OutcomeStrip />
-        <ProblemBridge />
-        <StrategyGraph />
-        <ConcreteExample />
-        <ProductDemos />
-        <ArchitectureLayer />
-        <DeploymentModels />
-        <GovernanceFlow />
-        <AgentGraph />
-        <ProductLifecycle />
-        <Evidence />
-        <CreatorProfile />
-        <Standards />
-        <EnterpriseTrust />
-        <FAQ />
-        <FinalCTA />
-      </main>
-      <Footer />
-    </>
-  )
+  if (HomeRenderer) return <HomeRenderer />
+  return <Suspense fallback={null}><HomeRoute /></Suspense>
 }
 
 export default function App({ pathname = '/' }: AppProps) {

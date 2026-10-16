@@ -25,8 +25,14 @@ const hashTargets = [...html.matchAll(/href="#([^"]+)"/g)].map((match) => match[
 const assetDirectory = new URL('../dist/assets/', import.meta.url)
 const assetNames = await readdir(assetDirectory)
 const assetSizes = Object.fromEntries(await Promise.all(assetNames.map(async (name) => [name, (await stat(new URL(name, assetDirectory))).size])))
+const kentaroCssAsset = assetNames.find((name) => /^kentaro-.*\.css$/.test(name))
 const largestJavaScriptBytes = Math.max(...Object.entries(assetSizes).filter(([name]) => name.endsWith('.js')).map(([, size]) => size), 0)
+const initialJavaScriptBytes = Math.max(...Object.entries(assetSizes).filter(([name]) => /^index-.*\.js$/.test(name)).map(([, size]) => size), 0)
 const cssBytes = Object.entries(assetSizes).filter(([name]) => name.endsWith('.css')).reduce((total, [, size]) => total + size, 0)
+const kentaroSocialImage = await readFile(new URL('../dist/og/kentaro-business-experience.jpg', import.meta.url))
+const kentaroSocialImageUrl = 'https://maysano.com/og/kentaro-business-experience.jpg'
+const kentaroSocialImageAlt = 'Kentaro, an AI agent, and a business owner working together in an office.'
+const kentaroImageTags = kentaro.match(/<img\b[^>]*>/g) || []
 const insightSocialImages = [
   ['catalog Insight', article, 'insight-data-catalog-portfolio.png', 'Maysano Insight: Data Catalog vs. Data Product Portfolio Management: Why Enterprises Need Both'],
   ['contracts Insight', contractsArticle, 'insight-data-contracts-specifications.png', 'Maysano Insight: Data Contracts and Data Product Specifications: Different Jobs, One Product'],
@@ -50,6 +56,14 @@ const hasInsightSocialMetadata = (document, file, alt) => {
     && document.includes(`<meta name="twitter:image" content="${imageUrl}" />`)
     && document.includes(`<meta name="twitter:image:alt" content="${alt}" />`)
 }
+const hasKentaroSocialMetadata = (document) => document.includes(`<meta property="og:image" content="${kentaroSocialImageUrl}" />`)
+  && document.includes('<meta property="og:image:width" content="1200" />')
+  && document.includes('<meta property="og:image:height" content="630" />')
+  && document.includes('<meta property="og:image:type" content="image/jpeg" />')
+  && document.includes(`<meta property="og:image:alt" content="${kentaroSocialImageAlt}" />`)
+  && document.includes('<meta name="twitter:card" content="summary_large_image" />')
+  && document.includes(`<meta name="twitter:image" content="${kentaroSocialImageUrl}" />`)
+  && document.includes(`<meta name="twitter:image:alt" content="${kentaroSocialImageAlt}" />`)
 
 const checks = [
   ['prerendered H1', (html.match(/<h1[\s>]/g) || []).length === 1],
@@ -96,6 +110,14 @@ const checks = [
   ['Kentaro archive shows the Harness delivery phases after the linked roadmap destination', kentaro.includes('id="kentaro-roadmap"') && kentaro.includes('KENTARO HARNESS ROADMAP') && kentaro.includes('From a business objective to evidence-backed delivery.') && kentaro.includes('Kentaro harness starts as a local harness that turns products, objectives, and use cases into governed execution packages.') && kentaro.includes('Each next phase extends that proven foundation, first into Maysano, then into agent clients and approved execution runtimes.') && kentaro.includes('v0.1 — Local governed Harness') && kentaro.includes('kentaro-harness on PyPI') && kentaro.includes('read-only access through the Maysano Platform API') && kentaro.includes('v0.2 — Maysano Platform synchronisation') && kentaro.includes('v0.3 — Agent-client integrations') && kentaro.includes('Codex, Claude Code and OpenCode integrations') && kentaro.includes('same Kentaro core, CLI and schemas') && kentaro.includes('v0.4 — Optional external execution runtimes') && kentaro.includes('such as HarnessRouter') && !kentaro.includes('Local web experience') && kentaro.includes('Maysano portfolio and enterprise operations') && kentaro.includes('Active build target') && kentaro.indexOf('KENTARO HARNESS ROADMAP') > kentaro.indexOf('THE KENTARO HARNESS')],
   ['Kentaro archive pairs equal update and Harness panels with a MailerLite form and contribution route', kentaro.includes('kentaro-follow__grid') && kentaro.includes('kentaro-follow__column--updates') && kentaro.includes('kentaro-follow__column--harness') && kentaro.includes('KEEP UP WITH KENTARO') && kentaro.includes('Follow Kentaro’s next assignment.') && kentaro.includes('New Kentaro stories and Harness development updates.') && kentaro.includes('action="https://assets.mailerlite.com/jsonp/2642436/forms/201458879917196911/subscribe"') && kentaro.includes('name="fields[email]"') && kentaro.includes('Get updates') && kentaro.includes('Help build the Harness.') && kentaro.includes('Kentaro is open source, and contributions are welcome.') && kentaro.includes('Contribute on GitHub') && kentaro.indexOf('KEEP UP WITH KENTARO') > kentaro.indexOf('MEET KENTARO')],
   ['Kentaro archive canonical URL', kentaro.includes('<link rel="canonical" href="https://maysano.com/kentaro/"')],
+  ['Kentaro archive has a dedicated rich social preview', hasKentaroSocialMetadata(kentaro)],
+  ['Kentaro background page has a dedicated rich social preview', hasKentaroSocialMetadata(kentaroBackground)],
+  ['Kentaro episode page has a dedicated rich social preview', hasKentaroSocialMetadata(kentaroEpisode)],
+  ['Kentaro social image is a non-empty JPEG', kentaroSocialImage.length > 50_000 && kentaroSocialImage[0] === 0xff && kentaroSocialImage[1] === 0xd8],
+  ['Kentaro archive serves WebP imagery', kentaroImageTags.length > 0 && kentaroImageTags.every((tag) => /\bsrc="[^"]+\.webp"/i.test(tag))],
+  ['Kentaro archive preloads its own hero image', kentaro.includes('<link rel="preload" as="image" href="../assets/kentaro-workplace-uncertainty-') && kentaro.includes('fetchpriority="high"')],
+  ['Kentaro archive does not preload the homepage visual', !kentaro.includes('hero-portfolio-flow')],
+  ['Kentaro archive serves its route stylesheet before hydration', Boolean(kentaroCssAsset) && kentaro.includes(`href="../assets/${kentaroCssAsset}"`)],
   ['prerendered Kentaro background page', kentaroBackground.includes('<h1>Why Kentaro Exists</h1>') && kentaroBackground.includes('The agent is not the whole story.') && kentaroBackground.includes('Business owner and agent.') && kentaroBackground.includes('Human. Agent. Harness.') && kentaroBackground.includes('The stories make the tension visible.') && kentaroBackground.includes('The solution is a clearer working relationship.') && kentaroBackground.includes('Further reading.')],
   ['Kentaro background page canonical URL', kentaroBackground.includes('<link rel="canonical" href="https://maysano.com/kentaro/why-kentaro-exists/"')],
   ['Kentaro background page keeps exploration boundary', kentaroBackground.includes('exploration and early work, not a claim that a final operating model already exists')],
@@ -155,6 +177,7 @@ const checks = [
   ['all internal section links resolve', hashTargets.every((id) => html.includes(`id="${id}"`))],
   ['prerendered asset paths remain portable', !/\b(?:src|href)="\/(?!\/)/.test(html)],
   ['initial JavaScript chunk stays below 250 kB uncompressed', largestJavaScriptBytes < 250_000],
+  ['initial JavaScript chunk stays below 175 kB uncompressed', initialJavaScriptBytes < 175_000],
   ['CSS stays below 100 kB uncompressed', cssBytes < 100_000],
 ]
 

@@ -1,4 +1,5 @@
 import { siteConfig } from '../config/site'
+import '../styles/kentaro.css'
 import { Footer } from './Footer'
 import { Header } from './Header'
 
@@ -38,6 +39,7 @@ function KentaroBackgroundStructuredData() {
     url,
     headline: 'Why Kentaro Exists',
     description: 'A background exploration of how business people and AI agents can work together with clearer context, authority, and accountability.',
+    image: `${siteConfig.siteUrl}og/kentaro-business-experience.jpg`,
     isPartOf: { '@id': `${siteConfig.siteUrl}#website` },
     publisher: { '@type': 'Organization', name: 'Maysano' },
     inLanguage: 'en',

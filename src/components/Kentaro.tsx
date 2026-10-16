@@ -1,8 +1,9 @@
 import { useState } from 'react'
-import kentaroBadgeImage from '../assets/kentaro/kentaro-badge.png'
-import kentaroHarnessOfficeImage from '../assets/kentaro/kentaro-harness-office.png'
-import kentaroPaperMountainImage from '../assets/kentaro/kentaro-paper-mountain.png'
-import kentaroWorkplaceUncertaintyImage from '../assets/kentaro/kentaro-workplace-uncertainty.png'
+import '../styles/kentaro.css'
+import kentaroBadgeImage from '../assets/kentaro/kentaro-badge.webp'
+import kentaroHarnessOfficeImage from '../assets/kentaro/kentaro-harness-office.webp'
+import kentaroPaperMountainImage from '../assets/kentaro/kentaro-paper-mountain.webp'
+import kentaroWorkplaceUncertaintyImage from '../assets/kentaro/kentaro-workplace-uncertainty.webp'
 import { siteConfig } from '../config/site'
 import {
   getKentaroEpisode,
@@ -16,6 +17,8 @@ import { KentaroUpdatesForm } from './KentaroUpdatesForm'
 
 const kentaroBaseUrl = `${siteConfig.siteUrl}kentaro/`
 const kentaroHarnessUrl = 'https://github.com/Maysano/Kentaro'
+const kentaroSocialImageUrl = `${siteConfig.siteUrl}og/kentaro-business-experience.jpg`
+const kentaroSocialImageAlt = 'Kentaro, an AI agent, and a business owner working together in an office.'
 const episodeHref = (episode: KentaroEpisode) => `${kentaroBaseUrl}episodes/${episode.slug}/`
 const episodeNumber = (episode: KentaroEpisode) => `Episode ${String(episode.episodeNumber).padStart(2, '0')}`
 const episodeStill = (episode: KentaroEpisode) => episode.thumbnail ?? (episode.episodeNumber % 2 === 0 ? kentaroPaperMountainImage : kentaroBadgeImage)
@@ -56,6 +59,8 @@ function KentaroStructuredData({ episode }: { episode?: KentaroEpisode }) {
     url,
     name: episode ? `${episode.title} | Kentaro` : 'Kentaro | Maysano',
     description: episode?.description ?? 'One-minute stories about an AI agent working with humans.',
+    image: kentaroSocialImageUrl,
+    about: { '@type': 'Thing', name: 'Human-agent collaboration' },
     isPartOf: { '@id': `${siteConfig.siteUrl}#website` },
     inLanguage: 'en',
   }
@@ -71,7 +76,7 @@ function EpisodeMedia({ episode, playable = false, presentation = 'detail' }: { 
   if (!episode.youtubeVideoId) {
     return (
       <figure className={`kentaro-episode-media kentaro-episode-media--poster kentaro-episode-media--${presentation}`} style={{ aspectRatio: episode.videoAspectRatio }}>
-        <img src={still} alt={stillAlt} />
+        <img src={still} alt={stillAlt} loading="lazy" />
         <figcaption>Episode video coming soon</figcaption>
       </figure>
     )
@@ -86,7 +91,7 @@ function EpisodeMedia({ episode, playable = false, presentation = 'detail' }: { 
         aria-label={`Play ${episode.title}`}
         onClick={() => setIsPlaying(true)}
       >
-        <img src={still} alt={stillAlt} />
+        <img src={still} alt={stillAlt} loading="lazy" />
         <span className="kentaro-play-label">Play episode</span>
       </button>
     )
@@ -123,9 +128,9 @@ function EpisodeCard({ episode }: { episode: KentaroEpisode }) {
       ) : (
         <a className="kentaro-episode-card__media" href={episodeHref(episode)} aria-label={`Open ${episode.title}`}>
           {episode.thumbnail ? (
-            <img src={episode.thumbnail} alt={episode.thumbnailAlt ?? ''} />
+            <img src={episode.thumbnail} alt={episode.thumbnailAlt ?? ''} loading="lazy" />
           ) : (
-            <img src={episodeStill(episode)} alt={episodeStillAlt(episode)} />
+            <img src={episodeStill(episode)} alt={episodeStillAlt(episode)} loading="lazy" />
           )}
         </a>
       )}
@@ -204,39 +209,39 @@ const kentaroPurposeStyles = `
 `
 
 const kentaroHarnessAgreementStyles = `
-  .kentaro-harness-agreement { padding: clamp(84px, 10vw, 148px) 0; background: hsl(var(--navy)); color: #F4F6EE; }
+  .kentaro-harness-agreement { padding: clamp(56px, 5vw, 80px) 0; background: hsl(var(--navy)); color: #F4F6EE; }
   .kentaro-harness-agreement > .container { width: min(1400px, calc(100% - 64px)); }
-  .kentaro-harness-agreement__layout { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: clamp(56px, 5vw, 72px); align-items: start; }
-  .kentaro-harness-agreement .eyebrow { margin-bottom: 20px; color: #C2D897; }
-  .kentaro-harness-agreement .kentaro-section-title { max-width: 650px; color: #F4F6EE; }
-  .kentaro-harness-agreement__intro { max-width: 630px; margin: 0; color: #B7C0BF; font-size: clamp(1.05rem, 1.45vw, 1.22rem); line-height: 1.58; }
-  .kentaro-harness-agreement__visual { display: grid; grid-template-columns: minmax(400px, 1fr) 220px; gap: 24px; align-items: start; width: min(690px, calc(100% + 64px)); margin: clamp(28px, 3.5vw, 44px) 0 0; }
+  .kentaro-harness-agreement__layout { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: clamp(42px, 4vw, 60px); align-items: start; }
+  .kentaro-harness-agreement .eyebrow { margin-bottom: 16px; color: #C2D897; }
+  .kentaro-harness-agreement .kentaro-section-title { max-width: 610px; margin-bottom: 18px; color: #F4F6EE; }
+  .kentaro-harness-agreement__intro { max-width: 600px; margin: 0; color: #B7C0BF; font-size: clamp(1rem, 1.3vw, 1.14rem); line-height: 1.5; }
+  .kentaro-harness-agreement__visual { display: grid; grid-template-columns: minmax(340px, 1fr) 198px; gap: 20px; align-items: start; width: min(600px, 100%); margin: 26px 0 0; }
   .kentaro-harness-agreement__image { align-self: start; margin: 0; overflow: hidden; border-radius: 12px; background: #132a3c; }
   .kentaro-harness-agreement__image img { display: block; width: 100%; height: auto; aspect-ratio: 1102 / 1427; object-fit: cover; object-position: center; }
-  .kentaro-harness-agreement__agreement { position: relative; display: grid; width: min(100%, 252px); gap: 14px; margin: clamp(76px, 8vw, 116px) 0 0; padding: 0 0 0 30px; list-style: none; }
-  .kentaro-harness-agreement__agreement::before { position: absolute; top: 42px; bottom: 42px; left: 5px; width: 1px; background: #C2D897; content: ''; }
-  .kentaro-harness-agreement__agreement li { position: relative; display: flex; align-items: center; gap: 14px; min-height: 82px; padding: 16px 18px; border: 1px solid #455864; border-radius: 8px; color: #F4F6EE; font-size: clamp(1.05rem, 1.5vw, 1.3rem); font-weight: 600; letter-spacing: -.03em; }
+  .kentaro-harness-agreement__agreement { position: relative; display: grid; width: min(100%, 228px); gap: 10px; margin: clamp(48px, 4.5vw, 66px) 0 0; padding: 0 0 0 26px; list-style: none; }
+  .kentaro-harness-agreement__agreement::before { position: absolute; top: 37px; bottom: 37px; left: 5px; width: 1px; background: #C2D897; content: ''; }
+  .kentaro-harness-agreement__agreement li { position: relative; display: flex; align-items: center; gap: 12px; min-height: 74px; padding: 13px 15px; border: 1px solid #455864; border-radius: 8px; color: #F4F6EE; font-size: clamp(1rem, 1.35vw, 1.16rem); font-weight: 600; letter-spacing: -.03em; }
   .kentaro-harness-agreement__agreement li::before { position: absolute; top: calc(50% - 5px); left: -30px; width: 10px; height: 10px; border-radius: 50%; background: #C2D897; content: ''; }
-  .kentaro-harness-agreement__agreement svg { width: 29px; height: 29px; flex: 0 0 auto; color: #C2D897; }
-  .kentaro-harness-agreement__body { max-width: 710px; }
-  .kentaro-harness-agreement__body > p { max-width: 680px; margin: 4px 0 38px; color: #F4F6EE; font-size: clamp(1.18rem, 2vw, 1.55rem); line-height: 1.45; }
+  .kentaro-harness-agreement__agreement svg { width: 26px; height: 26px; flex: 0 0 auto; color: #C2D897; }
+  .kentaro-harness-agreement__body { max-width: 720px; }
+  .kentaro-harness-agreement__body > p { max-width: 690px; margin: 0 0 26px; color: #F4F6EE; font-size: clamp(1.08rem, 1.55vw, 1.32rem); line-height: 1.42; }
   .kentaro-harness-agreement__rows { margin: 0; padding: 0; border-top: 1px solid #455864; }
-  .kentaro-harness-agreement__rows > div { display: grid; grid-template-columns: 50px minmax(0, 1fr); column-gap: 20px; padding: 30px 0; border-bottom: 1px solid #455864; }
-  .kentaro-harness-agreement__row-icon { display: grid; width: 48px; height: 48px; place-items: center; border: 1px solid #607382; border-radius: 50%; color: #C2D897; }
-  .kentaro-harness-agreement__row-icon svg { width: 25px; height: 25px; }
-  .kentaro-harness-agreement__rows dt { margin: 0 0 7px; color: #F4F6EE; font-size: clamp(1.15rem, 1.65vw, 1.42rem); font-weight: 600; letter-spacing: -.035em; line-height: 1.15; }
-  .kentaro-harness-agreement__rows dd { margin: 0; color: #B7C0BF; font-size: 1rem; line-height: 1.55; }
-  .kentaro-harness-agreement__roadmap { position: relative; display: block; min-height: 230px; margin-top: 38px; padding: clamp(28px, 3.2vw, 40px); border: 1px solid #455864; border-radius: 9px; background: #243d51; color: inherit; text-decoration: none; transition: border-color .2s ease, background-color .2s ease; }
+  .kentaro-harness-agreement__rows > div { display: grid; grid-template-columns: 46px minmax(0, 1fr); column-gap: 18px; padding: 21px 0; border-bottom: 1px solid #455864; }
+  .kentaro-harness-agreement__row-icon { display: grid; width: 44px; height: 44px; place-items: center; border: 1px solid #607382; border-radius: 50%; color: #C2D897; }
+  .kentaro-harness-agreement__row-icon svg { width: 23px; height: 23px; }
+  .kentaro-harness-agreement__rows dt { margin: 0 0 5px; color: #F4F6EE; font-size: clamp(1.08rem, 1.45vw, 1.28rem); font-weight: 600; letter-spacing: -.035em; line-height: 1.15; }
+  .kentaro-harness-agreement__rows dd { margin: 0; color: #B7C0BF; font-size: .94rem; line-height: 1.45; }
+  .kentaro-harness-agreement__roadmap { position: relative; display: block; min-height: 190px; margin-top: 26px; padding: clamp(23px, 2.5vw, 30px); border: 1px solid #455864; border-radius: 9px; background: #243d51; color: inherit; text-decoration: none; transition: border-color .2s ease, background-color .2s ease; }
   .kentaro-harness-agreement__roadmap:hover { border-color: #C2D897; background: #294357; }
-  .kentaro-harness-agreement__roadmap .eyebrow { margin: 0 0 14px; }
-  .kentaro-harness-agreement__roadmap strong { display: block; color: #F4F6EE; font-size: clamp(1.35rem, 2.2vw, 1.85rem); letter-spacing: -.045em; line-height: 1.1; }
-  .kentaro-harness-agreement__roadmap p { max-width: 430px; margin: 11px 0 0; color: #B7C0BF; font-size: .98rem; line-height: 1.5; }
-  .kentaro-harness-agreement__progress { display: flex; align-items: center; gap: 0; margin-top: 25px; color: #C2D897; }
+  .kentaro-harness-agreement__roadmap .eyebrow { margin: 0 0 9px; }
+  .kentaro-harness-agreement__roadmap strong { display: block; color: #F4F6EE; font-size: clamp(1.26rem, 1.85vw, 1.58rem); letter-spacing: -.045em; line-height: 1.1; }
+  .kentaro-harness-agreement__roadmap p { max-width: 430px; margin: 8px 0 0; color: #B7C0BF; font-size: .9rem; line-height: 1.45; }
+  .kentaro-harness-agreement__progress { display: flex; align-items: center; gap: 0; margin-top: 17px; color: #C2D897; }
   .kentaro-harness-agreement__progress span { display: block; width: 10px; height: 10px; border: 1px solid #C2D897; border-radius: 50%; background: hsl(var(--navy)); }
   .kentaro-harness-agreement__progress span:first-child { background: #C2D897; }
   .kentaro-harness-agreement__progress i { width: min(13vw, 92px); height: 1px; background: #B7C0BF; }
-  .kentaro-harness-agreement__roadmap-action { position: absolute; right: clamp(28px, 3.2vw, 40px); bottom: clamp(28px, 3.2vw, 40px); display: flex; align-items: center; gap: 16px; color: #C2D897; font-size: .95rem; font-weight: 700; white-space: nowrap; }
-  .kentaro-harness-agreement__arrow { display: grid; width: 56px; height: 56px; flex: 0 0 auto; place-items: center; border-radius: 50%; background: #C2D897; color: hsl(var(--navy)); font-size: 2rem; line-height: 1; transition: transform .2s ease; }
+  .kentaro-harness-agreement__roadmap-action { position: absolute; right: clamp(23px, 2.5vw, 30px); bottom: clamp(23px, 2.5vw, 30px); display: flex; align-items: center; gap: 13px; color: #C2D897; font-size: .88rem; font-weight: 700; white-space: nowrap; }
+  .kentaro-harness-agreement__arrow { display: grid; width: 50px; height: 50px; flex: 0 0 auto; place-items: center; border-radius: 50%; background: #C2D897; color: hsl(var(--navy)); font-size: 1.75rem; line-height: 1; transition: transform .2s ease; }
   .kentaro-harness-agreement__roadmap:hover .kentaro-harness-agreement__arrow { transform: translateX(4px); }
   @media (max-width: 1180px) { .kentaro-harness-agreement__layout { grid-template-columns: 1fr; gap: 58px; } .kentaro-harness-agreement__left { max-width: 720px; } .kentaro-harness-agreement__visual { width: min(100%, 690px); } .kentaro-harness-agreement__body { max-width: 760px; } }
   @media (max-width: 620px) { .kentaro-harness-agreement { padding: 78px 0; } .kentaro-harness-agreement > .container { width: min(100% - 40px, 1400px); } .kentaro-harness-agreement__visual { grid-template-columns: 1fr; gap: 20px; width: 100%; margin-top: 42px; } .kentaro-harness-agreement__image img { height: min(122vw, 510px); } .kentaro-harness-agreement__agreement { grid-template-columns: repeat(3, minmax(0, 1fr)); width: 100%; gap: 0; margin: 0; padding: 0; } .kentaro-harness-agreement__agreement::before { display: none; } .kentaro-harness-agreement__agreement li { min-height: 0; flex-direction: column; align-items: flex-start; gap: 9px; padding: 16px 10px 12px 19px; border: 0; border-radius: 0; font-size: .94rem; } .kentaro-harness-agreement__agreement li::before { top: 21px; left: 8px; } .kentaro-harness-agreement__agreement li:not(:last-child)::after { position: absolute; top: 25px; right: -4px; bottom: auto; left: auto; width: 8px; height: 1px; background: #C2D897; content: ''; } .kentaro-harness-agreement__agreement svg { width: 24px; height: 24px; } .kentaro-harness-agreement__body > p { margin-bottom: 30px; } .kentaro-harness-agreement__rows > div { grid-template-columns: 36px minmax(0, 1fr); column-gap: 13px; padding: 21px 0; } .kentaro-harness-agreement__row-icon { width: 34px; height: 34px; } .kentaro-harness-agreement__row-icon svg { width: 19px; height: 19px; } .kentaro-harness-agreement__roadmap { min-height: 0; padding: 23px; } .kentaro-harness-agreement__roadmap-action { position: static; justify-content: space-between; margin-top: 20px; } .kentaro-harness-agreement__progress i { width: min(15vw, 64px); } .kentaro-harness-agreement__arrow { width: 48px; height: 48px; font-size: 1.7rem; } }

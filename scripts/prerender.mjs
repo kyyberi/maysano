@@ -1,4 +1,4 @@
-import { mkdir, readFile, rm, writeFile } from 'node:fs/promises'
+import { mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises'
 import { dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -12,6 +12,8 @@ const [{ render }, template] = await Promise.all([
   import(serverEntry.href),
   readFile(outputPath, 'utf8'),
 ])
+const kentaroStyleAsset = (await readdir(new URL('../dist/assets/', import.meta.url)))
+  .find((file) => /^kentaro-.*\.css$/.test(file))
 
 const rootMarker = '<div id="root"></div>'
 if (!template.includes(rootMarker)) {
@@ -28,6 +30,10 @@ const kentaroEpisodes = [
   ['the-data-is-there', 'The Data Is There', 'Kentaro has access to the data. He does not know why the business needs it.'],
   ['new-team-member', 'The New Team Member', 'Kentaro has joined the team. The team has not agreed what role he has.'],
 ]
+
+const kentaroOgImage = 'https://maysano.com/og/kentaro-business-experience.jpg'
+const kentaroOgImageAlt = 'Kentaro, an AI agent, and a business owner working together in an office.'
+const kentaroHeroAlt = 'Kentaro navigates workplace uncertainty across meetings, requests and paperwork.'
 
 const pages = [
   {
@@ -60,10 +66,15 @@ const pages = [
   {
     pathname: '/kentaro/',
     outputPath: `${outputDirectory}kentaro/index.html`,
-    title: 'Kentaro | An AI Agent in a Very Human Workplace | Maysano',
-    description: 'One-minute stories about Kentaro, an AI agent learning to work with humans, context, and office ambiguity.',
+    title: 'Kentaro | Workplace Friction, One Minute at a Time | Maysano',
+    description: 'Kentaro’s one-minute stories show how missing context, unclear mandates and blurred decision rights create friction between business people and AI agents.',
     canonical: 'https://maysano.com/kentaro/',
     ogType: 'website',
+    ogImage: kentaroOgImage,
+    ogImageAlt: kentaroOgImageAlt,
+    ogImageType: 'image/jpeg',
+    preloadImageAlt: kentaroHeroAlt,
+    routeStyle: 'kentaro',
     assetPrefix: '../',
   },
   {
@@ -73,6 +84,10 @@ const pages = [
     description: 'A background exploration of how business people and AI agents can work together with clearer context, authority, and accountability.',
     canonical: 'https://maysano.com/kentaro/why-kentaro-exists/',
     ogType: 'article',
+    ogImage: kentaroOgImage,
+    ogImageAlt: kentaroOgImageAlt,
+    ogImageType: 'image/jpeg',
+    routeStyle: 'kentaro',
     assetPrefix: '../../',
   },
   ...kentaroEpisodes.map(([slug, title, description]) => ({
@@ -82,6 +97,10 @@ const pages = [
     description,
     canonical: `https://maysano.com/kentaro/episodes/${slug}/`,
     ogType: 'website',
+    ogImage: kentaroOgImage,
+    ogImageAlt: kentaroOgImageAlt,
+    ogImageType: 'image/jpeg',
+    routeStyle: 'kentaro',
     assetPrefix: '../../../',
   })),
   {
@@ -173,6 +192,7 @@ function withMetadata(html, page) {
   const canonical = escapeHtml(page.canonical)
   const ogImage = page.ogImage ? escapeHtml(page.ogImage) : null
   const ogImageAlt = page.ogImageAlt ? escapeHtml(page.ogImageAlt) : null
+  const ogImageType = page.ogImageType ?? (page.ogImage?.endsWith('.png') ? 'image/png' : 'image/jpeg')
 
   const metadata = html
     .replace(/<title>.*?<\/title>/, `<title>${title}</title>`)
@@ -191,6 +211,7 @@ function withMetadata(html, page) {
     .replace(/<meta property="og:image" content="[^"]*" \/>/, `<meta property="og:image" content="${ogImage}" />`)
     .replace(/<meta property="og:image:width" content="[^"]*" \/>/, '<meta property="og:image:width" content="1200" />')
     .replace(/<meta property="og:image:height" content="[^"]*" \/>/, '<meta property="og:image:height" content="630" />')
+    .replace(/<meta property="og:image:type" content="[^"]*" \/>/, `<meta property="og:image:type" content="${ogImageType}" />`)
     .replace(/<meta property="og:image:alt" content="[^"]*" \/>/, `<meta property="og:image:alt" content="${ogImageAlt}" />`)
     .replace(/<meta name="twitter:card" content="[^"]*" \/>/, '<meta name="twitter:card" content="summary_large_image" />')
     .replace(/<meta name="twitter:image" content="[^"]*" \/>/, `<meta name="twitter:image" content="${ogImage}" />`)
@@ -201,12 +222,37 @@ function withRelativeAssets(html, assetPrefix) {
   return html.replace(/\b(src|href)="\.\/(?=(?:assets\/|logo\.webp))/g, `$1="${assetPrefix}`)
 }
 
+function withRoutePerformance(html, page) {
+  const withoutHomeHeroPreload = page.pathname === '/'
+    ? html
+    : html.replace(/\s*<link rel="preload" as="image" href="[^"]*hero-portfolio-flow[^\"]*" type="image\/webp"\s*\/>/, '')
+
+  if (!page.preloadImageAlt) return withoutHomeHeroPreload
+
+  const escapedAlt = escapeHtml(page.preloadImageAlt)
+  const heroTag = [...withoutHomeHeroPreload.matchAll(/<img\b[^>]*>/g)]
+    .map(([tag]) => tag)
+    .find((tag) => tag.includes(`alt="${escapedAlt}"`))
+  const heroSource = heroTag?.match(/\bsrc="([^"]+)"/)?.[1]
+
+  if (!heroSource) throw new Error(`Unable to find the Kentaro hero image for ${page.pathname}`)
+
+  return withoutHomeHeroPreload.replace('</head>', `    <link rel="preload" as="image" href="${heroSource}" type="image/webp" fetchpriority="high" />\n  </head>`)
+}
+
+function withRouteStyles(html, page) {
+  if (page.routeStyle !== 'kentaro') return html
+  if (!kentaroStyleAsset) throw new Error('Unable to find the Kentaro route stylesheet')
+
+  return html.replace('</head>', `    <link rel="stylesheet" href="${page.assetPrefix}assets/${kentaroStyleAsset}" />\n  </head>`)
+}
+
 for (const page of pages) {
   const appHtml = render(page.pathname).replace(/\bsrc="\/(?!\/)/g, 'src="./')
-  const html = withRelativeAssets(
+  const html = withRouteStyles(withRoutePerformance(withRelativeAssets(
     withMetadata(template, page).replace(rootMarker, `<div id="root">${appHtml}</div>`),
     page.assetPrefix,
-  )
+  ), page), page)
   await mkdir(dirname(page.outputPath), { recursive: true })
   await writeFile(page.outputPath, html)
 }
