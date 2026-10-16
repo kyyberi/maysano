@@ -324,19 +324,19 @@ function KentaroHome() {
         </section>
         <section className="kentaro-follow" aria-labelledby="kentaro-follow-title">
           <div className="container kentaro-harness__grid">
-            <div>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
               <p className="eyebrow">KEEP UP WITH KENTARO</p>
-              <div className="kentaro-harness__copy">
+              <div className="kentaro-harness__copy" style={{ display: 'flex', flex: 1, flexDirection: 'column' }}>
                 <h2 id="kentaro-follow-title">Follow Kentaro’s next assignment.</h2>
-                <p>New episodes. Same reasonable questions.</p>
+                <p style={{ marginTop: 'auto' }}>New episodes. Same reasonable questions.</p>
                 <small>A series by Maysano.</small>
               </div>
             </div>
-            <div>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
               <p className="eyebrow">THE KENTARO HARNESS</p>
-              <div className="kentaro-harness__copy">
+              <div className="kentaro-harness__copy" style={{ display: 'flex', flex: 1, flexDirection: 'column' }}>
                 <h2>Help build the Harness.</h2>
-                <p>Kentaro is open source, and contributions are welcome. Explore the Agentic Maysano Harness and help make human–agent collaboration clearer.</p>
+                <p style={{ marginTop: 'auto' }}>Kentaro is open source, and contributions are welcome. Explore the Agentic Maysano Harness and help make human–agent collaboration clearer.</p>
                 <a className="button button--light" href={kentaroHarnessUrl} target="_blank" rel="noreferrer">Contribute on GitHub <span aria-hidden="true">↗</span></a>
               </div>
             </div>
