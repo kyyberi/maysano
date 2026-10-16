@@ -4019,7 +4019,6 @@ html.js .reveal:not(.is-in) .rise { opacity: 0; transform: translateY(18px); }
 }
 
 .kentaro-follow { padding: 100px 0; background: hsl(var(--navy)); color: hsl(var(--navy-foreground)); }
-.kentaro-follow > .container { max-width: 880px; }
 .kentaro-follow h2 { max-width: 680px; color: hsl(var(--navy-foreground)); }
 .kentaro-follow > .container > p:not(.eyebrow) { margin: 0 0 30px; color: hsl(var(--navy-foreground) / 0.76); font-size: 1.08rem; }
 .kentaro-follow small { display: block; margin-top: 24px; color: hsl(var(--navy-foreground) / 0.62); font-size: 0.78rem; }
