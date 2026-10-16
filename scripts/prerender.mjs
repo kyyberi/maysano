@@ -66,6 +66,15 @@ const pages = [
     ogType: 'website',
     assetPrefix: '../',
   },
+  {
+    pathname: '/kentaro/why-kentaro-exists/',
+    outputPath: `${outputDirectory}kentaro/why-kentaro-exists/index.html`,
+    title: 'Why Kentaro Exists | Maysano',
+    description: 'A background exploration of how business people and AI agents can work together with clearer context, authority, and accountability.',
+    canonical: 'https://maysano.com/kentaro/why-kentaro-exists/',
+    ogType: 'article',
+    assetPrefix: '../../',
+  },
   ...kentaroEpisodes.map(([slug, title, description]) => ({
     pathname: `/kentaro/episodes/${slug}/`,
     outputPath: `${outputDirectory}kentaro/episodes/${slug}/index.html`,

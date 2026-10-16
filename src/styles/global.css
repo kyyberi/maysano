@@ -3610,6 +3610,10 @@ html.js .reveal:not(.is-in) .rise { opacity: 0; transform: translateY(18px); }
 
 /* Kentaro */
 
+/* Kentaro background */
+
+.kentaro-background__callout{display:grid;gap:10px;margin:38px 0;padding:clamp(25px,4vw,42px);border-left:3px solid hsl(var(--lime));background:hsl(var(--navy-foreground) / .07)}.kentaro-background__callout strong{font-size:clamp(1.28rem,2vw,1.7rem)}.kentaro-background__source-links,.kentaro-background__actions{display:flex;flex-wrap:wrap;gap:15px 22px;margin-top:32px}.kentaro-background__definitions{margin:34px 0;padding:0;list-style:none}.kentaro-background__definitions>div{padding:16px 0;border-top:1px solid hsl(var(--border))}.kentaro-background__definitions dd{margin:4px 0 0}.kentaro-relationship{display:grid;grid-template-columns:1fr 1.1fr 1fr;margin:42px 0 0;border:1px solid hsl(var(--border));text-align:center}.kentaro-relationship__person,.kentaro-relationship__harness{display:grid;gap:8px;align-content:center;min-height:132px;padding:18px}.kentaro-relationship__harness{background:hsl(var(--navy));color:hsl(var(--lime))}.kentaro-relationship small{font-size:.68rem}.kentaro-relationship figcaption{grid-column:1/-1;padding:12px;border-top:1px solid hsl(var(--border));font-size:.77rem}.kentaro-background__reference-list{display:grid;gap:12px;max-width:720px;padding-left:22px;line-height:1.5}
+
 .kentaro-hero,
 .kentaro-episode-page__hero {
   overflow: hidden;
@@ -3992,6 +3996,9 @@ html.js .reveal:not(.is-in) .rise { opacity: 0; transform: translateY(18px); }
 }
 
 @media (max-width: 680px) {
+  .kentaro-relationship { grid-template-columns: 1fr; }
+  .kentaro-relationship__person,
+  .kentaro-relationship__harness { min-height: 0; padding: 22px 18px; }
   .kentaro-hero { padding: 54px 0 64px; }
   .kentaro-hero h1,
   .kentaro-episode-page__hero h1 { font-size: clamp(2.65rem, 12vw, 3.7rem); }

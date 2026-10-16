@@ -318,7 +318,7 @@ function KentaroHome() {
             </ol>
           </div>
         </section>
-        <section className="kentaro-follow" aria-labelledby="kentaro-follow-title">
+        <section id="kentaro-follow" className="kentaro-follow" aria-labelledby="kentaro-follow-title">
           <style>{kentaroFollowPanelStyles}</style>
           <div className="container kentaro-harness__grid kentaro-follow__grid">
             <div className="kentaro-follow__column kentaro-follow__column--updates" style={{ display: 'flex', flexDirection: 'column' }}>

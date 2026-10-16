@@ -33,6 +33,7 @@ Maysano is an operating layer, not a replacement for the existing enterprise dat
 - Traditional AI agents vs. governed AI agents: https://maysano.com/insights/traditional-ai-agents-vs-governed-ai-agents/
 - Manual vs. AI-assisted, governed data product delivery: https://maysano.com/insights/manual-vs-ai-assisted-governed-data-product-delivery/
 - AI control plane vs. data product operating layer: https://maysano.com/insights/ai-control-plane-vs-data-product-operating-layer/
+- Why Kentaro Exists: https://maysano.com/kentaro/why-kentaro-exists/
 
 ## Contact
 

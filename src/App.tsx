@@ -13,6 +13,7 @@ import { Footer } from './components/Footer'
 import { GovernanceFlow } from './components/GovernanceFlow'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
+import { KentaroWhyPage } from './components/KentaroWhy'
 import { OutcomeStrip } from './components/OutcomeStrip'
 import { ProblemBridge } from './components/ProblemBridge'
 import { ProductLifecycle } from './components/ProductLifecycle'
@@ -44,6 +45,7 @@ export function AppContent({ pathname = '/', InsightRenderer, KentaroRenderer }:
     return <Suspense fallback={null}><InsightRoutes pathname={path} /></Suspense>
   }
 
+  if (path === '/kentaro/why-kentaro-exists') return <KentaroWhyPage />
   if (path === '/kentaro' || path.startsWith('/kentaro/episodes/')) {
     if (KentaroRenderer) return <KentaroRenderer pathname={path} />
     return <Suspense fallback={null}><KentaroRoute pathname={path} /></Suspense>
