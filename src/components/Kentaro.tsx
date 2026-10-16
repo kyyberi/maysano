@@ -187,8 +187,9 @@ function KentaroHome() {
             </figure>
             <div className="kentaro-character__copy">
               <p className="eyebrow">MEET KENTARO</p>
-              <h2 id="kentaro-character-title">He means well. He also has questions.</h2>
-              <p>Kentaro wants to do useful work. He takes instructions seriously, sometimes more seriously than the people who give them.</p>
+              <h2 id="kentaro-character-title">Kentaro is an AI agent at work.</h2>
+              <p>Kentaro is the AI agent at the centre of these one-minute workplace stories. His job is to turn ordinary business instructions, documents and decisions into useful work.</p>
+              <p>That sounds simple until the brief is unclear or the authority is missing. Kentaro takes the words literally and asks the questions people hoped would stay unasked.</p>
               <p>Before a difficult conversation, he straightens his purple badge. When he tilts his head, someone is about to explain an assumption they forgot to mention.</p>
               <blockquote>“I found the single source of truth. There are four.”</blockquote>
             </div>
