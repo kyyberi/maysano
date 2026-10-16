@@ -18,6 +18,17 @@ if (!template.includes(rootMarker)) {
   throw new Error(`Unable to find the application root in ${outputPath.replace(projectRoot, '')}`)
 }
 
+const kentaroEpisodes = [
+  ['ownership-apparently', 'Ownership, Apparently', 'Kentaro is told to take ownership. Nobody gives him authority to decide.'],
+  ['meeting-he-wasnt-in', 'The Meeting He Wasn’t In', 'The answer exists. It was discussed in a meeting Kentaro never attended.'],
+  ['brief-that-wasnt', 'The Brief That Wasn’t', 'Kentaro has data, tools, and a deadline. He still does not know what success means.'],
+  ['can-you-fix-it', 'Can You Fix It?', 'Everyone agrees Kentaro’s output is wrong. Nobody can explain what the right answer is.'],
+  ['approved-by-nobody', 'Approved by Nobody', 'A recommendation turns into a decision because the responsible owner is absent.'],
+  ['one-small-extra-thing', 'One Small Extra Thing', 'A small request becomes a large task, but Kentaro’s mandate never changes.'],
+  ['the-data-is-there', 'The Data Is There', 'Kentaro has access to the data. He does not know why the business needs it.'],
+  ['new-team-member', 'The New Team Member', 'Kentaro has joined the team. The team has not agreed what role he has.'],
+]
+
 const pages = [
   {
     pathname: '/',
@@ -55,42 +66,15 @@ const pages = [
     ogType: 'website',
     assetPrefix: '../',
   },
-  {
-    pathname: '/kentaro/episodes/first-day-missing-context/',
-    outputPath: `${outputDirectory}kentaro/episodes/first-day-missing-context/index.html`,
-    title: 'First day. Missing context. | Kentaro | Maysano',
-    description: 'Welcome aboard. The owner has left.',
-    canonical: 'https://maysano.com/kentaro/episodes/first-day-missing-context/',
+  ...kentaroEpisodes.map(([slug, title, description]) => ({
+    pathname: `/kentaro/episodes/${slug}/`,
+    outputPath: `${outputDirectory}kentaro/episodes/${slug}/index.html`,
+    title: `${title} | Kentaro | Maysano`,
+    description,
+    canonical: `https://maysano.com/kentaro/episodes/${slug}/`,
     ogType: 'website',
     assetPrefix: '../../../',
-  },
-  {
-    pathname: '/kentaro/episodes/processing-time-zero/',
-    outputPath: `${outputDirectory}kentaro/episodes/processing-time-zero/index.html`,
-    title: 'Processing time: zero. | Kentaro | Maysano',
-    description: 'The KPI improved. The business did not.',
-    canonical: 'https://maysano.com/kentaro/episodes/processing-time-zero/',
-    ogType: 'website',
-    assetPrefix: '../../../',
-  },
-  {
-    pathname: '/kentaro/episodes/we-need-more-agents/',
-    outputPath: `${outputDirectory}kentaro/episodes/we-need-more-agents/index.html`,
-    title: 'We need more agents. | Kentaro | Maysano',
-    description: 'A supervisor for the supervisor.',
-    canonical: 'https://maysano.com/kentaro/episodes/we-need-more-agents/',
-    ogType: 'website',
-    assetPrefix: '../../../',
-  },
-  {
-    pathname: '/kentaro/episodes/it-works-on-my-machine/',
-    outputPath: `${outputDirectory}kentaro/episodes/it-works-on-my-machine/index.html`,
-    title: 'It works on my machine. | Kentaro | Maysano',
-    description: 'Twelve demo records. Twelve million surprises.',
-    canonical: 'https://maysano.com/kentaro/episodes/it-works-on-my-machine/',
-    ogType: 'website',
-    assetPrefix: '../../../',
-  },
+  })),
   {
     pathname: '/insights/data-catalog-vs-data-product-portfolio-management/',
     outputPath: `${outputDirectory}insights/data-catalog-vs-data-product-portfolio-management/index.html`,

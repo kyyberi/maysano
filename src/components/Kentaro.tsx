@@ -97,6 +97,7 @@ function EpisodeMedia({ episode, playable = false, presentation = 'detail' }: { 
 
 function EpisodeCard({ episode }: { episode: KentaroEpisode }) {
   const isPublished = episode.status === 'published'
+  const fallbackStill = episode.episodeNumber % 2 === 0 ? kentaroPaperMountainImage : kentaroBadgeImage
 
   return (
     <article className={`kentaro-episode-card ${isPublished ? '' : 'kentaro-episode-card--coming-soon'}`}>
@@ -114,10 +115,7 @@ function EpisodeCard({ episode }: { episode: KentaroEpisode }) {
           {episode.thumbnail ? (
             <img src={episode.thumbnail} alt={episode.thumbnailAlt ?? ''} />
           ) : (
-            <span className="kentaro-thumbnail-pending" role="img" aria-label={`Thumbnail pending for ${episode.title}`}>
-              <small>{episodeNumber(episode)}</small>
-              <strong>Thumbnail pending</strong>
-            </span>
+            <img src={fallbackStill} alt="Kentaro at work in an office." />
           )}
         </a>
       )}
@@ -127,7 +125,8 @@ function EpisodeCard({ episode }: { episode: KentaroEpisode }) {
         {episode.description && <p>{episode.description}</p>}
         <div className="kentaro-episode-card__meta">
           {episode.duration && <span>{episode.duration}</span>}
-          {episode.status === 'comingSoon' ? <span>Coming soon</span> : !episode.youtubeVideoId && <span>Video pending</span>}
+          {isPublished && <a className="kentaro-episode-card__watch" href={episodeHref(episode)}>Watch episode <span aria-hidden="true">→</span></a>}
+          {episode.status === 'comingSoon' && <span>Coming soon</span>}
         </div>
       </div>
     </article>
@@ -137,15 +136,14 @@ function EpisodeCard({ episode }: { episode: KentaroEpisode }) {
 function EpisodeLibrary() {
   const featuredEpisodes = [...publishedKentaroEpisodes]
     .sort((a, b) => b.episodeNumber - a.episodeNumber)
-    .slice(0, 3)
 
   return (
     <section className="kentaro-library section" id="episodes" aria-labelledby="kentaro-episodes-title">
       <div className="container">
         <div className="section-intro">
-          <p className="eyebrow">ONE-MINUTE STORIES</p>
-          <h2 id="kentaro-episodes-title">Stories about business people and AI agents.</h2>
-          <p className="section-copy">Kentaro works through everyday business situations where instructions are incomplete, context is missing, and nobody is clear about authority or accountability. Each story reveals one problem. The Kentaro Harness is being built to make this work clearer.</p>
+          <p className="eyebrow">WATCH KENTARO AT WORK</p>
+          <h2 id="kentaro-episodes-title">One-minute stories about business people and AI agents.</h2>
+          <p className="section-copy">Every story starts with ordinary work. Then the missing context, unclear mandate, or blurred accountability becomes visible.</p>
         </div>
         <div className="kentaro-episode-grid">
           {featuredEpisodes.map((episode) => <EpisodeCard key={episode.id} episode={episode} />)}
@@ -190,7 +188,7 @@ function KentaroHome() {
             <div className="kentaro-character__copy">
               <p className="eyebrow">MEET KENTARO</p>
               <h2 id="kentaro-character-title">He means well. He also has questions.</h2>
-              <p>Kentaro is curious, earnest and quietly stubborn. He wants to do useful work and takes instructions seriously, sometimes too seriously. He remembers what everyone agreed last Tuesday, which makes him an uncomfortable addition to Thursday’s meeting.</p>
+              <p>Kentaro wants to do useful work. He takes instructions seriously, sometimes more seriously than the people who give them.</p>
               <p>Before a difficult conversation, he straightens his purple badge. When he tilts his head, someone is about to explain an assumption they forgot to mention.</p>
               <blockquote>“I found the single source of truth. There are four.”</blockquote>
             </div>
@@ -199,22 +197,21 @@ function KentaroHome() {
         <section className="kentaro-purpose section" aria-labelledby="kentaro-purpose-title">
           <div className="container kentaro-purpose__grid">
             <div className="kentaro-purpose__heading">
-              <p className="eyebrow">WHY KENTARO EXISTS</p>
+              <p className="eyebrow">WHY KENTARO IS IN TROUBLE</p>
               <h2 id="kentaro-purpose-title">The work starts before the prompt.</h2>
             </div>
             <div className="kentaro-purpose__copy">
-              <p>Kentaro is an agent in trouble. AI agents are entering ordinary work, where they meet unclear requirements, competing priorities, old documents and words that mean different things to different people.</p>
+              <p>Kentaro is an agent in trouble. AI agents are entering ordinary work, where they meet unclear requirements, competing priorities, old documents, and words that mean different things to different people.</p>
               <p>The result is often blamed on the agent.</p>
-              <p>Kentaro shows the other side. He takes workplace language seriously. When the business owner says everything is Priority One, Kentaro starts everything. When the business owner asks for speed, Kentaro optimises the number. When the business owner says “use your judgment,” Kentaro asks which judgment is approved.</p>
+              <p>Kentaro shows the other side. He takes workplace language seriously. When the business owner says everything is Priority One, Kentaro starts everything. When the business owner asks for speed, Kentaro optimises the number. When the business owner says, “Use your judgment,” Kentaro asks which judgment is approved.</p>
               <p>The stories raise these tensions to the surface through office comedy. Each episode ends with one practical principle for working with agents.</p>
-              <ul className="kentaro-purpose__principles">
-                <li>Agents need business context, not missing history.</li>
-                <li>Agents need a definition of success, not a KPI.</li>
-                <li>Agents need trade-offs, not priority labels.</li>
-                <li><span>Agents need a <a href="#kentaro-harness">context harness</a>. That is what we offer as open source.</span></li>
+              <ul className="kentaro-purpose__statements">
+                <li><strong>Business context</strong><span>Not missing history.</span></li>
+                <li><strong>Definition of success</strong><span>Not a KPI.</span></li>
+                <li><strong>Trade-offs</strong><span>Not priority labels.</span></li>
+                <li><strong>A working Harness</strong><span>Not another prompt.</span></li>
               </ul>
-              <p>Kentaro exists because better agent work starts before the prompt. It starts when people make the objective, decision, rules, data and evidence clear enough to act on.</p>
-              <p className="kentaro-purpose__credit">A series by Maysano.</p>
+              <p>Kentaro Harness is being built as an open-source working layer that gives agents the context, mandate, boundaries, and approval path needed to work with people.</p>
             </div>
           </div>
         </section>
