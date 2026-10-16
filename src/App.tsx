@@ -13,7 +13,6 @@ import { Footer } from './components/Footer'
 import { GovernanceFlow } from './components/GovernanceFlow'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
-import { KentaroPage } from './components/Kentaro'
 import { OutcomeStrip } from './components/OutcomeStrip'
 import { ProblemBridge } from './components/ProblemBridge'
 import { ProductLifecycle } from './components/ProductLifecycle'
@@ -26,13 +25,18 @@ type InsightRouteProps = {
   pathname: string
 }
 
+type KentaroRouteProps = {
+  pathname: string
+}
+
 const InsightRoutes = lazy(() => import('./components/InsightRoutes').then((module) => ({ default: module.InsightRoutes })))
+const KentaroRoute = lazy(() => import('./components/Kentaro').then((module) => ({ default: module.KentaroPage })))
 
 type AppProps = {
   pathname?: string
 }
 
-export function AppContent({ pathname = '/', InsightRenderer }: AppProps & { InsightRenderer?: ComponentType<InsightRouteProps> }) {
+export function AppContent({ pathname = '/', InsightRenderer, KentaroRenderer }: AppProps & { InsightRenderer?: ComponentType<InsightRouteProps>; KentaroRenderer?: ComponentType<KentaroRouteProps> }) {
   const path = pathname.replace(/\/+$/, '') || '/'
 
   if (path.startsWith('/insights')) {
@@ -40,7 +44,10 @@ export function AppContent({ pathname = '/', InsightRenderer }: AppProps & { Ins
     return <Suspense fallback={null}><InsightRoutes pathname={path} /></Suspense>
   }
 
-  if (path === '/kentaro' || path.startsWith('/kentaro/episodes/')) return <KentaroPage pathname={path} />
+  if (path === '/kentaro' || path.startsWith('/kentaro/episodes/')) {
+    if (KentaroRenderer) return <KentaroRenderer pathname={path} />
+    return <Suspense fallback={null}><KentaroRoute pathname={path} /></Suspense>
+  }
 
   if (path === '/architecture') return <ArchitecturePage />
 

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import kentaroBadgeImage from '../assets/kentaro/kentaro-badge.png'
 import kentaroPaperMountainImage from '../assets/kentaro/kentaro-paper-mountain.png'
+import kentaroWorkplaceUncertaintyImage from '../assets/kentaro/kentaro-workplace-uncertainty.png'
 import { siteConfig } from '../config/site'
 import {
   getKentaroEpisode,
@@ -16,6 +17,8 @@ const kentaroBaseUrl = `${siteConfig.siteUrl}kentaro/`
 const kentaroHarnessUrl = 'https://github.com/Maysano/Kentaro'
 const episodeHref = (episode: KentaroEpisode) => `${kentaroBaseUrl}episodes/${episode.slug}/`
 const episodeNumber = (episode: KentaroEpisode) => `Episode ${String(episode.episodeNumber).padStart(2, '0')}`
+const episodeStill = (episode: KentaroEpisode) => episode.thumbnail ?? (episode.episodeNumber % 2 === 0 ? kentaroPaperMountainImage : kentaroBadgeImage)
+const episodeStillAlt = (episode: KentaroEpisode) => episode.thumbnailAlt ?? 'Kentaro at work in an office.'
 
 const kentaroRoadmap = [
   { phase: 'Phase 0', title: 'Product foundation', summary: 'Establish the MIT-licensed GitHub project, package skeleton, release workflow, product schemas and a demonstrable reference use case.', status: 'Foundation' },
@@ -56,14 +59,15 @@ function KentaroStructuredData({ episode }: { episode?: KentaroEpisode }) {
 
 function EpisodeMedia({ episode, playable = false, presentation = 'detail' }: { episode: KentaroEpisode; playable?: boolean; presentation?: 'detail' | 'card' }) {
   const [isPlaying, setIsPlaying] = useState(false)
+  const still = episodeStill(episode)
+  const stillAlt = episodeStillAlt(episode)
 
   if (!episode.youtubeVideoId) {
     return (
-      <div className={`kentaro-episode-media kentaro-episode-media--unavailable kentaro-episode-media--${presentation}`} style={{ aspectRatio: episode.videoAspectRatio }}>
-        <span>{episodeNumber(episode)}</span>
-        <strong>Video not yet available</strong>
-        <small>Playback will be added when the episode video is configured.</small>
-      </div>
+      <figure className={`kentaro-episode-media kentaro-episode-media--poster kentaro-episode-media--${presentation}`} style={{ aspectRatio: episode.videoAspectRatio }}>
+        <img src={still} alt={stillAlt} />
+        <figcaption>Episode video coming soon</figcaption>
+      </figure>
     )
   }
 
@@ -76,7 +80,7 @@ function EpisodeMedia({ episode, playable = false, presentation = 'detail' }: { 
         aria-label={`Play ${episode.title}`}
         onClick={() => setIsPlaying(true)}
       >
-        {episode.thumbnail ? <img src={episode.thumbnail} alt={episode.thumbnailAlt ?? ''} /> : <span>{episodeNumber(episode)}</span>}
+        <img src={still} alt={stillAlt} />
         <span className="kentaro-play-label">Play episode</span>
       </button>
     )
@@ -97,7 +101,6 @@ function EpisodeMedia({ episode, playable = false, presentation = 'detail' }: { 
 
 function EpisodeCard({ episode }: { episode: KentaroEpisode }) {
   const isPublished = episode.status === 'published'
-  const fallbackStill = episode.episodeNumber % 2 === 0 ? kentaroPaperMountainImage : kentaroBadgeImage
 
   return (
     <article className={`kentaro-episode-card ${isPublished ? '' : 'kentaro-episode-card--coming-soon'}`}>
@@ -115,7 +118,7 @@ function EpisodeCard({ episode }: { episode: KentaroEpisode }) {
           {episode.thumbnail ? (
             <img src={episode.thumbnail} alt={episode.thumbnailAlt ?? ''} />
           ) : (
-            <img src={fallbackStill} alt="Kentaro at work in an office." />
+            <img src={episodeStill(episode)} alt={episodeStillAlt(episode)} />
           )}
         </a>
       )}
@@ -176,7 +179,7 @@ function KentaroHome() {
               </div>
             </div>
             <figure className="kentaro-hero__image">
-              <img src={kentaroPaperMountainImage} alt="Kentaro looks worried beside a towering stack of office paperwork." width="1448" height="1086" />
+              <img src={kentaroWorkplaceUncertaintyImage} alt="Kentaro navigates workplace uncertainty across meetings, requests and paperwork." width="1448" height="1086" />
             </figure>
           </div>
         </section>
@@ -287,11 +290,63 @@ function KentaroHome() {
   )
 }
 
+const kentaroEpisodePageStyles = `
+  .kentaro-episode-page__hero { padding: clamp(42px, 6vw, 84px) 0; }
+  .kentaro-episode-page__hero-grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(320px, .78fr); align-items: center; gap: clamp(44px, 8vw, 120px); }
+  .kentaro-episode-page__hero-copy { max-width: 650px; }
+  .kentaro-episode-page__hero .kentaro-back::before { content: none; }
+  .kentaro-episode-page__hero .kentaro-back { margin-bottom: clamp(38px, 6vw, 72px); }
+  .kentaro-episode-page__hero h1 { max-width: 630px; margin-bottom: 20px; font-size: clamp(3.2rem, 5.4vw, 5.8rem); }
+  .kentaro-episode-page__summary { max-width: 570px; margin: 0; color: hsl(var(--navy-foreground) / .8); font-size: clamp(1.06rem, 1.5vw, 1.22rem); line-height: 1.58; }
+  .kentaro-episode-page__video { width: min(100%, 440px); justify-self: end; }
+  .kentaro-episode-page__video .kentaro-episode-media { width: 100%; }
+  .kentaro-episode-media--poster { position: relative; overflow: hidden; margin: 0; border: 1px solid hsl(var(--navy-foreground) / .24); border-radius: 9px; background: hsl(var(--navy) / .5); }
+  .kentaro-episode-media--poster img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .kentaro-episode-media--poster figcaption { position: absolute; right: 14px; bottom: 14px; padding: 8px 10px; background: hsl(var(--navy) / .88); color: hsl(var(--lime)); font-size: .68rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; }
+  .kentaro-episode-page__story-section { padding: clamp(68px, 9vw, 128px) 0; }
+  .kentaro-episode-page__story-section--paper { background: hsl(var(--secondary)); }
+  .kentaro-episode-page__story-section--navy { background: hsl(var(--navy)); color: hsl(var(--navy-foreground)); }
+  .kentaro-episode-page__story-grid { display: grid; grid-template-columns: minmax(220px, .66fr) minmax(0, 1fr); align-items: start; gap: clamp(48px, 10vw, 170px); }
+  .kentaro-episode-page__story-heading { max-width: 390px; }
+  .kentaro-episode-page__story-heading .eyebrow { margin-bottom: 17px; color: hsl(var(--primary)); }
+  .kentaro-episode-page__story-section--navy .eyebrow { color: hsl(var(--lime)); }
+  .kentaro-episode-page__story-heading h2 { margin: 0; color: hsl(var(--heading)); font-size: clamp(2.3rem, 4vw, 4.1rem); letter-spacing: -.065em; line-height: .96; }
+  .kentaro-episode-page__story-section--navy .kentaro-episode-page__story-heading h2 { color: hsl(var(--navy-foreground)); }
+  .kentaro-episode-page__story-copy { max-width: 720px; }
+  .kentaro-episode-page__story-copy p { margin: 0 0 20px; color: hsl(var(--muted-foreground)); font-size: 1.04rem; line-height: 1.76; }
+  .kentaro-episode-page__story-copy p:last-child { margin-bottom: 0; }
+  .kentaro-episode-page__story-section--navy .kentaro-episode-page__story-copy p { color: hsl(var(--navy-foreground) / .8); }
+  .kentaro-episode-page__principle-statement { margin: 0 0 25px !important; padding: clamp(24px, 3vw, 36px); border-left: 3px solid hsl(var(--primary)); background: hsl(var(--accent)); color: hsl(var(--heading)) !important; font-size: clamp(1.3rem, 2.1vw, 1.82rem) !important; font-weight: 700; letter-spacing: -.045em; line-height: 1.18 !important; }
+  .kentaro-episode-page__harness-cta { display: inline-flex; align-items: center; gap: 9px; margin-top: 14px; color: hsl(var(--lime)); font-size: .92rem; font-weight: 700; text-decoration: none; }
+  .kentaro-episode-page__harness-cta:hover { text-decoration: underline; text-underline-offset: 5px; }
+  .kentaro-episode-continue { padding: clamp(62px, 8vw, 110px) 0; background: hsl(var(--navy)); }
+  .kentaro-episode-continue__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid hsl(var(--navy-foreground) / .22); border-bottom: 1px solid hsl(var(--navy-foreground) / .22); }
+  .kentaro-episode-continue__item { display: grid; gap: 10px; min-height: 144px; align-content: center; padding: 24px clamp(20px, 3vw, 42px); border-left: 1px solid hsl(var(--navy-foreground) / .22); color: hsl(var(--navy-foreground)); text-decoration: none; }
+  .kentaro-episode-continue__item:first-child { border-left: 0; }
+  .kentaro-episode-continue__item small { color: hsl(var(--lime)); font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+  .kentaro-episode-continue__item strong { font-size: clamp(1.15rem, 1.65vw, 1.5rem); letter-spacing: -.045em; line-height: 1.1; }
+  .kentaro-episode-continue__item:not([aria-disabled="true"]):hover { background: hsl(var(--navy-foreground) / .07); }
+  .kentaro-episode-continue__item[aria-disabled="true"] { opacity: .56; }
+  @media (max-width: 900px) {
+    .kentaro-episode-page__hero-grid, .kentaro-episode-page__story-grid { grid-template-columns: 1fr; gap: 30px; }
+    .kentaro-episode-page__video { width: min(100%, 500px); justify-self: start; }
+    .kentaro-episode-page__story-heading { max-width: 620px; }
+  }
+  @media (max-width: 680px) {
+    .kentaro-episode-page__hero { padding: 30px 0 62px; }
+    .kentaro-episode-page__hero h1 { font-size: clamp(2.8rem, 13vw, 4.3rem); }
+    .kentaro-episode-page__story-heading h2 { font-size: clamp(2.25rem, 10vw, 3.2rem); }
+    .kentaro-episode-page__story-copy p { font-size: .98rem; line-height: 1.7; }
+    .kentaro-episode-continue__grid { grid-template-columns: 1fr; }
+    .kentaro-episode-continue__item { min-height: 0; padding: 22px 0; border-top: 1px solid hsl(var(--navy-foreground) / .22); border-left: 0; }
+    .kentaro-episode-continue__item:first-child { border-top: 0; }
+  }
+`
+
 function KentaroEpisodePage({ episode }: { episode: KentaroEpisode }) {
   const index = publishedKentaroEpisodes.findIndex((item) => item.id === episode.id)
   const previous = index > 0 ? publishedKentaroEpisodes[index - 1] : null
   const next = index >= 0 && index < publishedKentaroEpisodes.length - 1 ? publishedKentaroEpisodes[index + 1] : null
-  const related = publishedKentaroEpisodes.filter((item) => item.id !== episode.id && item.topics.some((topic) => episode.topics.includes(topic))).slice(0, 3)
 
   return (
     <>
@@ -300,35 +355,51 @@ function KentaroEpisodePage({ episode }: { episode: KentaroEpisode }) {
       <Header activePath="kentaro" />
       <main id="main-content">
         <article className="kentaro-episode-page">
+          <style>{kentaroEpisodePageStyles}</style>
           <header className="kentaro-episode-page__hero">
-            <div className="container">
-              <a className="kentaro-back" href={kentaroBaseUrl}>Back to Kentaro</a>
-              <p className="eyebrow">{episodeNumber(episode)}</p>
-              <h1>{episode.title}</h1>
-              <p>{episode.description}</p>
+            <div className="container kentaro-episode-page__hero-grid">
+              <div className="kentaro-episode-page__hero-copy">
+                <a className="kentaro-back" href={kentaroBaseUrl}>Back to Kentaro at Work <span aria-hidden="true">→</span></a>
+                <p className="eyebrow">{episodeNumber(episode)}</p>
+                <h1>{episode.title}</h1>
+                <p className="kentaro-episode-page__summary">{episode.description}</p>
+              </div>
+              <div className="kentaro-episode-page__video">
+                <EpisodeMedia episode={episode} playable />
+              </div>
             </div>
           </header>
-          <div className="container kentaro-episode-page__content">
-            <EpisodeMedia episode={episode} playable />
-            {!episode.youtubeVideoId && <p className="kentaro-episode-page__notice">This episode is listed, but its video URL has not yet been configured.</p>}
-            {episode.transcript && <section className="kentaro-episode-page__text"><h2>Transcript</h2><p>{episode.transcript}</p></section>}
-            {episode.behindTheEpisode && <section className="kentaro-episode-page__text"><h2>Behind the episode</h2><p>{episode.behindTheEpisode}</p></section>}
-            {episode.relatedLink && <p className="kentaro-episode-page__related-link"><a href={episode.relatedLink.href}>{episode.relatedLink.label} <span aria-hidden="true">→</span></a></p>}
-          </div>
-          {(previous || next) && (
-            <nav className="container kentaro-episode-navigation" aria-label="Adjacent episodes">
-              {previous ? <a href={episodeHref(previous)}><small>Previous episode</small><strong>{previous.title}</strong></a> : <span />}
-              {next ? <a href={episodeHref(next)}><small>Next episode</small><strong>{next.title}</strong></a> : <span />}
+          <section className="kentaro-episode-page__story-section kentaro-episode-page__story-section--paper" aria-labelledby="episode-situation-title">
+            <div className="container kentaro-episode-page__story-grid">
+              <div className="kentaro-episode-page__story-heading"><p className="eyebrow">THE SITUATION</p><h2 id="episode-situation-title">What happened</h2></div>
+              <div className="kentaro-episode-page__story-copy"><p>{episode.story.situation}</p></div>
+            </div>
+          </section>
+          <section className="kentaro-episode-page__story-section" aria-labelledby="episode-tension-title">
+            <div className="container kentaro-episode-page__story-grid">
+              <div className="kentaro-episode-page__story-heading"><p className="eyebrow">THE WORK TENSION</p><h2 id="episode-tension-title">What went wrong</h2></div>
+              <div className="kentaro-episode-page__story-copy"><p>{episode.story.tension[0]}</p><p>{episode.story.tension[1]}</p></div>
+            </div>
+          </section>
+          <section className="kentaro-episode-page__story-section kentaro-episode-page__story-section--paper" aria-labelledby="episode-principle-title">
+            <div className="container kentaro-episode-page__story-grid">
+              <div className="kentaro-episode-page__story-heading"><p className="eyebrow">THE PRINCIPLE</p><h2 id="episode-principle-title">{episode.story.principleTitle}</h2></div>
+              <div className="kentaro-episode-page__story-copy"><p className="kentaro-episode-page__principle-statement">“{episode.story.principleStatement}”</p><p>{episode.story.principleExplanation}</p></div>
+            </div>
+          </section>
+          <section className="kentaro-episode-page__story-section kentaro-episode-page__story-section--navy" aria-labelledby="episode-harness-title">
+            <div className="container kentaro-episode-page__story-grid">
+              <div className="kentaro-episode-page__story-heading"><p className="eyebrow">FROM STORY TO HARNESS</p><h2 id="episode-harness-title">How Kentaro Harness reduces this friction</h2></div>
+              <div className="kentaro-episode-page__story-copy"><p>{episode.story.harness}</p><a className="kentaro-episode-page__harness-cta" href={`${kentaroBaseUrl}#kentaro-harness`}>Explore Kentaro Harness <span aria-hidden="true">→</span></a></div>
+            </div>
+          </section>
+          <section className="kentaro-episode-continue" aria-label="Continue watching Kentaro stories">
+            <nav className="container kentaro-episode-continue__grid" aria-label="Adjacent episodes">
+              {previous ? <a className="kentaro-episode-continue__item" href={episodeHref(previous)}><small>Previous story</small><strong>{previous.title}</strong></a> : <span className="kentaro-episode-continue__item" aria-disabled="true"><small>Previous story</small><strong>No earlier story</strong></span>}
+              {next ? <a className="kentaro-episode-continue__item" href={episodeHref(next)}><small>Next story</small><strong>{next.title}</strong></a> : <span className="kentaro-episode-continue__item" aria-disabled="true"><small>Next story</small><strong>No later story</strong></span>}
+              <a className="kentaro-episode-continue__item" href={kentaroBaseUrl}><small>Continue watching</small><strong>Back to all Kentaro stories</strong></a>
             </nav>
-          )}
-          {related.length > 0 && (
-            <section className="kentaro-related section" aria-labelledby="kentaro-related-title">
-              <div className="container">
-                <div className="section-intro"><p className="eyebrow">KEEP WATCHING</p><h2 id="kentaro-related-title">Related episodes</h2></div>
-                <div className="kentaro-episode-grid">{related.map((item) => <EpisodeCard key={item.id} episode={item} />)}</div>
-              </div>
-            </section>
-          )}
+          </section>
         </article>
       </main>
       <Footer />
