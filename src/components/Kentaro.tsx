@@ -22,7 +22,7 @@ const episodeNumber = (episode: KentaroEpisode) => `Episode ${String(episode.epi
 
 const kentaroRoadmap = [
   { phase: 'Phase 0', title: 'Product foundation', summary: 'Establish the MIT-licensed GitHub project, package skeleton, release workflow, product schemas and a demonstrable reference use case.', status: 'Foundation' },
-  { phase: 'Phase 1', title: 'v0.1 — Local governed Harness', summary: 'Publish kentaro-harness on PyPI. Initialise a Codex project, run the CLI from use case to execution, evidence and report, with local or cloud model configuration and a Maysano Platform API key.', status: 'Active build target', active: true },
+  { phase: 'Phase 1', title: 'v0.1 — Local governed Harness', summary: 'Publish kentaro-harness on PyPI. Initialise a Codex project, run the CLI from use case to execution, evidence and report, with local or cloud model configuration and read-only access through the Maysano Platform API.', status: 'Active build target', active: true },
   { phase: 'Phase 2', title: 'v0.2 — Maysano Platform synchronisation', summary: 'Expand the existing API connection with tested authenticated read and write synchronisation of products, objectives and use cases.', status: 'Planned' },
   { phase: 'Phase 3', title: 'v0.3 — Agent-native experience', summary: 'Add an MCP server, Codex integration, structured JSON, reusable templates, version history and stronger gates.', status: 'Planned' },
   { phase: 'Phase 4', title: 'v0.4 — Pluggable runtimes', summary: 'Support optional execution runtimes while keeping governance, evidence and customer-controlled credentials comparable.', status: 'Planned' },
@@ -305,7 +305,7 @@ function KentaroHome() {
             </div>
             <div className="kentaro-harness__copy">
               <p>Kentaro is the open-source Agentic Maysano Harness for governed local execution through Codex, Claude Code and OpenCode.</p>
-              <p>The Harness requires a Maysano Platform API key in every version. v0.2 expands that connection with tested synchronisation of products, objectives and use cases.</p>
+              <p>The Harness requires a Maysano Platform API key in every version. v0.1 uses the API read-only; v0.2 adds tested synchronisation of products, objectives and use cases.</p>
               <p>The episodes show what happens when Kentaro has to infer human intent alone. The Harness helps lift that friction by giving people and the agent the same business context, structured artefacts, working rules, approved tools and human approval boundaries.</p>
               <ul className="kentaro-harness__principles">
                 <li><strong>Start from the same context</strong><span>Objectives, use cases, data products and evidence travel with the agent.</span></li>
@@ -322,7 +322,7 @@ function KentaroHome() {
             <div className="section-intro">
               <p className="eyebrow">KENTARO ROADMAP</p>
               <h2 id="kentaro-roadmap-title">Prove the governed loop before expanding it.</h2>
-              <p className="section-copy">The plan starts with one complete local governed delivery journey, using a Maysano Platform API key. Platform synchronisation, agent-native tools, pluggable runtimes and enterprise operations follow only once that loop is proven.</p>
+              <p className="section-copy">The plan starts with one complete local governed delivery journey, using the Maysano Platform API read-only. Platform synchronisation, agent-native tools, pluggable runtimes and enterprise operations follow only once that loop is proven.</p>
             </div>
             <ol className="kentaro-roadmap-grid kentaro-episode-grid" aria-label="Kentaro delivery roadmap" style={{ margin: 0, padding: 0, listStyle: 'none' }}>
               {kentaroRoadmap.map((phase) => (
