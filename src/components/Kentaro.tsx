@@ -365,7 +365,7 @@ function KentaroHome() {
               <p className="eyebrow">THE KENTARO HARNESS</p>
               <div className="kentaro-harness__copy" style={{ display: 'flex', flex: 1, flexDirection: 'column' }}>
                 <h2 className="kentaro-section-title">Help build the Harness.</h2>
-                <p style={{ marginTop: 'auto' }}>Kentaro is open source, and contributions are welcome. Explore the Agentic Maysano Harness and help make human–agent collaboration clearer.</p>
+                <p style={{ marginTop: 0 }}>Kentaro is open source, and contributions are welcome. Explore the Agentic Maysano Harness and help make human–agent collaboration clearer.</p>
                 <a className="button button--light" href={kentaroHarnessUrl} target="_blank" rel="noreferrer">Contribute on GitHub <span aria-hidden="true">↗</span></a>
               </div>
             </div>
