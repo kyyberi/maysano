@@ -1,4 +1,6 @@
 import { siteConfig } from '../config/site'
+import kentaroWorkplaceUncertaintyMobileImage from '../assets/kentaro/kentaro-workplace-uncertainty-mobile.webp'
+import kentaroWorkplaceUncertaintyImage from '../assets/kentaro/kentaro-workplace-uncertainty.webp'
 import '../styles/kentaro.css'
 import { Footer } from './Footer'
 import { Header } from './Header'
@@ -12,12 +14,13 @@ type BackgroundSectionProps = {
   children: React.ReactNode
   tone?: 'paper' | 'navy'
   visual?: React.ReactNode
+  id?: string
 }
 
-function BackgroundSection({ eyebrow, title, children, tone = 'paper', visual }: BackgroundSectionProps) {
+function BackgroundSection({ eyebrow, title, children, tone = 'paper', visual, id }: BackgroundSectionProps) {
   const isNavy = tone === 'navy'
   return (
-    <section className={`section ${isNavy ? 'kentaro-harness' : 'kentaro-purpose'}`}>
+    <section id={id} className={`section ${isNavy ? 'kentaro-harness' : 'kentaro-purpose'}`}>
       <div className={`container ${isNavy ? 'kentaro-harness__grid' : 'kentaro-purpose__grid'}`}>
         <div className={isNavy ? 'kentaro-harness__heading' : 'kentaro-purpose__heading'}>
           <p className="eyebrow">{eyebrow}</p>
@@ -66,16 +69,28 @@ export function KentaroWhyPage() {
       <a className="skip-link" href="#main-content">Skip to content</a>
       <Header activePath="kentaro" />
       <main id="main-content" className="kentaro-background">
-        <header className="kentaro-episode-page__hero">
-          <div className="container">
-            <a className="kentaro-back" href={kentaroBaseUrl}>Back to Kentaro at Work</a>
-            <p className="eyebrow">THE BACKGROUND STORY</p>
-            <h1>Why Kentaro Exists</h1>
-            <p>AI agents are entering workplaces built around human relationships. The question is not only what they can do. It is how business people and agents should work together.</p>
+        <header className="kentaro-hero">
+          <div className="container kentaro-hero__grid">
+            <div className="kentaro-hero__copy">
+              <p className="eyebrow">THE BACKGROUND STORY</p>
+              <h1><span className="kentaro-hero__title-line kentaro-hero__title-line--light">Why Kentaro exists.</span></h1>
+              <p className="kentaro-hero__lead">AI agents are entering workplaces built around human relationships. The question is not only what they can do. It is how business people and agents should work together.</p>
+              <p className="kentaro-hero__supporting">The human–agent relationship needs an explicit working agreement.</p>
+              <div className="kentaro-hero__actions">
+                <a className="button button--light" href={kentaroBaseUrl}>Explore Kentaro at Work <span aria-hidden="true">→</span></a>
+                <a className="text-link text-link--light" href="#why-this-topic">Read the background <span aria-hidden="true">↓</span></a>
+              </div>
+            </div>
+            <figure className="kentaro-hero__image">
+              <picture>
+                <source media="(max-width: 680px)" srcSet={kentaroWorkplaceUncertaintyMobileImage} type="image/webp" />
+                <img src={kentaroWorkplaceUncertaintyImage} alt="Kentaro navigates workplace uncertainty across meetings, requests and paperwork." width="1448" height="1086" />
+              </picture>
+            </figure>
           </div>
         </header>
 
-        <BackgroundSection eyebrow="WHY THIS TOPIC HAS RETURNED" title="The agent is not the whole story.">
+        <BackgroundSection id="why-this-topic" eyebrow="WHY THIS TOPIC HAS RETURNED" title="The agent is not the whole story.">
           <p>There is renewed interest in what sits behind a new technology: the working conditions that make it useful, risky, frustrating, or trusted. Taking the lead for Maysano’s AI agent layer brought that question into focus. The immediate work is Kentaro Harness: a way for Codex and similar agents to work with Maysano through dialogue-based environments, alongside the conventional graphical interface.</p>
           <p>The GUI still matters. It is often the right place to compare a portfolio, inspect a record, or make a decision visible to a group. But more work will move through intent, dialogue, review, approval, and bounded execution across tools. That pattern is already reaching beyond developer tools into services such as banking.</p>
           <p>The technical shift is real. The more interesting question is social: what happens when an AI agent enters a workplace built around human relationships?</p>
