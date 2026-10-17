@@ -1,5 +1,7 @@
+import { useState } from 'react'
 import '../styles/kentaro.css'
 import kentaroBadgeImage from '../assets/kentaro/kentaro-badge.webp'
+import kentaroEpisodeOnePosterImage from '../assets/kentaro/kentaro-e01.webp'
 import kentaroHarnessOfficeImage from '../assets/kentaro/kentaro-harness-office.webp'
 import kentaroPaperMountainImage from '../assets/kentaro/kentaro-paper-mountain.webp'
 import kentaroWorkplaceUncertaintyMobileImage from '../assets/kentaro/kentaro-workplace-uncertainty-mobile.webp'
@@ -22,6 +24,7 @@ const kentaroSocialImageAlt = 'Kentaro, an AI agent, and a business owner workin
 const episodeNumber = (episode: KentaroEpisode) => `Episode ${String(episode.episodeNumber).padStart(2, '0')}`
 const episodeStill = (episode: KentaroEpisode) => episode.thumbnail ?? (episode.episodeNumber % 2 === 0 ? kentaroPaperMountainImage : kentaroBadgeImage)
 const episodeStillAlt = (episode: KentaroEpisode) => episode.thumbnailAlt ?? 'Kentaro at work in an office.'
+const episodeVideoPoster = (episode: KentaroEpisode) => episode.slug === 'i-expected-context' ? kentaroEpisodeOnePosterImage : episodeStill(episode)
 const episodeFrictionLabels: Record<string, string> = {
   'i-expected-context': 'Data without purpose',
   'new-team-member': 'Undefined role',
@@ -54,6 +57,16 @@ const kentaroFollowPanelStyles = `
   }
 `
 
+const kentaroEpisodeVideoStyles = `
+  .kentaro-featured-card__poster { position: relative; display: block; width: 100%; padding: 0; border: 0; background: transparent; cursor: pointer; }
+  .kentaro-featured-card__poster img { transition: transform .24s ease; }
+  .kentaro-featured-card__poster:hover img { transform: scale(1.015); }
+  .kentaro-featured-card__poster-play { position: absolute; inset: 50% auto auto 50%; display: grid; width: 68px; height: 68px; place-items: center; border-radius: 50%; transform: translate(-50%, -50%); background: #C2D897; color: #1C3245; transition: transform .2s ease, background-color .2s ease; }
+  .kentaro-featured-card__poster:hover .kentaro-featured-card__poster-play { transform: translate(-46%, -50%); background: #F4F6EE; }
+  .kentaro-featured-card__poster-play svg { width: 24px; height: 24px; margin-left: 3px; }
+  .kentaro-featured-card__poster:focus-visible { outline: 3px solid #C2D897; outline-offset: -5px; }
+`
+
 function KentaroStructuredData() {
   const url = kentaroBaseUrl
   const page = {
@@ -75,11 +88,17 @@ function KentaroStructuredData() {
 function FeaturedEpisodeCard({ episode }: { episode: KentaroEpisode }) {
   const frictionLabel = episodeFrictionLabels[episode.slug]
   const hasEmbeddedVideo = Boolean(episode.youtubeVideoId)
+  const [isPlaying, setIsPlaying] = useState(false)
   const content = <>
     <figure className="kentaro-featured-card__image">
-      {hasEmbeddedVideo ? (
+      {hasEmbeddedVideo && !isPlaying ? (
+        <button className="kentaro-featured-card__poster" type="button" onClick={() => setIsPlaying(true)} aria-label={`Play ${episode.title}`}>
+          <img src={episodeVideoPoster(episode)} alt="" />
+          <span className="kentaro-featured-card__poster-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="m8 5 11 7-11 7V5Z" /></svg></span>
+        </button>
+      ) : hasEmbeddedVideo ? (
         <iframe
-          src={`https://www.youtube-nocookie.com/embed/${episode.youtubeVideoId}?rel=0&playsinline=1`}
+          src={`https://www.youtube-nocookie.com/embed/${episode.youtubeVideoId}?autoplay=1&rel=0&playsinline=1`}
           title={`Watch ${episode.title} on YouTube`}
           loading="lazy"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -110,6 +129,7 @@ function FeaturedStories() {
 
   return (
     <section className="kentaro-featured-stories section" id="featured-stories" aria-labelledby="featured-stories-title">
+      <style>{kentaroEpisodeVideoStyles}</style>
       <div className="container">
         <div className="section-intro">
           <p className="eyebrow">FEATURED EPISODES</p>
