@@ -23,11 +23,11 @@ const episodeNumber = (episode: KentaroEpisode) => `Episode ${String(episode.epi
 const episodeStill = (episode: KentaroEpisode) => episode.thumbnail ?? (episode.episodeNumber % 2 === 0 ? kentaroPaperMountainImage : kentaroBadgeImage)
 const episodeStillAlt = (episode: KentaroEpisode) => episode.thumbnailAlt ?? 'Kentaro at work in an office.'
 const episodeFrictionLabels: Record<string, string> = {
+  'i-expected-context': 'Data without purpose',
   'new-team-member': 'Undefined role',
-  'the-data-is-there': 'Data without purpose',
   'one-small-extra-thing': 'Scope without a renewed mandate',
 }
-const featuredEpisodeSlugs = ['new-team-member', 'the-data-is-there', 'one-small-extra-thing']
+const featuredEpisodeSlugs = ['i-expected-context', 'new-team-member', 'one-small-extra-thing']
 
 const kentaroRoadmap = [
   { phase: 'Phase 0', title: 'Product foundation', summary: 'Establish the MIT-licensed GitHub project, package skeleton, release workflow, product schemas and a demonstrable reference use case.', status: 'Foundation' },
@@ -74,19 +74,30 @@ function KentaroStructuredData() {
 
 function FeaturedEpisodeCard({ episode }: { episode: KentaroEpisode }) {
   const frictionLabel = episodeFrictionLabels[episode.slug]
+  const hasEmbeddedVideo = Boolean(episode.youtubeVideoId)
   const content = <>
     <figure className="kentaro-featured-card__image">
-      <img src={episodeStill(episode)} alt={episodeStillAlt(episode)} loading="lazy" />
+      {hasEmbeddedVideo ? (
+        <iframe
+          src={`https://www.youtube-nocookie.com/embed/${episode.youtubeVideoId}?rel=0&playsinline=1`}
+          title={`Watch ${episode.title} on YouTube`}
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowFullScreen
+          style={{ display: 'block', width: '100%', aspectRatio: '4 / 5', border: 0 }}
+        />
+      ) : <img src={episodeStill(episode)} alt={episodeStillAlt(episode)} loading="lazy" />}
     </figure>
     <div className="kentaro-featured-card__content">
       <p className="kentaro-featured-card__number">{episodeNumber(episode)}</p>
       <h3>{episode.title}</h3>
       <p className="kentaro-featured-card__friction">{frictionLabel}</p>
       <p className="kentaro-featured-card__description">{episode.description}</p>
-      {episode.videoUrl && <span className="kentaro-featured-card__watch">Watch on YouTube <span aria-hidden="true">▶ ↗</span></span>}
+      {episode.videoUrl && !hasEmbeddedVideo && <span className="kentaro-featured-card__watch">Watch on YouTube <span aria-hidden="true">▶ ↗</span></span>}
     </div>
   </>
 
+  if (hasEmbeddedVideo) return <article className="kentaro-featured-card kentaro-featured-card--embedded">{content}</article>
   if (!episode.videoUrl) return <article className="kentaro-featured-card">{content}</article>
 
   return <a className="kentaro-featured-card kentaro-featured-card--linked" href={episode.videoUrl} target="_blank" rel="noreferrer" aria-label={`Watch ${episode.title} on YouTube`}>{content}</a>
