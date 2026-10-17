@@ -2,6 +2,7 @@ import { useState } from 'react'
 import '../styles/kentaro.css'
 import kentaroBadgeImage from '../assets/kentaro/kentaro-badge.webp'
 import kentaroEpisodeOnePosterImage from '../assets/kentaro/kentaro-e01.webp'
+import kentaroEpisodeTwoPosterImage from '../assets/kentaro/kentaro-e02.webp'
 import kentaroHarnessOfficeImage from '../assets/kentaro/kentaro-harness-office.webp'
 import kentaroPaperMountainImage from '../assets/kentaro/kentaro-paper-mountain.webp'
 import kentaroWorkplaceUncertaintyMobileImage from '../assets/kentaro/kentaro-workplace-uncertainty-mobile.webp'
@@ -24,13 +25,18 @@ const kentaroSocialImageAlt = 'Kentaro, an AI agent, and a business owner workin
 const episodeNumber = (episode: KentaroEpisode) => `Episode ${String(episode.episodeNumber).padStart(2, '0')}`
 const episodeStill = (episode: KentaroEpisode) => episode.thumbnail ?? (episode.episodeNumber % 2 === 0 ? kentaroPaperMountainImage : kentaroBadgeImage)
 const episodeStillAlt = (episode: KentaroEpisode) => episode.thumbnailAlt ?? 'Kentaro at work in an office.'
-const episodeVideoPoster = (episode: KentaroEpisode) => episode.slug === 'i-expected-context' ? kentaroEpisodeOnePosterImage : episodeStill(episode)
+const episodeVideoPosters: Record<string, string> = {
+  'i-expected-context': kentaroEpisodeOnePosterImage,
+  'what-makes-a-good-decision': kentaroEpisodeTwoPosterImage,
+}
+const episodeVideoPoster = (episode: KentaroEpisode) => episodeVideoPosters[episode.slug] ?? episodeStill(episode)
 const episodeFrictionLabels: Record<string, string> = {
   'i-expected-context': 'Data without purpose',
+  'what-makes-a-good-decision': 'Decision without context',
   'new-team-member': 'Undefined role',
   'one-small-extra-thing': 'Scope without a renewed mandate',
 }
-const featuredEpisodeSlugs = ['i-expected-context', 'new-team-member', 'one-small-extra-thing']
+const featuredEpisodeSlugs = ['i-expected-context', 'what-makes-a-good-decision', 'one-small-extra-thing']
 
 const kentaroRoadmap = [
   { phase: 'Phase 0', title: 'Product foundation', summary: 'Establish the MIT-licensed GitHub project, package skeleton, release workflow, product schemas and a demonstrable reference use case.', status: 'Foundation' },
