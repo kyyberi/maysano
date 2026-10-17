@@ -2,6 +2,7 @@ import '../styles/kentaro.css'
 import kentaroBadgeImage from '../assets/kentaro/kentaro-badge.webp'
 import kentaroHarnessOfficeImage from '../assets/kentaro/kentaro-harness-office.webp'
 import kentaroPaperMountainImage from '../assets/kentaro/kentaro-paper-mountain.webp'
+import kentaroWorkplaceUncertaintyMobileImage from '../assets/kentaro/kentaro-workplace-uncertainty-mobile.webp'
 import kentaroWorkplaceUncertaintyImage from '../assets/kentaro/kentaro-workplace-uncertainty.webp'
 import { siteConfig } from '../config/site'
 import {
@@ -232,7 +233,10 @@ function KentaroHome() {
               <a className="kentaro-hero__subscribe-link" href="#kentaro-subscribe">Get new Kentaro stories by email <span aria-hidden="true">→</span></a>
             </div>
             <figure className="kentaro-hero__image">
-              <img src={kentaroWorkplaceUncertaintyImage} alt="Kentaro navigates workplace uncertainty across meetings, requests and paperwork." width="1448" height="1086" />
+              <picture>
+                <source media="(max-width: 680px)" srcSet={kentaroWorkplaceUncertaintyMobileImage} type="image/webp" />
+                <img src={kentaroWorkplaceUncertaintyImage} alt="Kentaro navigates workplace uncertainty across meetings, requests and paperwork." width="1448" height="1086" />
+              </picture>
             </figure>
           </div>
         </section>

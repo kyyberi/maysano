@@ -76,6 +76,8 @@
 .kentaro-hero__image,
 .kentaro-character__image { margin: 0; }
 
+.kentaro-hero__image picture { display: block; }
+
 .kentaro-hero__image {
   justify-self: end;
   width: min(100%, 640px);

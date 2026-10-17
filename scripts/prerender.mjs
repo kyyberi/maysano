@@ -63,6 +63,7 @@ const pages = [
     ogImageAlt: kentaroOgImageAlt,
     ogImageType: 'image/jpeg',
     preloadImageAlt: kentaroHeroAlt,
+    mobilePreloadImageAlt: kentaroHeroAlt,
     routeStyle: 'kentaro',
     assetPrefix: '../',
   },
@@ -195,7 +196,7 @@ function withMetadata(html, page) {
 }
 
 function withRelativeAssets(html, assetPrefix) {
-  return html.replace(/\b(src|href)="\.\/(?=(?:assets\/|logo\.webp))/g, `$1="${assetPrefix}`)
+  return html.replace(/\b(src|href|srcSet)="(?:\.\/|\/(?=assets\/))(?=(?:assets\/|logo\.webp))/g, `$1="${assetPrefix}`)
 }
 
 function withRoutePerformance(html, page) {
@@ -213,7 +214,17 @@ function withRoutePerformance(html, page) {
 
   if (!heroSource) throw new Error(`Unable to find the Kentaro hero image for ${page.pathname}`)
 
-  return withoutHomeHeroPreload.replace('</head>', `    <link rel="preload" as="image" href="${heroSource}" type="image/webp" fetchpriority="high" />\n  </head>`)
+  const heroPicture = page.mobilePreloadImageAlt
+    ? [...withoutHomeHeroPreload.matchAll(/<picture\b[^>]*>[\s\S]*?<\/picture>/g)]
+      .map(([picture]) => picture)
+      .find((picture) => picture.includes(`alt="${escapedAlt}"`))
+    : null
+  const mobileSource = heroPicture?.match(/<source\b[^>]*media="\(max-width: 680px\)"[^>]*srcSet="([^"]+)"/)?.[1]
+  const preloadLinks = mobileSource
+    ? `    <link rel="preload" as="image" href="${mobileSource}" type="image/webp" media="(max-width: 680px)" fetchpriority="high" />\n    <link rel="preload" as="image" href="${heroSource}" type="image/webp" media="(min-width: 681px)" fetchpriority="high" />\n`
+    : `    <link rel="preload" as="image" href="${heroSource}" type="image/webp" fetchpriority="high" />\n`
+
+  return withoutHomeHeroPreload.replace('</head>', `${preloadLinks}  </head>`)
 }
 
 function withRouteStyles(html, page) {

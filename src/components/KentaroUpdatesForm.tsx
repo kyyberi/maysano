@@ -1,4 +1,4 @@
-import { type CSSProperties, useEffect, useRef } from 'react'
+import { type CSSProperties, useEffect, useRef, useState } from 'react'
 
 const formId = 'mlb2-47210916'
 const formClass = 'ml-subscribe-form-47210916'
@@ -18,19 +18,26 @@ declare global {
 function loadScript(source: string, onLoad?: () => void) {
   const existing = document.querySelector<HTMLScriptElement>(`script[src="${source}"]`)
   if (existing) {
-    if (onLoad) existing.addEventListener('load', onLoad, { once: true })
+    if (onLoad) {
+      if (existing.dataset.loaded === 'true') onLoad()
+      else existing.addEventListener('load', onLoad, { once: true })
+    }
     return
   }
 
   const script = document.createElement('script')
   script.src = source
   script.async = true
-  if (onLoad) script.addEventListener('load', onLoad, { once: true })
+  script.addEventListener('load', () => {
+    script.dataset.loaded = 'true'
+    onLoad?.()
+  }, { once: true })
   document.head.appendChild(script)
 }
 
 export function KentaroUpdatesForm() {
   const formRef = useRef<HTMLDivElement>(null)
+  const [loadProvider, setLoadProvider] = useState(false)
 
   useEffect(() => {
     window.ml_webform_success_47210916 = () => {
@@ -39,15 +46,35 @@ export function KentaroUpdatesForm() {
       root?.querySelector<HTMLElement>('.row-success')?.removeAttribute('hidden')
     }
 
-    loadScript(recaptchaScript, () => loadScript(webformsScript))
-
     return () => {
       delete window.ml_webform_success_47210916
     }
   }, [])
 
+  useEffect(() => {
+    if (loadProvider) {
+      loadScript(recaptchaScript, () => loadScript(webformsScript))
+      return
+    }
+
+    const form = formRef.current
+    if (!form || !('IntersectionObserver' in window)) {
+      setLoadProvider(true)
+      return
+    }
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return
+      setLoadProvider(true)
+      observer.disconnect()
+    }, { rootMargin: '600px 0px' })
+
+    observer.observe(form)
+    return () => observer.disconnect()
+  }, [loadProvider])
+
   return (
-    <div ref={formRef} id={formId} className={`ml-form-embedContainer ml-subscribe-form ${formClass}`} style={formStyle}>
+    <div ref={formRef} id={formId} className={`ml-form-embedContainer ml-subscribe-form ${formClass}`} style={formStyle} onFocusCapture={() => setLoadProvider(true)}>
       <div className="row-form">
         <form
           className="ml-block-form"

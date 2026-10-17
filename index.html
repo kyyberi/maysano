@@ -12,12 +12,17 @@
     <meta name="theme-color" content="#1c3245" />
     <link rel="canonical" href="https://maysano.com/" />
     <link rel="preload" as="image" href="/src/assets/hero-portfolio-flow.webp" type="image/webp" />
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PX44YVYL9Z"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-PX44YVYL9Z');
+      window.addEventListener('load', function () {
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-PX44YVYL9Z';
+        document.head.appendChild(script);
+      }, { once: true });
     </script>
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Maysano | Connect Data Products to Business Strategy" />
