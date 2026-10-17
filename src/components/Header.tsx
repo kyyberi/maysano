@@ -7,6 +7,7 @@ const navItems = [
   ['How It Works', `${siteConfig.siteUrl}#how-it-works`, 'how-it-works'],
   ['Architecture', `${siteConfig.siteUrl}architecture/`, 'architecture'],
   ['AI Agents', `${siteConfig.siteUrl}#agents`, 'agents'],
+  ['Kentaro', `${siteConfig.siteUrl}kentaro/`, 'kentaro'],
   ['Insights', `${siteConfig.siteUrl}insights/`, 'insights'],
 ]
 
