@@ -15,6 +15,7 @@ import { KentaroUpdatesForm } from './KentaroUpdatesForm'
 
 const kentaroBaseUrl = `${siteConfig.siteUrl}kentaro/`
 const kentaroHarnessUrl = 'https://github.com/Maysano/Kentaro'
+const kentaroIssueUrl = `${kentaroHarnessUrl}/issues/new`
 const kentaroPlaylistUrl = 'https://www.youtube.com/playlist?list=PLCfcf0t6CobQ'
 const kentaroSocialImageUrl = `${siteConfig.siteUrl}og/kentaro-business-experience.jpg`
 const kentaroSocialImageAlt = 'Kentaro, an AI agent, and a business owner working together in an office.'
@@ -42,6 +43,10 @@ const kentaroFollowPanelStyles = `
   .kentaro-follow__column { min-width: 0; }
   .kentaro-follow__column--updates { padding-right: clamp(40px, 6vw, 96px); }
   .kentaro-follow__column--harness { padding-left: clamp(40px, 6vw, 96px); border-left: 1px solid hsl(var(--navy-foreground) / 0.2); }
+  .kentaro-follow__contribute-copy { max-width: 560px; }
+  .kentaro-follow__contribute-links { display: grid; justify-items: start; gap: 14px; }
+  .kentaro-follow__contribute-link { color: hsl(var(--lime)); font-size: .9rem; font-weight: 700; text-decoration: none; }
+  .kentaro-follow__contribute-link:hover { color: hsl(var(--navy-foreground)); text-decoration: underline; text-underline-offset: 5px; }
   @media (max-width: 900px) {
     .kentaro-follow__grid { grid-template-columns: 1fr; gap: 36px; }
     .kentaro-follow__column--updates { padding-right: 0; padding-bottom: 36px; border-bottom: 1px solid hsl(var(--navy-foreground) / 0.2); }
@@ -365,8 +370,11 @@ function KentaroHome() {
               <p className="eyebrow">THE KENTARO HARNESS</p>
               <div className="kentaro-harness__copy" style={{ display: 'flex', flex: 1, flexDirection: 'column' }}>
                 <h2 className="kentaro-section-title">Help build the Harness.</h2>
-                <p style={{ marginTop: 0 }}>Kentaro is open source, and contributions are welcome. Explore the Agentic Maysano Harness and help make human–agent collaboration clearer.</p>
-                <a className="button button--light" href={kentaroHarnessUrl} target="_blank" rel="noreferrer">Contribute on GitHub <span aria-hidden="true">↗</span></a>
+                <p className="kentaro-follow__contribute-copy">Tell us where human–agent work gets stuck: missing context, unclear mandates, approvals or ownership. Open a GitHub issue so the problem can shape the Harness.</p>
+                <div className="kentaro-follow__contribute-links">
+                  <a className="button button--light" href={kentaroIssueUrl} target="_blank" rel="noreferrer">Report a human–agent issue <span aria-hidden="true">↗</span></a>
+                  <a className="kentaro-follow__contribute-link" href={kentaroHarnessUrl} target="_blank" rel="noreferrer">Contribute code or improve the documentation <span aria-hidden="true">↗</span></a>
+                </div>
               </div>
             </div>
           </div>
