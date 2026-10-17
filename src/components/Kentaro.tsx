@@ -104,7 +104,7 @@ function FeaturedEpisodeCard({ episode }: { episode: KentaroEpisode }) {
         </button>
       ) : hasEmbeddedVideo ? (
         <iframe
-          src={`https://www.youtube-nocookie.com/embed/${episode.youtubeVideoId}?autoplay=1&rel=0&playsinline=1`}
+          src={`https://www.youtube-nocookie.com/embed/${episode.youtubeVideoId}?autoplay=1&loop=0&rel=0&playsinline=1`}
           title={`Watch ${episode.title} on YouTube`}
           loading="lazy"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
