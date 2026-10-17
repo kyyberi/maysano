@@ -242,12 +242,44 @@ code, pre {
 /* Header */
 
 .site-header {
+  /* --nav-bg is set from Header.tsx to the background of whatever is underneath. */
+  --nav-bg: hsl(var(--background));
+  --nav-fg: hsl(var(--foreground));
+  --nav-heading: hsl(var(--navy));
+  --nav-muted: hsl(var(--muted-foreground));
+  --nav-accent: hsl(var(--primary));
+  --nav-line: hsl(var(--navy) / 0.12);
   position: sticky;
   z-index: 100;
   top: 0;
-  border-bottom: 1px solid hsl(var(--navy) / 0.12);
-  background: hsl(var(--background) / 0.97);
+  border-bottom: 1px solid var(--nav-line);
+  background: var(--nav-bg);
+  color: var(--nav-fg);
   box-shadow: var(--shadow-sm);
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.site-header[data-tone="dark"] {
+  --nav-fg: hsl(var(--navy-foreground));
+  --nav-heading: hsl(var(--navy-foreground));
+  --nav-muted: hsl(var(--navy-foreground) / 0.7);
+  --nav-accent: hsl(var(--lime));
+  --nav-line: hsl(var(--navy-foreground) / 0.14);
+  box-shadow: none;
+}
+
+.site-header[data-tone="dark"] :focus-visible { outline-color: hsl(var(--lime)); }
+
+/* Lime button on navy, same as the hero CTA. */
+.site-header[data-tone="dark"] .primary-nav > .button {
+  background: hsl(var(--lime));
+  color: hsl(var(--navy));
+}
+
+.site-header .brand-word { color: var(--nav-heading); transition: color 0.3s ease; }
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header, .site-header * { transition: none; }
 }
 
 .header-inner {
@@ -305,20 +337,20 @@ code, pre {
 .primary-nav > a:not(.button) {
   padding-block: 6px;
   border-bottom: 2px solid transparent;
-  color: hsl(var(--foreground));
+  color: var(--nav-fg);
   font-size: 0.875rem;
   font-weight: 700;
   transition: color 0.15s, border-color 0.15s;
 }
 
 .primary-nav > a:not(.button):hover {
-  border-bottom-color: hsl(var(--primary));
-  color: hsl(var(--primary));
+  border-bottom-color: var(--nav-accent);
+  color: var(--nav-accent);
 }
 
 .primary-nav > a:not(.button).is-active {
-  border-bottom-color: hsl(var(--primary));
-  color: hsl(var(--primary));
+  border-bottom-color: var(--nav-accent);
+  color: var(--nav-accent);
 }
 
 .primary-nav > .button { margin-left: 6px; }
@@ -677,7 +709,7 @@ code, pre {
   display: none;
   width: 44px;
   height: 44px;
-  border: 1px solid hsl(var(--border));
+  border: 1px solid var(--nav-line);
   border-radius: 6px;
   background: transparent;
 }
@@ -687,7 +719,7 @@ code, pre {
   width: 20px;
   height: 1px;
   margin: 6px auto;
-  background: hsl(var(--heading));
+  background: var(--nav-heading);
 }
 
 /* Hero */
@@ -2686,25 +2718,25 @@ code, pre {
     align-items: stretch;
     gap: 0;
     padding: 16px 20px 24px;
-    border-bottom: 1px solid hsl(var(--border));
-    background: hsl(var(--background));
+    border-bottom: 1px solid var(--nav-line);
+    background: var(--nav-bg);
     box-shadow: 0 22px 30px hsl(var(--navy) / 0.08);
   }
   .primary-nav.is-open { display: grid; }
-  .primary-nav > a:not(.button) { padding: 14px 6px; border-bottom: 1px solid hsl(var(--border)); font-size: 0.9rem; }
-  .primary-nav > a:not(.button):hover { border-bottom-color: hsl(var(--border)); }
+  .primary-nav > a:not(.button) { padding: 14px 6px; border-bottom: 1px solid var(--nav-line); font-size: 0.9rem; }
+  .primary-nav > a:not(.button):hover { border-bottom-color: var(--nav-line); }
   .primary-nav .button { margin: 18px 0 0; }
   .nav-secondary { display: grid; margin-top: 18px; }
   .nav-secondary > span {
     padding: 0 6px 6px;
-    color: hsl(var(--muted-foreground));
+    color: var(--nav-muted);
     font-size: 0.66rem;
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
   }
-  .nav-secondary a { padding: 11px 6px; color: hsl(var(--muted-foreground)); font-size: 0.84rem; font-weight: 700; }
-  .nav-secondary a:hover { color: hsl(var(--primary)); }
+  .nav-secondary a { padding: 11px 6px; color: var(--nav-muted); font-size: 0.84rem; font-weight: 700; }
+  .nav-secondary a:hover { color: var(--nav-accent); }
   .hero {
     padding: 78px 0;
     background-image:
