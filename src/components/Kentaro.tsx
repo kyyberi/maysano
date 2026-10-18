@@ -43,8 +43,17 @@ const featuredEpisodeSlugs = ['i-expected-context', 'what-makes-a-good-decision'
 
 const kentaroRoadmap = [
   { phase: 'Phase 0', title: 'Product foundation', summary: 'Establish the MIT-licensed GitHub project, package skeleton, release workflow, product schemas and a demonstrable reference use case.', status: 'Foundation' },
-  { phase: 'Phase 1', title: 'v0.1 — Local governed Harness', summary: 'Publish kentaro-harness on PyPI. Initialise a Codex project, run the CLI from use case to execution, evidence and report, with local or cloud model configuration and read-only access through the Maysano Platform API.', status: 'Active build target', active: true },
-  { phase: 'Phase 2', title: 'v0.2 — Maysano Platform synchronisation', summary: 'Expand the existing API connection with tested authenticated read and write synchronisation of products, objectives and use cases.', status: 'Planned' },
+  {
+    phase: 'Phase 1',
+    title: 'v0.1.0 — Local governed Harness',
+    summary: 'Kentaro v0.1.0 is released on GitHub and PyPI. Initialise a Codex project, run the CLI from use case to execution, evidence and report, with local or cloud model configuration and read-only access through the Maysano Platform API.',
+    status: 'Released',
+    releases: [
+      { label: 'GitHub release', href: 'https://github.com/Maysano/Kentaro/releases/tag/v0.1.0' },
+      { label: 'PyPI package', href: 'https://pypi.org/project/kentaro/' },
+    ],
+  },
+  { phase: 'Phase 2', title: 'v0.2 — Maysano Platform synchronisation', summary: 'Expand the existing API connection with tested authenticated read and write synchronisation of products, objectives and use cases.', status: 'Active build target', active: true },
   { phase: 'Phase 3', title: 'v0.3 — Agent-client integrations', summary: 'Add Codex, Claude Code and OpenCode integrations on the same Kentaro core, CLI and schemas, with the MCP server, structured JSON, reusable templates and stronger gates.', status: 'Planned' },
   { phase: 'Phase 4', title: 'v0.4 — Optional external execution runtimes', summary: 'Add optional external execution runtimes, such as HarnessRouter, while Kentaro keeps governance, evidence and customer-controlled credentials comparable.', status: 'Planned' },
   { phase: 'Phase 5', title: 'Maysano portfolio and enterprise operations', summary: 'Build the user-facing platform, portfolio view, platform-hosted agents and organisation-level governance above the proven Harness connection.', status: 'Planned' },
@@ -388,6 +397,13 @@ function KentaroHome() {
                     <h3>{phase.title}</h3>
                     <p>{phase.summary}</p>
                     <div className="kentaro-episode-card__meta"><span>{phase.status}</span></div>
+                    {phase.releases && (
+                      <div aria-label={`${phase.title} release links`} style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginTop: 14 }}>
+                        {phase.releases.map((release) => (
+                          <a key={release.href} href={release.href} target="_blank" rel="noreferrer" style={{ fontSize: '0.75rem', fontWeight: 700 }}>{release.label} <span aria-hidden="true">↗</span></a>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </li>
               ))}
