@@ -43,6 +43,37 @@ const episodeFrictionLabels: Record<string, string> = {
 }
 const featuredEpisodeSlugs = ['i-expected-context', 'what-makes-a-good-decision', 'we-need-more-agents']
 
+const kentaroFaqs = [
+  [
+    'What is Kentaro Harness?',
+    'Kentaro Harness is the working layer between a business owner and an AI agent. It makes the context behind the work, the agent’s mandate and the route for human review explicit. It is open source and built to work with Maysano.',
+  ],
+  [
+    'Does Kentaro make decisions or act on its own?',
+    'Not in v0.1. Kentaro can retrieve and explain sourced context, validate local governance objects, form local drafts and classify a proposed request. It does not write to Maysano, execute business actions or process approvals. A result that is structurally in scope is still not permission to act.',
+  ],
+  [
+    'Who remains accountable for the outcome?',
+    'People do. A mandate names the business owner, scope, exclusions, escalation route and review cycle. Kentaro makes those boundaries visible to the agent; it does not take responsibility away from the people who own the work and its consequences.',
+  ],
+  [
+    'Who keeps the context true after the project team leaves?',
+    'Maysano remains the system of record for business context, approvals, graph updates and audit. Kentaro records the source versions and timestamps it used, so a result can be understood in its original context. In v0.1, missing, conflicting, stale or unknown information is a reason to escalate, not to assume it is current.',
+  ],
+  [
+    'What happens when an owner, objective or approval rule changes?',
+    'The change must be reflected in the authoritative business context and reviewed by the accountable people. In v0.1, Kentaro can flag supplied stale, conflicting or incomplete context, but it does not automatically discover every business change or refresh the graph on its own. Future graph-change work is planned to remain Maysano-controlled and to revalidate authority and current context before a change is accepted.',
+  ],
+  [
+    'What evidence does Kentaro keep?',
+    'Kentaro can keep local evidence of the context retrieved, object versions, validation results, proposed work and generated outputs. That makes the work easier to explain and reproduce. It is not a replacement for Maysano’s authoritative approval record or compliance-grade platform audit.',
+  ],
+  [
+    'What is available now, and what comes later?',
+    'v0.1 is the released read-only local Harness. The next target, v0.2, is governed graph changes through approved Change Contracts, with Maysano validating and recording every change. Agent-client integrations and optional execution runtimes are later roadmap phases. The roadmap shows direction, not a promise that future capabilities are already available.',
+  ],
+] as const
+
 const kentaroRoadmap = [
   { phase: 'Phase 0', title: 'Product foundation', summary: 'Establish the MIT-licensed GitHub project, package skeleton, release workflow, product schemas and a demonstrable reference use case.', status: 'Foundation' },
   {
@@ -94,20 +125,33 @@ const kentaroEpisodeVideoStyles = `
 
 function KentaroStructuredData() {
   const url = kentaroBaseUrl
-  const page = {
+  const data = {
     '@context': 'https://schema.org',
-    '@type': 'WebPage',
-    '@id': `${url}#webpage`,
-    url,
-    name: 'Kentaro | Maysano',
-    description: 'One-minute stories about an AI agent working with humans.',
-    image: kentaroSocialImageUrl,
-    about: { '@type': 'Thing', name: 'Human-agent collaboration' },
-    isPartOf: { '@id': `${siteConfig.siteUrl}#website` },
-    inLanguage: 'en',
+    '@graph': [
+      {
+        '@type': 'WebPage',
+        '@id': `${url}#webpage`,
+        url,
+        name: 'Kentaro | Maysano',
+        description: 'One-minute stories about an AI agent working with humans.',
+        image: kentaroSocialImageUrl,
+        about: { '@type': 'Thing', name: 'Human-agent collaboration' },
+        isPartOf: { '@id': `${siteConfig.siteUrl}#website` },
+        inLanguage: 'en',
+      },
+      {
+        '@type': 'FAQPage',
+        '@id': `${url}#faq`,
+        mainEntity: kentaroFaqs.map(([question, answer]) => ({
+          '@type': 'Question',
+          name: question,
+          acceptedAnswer: { '@type': 'Answer', text: answer },
+        })),
+      },
+    ],
   }
 
-  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(page) }} />
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />
 }
 
 function FeaturedEpisodeCard({ episode }: { episode: KentaroEpisode }) {
@@ -415,6 +459,31 @@ function KentaroHome() {
                 </li>
               ))}
             </ol>
+          </div>
+        </section>
+        <section id="kentaro-faq" className="section faq-section kentaro-faq" aria-labelledby="kentaro-faq-title">
+          <div className="container faq-grid">
+            <div className="section-intro">
+              <p className="eyebrow">QUESTIONS PEOPLE ASK</p>
+              <h2 id="kentaro-faq-title" className="kentaro-section-title">Clear boundaries for working with Kentaro.</h2>
+              <p className="section-copy">The Harness is useful only when people can see what it can do now, where Maysano remains responsible and when a question needs human review.</p>
+              <nav aria-label="Kentaro documentation" style={{ display: 'grid', justifyItems: 'start', gap: 11, marginTop: 30 }}>
+                <a href={kentaroHarnessUrl} target="_blank" rel="noreferrer" style={{ color: 'hsl(var(--primary))', fontSize: '0.88rem', fontWeight: 700 }}>Read the released v0.1 documentation <span aria-hidden="true">↗</span></a>
+                <a href={`${kentaroHarnessUrl}/blob/main/docs/roadmap.md`} target="_blank" rel="noreferrer" style={{ color: 'hsl(var(--primary))', fontSize: '0.88rem', fontWeight: 700 }}>See the roadmap and implementation status <span aria-hidden="true">↗</span></a>
+                <a href={`${kentaroHarnessUrl}/blob/main/docs/governance-and-delivery-object-model.md`} target="_blank" rel="noreferrer" style={{ color: 'hsl(var(--primary))', fontSize: '0.88rem', fontWeight: 700 }}>Explore the governance and delivery object model <span aria-hidden="true">↗</span></a>
+              </nav>
+            </div>
+            <div className="faq-list">
+              {kentaroFaqs.map(([question, answer]) => (
+                <details className="faq-item" key={question}>
+                  <summary>
+                    <strong>{question}</strong>
+                    <span className="faq-toggle" aria-hidden="true">+</span>
+                  </summary>
+                  <div className="faq-answer"><p>{answer}</p></div>
+                </details>
+              ))}
+            </div>
           </div>
         </section>
         <section id="kentaro-subscribe" className="kentaro-follow" aria-labelledby="kentaro-follow-title">
