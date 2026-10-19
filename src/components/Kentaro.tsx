@@ -4,6 +4,7 @@ import kentaroBadgeImage from '../assets/kentaro/kentaro-badge.webp'
 import kentaroEpisodeOnePosterImage from '../assets/kentaro/kentaro-e01.webp'
 import kentaroEpisodeTwoPosterImage from '../assets/kentaro/kentaro-e02.webp'
 import kentaroEpisodeThreePosterImage from '../assets/kentaro/kentaro-e03.webp'
+import kentaroEpisodeFourPosterImage from '../assets/kentaro/kentaro-e04.webp'
 import kentaroHarnessOfficeImage from '../assets/kentaro/kentaro-harness-office.webp'
 import kentaroPaperMountainImage from '../assets/kentaro/kentaro-paper-mountain.webp'
 import kentaroWorkplaceUncertaintyMobileImage from '../assets/kentaro/kentaro-workplace-uncertainty-mobile.webp'
@@ -32,16 +33,18 @@ const episodeVideoPosters: Record<string, string> = {
   'i-expected-context': kentaroEpisodeOnePosterImage,
   'what-makes-a-good-decision': kentaroEpisodeTwoPosterImage,
   'we-need-more-agents': kentaroEpisodeThreePosterImage,
+  'everything-is-priority-one': kentaroEpisodeFourPosterImage,
 }
 const episodeVideoPoster = (episode: KentaroEpisode) => episodeVideoPosters[episode.slug] ?? episodeStill(episode)
 const episodeFrictionLabels: Record<string, string> = {
   'i-expected-context': 'Data without purpose',
   'what-makes-a-good-decision': 'Decision without context',
   'we-need-more-agents': 'More agents, unclear roles',
+  'everything-is-priority-one': 'Priorities without trade-offs',
   'new-team-member': 'Undefined role',
   'one-small-extra-thing': 'Scope without a renewed mandate',
 }
-const featuredEpisodeSlugs = ['i-expected-context', 'what-makes-a-good-decision', 'we-need-more-agents']
+const featuredEpisodeSlugs = ['i-expected-context', 'what-makes-a-good-decision', 'we-need-more-agents', 'everything-is-priority-one']
 
 const kentaroFaqs = [
   [
