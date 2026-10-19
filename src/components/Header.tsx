@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { siteConfig } from '../config/site'
 import { Brand } from './Brand'
 
@@ -19,8 +19,65 @@ const secondaryNavItems = [
   ['Enterprise', `${siteConfig.siteUrl}#enterprise`],
 ]
 
+type Tone = 'light' | 'dark'
+
+// Parses a computed "rgb(r, g, b)" / "rgba(r, g, b, a)" string. Returns null for transparent.
+function parseRgb(color: string) {
+  const parts = color.match(/[\d.]+/g)?.map(Number)
+  if (!parts || parts.length < 3 || parts[3] === 0) return null
+  return parts.slice(0, 3)
+}
+
+// WCAG relative luminance: below ~0.4 the surface needs light text.
+function toneFor([r, g, b]: number[]): Tone {
+  const [R, G, B] = [r, g, b].map((v) => {
+    const c = v / 255
+    return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4
+  })
+  return 0.2126 * R + 0.7152 * G + 0.0722 * B < 0.4 ? 'dark' : 'light'
+}
+
+// First opaque background behind the point, ignoring the header itself.
+function backgroundAt(x: number, y: number, header: HTMLElement) {
+  for (const element of document.elementsFromPoint(x, y)) {
+    if (header.contains(element)) continue
+    const color = getComputedStyle(element).backgroundColor
+    const rgb = parseRgb(color)
+    if (rgb) return { color, rgb }
+  }
+  return null
+}
+
 export function Header({ activePath }: { activePath?: string }) {
   const [open, setOpen] = useState(false)
+  const [tone, setTone] = useState<Tone>('light')
+  const headerRef = useRef<HTMLElement>(null)
+
+  // Match the header to whatever is directly beneath its bottom edge. Probing at the
+  // left gutter hits section backgrounds rather than cards, and works on every page.
+  useEffect(() => {
+    const header = headerRef.current
+    if (!header) return
+    let frame = 0
+
+    const update = () => {
+      frame = 0
+      const found = backgroundAt(4, header.getBoundingClientRect().bottom + 1, header)
+      if (!found) return
+      header.style.setProperty('--nav-bg', found.color)
+      setTone(toneFor(found.rgb))
+    }
+
+    const schedule = () => { if (!frame) frame = requestAnimationFrame(update) }
+    update()
+    window.addEventListener('scroll', schedule, { passive: true })
+    window.addEventListener('resize', schedule)
+    return () => {
+      cancelAnimationFrame(frame)
+      window.removeEventListener('scroll', schedule)
+      window.removeEventListener('resize', schedule)
+    }
+  }, [])
 
   useEffect(() => {
     const close = () => setOpen(false)
@@ -34,7 +91,7 @@ export function Header({ activePath }: { activePath?: string }) {
   }, [])
 
   return (
-    <header className="site-header">
+    <header ref={headerRef} className="site-header" data-tone={tone}>
       <div className="container header-inner">
         <Brand compact />
         <button
