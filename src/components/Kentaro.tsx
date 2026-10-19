@@ -21,6 +21,8 @@ const kentaroBaseUrl = `${siteConfig.siteUrl}kentaro/`
 const kentaroHarnessUrl = 'https://github.com/Maysano/Kentaro'
 const kentaroIssueUrl = `${kentaroHarnessUrl}/issues/new`
 const kentaroPlaylistUrl = 'https://www.youtube.com/playlist?list=PLCfcf0t6CobQ'
+const kentaroXUrl = 'https://x.com/KentaroAgent'
+const kentaroInstagramUrl = 'https://www.instagram.com/maysano_kentaro/'
 const kentaroSocialImageUrl = `${siteConfig.siteUrl}og/kentaro-business-experience.jpg`
 const kentaroSocialImageAlt = 'Kentaro, an AI agent, and a business owner working together in an office.'
 const episodeNumber = (episode: KentaroEpisode) => `Episode ${String(episode.episodeNumber).padStart(2, '0')}`
@@ -68,6 +70,11 @@ const kentaroFollowPanelStyles = `
   .kentaro-follow__contribute-links { display: grid; justify-items: start; gap: 14px; }
   .kentaro-follow__contribute-link { color: hsl(var(--lime)); font-size: .9rem; font-weight: 700; text-decoration: none; }
   .kentaro-follow__contribute-link:hover { color: hsl(var(--navy-foreground)); text-decoration: underline; text-underline-offset: 5px; }
+  .kentaro-follow__social { display: grid; gap: 9px; width: min(100%, 530px); margin-top: 25px; padding-top: 21px; border-top: 1px solid hsl(var(--navy-foreground) / .2); }
+  .kentaro-follow__social-label { color: hsl(var(--navy-foreground) / .66); font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+  .kentaro-follow__social-links { display: flex; flex-wrap: wrap; gap: 9px; }
+  .kentaro-follow__social-link { display: inline-flex; align-items: center; gap: 8px; min-height: 38px; padding: 0 13px; border: 1px solid hsl(var(--navy-foreground) / .3); border-radius: 999px; color: hsl(var(--navy-foreground)); font-size: .84rem; font-weight: 700; text-decoration: none; transition: border-color .2s ease, background-color .2s ease, color .2s ease; }
+  .kentaro-follow__social-link:hover { border-color: hsl(var(--lime)); background: hsl(var(--lime)); color: hsl(var(--navy)); }
   @media (max-width: 900px) {
     .kentaro-follow__grid { grid-template-columns: 1fr; gap: 36px; }
     .kentaro-follow__column--updates { padding-right: 0; padding-bottom: 36px; border-bottom: 1px solid hsl(var(--navy-foreground) / 0.2); }
@@ -419,6 +426,13 @@ function KentaroHome() {
                 <h2 id="kentaro-follow-title" className="kentaro-section-title">The next workplace problem is already on its way.</h2>
                 <p style={{ marginTop: 'auto' }}>Join the Kentaro list for new office stories, practical principles and updates on Kentaro Harness.</p>
                 <KentaroUpdatesForm />
+                <nav className="kentaro-follow__social" aria-label="Follow Kentaro on social media">
+                  <span className="kentaro-follow__social-label">Follow Kentaro</span>
+                  <div className="kentaro-follow__social-links">
+                    <a className="kentaro-follow__social-link" href={kentaroXUrl} target="_blank" rel="noreferrer">X <span aria-hidden="true">↗</span></a>
+                    <a className="kentaro-follow__social-link" href={kentaroInstagramUrl} target="_blank" rel="noreferrer">Instagram <span aria-hidden="true">↗</span></a>
+                  </div>
+                </nav>
                 <small>A series by Maysano.</small>
               </div>
             </div>
