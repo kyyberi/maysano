@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import '../styles/kentaro.css'
 import kentaroBadgeImage from '../assets/kentaro/kentaro-badge.webp'
+import kentaroCharacterWorkstationImage from '../assets/kentaro/kentaro-character-workstation.webp'
 import kentaroEpisodeOnePosterImage from '../assets/kentaro/kentaro-e01.webp'
 import kentaroEpisodeTwoPosterImage from '../assets/kentaro/kentaro-e02.webp'
 import kentaroEpisodeThreePosterImage from '../assets/kentaro/kentaro-e03.webp'
@@ -351,7 +352,7 @@ function KentaroHome() {
         <section className="kentaro-character section" aria-labelledby="kentaro-character-title">
           <div className="container kentaro-character__grid">
             <figure className="kentaro-character__image">
-              <img src={kentaroBadgeImage} alt="Kentaro straightens his purple badge in an office." width="1448" height="1086" loading="lazy" />
+              <img src={kentaroCharacterWorkstationImage} alt="Kentaro pauses at a laptop, holding a small screwdriver beside his head." width="742" height="960" loading="lazy" />
             </figure>
             <div className="kentaro-character__copy">
               <p className="eyebrow">MEET KENTARO</p>
