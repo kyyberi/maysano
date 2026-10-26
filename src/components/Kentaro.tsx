@@ -6,6 +6,7 @@ import kentaroEpisodeOnePosterImage from '../assets/kentaro/kentaro-e01.webp'
 import kentaroEpisodeTwoPosterImage from '../assets/kentaro/kentaro-e02.webp'
 import kentaroEpisodeThreePosterImage from '../assets/kentaro/kentaro-e03.webp'
 import kentaroEpisodeFourPosterImage from '../assets/kentaro/kentaro-e04.webp'
+import kentaroEpisodeFivePosterImage from '../assets/kentaro/kentaro-e05.webp'
 import kentaroHarnessOfficeImage from '../assets/kentaro/kentaro-harness-office.webp'
 import kentaroPaperMountainImage from '../assets/kentaro/kentaro-paper-mountain.webp'
 import kentaroWorkplaceUncertaintyMobileImage from '../assets/kentaro/kentaro-workplace-uncertainty-mobile.webp'
@@ -35,6 +36,7 @@ const episodeVideoPosters: Record<string, string> = {
   'what-makes-a-good-decision': kentaroEpisodeTwoPosterImage,
   'we-need-more-agents': kentaroEpisodeThreePosterImage,
   'everything-is-priority-one': kentaroEpisodeFourPosterImage,
+  'approved-by-nobody': kentaroEpisodeFivePosterImage,
 }
 const episodeVideoPoster = (episode: KentaroEpisode) => episodeVideoPosters[episode.slug] ?? episodeStill(episode)
 const episodeFrictionLabels: Record<string, string> = {
@@ -42,10 +44,11 @@ const episodeFrictionLabels: Record<string, string> = {
   'what-makes-a-good-decision': 'Decision without context',
   'we-need-more-agents': 'More agents, unclear roles',
   'everything-is-priority-one': 'Priorities without trade-offs',
+  'approved-by-nobody': 'Discussion without approval',
   'new-team-member': 'Undefined role',
   'one-small-extra-thing': 'Scope without a renewed mandate',
 }
-const featuredEpisodeSlugs = ['i-expected-context', 'what-makes-a-good-decision', 'we-need-more-agents', 'everything-is-priority-one']
+const featuredEpisodeSlugs = ['i-expected-context', 'what-makes-a-good-decision', 'we-need-more-agents', 'everything-is-priority-one', 'approved-by-nobody']
 
 const kentaroFaqs = [
   [
