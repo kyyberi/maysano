@@ -24,6 +24,7 @@ const kentaroBaseUrl = `${siteConfig.siteUrl}kentaro/`
 const kentaroHarnessUrl = 'https://github.com/Maysano/Kentaro'
 const kentaroIssueUrl = `${kentaroHarnessUrl}/issues/new`
 const kentaroPlaylistUrl = 'https://www.youtube.com/playlist?list=PLCfcf0t6CobQ'
+const kentaroUdemyMasterclassUrl = 'https://www.udemy.com/course/integrated-data-ai-product-management-with-ai-agent/?referralCode=107CE8992830324CB45A'
 const kentaroXUrl = 'https://x.com/KentaroAgent'
 const kentaroInstagramUrl = 'https://www.instagram.com/maysano_kentaro/'
 const kentaroSocialImageUrl = `${siteConfig.siteUrl}og/kentaro-business-experience.jpg`
@@ -237,6 +238,11 @@ function FeaturedStories() {
             <span className="kentaro-featured-stories__destination-icon" aria-hidden="true">✓</span>
             <span><span className="eyebrow">THE SOLUTION</span><strong>Take the Harness and avoid the trouble.</strong><span>Give people and agents shared context, a clear mandate and a path for review.</span></span>
             <span className="kentaro-featured-stories__destination-action">Explore Kentaro Harness <span aria-hidden="true">→</span></span>
+          </a>
+          <a className="kentaro-featured-stories__destination kentaro-featured-stories__destination--masterclass" href={kentaroUdemyMasterclassUrl} target="_blank" rel="noreferrer">
+            <span className="kentaro-featured-stories__destination-icon" aria-hidden="true">U</span>
+            <span><span className="eyebrow">UDEMY MASTERCLASS</span><strong>See Kentaro in the Udemy Masterclass.</strong><span>Integrated Data &amp; AI Product Management with AI Agent explores the ideas behind better human–agent work.</span></span>
+            <span className="kentaro-featured-stories__destination-action">Open the Udemy Masterclass <span aria-hidden="true">↗</span></span>
           </a>
         </div>
       </div>
