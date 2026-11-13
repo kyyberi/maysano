@@ -338,7 +338,7 @@ function KentaroHome() {
       <a className="skip-link" href="#main-content">Skip to content</a>
       <Header activePath="kentaro" />
       <main id="main-content">
-        <section className="kentaro-hero">
+        <section className="kentaro-hero" data-page-hero>
           <div className="container kentaro-hero__grid">
             <div className="kentaro-hero__copy">
               <p className="eyebrow">KENTARO AT WORK</p>

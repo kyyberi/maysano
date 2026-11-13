@@ -155,7 +155,7 @@ function InsightHeroDiagram({ kind }: { kind: InsightKind }) {
 
 function InsightArticleHeader({ kind, kicker, title, dek, readTime, topics }: { kind: InsightKind, kicker: string, title: string, dek: string, readTime: string, topics: string[] }) {
   return (
-    <header className="insight-article__header">
+    <header className="insight-article__header" data-page-hero>
       <div className="container insight-article__header-inner">
         <a className="insight-article__back" href={`${siteConfig.siteUrl}insights/`}>Insights</a>
         <div className="insight-article__hero-grid">
@@ -245,7 +245,7 @@ export function InsightsIndex() {
   return (
     <InsightShell>
       <section className="insights-library">
-        <div className="insights-hero">
+        <div className="insights-hero" data-page-hero>
           <div className="container">
             <p className="eyebrow">Insights / Practical perspectives</p>
             <h1>Better decisions about data products and AI.</h1>
