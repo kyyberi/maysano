@@ -5,7 +5,7 @@ import heroDiagram from '../assets/hero-portfolio-flow.webp'
 
 export function Hero() {
   return (
-    <section className="hero section" id="top">
+    <section className="hero section" id="top" data-page-hero>
       <div className="container">
         <div className="hero-grid">
           <div className="hero-copy">

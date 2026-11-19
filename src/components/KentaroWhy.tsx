@@ -69,7 +69,7 @@ export function KentaroWhyPage() {
       <a className="skip-link" href="#main-content">Skip to content</a>
       <Header activePath="kentaro" />
       <main id="main-content" className="kentaro-background">
-        <header className="kentaro-hero">
+        <header className="kentaro-hero" data-page-hero>
           <div className="container kentaro-hero__grid">
             <div className="kentaro-hero__copy">
               <p className="eyebrow">THE BACKGROUND STORY</p>

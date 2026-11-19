@@ -191,7 +191,7 @@ export function ArchitecturePage() {
       <a className="skip-link" href="#main-content">Skip to content</a>
       <Header />
       <main id="main-content" className="architecture-page">
-        <header className="architecture-page__hero">
+        <header className="architecture-page__hero" data-page-hero>
           <div className="container architecture-page__hero-inner">
             <a className="architecture-page__back" href={siteConfig.siteUrl}>Maysano</a>
             <div className="architecture-page__hero-grid">

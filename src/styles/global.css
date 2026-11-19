@@ -3653,3 +3653,30 @@ html.js .reveal:not(.is-in) .rise { opacity: 0; transform: translateY(18px); }
     object-position: 80% center;
   }
 }
+
+/* Back to top: bottom-right once the hero has scrolled out of view (BackToTop.tsx).
+   Navy fill with a light rim so it reads over light and navy sections. Hidden state
+   uses visibility, which also takes it out of the tab order. */
+.back-to-top {
+  position: fixed;
+  z-index: 90;
+  right: 20px;
+  bottom: 20px;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 2px solid hsl(var(--navy-foreground));
+  border-radius: 50%;
+  background: hsl(var(--navy));
+  color: hsl(var(--navy-foreground));
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: .2s;
+}
+.back-to-top.is-visible { opacity: 1; visibility: visible; }
+.back-to-top:hover { background: hsl(var(--primary)); }
+/* Lime ring between navy bands: visible on light and navy backgrounds. */
+.back-to-top:focus-visible { outline-color: hsl(var(--lime)); box-shadow: 0 0 0 6px hsl(var(--navy)); }
+@media print { .back-to-top { display: none; } }

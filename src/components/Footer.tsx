@@ -1,4 +1,5 @@
 import { siteConfig } from '../config/site'
+import { BackToTop } from './BackToTop'
 import { Brand } from './Brand'
 
 const footerNav = [
@@ -30,6 +31,8 @@ const connectedContext = [
 
 export function Footer() {
   return (
+    <>
+    <BackToTop />
     <footer className="site-footer">
       <div className="container footer-main">
         <div className="footer-brand">
@@ -84,5 +87,6 @@ export function Footer() {
         <span>Connect data directly to business</span>
       </div>
     </footer>
+    </>
   )
 }
